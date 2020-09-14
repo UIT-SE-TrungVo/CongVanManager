@@ -24,5 +24,11 @@ namespace CongVanManager
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PdfView pdfview = new PdfView();
+            pdfview.Show();
+        }
     }
 }

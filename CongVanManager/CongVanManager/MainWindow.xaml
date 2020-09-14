@@ -22,6 +22,7 @@
             <StackPanel DockPanel.Dock="Top">
                 <Button Padding="10">Công văn đến</Button>
                 <Button Padding="10">Công văn đi</Button>
+                <Button Padding="10" Click="Button_Click">Demo xem pdf</Button>
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom">
                 <Button Padding="10">Cài đặt</Button>

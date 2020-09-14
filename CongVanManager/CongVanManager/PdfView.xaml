@@ -1,0 +1,31 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CongVanManager"
+        xmlns:PdfViewer="clr-namespace:Syncfusion.Windows.PdfViewer;assembly=Syncfusion.PdfViewer.WPF" x:Class="CongVanManager.PdfView"
+        mc:Ignorable="d"
+    
+        DataContext="{StaticResource PdfVM}"
+    
+        Title="PdfView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height="30*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                <TextBox x:Name="txtEditor" Width="500" Height="50" Text="{Binding filename}"/>
+                <Button Padding="10" Command="{Binding Click_ChonFileCommand}" Content="Chọn file"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid>
+                <PdfViewer:PdfViewerControl ItemSource="{Binding docStream}"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
