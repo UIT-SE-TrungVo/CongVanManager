@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("116708945_963250040791127_2325266720546025099_n.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database.edmx.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database.mdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database_log.ldf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model1.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model1.tt")]
 
 

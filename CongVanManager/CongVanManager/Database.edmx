@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Database.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DatabaseStoreContainer">
+    <EntitySet Name="LoaiCongVans" EntityType="Database.Store.LoaiCongVans" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LienHes" EntityType="Database.Store.LienHes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CongVans" EntityType="Database.Store.CongVans" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NoiNhans" EntityType="Database.Store.NoiNhans" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HopCongVans" EntityType="Database.Store.HopCongVans" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="LoaiCongVanCongVan" Association="Database.Store.LoaiCongVanCongVan">
+      <End Role="LoaiCongVan" EntitySet="LoaiCongVans" />
+      <End Role="CongVan" EntitySet="CongVans" />
+    </AssociationSet>
+    <AssociationSet Name="LienHeCongVan" Association="Database.Store.LienHeCongVan">
+      <End Role="LienHe" EntitySet="LienHes" />
+      <End Role="CongVan" EntitySet="CongVans" />
+    </AssociationSet>
+    <AssociationSet Name="CongVanDanhSachNoiNhan" Association="Database.Store.CongVanDanhSachNoiNhan">
+      <End Role="CongVan" EntitySet="CongVans" />
+      <End Role="DanhSachNoiNhan" EntitySet="NoiNhans" />
+    </AssociationSet>
+    <AssociationSet Name="LienHeDanhSachNoiNhan" Association="Database.Store.LienHeDanhSachNoiNhan">
+      <End Role="LienHe" EntitySet="LienHes" />
+      <End Role="DanhSachNoiNhan" EntitySet="NoiNhans" />
+    </AssociationSet>
+    <AssociationSet Name="HopCongVanCongVan" Association="Database.Store.HopCongVanCongVan">
+      <End Role="HopCongVan" EntitySet="HopCongVans" />
+      <End Role="CongVan" EntitySet="CongVans" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="LoaiCongVans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LienHes">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CongVans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SoKyHieu" Type="int" Nullable="true" />
+    <Property Name="NgayCongVan" Type="datetime" Nullable="true" />
+    <Property Name="TrichYeu" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="GhiChu" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PDFScanLocation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NgayXuLi" Type="datetime" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="LoaiCongVan_Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LienHe_Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HopCongVan_LoaiHop" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NoiNhans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CongVan_Id" Type="int" Nullable="false" />
+    <Property Name="LienHe_Email" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HopCongVans">
+    <Key>
+      <PropertyRef Name="LoaiHop" />
+    </Key>
+    <Property Name="LoaiHop" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="LoaiCongVanCongVan">
+    <End Role="LoaiCongVan" Type="Database.Store.LoaiCongVans" Multiplicity="1" />
+    <End Role="CongVan" Type="Database.Store.CongVans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiCongVan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CongVan">
+        <PropertyRef Name="LoaiCongVan_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LienHeCongVan">
+    <End Role="LienHe" Type="Database.Store.LienHes" Multiplicity="1" />
+    <End Role="CongVan" Type="Database.Store.CongVans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LienHe">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="CongVan">
+        <PropertyRef Name="LienHe_Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CongVanDanhSachNoiNhan">
+    <End Role="CongVan" Type="Database.Store.CongVans" Multiplicity="1" />
+    <End Role="DanhSachNoiNhan" Type="Database.Store.NoiNhans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CongVan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DanhSachNoiNhan">
+        <PropertyRef Name="CongVan_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LienHeDanhSachNoiNhan">
+    <End Role="LienHe" Type="Database.Store.LienHes" Multiplicity="1" />
+    <End Role="DanhSachNoiNhan" Type="Database.Store.NoiNhans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LienHe">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="DanhSachNoiNhan">
+        <PropertyRef Name="LienHe_Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HopCongVanCongVan">
+    <End Role="HopCongVan" Type="Database.Store.HopCongVans" Multiplicity="1" />
+    <End Role="CongVan" Type="Database.Store.CongVans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HopCongVan">
+        <PropertyRef Name="LoaiHop" />
+      </Principal>
+      <Dependent Role="CongVan">
+        <PropertyRef Name="HopCongVan_LoaiHop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Database" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DatabaseContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LoaiCongVans" EntityType="Database.LoaiCongVan" />
+          <EntitySet Name="LienHes" EntityType="Database.LienHe" />
+          <EntitySet Name="CongVans" EntityType="Database.CongVan" />
+          <EntitySet Name="NoiNhans" EntityType="Database.NoiNhan" />
+          <AssociationSet Name="LoaiCongVanCongVan" Association="Database.LoaiCongVanCongVan">
+            <End Role="LoaiCongVan" EntitySet="LoaiCongVans" />
+            <End Role="CongVan" EntitySet="CongVans" />
+          </AssociationSet>
+          <AssociationSet Name="LienHeCongVan" Association="Database.LienHeCongVan">
+            <End Role="LienHe" EntitySet="LienHes" />
+            <End Role="CongVan" EntitySet="CongVans" />
+          </AssociationSet>
+          <AssociationSet Name="CongVanDanhSachNoiNhan" Association="Database.CongVanDanhSachNoiNhan">
+            <End Role="CongVan" EntitySet="CongVans" />
+            <End Role="DanhSachNoiNhan" EntitySet="NoiNhans" />
+          </AssociationSet>
+          <AssociationSet Name="LienHeDanhSachNoiNhan" Association="Database.LienHeDanhSachNoiNhan">
+            <End Role="LienHe" EntitySet="LienHes" />
+            <End Role="DanhSachNoiNhan" EntitySet="NoiNhans" />
+          </AssociationSet>
+          <EntitySet Name="HopCongVans" EntityType="Database.HopCongVan" />
+          <AssociationSet Name="HopCongVanCongVan" Association="Database.HopCongVanCongVan">
+            <End Role="HopCongVan" EntitySet="HopCongVans" />
+            <End Role="CongVan" EntitySet="CongVans" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CongVan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="LoaiCongVan" Relationship="Database.LoaiCongVanCongVan" FromRole="CongVan" ToRole="LoaiCongVan" />
+          <NavigationProperty Name="LienHe" Relationship="Database.LienHeCongVan" FromRole="CongVan" ToRole="LienHe" />
+          <NavigationProperty Name="DanhSachNoiNhan" Relationship="Database.CongVanDanhSachNoiNhan" FromRole="CongVan" ToRole="DanhSachNoiNhan" />
+          <NavigationProperty Name="HopCongVan" Relationship="Database.HopCongVanCongVan" FromRole="CongVan" ToRole="HopCongVan" />
+          <Property Name="SoKyHieu" Type="Int32" Nullable="true" />
+          <Property Name="NgayCongVan" Type="DateTime" Nullable="true" />
+          <Property Name="TrichYeu" Type="String" Nullable="true" />
+          <Property Name="GhiChu" Type="String" Nullable="true" />
+          <Property Name="PDFScanLocation" Type="String" Nullable="false" />
+          <Property Name="NgayXuLi" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="LoaiCongVan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="CongVans" Relationship="Database.LoaiCongVanCongVan" FromRole="LoaiCongVan" ToRole="CongVan" />
+        </EntityType>
+        <EntityType Name="LienHe">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Email" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="CongVans" Relationship="Database.LienHeCongVan" FromRole="LienHe" ToRole="CongVan" />
+          <NavigationProperty Name="DanhSachNoiNhan" Relationship="Database.LienHeDanhSachNoiNhan" FromRole="LienHe" ToRole="DanhSachNoiNhan" />
+        </EntityType>
+        <EntityType Name="NoiNhan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="CongVan" Relationship="Database.CongVanDanhSachNoiNhan" FromRole="DanhSachNoiNhan" ToRole="CongVan" />
+          <NavigationProperty Name="LienHe" Relationship="Database.LienHeDanhSachNoiNhan" FromRole="DanhSachNoiNhan" ToRole="LienHe" />
+        </EntityType>
+        <Association Name="LoaiCongVanCongVan">
+          <End Type="Database.LoaiCongVan" Role="LoaiCongVan" Multiplicity="1" />
+          <End Type="Database.CongVan" Role="CongVan" Multiplicity="*" />
+        </Association>
+        <Association Name="LienHeCongVan">
+          <End Type="Database.LienHe" Role="LienHe" Multiplicity="1" />
+          <End Type="Database.CongVan" Role="CongVan" Multiplicity="*" />
+        </Association>
+        <Association Name="CongVanDanhSachNoiNhan">
+          <End Type="Database.CongVan" Role="CongVan" Multiplicity="1" />
+          <End Type="Database.NoiNhan" Role="DanhSachNoiNhan" Multiplicity="*" />
+        </Association>
+        <Association Name="LienHeDanhSachNoiNhan">
+          <End Type="Database.LienHe" Role="LienHe" Multiplicity="1" />
+          <End Type="Database.NoiNhan" Role="DanhSachNoiNhan" Multiplicity="*" />
+        </Association>
+        <EntityType Name="HopCongVan">
+          <Key>
+            <PropertyRef Name="LoaiHop" />
+          </Key>
+          <Property Name="LoaiHop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="CongVans" Relationship="Database.HopCongVanCongVan" FromRole="HopCongVan" ToRole="CongVan" />
+        </EntityType>
+        <Association Name="HopCongVanCongVan">
+          <End Type="Database.HopCongVan" Role="HopCongVan" Multiplicity="1" />
+          <End Type="Database.CongVan" Role="CongVan" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DatabaseStoreContainer" CdmEntityContainer="DatabaseContainer">
+    <EntitySetMapping Name="LoaiCongVans">
+      <EntityTypeMapping TypeName="IsTypeOf(Database.LoaiCongVan)">
+        <MappingFragment StoreEntitySet="LoaiCongVans">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LienHes">
+      <EntityTypeMapping TypeName="IsTypeOf(Database.LienHe)">
+        <MappingFragment StoreEntitySet="LienHes">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CongVans">
+      <EntityTypeMapping TypeName="IsTypeOf(Database.CongVan)">
+        <MappingFragment StoreEntitySet="CongVans">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SoKyHieu" ColumnName="SoKyHieu" />
+          <ScalarProperty Name="NgayCongVan" ColumnName="NgayCongVan" />
+          <ScalarProperty Name="TrichYeu" ColumnName="TrichYeu" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="PDFScanLocation" ColumnName="PDFScanLocation" />
+          <ScalarProperty Name="NgayXuLi" ColumnName="NgayXuLi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NoiNhans">
+      <EntityTypeMapping TypeName="IsTypeOf(Database.NoiNhan)">
+        <MappingFragment StoreEntitySet="NoiNhans">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HopCongVans">
+      <EntityTypeMapping TypeName="IsTypeOf(Database.HopCongVan)">
+        <MappingFragment StoreEntitySet="HopCongVans">
+          <ScalarProperty Name="LoaiHop" ColumnName="LoaiHop" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LoaiCongVanCongVan" TypeName="Database.LoaiCongVanCongVan" StoreEntitySet="CongVans">
+      <EndProperty Name="LoaiCongVan">
+        <ScalarProperty Name="Id" ColumnName="LoaiCongVan_Id" />
+      </EndProperty>
+      <EndProperty Name="CongVan">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LienHeCongVan" TypeName="Database.LienHeCongVan" StoreEntitySet="CongVans">
+      <EndProperty Name="LienHe">
+        <ScalarProperty Name="Email" ColumnName="LienHe_Email" />
+      </EndProperty>
+      <EndProperty Name="CongVan">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CongVanDanhSachNoiNhan" TypeName="Database.CongVanDanhSachNoiNhan" StoreEntitySet="NoiNhans">
+      <EndProperty Name="CongVan">
+        <ScalarProperty Name="Id" ColumnName="CongVan_Id" />
+      </EndProperty>
+      <EndProperty Name="DanhSachNoiNhan">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LienHeDanhSachNoiNhan" TypeName="Database.LienHeDanhSachNoiNhan" StoreEntitySet="NoiNhans">
+      <EndProperty Name="LienHe">
+        <ScalarProperty Name="Email" ColumnName="LienHe_Email" />
+      </EndProperty>
+      <EndProperty Name="DanhSachNoiNhan">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="HopCongVanCongVan" TypeName="Database.HopCongVanCongVan" StoreEntitySet="CongVans">
+      <EndProperty Name="HopCongVan">
+        <ScalarProperty Name="LoaiHop" ColumnName="HopCongVan_LoaiHop" />
+      </EndProperty>
+      <EndProperty Name="CongVan">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

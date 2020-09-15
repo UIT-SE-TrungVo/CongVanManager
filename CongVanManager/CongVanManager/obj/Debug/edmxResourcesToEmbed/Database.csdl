@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Database" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="DatabaseContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="LoaiCongVans" EntityType="Database.LoaiCongVan" />
+    <EntitySet Name="LienHes" EntityType="Database.LienHe" />
+    <EntitySet Name="CongVans" EntityType="Database.CongVan" />
+    <EntitySet Name="NoiNhans" EntityType="Database.NoiNhan" />
+    <AssociationSet Name="LoaiCongVanCongVan" Association="Database.LoaiCongVanCongVan">
+      <End Role="LoaiCongVan" EntitySet="LoaiCongVans" />
+      <End Role="CongVan" EntitySet="CongVans" />
+    </AssociationSet>
+    <AssociationSet Name="LienHeCongVan" Association="Database.LienHeCongVan">
+      <End Role="LienHe" EntitySet="LienHes" />
+      <End Role="CongVan" EntitySet="CongVans" />
+    </AssociationSet>
+    <AssociationSet Name="CongVanDanhSachNoiNhan" Association="Database.CongVanDanhSachNoiNhan">
+      <End Role="CongVan" EntitySet="CongVans" />
+      <End Role="DanhSachNoiNhan" EntitySet="NoiNhans" />
+    </AssociationSet>
+    <AssociationSet Name="LienHeDanhSachNoiNhan" Association="Database.LienHeDanhSachNoiNhan">
+      <End Role="LienHe" EntitySet="LienHes" />
+      <End Role="DanhSachNoiNhan" EntitySet="NoiNhans" />
+    </AssociationSet>
+    <EntitySet Name="HopCongVans" EntityType="Database.HopCongVan" />
+    <AssociationSet Name="HopCongVanCongVan" Association="Database.HopCongVanCongVan">
+      <End Role="HopCongVan" EntitySet="HopCongVans" />
+      <End Role="CongVan" EntitySet="CongVans" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CongVan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="LoaiCongVan" Relationship="Database.LoaiCongVanCongVan" FromRole="CongVan" ToRole="LoaiCongVan" />
+    <NavigationProperty Name="LienHe" Relationship="Database.LienHeCongVan" FromRole="CongVan" ToRole="LienHe" />
+    <NavigationProperty Name="DanhSachNoiNhan" Relationship="Database.CongVanDanhSachNoiNhan" FromRole="CongVan" ToRole="DanhSachNoiNhan" />
+    <NavigationProperty Name="HopCongVan" Relationship="Database.HopCongVanCongVan" FromRole="CongVan" ToRole="HopCongVan" />
+    <Property Name="SoKyHieu" Type="Int32" Nullable="true" />
+    <Property Name="NgayCongVan" Type="DateTime" Nullable="true" />
+    <Property Name="TrichYeu" Type="String" Nullable="true" />
+    <Property Name="GhiChu" Type="String" Nullable="true" />
+    <Property Name="PDFScanLocation" Type="String" Nullable="false" />
+    <Property Name="NgayXuLi" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="LoaiCongVan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <NavigationProperty Name="CongVans" Relationship="Database.LoaiCongVanCongVan" FromRole="LoaiCongVan" ToRole="CongVan" />
+  </EntityType>
+  <EntityType Name="LienHe">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="CongVans" Relationship="Database.LienHeCongVan" FromRole="LienHe" ToRole="CongVan" />
+    <NavigationProperty Name="DanhSachNoiNhan" Relationship="Database.LienHeDanhSachNoiNhan" FromRole="LienHe" ToRole="DanhSachNoiNhan" />
+  </EntityType>
+  <EntityType Name="NoiNhan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="CongVan" Relationship="Database.CongVanDanhSachNoiNhan" FromRole="DanhSachNoiNhan" ToRole="CongVan" />
+    <NavigationProperty Name="LienHe" Relationship="Database.LienHeDanhSachNoiNhan" FromRole="DanhSachNoiNhan" ToRole="LienHe" />
+  </EntityType>
+  <Association Name="LoaiCongVanCongVan">
+    <End Type="Database.LoaiCongVan" Role="LoaiCongVan" Multiplicity="1" />
+    <End Type="Database.CongVan" Role="CongVan" Multiplicity="*" />
+  </Association>
+  <Association Name="LienHeCongVan">
+    <End Type="Database.LienHe" Role="LienHe" Multiplicity="1" />
+    <End Type="Database.CongVan" Role="CongVan" Multiplicity="*" />
+  </Association>
+  <Association Name="CongVanDanhSachNoiNhan">
+    <End Type="Database.CongVan" Role="CongVan" Multiplicity="1" />
+    <End Type="Database.NoiNhan" Role="DanhSachNoiNhan" Multiplicity="*" />
+  </Association>
+  <Association Name="LienHeDanhSachNoiNhan">
+    <End Type="Database.LienHe" Role="LienHe" Multiplicity="1" />
+    <End Type="Database.NoiNhan" Role="DanhSachNoiNhan" Multiplicity="*" />
+  </Association>
+  <EntityType Name="HopCongVan">
+    <Key>
+      <PropertyRef Name="LoaiHop" />
+    </Key>
+    <Property Name="LoaiHop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <NavigationProperty Name="CongVans" Relationship="Database.HopCongVanCongVan" FromRole="HopCongVan" ToRole="CongVan" />
+  </EntityType>
+  <Association Name="HopCongVanCongVan">
+    <End Type="Database.HopCongVan" Role="HopCongVan" Multiplicity="1" />
+    <End Type="Database.CongVan" Role="CongVan" Multiplicity="*" />
+  </Association>
+</Schema>

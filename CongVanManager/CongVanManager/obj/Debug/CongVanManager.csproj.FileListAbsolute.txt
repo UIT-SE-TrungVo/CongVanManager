@@ -38,3 +38,35 @@ G:\Visual Studio\CVManager\CongVanManager\CongVanManager\bin\Debug\MaterialDesig
 G:\Visual Studio\CVManager\CongVanManager\CongVanManager\obj\Debug\App.baml
 G:\Visual Studio\CVManager\CongVanManager\CongVanManager\obj\Debug\InboxLayout.g.cs
 G:\Visual Studio\CVManager\CongVanManager\CongVanManager\obj\Debug\InboxLayout.baml
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\CongVanManager.exe.config
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\CongVanManager.exe
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\CongVanManager.pdb
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\HamburgerMenu.dll
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\MaterialDesignColors.dll
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\MaterialDesignColors.pdb
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\CongVanManager.csprojAssemblyReference.cache
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\InboxLayout.g.cs
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\MainWindow.g.cs
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\App.g.cs
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\CongVanManager_MarkupCompile.cache
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\CongVanManager_MarkupCompile.lref
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\App.baml
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\InboxLayout.baml
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\MainWindow.baml
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\CongVanManager.g.resources
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\CongVanManager.Properties.Resources.resources
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\CongVanManager.csproj.GenerateResource.cache
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\CongVanManager.csproj.CoreCompileInputs.cache
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\CongVanManager.csproj.CopyComplete
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\CongVanManager.exe
+C:\Users\longt\Source\Repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\CongVanManager.pdb
+C:\Users\longt\source\repos\CongVanManager\CongVanManager\CongVanManager\obj\Debug\CongVanManager_Content.g.cs
+C:\Users\longt\source\repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\Database.mdf
+C:\Users\longt\source\repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\Database_log.ldf
+C:\Users\longt\source\repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\EntityFramework.dll
+C:\Users\longt\source\repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\longt\source\repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\EntityFramework.xml
+C:\Users\longt\source\repos\CongVanManager\CongVanManager\CongVanManager\bin\Debug\EntityFramework.SqlServer.xml

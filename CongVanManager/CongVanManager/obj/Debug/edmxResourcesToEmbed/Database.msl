@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DatabaseStoreContainer" CdmEntityContainer="DatabaseContainer">
+    <EntitySetMapping Name="LoaiCongVans">
+      <EntityTypeMapping TypeName="IsTypeOf(Database.LoaiCongVan)">
+        <MappingFragment StoreEntitySet="LoaiCongVans">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LienHes">
+      <EntityTypeMapping TypeName="IsTypeOf(Database.LienHe)">
+        <MappingFragment StoreEntitySet="LienHes">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CongVans">
+      <EntityTypeMapping TypeName="IsTypeOf(Database.CongVan)">
+        <MappingFragment StoreEntitySet="CongVans">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SoKyHieu" ColumnName="SoKyHieu" />
+          <ScalarProperty Name="NgayCongVan" ColumnName="NgayCongVan" />
+          <ScalarProperty Name="TrichYeu" ColumnName="TrichYeu" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="PDFScanLocation" ColumnName="PDFScanLocation" />
+          <ScalarProperty Name="NgayXuLi" ColumnName="NgayXuLi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NoiNhans">
+      <EntityTypeMapping TypeName="IsTypeOf(Database.NoiNhan)">
+        <MappingFragment StoreEntitySet="NoiNhans">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HopCongVans">
+      <EntityTypeMapping TypeName="IsTypeOf(Database.HopCongVan)">
+        <MappingFragment StoreEntitySet="HopCongVans">
+          <ScalarProperty Name="LoaiHop" ColumnName="LoaiHop" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LoaiCongVanCongVan" TypeName="Database.LoaiCongVanCongVan" StoreEntitySet="CongVans">
+      <EndProperty Name="LoaiCongVan">
+        <ScalarProperty Name="Id" ColumnName="LoaiCongVan_Id" />
+      </EndProperty>
+      <EndProperty Name="CongVan">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LienHeCongVan" TypeName="Database.LienHeCongVan" StoreEntitySet="CongVans">
+      <EndProperty Name="LienHe">
+        <ScalarProperty Name="Email" ColumnName="LienHe_Email" />
+      </EndProperty>
+      <EndProperty Name="CongVan">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CongVanDanhSachNoiNhan" TypeName="Database.CongVanDanhSachNoiNhan" StoreEntitySet="NoiNhans">
+      <EndProperty Name="CongVan">
+        <ScalarProperty Name="Id" ColumnName="CongVan_Id" />
+      </EndProperty>
+      <EndProperty Name="DanhSachNoiNhan">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LienHeDanhSachNoiNhan" TypeName="Database.LienHeDanhSachNoiNhan" StoreEntitySet="NoiNhans">
+      <EndProperty Name="LienHe">
+        <ScalarProperty Name="Email" ColumnName="LienHe_Email" />
+      </EndProperty>
+      <EndProperty Name="DanhSachNoiNhan">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="HopCongVanCongVan" TypeName="Database.HopCongVanCongVan" StoreEntitySet="CongVans">
+      <EndProperty Name="HopCongVan">
+        <ScalarProperty Name="LoaiHop" ColumnName="HopCongVan_LoaiHop" />
+      </EndProperty>
+      <EndProperty Name="CongVan">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
