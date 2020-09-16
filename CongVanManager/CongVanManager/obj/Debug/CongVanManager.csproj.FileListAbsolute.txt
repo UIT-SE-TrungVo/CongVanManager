@@ -36,5 +36,5 @@ G:\Visual Studio\CVManager\CongVanManager\CongVanManager\bin\Debug\MaterialDesig
 G:\Visual Studio\CVManager\CongVanManager\CongVanManager\bin\Debug\MaterialDesignThemes.Wpf.pdb
 G:\Visual Studio\CVManager\CongVanManager\CongVanManager\bin\Debug\MaterialDesignThemes.Wpf.xml
 G:\Visual Studio\CVManager\CongVanManager\CongVanManager\obj\Debug\App.baml
-G:\Visual Studio\CVManager\CongVanManager\CongVanManager\obj\Debug\InboxLayout.g.cs
-G:\Visual Studio\CVManager\CongVanManager\CongVanManager\obj\Debug\InboxLayout.baml
+G:\Visual Studio\CVManager\CongVanManager\CongVanManager\obj\Debug\Page\InboxLayout.g.cs
+G:\Visual Studio\CVManager\CongVanManager\CongVanManager\obj\Debug\Page\InboxLayout.baml

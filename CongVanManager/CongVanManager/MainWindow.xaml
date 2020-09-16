@@ -17,7 +17,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         
         mc:Ignorable="d"
-        Title="Công Văn Manager" Height="720" Width="1200" MinHeight="720" MinWidth="1200" WindowStartupLocation="CenterOwner">
+        Title="Công Văn Manager" Height="720" Width="1280" MinHeight="720" MinWidth="1280" WindowStartupLocation="CenterOwner">
     <Grid>
         
         <!--#region LAYOUT DEFINITION-->
@@ -38,7 +38,7 @@
                     <ScaleTransform CenterY="5" ScaleX="2" ScaleY="2"/>
                 </materialDesign:PackIcon.RenderTransform>
             </materialDesign:PackIcon>
-            <Image Source="Logo.png" Margin="20,-15"/>
+            <Image Source="Asset/Image/Logo.png" Margin="20,-15"/>
         </StackPanel>
         <!--#endregion-->
         
@@ -90,13 +90,23 @@
         <!--#endregion-->
         
         <!--#region TOP BAR-->
-        <Grid Grid.Column="1" Background="WhiteSmoke">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="200"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-
-            <Border CornerRadius="20" Margin="100,15" Padding="20,5" BorderBrush="MediumPurple" BorderThickness="3">
+        <DockPanel Grid.Column="1" Background="WhiteSmoke" LastChildFill="True">
+            <DockPanel Grid.Column="1" DockPanel.Dock="Right" Margin="25,0">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="100">
+                    <TextBlock TextAlignment="Center" TextWrapping="Wrap"> Lê Hoàng Minh Sơn </TextBlock>
+                    <TextBlock TextAlignment="Right"> 12783712379 </TextBlock>
+                </StackPanel>
+                <Ellipse Width="60" Height="60">
+                    <Ellipse.Fill>
+                        <ImageBrush>
+                            <ImageBrush.ImageSource>
+                                <BitmapImage UriSource="Asset/Image/116708945_963250040791127_2325266720546025099_n.png"/>
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </DockPanel>
+            <Border CornerRadius="20" Margin="100,15,25,15" Padding="20,5" BorderBrush="MediumPurple" BorderThickness="3">
                 <DockPanel LastChildFill="True">
                     <WrapPanel DockPanel.Dock="Right" VerticalAlignment="Center">
                         <materialDesign:PackIcon DockPanel.Dock="Right" Kind="Search" Margin="10,0">
@@ -113,28 +123,15 @@
                     <TextBox VerticalContentAlignment="Center" Margin="100,0,10,0" BorderBrush="Transparent" FontWeight="SemiBold"/>
                 </DockPanel>
             </Border>
-
-            <DockPanel Grid.Column="1">
-                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="100">
-                    <TextBlock TextAlignment="Center" TextWrapping="Wrap"> Lê Hoàng Minh Sơn </TextBlock>
-                    <TextBlock TextAlignment="Right"> 12783712379 </TextBlock>
-                </StackPanel>
-                <Ellipse Width="60" Height="60">
-                    <Ellipse.Fill>
-                        <ImageBrush>
-                            <ImageBrush.ImageSource>
-                                <BitmapImage UriSource="116708945_963250040791127_2325266720546025099_n.png" />
-                            </ImageBrush.ImageSource>
-                        </ImageBrush>
-                    </Ellipse.Fill>
-                </Ellipse>
-            </DockPanel>
-        </Grid>
+        </DockPanel>
         <!--#endregion-->
 
         <!--#region MAIN DISPLAY -->
-        <Frame Grid.Column="1" Grid.Row="1" Source="InboxLayout.xaml">
-        </Frame>
+        <Viewbox Stretch="Uniform" Grid.Column="1" Grid.Row="1">
+            <Frame 
+               Source="/CongVanManager;component/Page/InboxLayout.xaml">
+            </Frame>
+        </Viewbox>
         <!--#endregion-->
         
     </Grid>
