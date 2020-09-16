@@ -17,6 +17,7 @@ namespace CongVanManager
         public CongVan()
         {
             this.DanhSachNoiNhan = new HashSet<NoiNhan>();
+            this.PhanHois = new HashSet<PhanHoi>();
         }
     
         public int Id { get; set; }
@@ -26,10 +27,12 @@ namespace CongVanManager
         public string GhiChu { get; set; }
         public string PDFScanLocation { get; set; }
         public System.DateTime NgayXuLi { get; set; }
+        public bool XacNhan { get; set; }
     
         public virtual LoaiCongVan LoaiCongVan { get; set; }
         public virtual LienHe LienHe { get; set; }
         public virtual ICollection<NoiNhan> DanhSachNoiNhan { get; set; }
         public virtual HopCongVan HopCongVan { get; set; }
+        public virtual ICollection<PhanHoi> PhanHois { get; set; }
     }
 }

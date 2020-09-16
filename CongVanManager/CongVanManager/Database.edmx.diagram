@@ -15,6 +15,12 @@
         <AssociationConnector Association="Database.LienHeDanhSachNoiNhan" />
         <EntityTypeShape EntityType="Database.HopCongVan" Width="1.5" PointX="6" PointY="1.75" />
         <AssociationConnector Association="Database.HopCongVanCongVan" />
+        <EntityTypeShape EntityType="Database.Setting" Width="2.5" PointX="1" PointY="5.625" />
+        <EntityTypeShape EntityType="Database.User" Width="1.5" PointX="4.625" PointY="5.625" />
+        <AssociationConnector Association="Database.UserSetting" />
+        <EntityTypeShape EntityType="Database.PhanHoi" Width="1.5" PointX="3.25" PointY="7.75" />
+        <AssociationConnector Association="Database.CongVanPhanHoi" />
+        <AssociationConnector Association="Database.UserPhanHoi" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

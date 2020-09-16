@@ -164,6 +164,21 @@
             <End Role="HopCongVan" EntitySet="HopCongVans" />
             <End Role="CongVan" EntitySet="CongVans" />
           </AssociationSet>
+          <EntitySet Name="Settings" EntityType="Database.Setting" />
+          <EntitySet Name="Users" EntityType="Database.User" />
+          <AssociationSet Name="UserSetting" Association="Database.UserSetting">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Setting" EntitySet="Settings" />
+          </AssociationSet>
+          <EntitySet Name="PhanHois" EntityType="Database.PhanHoi" />
+          <AssociationSet Name="CongVanPhanHoi" Association="Database.CongVanPhanHoi">
+            <End Role="CongVan" EntitySet="CongVans" />
+            <End Role="PhanHoi" EntitySet="PhanHois" />
+          </AssociationSet>
+          <AssociationSet Name="UserPhanHoi" Association="Database.UserPhanHoi">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PhanHoi" EntitySet="PhanHois" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CongVan">
           <Key>
@@ -180,6 +195,8 @@
           <Property Name="GhiChu" Type="String" Nullable="true" />
           <Property Name="PDFScanLocation" Type="String" Nullable="false" />
           <Property Name="NgayXuLi" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="XacNhan" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PhanHois" Relationship="Database.CongVanPhanHoi" FromRole="CongVan" ToRole="PhanHoi" />
         </EntityType>
         <EntityType Name="LoaiCongVan">
           <Key>
@@ -231,6 +248,45 @@
         <Association Name="HopCongVanCongVan">
           <End Type="Database.HopCongVan" Role="HopCongVan" Multiplicity="1" />
           <End Type="Database.CongVan" Role="CongVan" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubscribedWatchlist" Type="String" Nullable="false" />
+          <NavigationProperty Name="TruongPhong" Relationship="Database.UserSetting" FromRole="Setting" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="Loai" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Setting" Relationship="Database.UserSetting" FromRole="User" ToRole="Setting" />
+          <NavigationProperty Name="PhanHois" Relationship="Database.UserPhanHoi" FromRole="User" ToRole="PhanHoi" />
+        </EntityType>
+        <Association Name="UserSetting">
+          <End Type="Database.User" Role="User" Multiplicity="1" />
+          <End Type="Database.Setting" Role="Setting" Multiplicity="1" />
+        </Association>
+        <EntityType Name="PhanHoi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comment" Type="String" Nullable="false" />
+          <NavigationProperty Name="CongVan" Relationship="Database.CongVanPhanHoi" FromRole="PhanHoi" ToRole="CongVan" />
+          <NavigationProperty Name="User" Relationship="Database.UserPhanHoi" FromRole="PhanHoi" ToRole="User" />
+        </EntityType>
+        <Association Name="CongVanPhanHoi">
+          <End Type="Database.CongVan" Role="CongVan" Multiplicity="1" />
+          <End Type="Database.PhanHoi" Role="PhanHoi" Multiplicity="*" />
+        </Association>
+        <Association Name="UserPhanHoi">
+          <End Type="Database.User" Role="User" Multiplicity="1" />
+          <End Type="Database.PhanHoi" Role="PhanHoi" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
