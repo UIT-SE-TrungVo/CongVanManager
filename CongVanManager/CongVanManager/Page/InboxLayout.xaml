@@ -49,28 +49,29 @@
         <!--#region MAIN-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="700" MinWidth="300" MaxWidth="900"/>
+                <ColumnDefinition Width="700" MinWidth="400" MaxWidth="900"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <!--#region LEFT: MAIL LIST-->
-            <ListBox materialDesign:ListViewAssist.ListViewItemPadding="10"
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListBox materialDesign:ListViewAssist.ListViewItemPadding="10"
                  materialDesign:ListBoxAssist.IsToggle="False"
                  Style="{StaticResource MaterialDesignCardsListBox}">
-                <ListBoxItem Style="{StaticResource MaterialDesignCardsListBoxItem}" HorizontalAlignment="Stretch" Height="40" Margin="5">
-                    <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch">
-                        <Viewbox Stretch="Uniform">
-                            <WrapPanel>
+                    <ListBoxItem Style="{StaticResource MaterialDesignCardsListBoxItem}" HorizontalAlignment="Stretch" Height="40" Margin="5">
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Stretch" Height="40">
+                            <DockPanel LastChildFill="True">
                                 <CheckBox Margin="5"/>
-                                <TextBlock Margin="5"> Phòng đào tạo</TextBlock>
+                                <TextBlock Margin="5" Width="100"> Phòng đào tạo</TextBlock>
                                 <TextBlock Margin="5"> [KẾ HOẠCH]</TextBlock>
+                                <TextBlock Margin="5" DockPanel.Dock="Right" MinWidth="100"> Đã tiếp nhận</TextBlock>
                                 <TextBlock Margin="5"> Ngày hội qua môn cho sinh viên năm 6</TextBlock>
-                                <TextBlock Margin="5" HorizontalAlignment="Right"> Đã tiếp nhận</TextBlock>
-                            </WrapPanel>
-                        </Viewbox>
-                    </Button>
-                </ListBoxItem>
-            </ListBox>
+                            </DockPanel>
+                        </Button>
+                    </ListBoxItem>
+                </ListBox>
+            </ScrollViewer>
+            
             <!--#endregion -->
             
             <!--Spliter--> <GridSplitter Grid.Column="1" Width="5" Background="Purple" HorizontalAlignment="Stretch"/>
@@ -78,75 +79,77 @@
             <!--#region RIGHT: VIEW PANEL-->
             <DockPanel Grid.Column="2" LastChildFill="True">
                 <!--View Panel-->
-                <StackPanel DockPanel.Dock="Top" CanVerticallyScroll="True">
-                    <!--Header-->
-                    <StackPanel Margin="5">
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" 
-                               TextWrapping="WrapWithOverflow" HorizontalAlignment="Center"> 
+                <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <!--Header-->
+                        <StackPanel Margin="5">
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" 
+                               TextWrapping="WrapWithOverflow" TextAlignment="Center"> 
                         KẾ HOẠCH
-                        </TextBlock>
-                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                               TextWrapping="WrapWithOverflow" HorizontalAlignment="Center">
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                               TextWrapping="WrapWithOverflow" TextAlignment="Center">
                         Ngày hội qua môn cho sinh viên năm 6
-                        </TextBlock>
-                    </StackPanel>
+                            </TextBlock>
+                        </StackPanel>
 
-                    <!--CongVan Info-->
-                    <StackPanel Orientation="Vertical" Margin="0,10">
-                        <WrapPanel Margin="5">
-                            <TextBlock VerticalAlignment="Top"> Số vào</TextBlock>
-                            <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}">
+                        <!--CongVan Info-->
+                        <StackPanel Orientation="Vertical" Margin="0,10">
+                            <WrapPanel Margin="5">
+                                <TextBlock VerticalAlignment="Top"> Số vào</TextBlock>
+                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}">
                                     001
-                            </TextBlock>
-                        </WrapPanel>
-                        <WrapPanel Margin="5">
-                            <TextBlock> Nơi gửi:</TextBlock>
-                            <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0">
-                                <ListBoxItem>
-                                    <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}">
+                                </TextBlock>
+                            </WrapPanel>
+                            <WrapPanel Margin="5">
+                                <TextBlock> Nơi gửi:</TextBlock>
+                                <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0">
+                                    <ListBoxItem>
+                                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}">
                                     phongdaotao@gmail.com
-                                    </TextBlock>
-                                </ListBoxItem>
-                            </ListBox>
-                        </WrapPanel>
-                        <WrapPanel Margin="5">
-                            <TextBlock> Nơi nhận:</TextBlock>
-                            <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0">
-                                <ListBoxItem >
-                                    <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}">
+                                        </TextBlock>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </WrapPanel>
+                            <WrapPanel Margin="5">
+                                <TextBlock> Nơi nhận:</TextBlock>
+                                <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0">
+                                    <ListBoxItem >
+                                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}">
                                     phongdaotao@gmail.com
-                                    </TextBlock>
-                                </ListBoxItem>
-                                <ListBoxItem>
-                                    <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}">
+                                        </TextBlock>
+                                    </ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}">
                                     phongdaotao@gmail.com
-                                    </TextBlock>
-                                </ListBoxItem>
-                            </ListBox>
-                        </WrapPanel>
-                        <WrapPanel Margin="5">
-                            <TextBlock> Ngày gửi:</TextBlock>
-                            <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}">
+                                        </TextBlock>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </WrapPanel>
+                            <WrapPanel Margin="5">
+                                <TextBlock> Ngày gửi:</TextBlock>
+                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}">
                                     16:59 ngày 31/09/2020
-                            </TextBlock>
-                        </WrapPanel>
-                        <WrapPanel Margin="5">
-                            <TextBlock> Số ký hiệu:</TextBlock>
-                            <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}">
+                                </TextBlock>
+                            </WrapPanel>
+                            <WrapPanel Margin="5">
+                                <TextBlock> Số ký hiệu:</TextBlock>
+                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}">
                                     01/ĐH-CNTT
-                            </TextBlock>
-                        </WrapPanel>
+                                </TextBlock>
+                            </WrapPanel>
 
-                        <WrapPanel Margin="5">
-                            <TextBlock VerticalAlignment="Top"> Ghi chú</TextBlock>
-                            <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}">
+                            <WrapPanel Margin="5">
+                                <TextBlock VerticalAlignment="Top"> Ghi chú</TextBlock>
+                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}">
                                     Đme ngày hội xàm vài lòn
-                            </TextBlock>
-                        </WrapPanel>
+                                </TextBlock>
+                            </WrapPanel>
 
-                        <!--Cong Van Content-->
+                            <!--Cong Van Content-->
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+                </ScrollViewer>
 
                 <!--Action bar-->
                 <DockPanel DockPanel.Dock="Bottom" Height="50" VerticalAlignment="Bottom">
