@@ -1,0 +1,58 @@
+﻿<Page x:Class="CongVanManager.InboxLayout"
+        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CongVanManager"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:Controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+ 
+      MinHeight="685" MinWidth="1000"
+      Title="Hộp thư đến">
+
+    <Grid>
+        <!--#region LAYOUT DEFINITION-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--#endregion-->
+        
+        <!--#region TOP LAYOUT-->
+        <DockPanel LastChildFill="True">
+            <WrapPanel>
+                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Margin="10">
+                    Lọc thư 
+                </Button>
+                <CheckBox Margin="5">Chưa đọc</CheckBox>
+                <CheckBox Margin="5">Đã tiếp nhận</CheckBox>
+                <CheckBox Margin="5">Đã duyệt</CheckBox>
+                <CheckBox Margin="5">Đã chuyển</CheckBox>
+            </WrapPanel>
+            <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
+                <TextBlock HorizontalAlignment="Right" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="{Binding AmountOfLetters, StringFormat=Tổng số thư: {0:#}}"></TextBlock>
+                <TextBlock HorizontalAlignment="Right" Style="{StaticResource MaterialDesignBody2TextBlock}"> Thông tin hộp thư </TextBlock>
+            </StackPanel>
+        </DockPanel>
+        <!--#endregion-->
+        
+        <!--#region RIGHT: PREVIEW PANEL-->
+        <!--#region -->
+        
+        <!--#region MAIN-->
+        <!--#endregion-->
+    </Grid>
+</Page>

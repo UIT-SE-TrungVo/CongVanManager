@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DatabaseStoreContainer">
+    <EntitySet Name="LoaiCongVans" EntityType="Database.Store.LoaiCongVans" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LienHes" EntityType="Database.Store.LienHes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CongVans" EntityType="Database.Store.CongVans" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NoiNhans" EntityType="Database.Store.NoiNhans" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HopCongVans" EntityType="Database.Store.HopCongVans" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="LoaiCongVanCongVan" Association="Database.Store.LoaiCongVanCongVan">
+      <End Role="LoaiCongVan" EntitySet="LoaiCongVans" />
+      <End Role="CongVan" EntitySet="CongVans" />
+    </AssociationSet>
+    <AssociationSet Name="LienHeCongVan" Association="Database.Store.LienHeCongVan">
+      <End Role="LienHe" EntitySet="LienHes" />
+      <End Role="CongVan" EntitySet="CongVans" />
+    </AssociationSet>
+    <AssociationSet Name="CongVanDanhSachNoiNhan" Association="Database.Store.CongVanDanhSachNoiNhan">
+      <End Role="CongVan" EntitySet="CongVans" />
+      <End Role="DanhSachNoiNhan" EntitySet="NoiNhans" />
+    </AssociationSet>
+    <AssociationSet Name="LienHeDanhSachNoiNhan" Association="Database.Store.LienHeDanhSachNoiNhan">
+      <End Role="LienHe" EntitySet="LienHes" />
+      <End Role="DanhSachNoiNhan" EntitySet="NoiNhans" />
+    </AssociationSet>
+    <AssociationSet Name="HopCongVanCongVan" Association="Database.Store.HopCongVanCongVan">
+      <End Role="HopCongVan" EntitySet="HopCongVans" />
+      <End Role="CongVan" EntitySet="CongVans" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="LoaiCongVans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LienHes">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CongVans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SoKyHieu" Type="int" Nullable="true" />
+    <Property Name="NgayCongVan" Type="datetime" Nullable="true" />
+    <Property Name="TrichYeu" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="GhiChu" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PDFScanLocation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NgayXuLi" Type="datetime" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="LoaiCongVan_Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LienHe_Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HopCongVan_LoaiHop" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NoiNhans">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CongVan_Id" Type="int" Nullable="false" />
+    <Property Name="LienHe_Email" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HopCongVans">
+    <Key>
+      <PropertyRef Name="LoaiHop" />
+    </Key>
+    <Property Name="LoaiHop" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="LoaiCongVanCongVan">
+    <End Role="LoaiCongVan" Type="Database.Store.LoaiCongVans" Multiplicity="1" />
+    <End Role="CongVan" Type="Database.Store.CongVans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiCongVan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CongVan">
+        <PropertyRef Name="LoaiCongVan_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LienHeCongVan">
+    <End Role="LienHe" Type="Database.Store.LienHes" Multiplicity="1" />
+    <End Role="CongVan" Type="Database.Store.CongVans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LienHe">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="CongVan">
+        <PropertyRef Name="LienHe_Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CongVanDanhSachNoiNhan">
+    <End Role="CongVan" Type="Database.Store.CongVans" Multiplicity="1" />
+    <End Role="DanhSachNoiNhan" Type="Database.Store.NoiNhans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CongVan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DanhSachNoiNhan">
+        <PropertyRef Name="CongVan_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LienHeDanhSachNoiNhan">
+    <End Role="LienHe" Type="Database.Store.LienHes" Multiplicity="1" />
+    <End Role="DanhSachNoiNhan" Type="Database.Store.NoiNhans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LienHe">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="DanhSachNoiNhan">
+        <PropertyRef Name="LienHe_Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HopCongVanCongVan">
+    <End Role="HopCongVan" Type="Database.Store.HopCongVans" Multiplicity="1" />
+    <End Role="CongVan" Type="Database.Store.CongVans" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HopCongVan">
+        <PropertyRef Name="LoaiHop" />
+      </Principal>
+      <Dependent Role="CongVan">
+        <PropertyRef Name="HopCongVan_LoaiHop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
