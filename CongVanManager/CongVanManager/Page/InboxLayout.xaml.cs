@@ -23,6 +23,7 @@ namespace CongVanManager
         public InboxLayout()
         {
             InitializeComponent();
+            this.DataContext = new InboxView();
         }
     }
 }
