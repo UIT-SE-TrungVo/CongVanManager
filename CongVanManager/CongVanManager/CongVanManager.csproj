@@ -68,7 +68,13 @@
     </ApplicationDefinition>
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Model\User.cs" />
-    <Page Include="Page\InboxLayout.xaml">
+    <Compile Include="View\NewDocLayout_Chooser.xaml.cs">
+      <DependentUpon>NewDocLayout_Chooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewDocLayout_In.xaml.cs">
+      <DependentUpon>NewDocLayout_In.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\InboxLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -86,13 +92,21 @@
     <Compile Include="Model\LienHe.cs" />
     <Compile Include="Model\LoaiCongVan.cs" />
     <Compile Include="Model\NoiNhan.cs" />
-    <Compile Include="Page\InboxLayout.xaml.cs">
+    <Compile Include="View\InboxLayout.xaml.cs">
       <DependentUpon>InboxLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\NewDocLayout_Chooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NewDocLayout_In.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\PhanHoi.cs" />
@@ -127,9 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Asset\Image\116708945_963250040791127_2325266720546025099_n.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
