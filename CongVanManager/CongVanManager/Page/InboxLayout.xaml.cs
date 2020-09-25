@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CongVanManager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace CongVanManager
         public InboxLayout()
         {
             InitializeComponent();
-            this.DataContext = new InboxView();
+            this.DataContext = new InboxViewModel();
         }
     }
 }

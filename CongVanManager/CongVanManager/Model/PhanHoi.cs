@@ -11,7 +11,8 @@ namespace CongVanManager
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Collections.ObjectModel;
+
     public partial class PhanHoi
     {
         public int Id { get; set; }
@@ -19,5 +20,17 @@ namespace CongVanManager
     
         public virtual CongVan CongVan { get; set; }
         public virtual User User { get; set; }
+
+        private static ObservableCollection<PhanHoi> _db;
+        public static ObservableCollection<PhanHoi> DB
+        {
+            get
+            {
+                if (_db == null)
+                    _db = new ObservableCollection<PhanHoi>();
+                return _db;
+            }
+            private set { }
+        }
     }
 }
