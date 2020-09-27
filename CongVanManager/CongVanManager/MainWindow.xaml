@@ -129,7 +129,7 @@
         <!--#region MAIN DISPLAY -->
         <Viewbox Stretch="Uniform" Grid.Column="1" Grid.Row="1">
             <Frame 
-               Source="/CongVanManager;component/Page/InboxLayout.xaml">
+               Content="{Binding SelectedPage, Mode=TwoWay}">
             </Frame>
         </Viewbox>
         <!--#endregion-->

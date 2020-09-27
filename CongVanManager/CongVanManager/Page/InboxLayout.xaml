@@ -62,16 +62,16 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <!--Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Stretch" Height="40"-->
-                            <DockPanel LastChildFill="True">
-                                <CheckBox Margin="5"/>
+                                <DockPanel LastChildFill="True">
+                                    <CheckBox Margin="5"/>
                                     <TextBlock Margin="5" Width="100" Text="{Binding NoiGui.Name}"></TextBlock>
                                     <TextBlock Margin="5" Text="{Binding LoaiCongVan.Id, StringFormat=[{0}]}"></TextBlock>
                                     <TextBlock Margin="5" DockPanel.Dock="Right" MinWidth="100" Text="{Binding Status}"></TextBlock>
                                     <TextBlock Margin="5" Text="{Binding TrichYeu}"></TextBlock>
-                            </DockPanel>
-                        
+                                </DockPanel>
+                            
                         </DataTemplate>
-                        </ListBox.ItemTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </ScrollViewer>
             
