@@ -158,6 +158,10 @@
 
                             <!--Cong Van Content-->
                         </StackPanel>
+                        <!--PdfViewer-->
+                        <StackPanel x:Name="pdfZone" Orientation="Vertical" Margin="0,10">
+                            
+                        </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
 
