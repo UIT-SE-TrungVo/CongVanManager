@@ -1,0 +1,9 @@
+﻿<Window x:Class="DateTimePickerTest.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:DateTimePicker="clr-namespace:DateTimePicker;assembly=DateTimePicker"
+    Title="Window1" Height="300" Width="300">
+    <Grid>
+        <DateTimePicker:DateTimePicker Height="40" Format="yyyy:MM:dd:hh:mm:ss"/>
+    </Grid>
+</Window>

@@ -1,0 +1,14 @@
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\bin\Debug\DateTimePickerTest.exe
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\bin\Debug\DateTimePickerTest.pdb
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\bin\Debug\DateTimePicker.dll
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\bin\Debug\DateTimePicker.pdb
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\obj\Debug\Window1.baml
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\obj\Debug\Window1.g.cs
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\obj\Debug\App.g.cs
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\obj\Debug\DateTimePickerTest_MarkupCompile.cache
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\obj\Debug\DateTimePickerTest.g.resources
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\obj\Debug\DateTimePickerTest.Properties.Resources.resources
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\obj\Debug\DateTimePickerTest.csproj.GenerateResource.Cache
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\obj\Debug\DateTimePickerTest.exe
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePickerTest\obj\Debug\DateTimePickerTest.pdb

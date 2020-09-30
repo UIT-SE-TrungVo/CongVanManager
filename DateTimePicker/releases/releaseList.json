@@ -1,0 +1,19 @@
+[
+  {
+    "Id": "0",
+    "Name": "DateTimePicker",
+    "DevelopmentStatus": "Alpha",
+    "Description": "/// <summary>\n  /// Follow steps 1a or 1b and then 2 to use this custom control in a XAML file.\n  ///\n  /// Step 1a) Using this custom control in a XAML file that exists in the current project.\n  /// Add this XmlNamespace attribute to the root element of the markup file where it is \n  /// to be used:\n  ///\n  ///     xmlns:MyNamespace=\"clr-namespace:DateTimePicker\"\n  ///\n  ///\n  /// Step 1b) Using this custom control in a XAML file that exists in a different project.\n  /// Add this XmlNamespace attribute to the root element of the markup file where it is \n  /// to be used:\n  ///\n  ///     xmlns:MyNamespace=\"clr-namespace:DateTimePicker;assembly=DateTimePicker\"\n  ///\n  /// You will also need to add a project reference from the project where the XAML file lives\n  /// to this project and Rebuild to avoid compilation errors:\n  ///\n  ///     Right click on the target project in the Solution Explorer and\n  ///     \"Add Reference\"->\"Projects\"->[Browse to and select this project]\n  ///\n  ///\n  /// Step 2)\n  /// Go ahead and use your control in the XAML file.\n  ///\n  ///     <MyNamespace:DateTimePicker/>\n  ///\n  /// </summary>",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2009-06-12T20:57:50.057-07:00",
+    "Files": [
+      {
+        "Id": "d8df3961-cf75-4862-b4b6-1bd5b96c7c29",
+        "FileName": "DateTimePicker.zip",
+        "Url": "./0/d8df3961-cf75-4862-b4b6-1bd5b96c7c29",
+        "Type": "Source Code",
+        "UploadDate": "2009-06-12T20:57:49.87-07:00"
+      }
+    ]
+  }
+]

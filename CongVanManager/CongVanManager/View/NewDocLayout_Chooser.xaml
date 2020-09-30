@@ -14,7 +14,7 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
  
-      Height="645" Width="1080" Background="Gray"
+      Height="645" Width="1080" Background="LightGray" Opacity="50"
       Title="Chọn loại công văn cần nhập">
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center"

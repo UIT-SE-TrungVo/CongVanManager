@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi,\n\nWe have used DateTime Picker control in our project . We want to disable the context menu to for that particular control . We have tried making context menu as null for date time picker styles. but it is not working.\n\nCan you please suggest on this?\n\nThanks\n\nRegards,\nPraveen",
+    "LastUpdatedDate": "2015-08-24T03:53:37.613-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Unassigned",
+      "Severity": 0,
+      "Id": 0
+    },
+    "ProjectName": "DateTimePicker",
+    "ReportedDate": "2015-08-24T03:53:37.613-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Disable ContextMenu(RightClick) for DateTime Picker control/TimePicker Control",
+    "Type": {
+      "Name": "Unassigned",
+      "Id": 5
+    },
+    "VoteCount": 1,
+    "Id": 10988
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

@@ -1,0 +1,12 @@
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePicker\bin\Debug\DateTimePicker.dll
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePicker\bin\Debug\DateTimePicker.pdb
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePicker\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePicker\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePicker\obj\Debug\DateTimePicker_MarkupCompile.cache
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePicker\obj\Debug\DateTimePicker_MarkupCompile.lref
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePicker\obj\Debug\Themes\Generic.baml
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePicker\obj\Debug\DateTimePicker.g.resources
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePicker\obj\Debug\DateTimePicker.Properties.Resources.resources
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePicker\obj\Debug\DateTimePicker.csproj.GenerateResource.Cache
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePicker\obj\Debug\DateTimePicker.dll
+C:\Users\Franz\Desktop\DateTimePicker\DateTimePicker\DateTimePicker\obj\Debug\DateTimePicker.pdb

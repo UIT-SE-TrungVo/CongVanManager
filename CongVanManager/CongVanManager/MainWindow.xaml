@@ -127,11 +127,9 @@
         <!--#endregion-->
 
         <!--#region MAIN DISPLAY -->
-        <Viewbox Stretch="Uniform" Grid.Column="1" Grid.Row="1">
-            <Frame 
-               Source="/CongVanManager;component/View/InboxLayout.xaml">
-            </Frame>
-        </Viewbox>
+        <Frame Grid.Column="1" Grid.Row="1"
+            Source="/CongVanManager;component/View/NewDocLayout_In.xaml">
+        </Frame>
         <!--#endregion-->
         
     </Grid>

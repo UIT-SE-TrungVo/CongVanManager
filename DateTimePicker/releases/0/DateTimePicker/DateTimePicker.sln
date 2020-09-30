@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateTimePicker", "DateTimePicker\DateTimePicker.csproj", "{65246E87-CC2B-4276-8F64-B4760D13DC31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateTimePickerTest", "DateTimePickerTest\DateTimePickerTest.csproj", "{FD695621-1EFA-4FF5-9DFB-E695EF22A696}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65246E87-CC2B-4276-8F64-B4760D13DC31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65246E87-CC2B-4276-8F64-B4760D13DC31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65246E87-CC2B-4276-8F64-B4760D13DC31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65246E87-CC2B-4276-8F64-B4760D13DC31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD695621-1EFA-4FF5-9DFB-E695EF22A696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD695621-1EFA-4FF5-9DFB-E695EF22A696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD695621-1EFA-4FF5-9DFB-E695EF22A696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD695621-1EFA-4FF5-9DFB-E695EF22A696}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
