@@ -17,7 +17,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
  
       Height="645" Width="1080"
-      Title="Hộp thư đến">
+      Title="Hộp thư đến" Loaded="Page_Loaded">
 
     <Grid>
         <!--#region LAYOUT DEFINITION-->
@@ -83,87 +83,96 @@
             <DockPanel Grid.Column="2" LastChildFill="True">
                 <!--View Panel-->
                 <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
+                    <StackPanel Height="539">
                         <!--Header-->
                         <StackPanel Margin="5">
                             <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" 
                                TextWrapping="WrapWithOverflow" TextAlignment="Center"
                                Text="{Binding SelectedLoaiCongVan}"
-                               > 
-                        
+                               >
+
                             </TextBlock>
                             <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                TextWrapping="WrapWithOverflow" TextAlignment="Center"
                                Text="{Binding SelectedCongVanTrichYeu}">
-                        
+
                             </TextBlock>
                         </StackPanel>
 
                         <!--CongVan Info-->
-                        <StackPanel Orientation="Vertical" Margin="0,10">
-                            <WrapPanel Margin="5">
-                                <TextBlock VerticalAlignment="Top"> Số vào</TextBlock>
-                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
+                        <Grid Height="450">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <StackPanel Orientation="Vertical" Margin="0,10">
+                                    <WrapPanel Margin="5">
+                                        <TextBlock VerticalAlignment="Top"> Số vào</TextBlock>
+                                        <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
                                   Text="{Binding SelectedCongVanNumber, StringFormat={}{0:000}, Mode=OneWay}">
-                                    
-                                </TextBlock>
-                            </WrapPanel>
-                            <WrapPanel Margin="5">
-                                <TextBlock> Nơi gửi:</TextBlock>
-                                <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0">
-                                    <ListBoxItem>
-                                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}"
-                                          Text="{Binding SelectedCongVanSender, Mode=OneWay}">
-                                    
+
                                         </TextBlock>
-                                    </ListBoxItem>
-                                </ListBox>
-                            </WrapPanel>
-                            <WrapPanel Margin="5">
-                                <TextBlock> Nơi nhận:</TextBlock>
-                                <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0"
+                                    </WrapPanel>
+                                    <WrapPanel Margin="5">
+                                        <TextBlock> Nơi gửi:</TextBlock>
+                                        <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0">
+                                            <ListBoxItem>
+                                                <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                          Text="{Binding SelectedCongVanSender, Mode=OneWay}">
+
+                                                </TextBlock>
+                                            </ListBoxItem>
+                                        </ListBox>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="5">
+                                        <TextBlock> Nơi nhận:</TextBlock>
+                                        <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0"
                                     ItemsSource="{Binding SelectedCongVanDestination, Mode=OneWay}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}"
                                                Text="{Binding LienHe.Name, Mode=OneWay}">
-                                    
-                                            </TextBlock>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </WrapPanel>
-                            <WrapPanel Margin="5">
-                                <TextBlock> Ngày gửi:</TextBlock>
-                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
+
+                                                    </TextBlock>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="5">
+                                        <TextBlock> Ngày gửi:</TextBlock>
+                                        <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
                                     Text="{Binding SelectedCongVanSentDate, StringFormat={}{0:HH:mm} ngày {0:dd-MM-yyyy}, Mode=OneWay}">
-                                    
-                                </TextBlock>
-                            </WrapPanel>
-                            <WrapPanel Margin="5">
-                                <TextBlock> Số ký hiệu:</TextBlock>
-                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
+
+                                        </TextBlock>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="5">
+                                        <TextBlock> Số ký hiệu:</TextBlock>
+                                        <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
                                     Text="{Binding SelectedCongVanKeyNumber, Mode=OneWay}">
-                                    
-                                </TextBlock>
-                            </WrapPanel>
 
-                            <WrapPanel Margin="5">
-                                <TextBlock VerticalAlignment="Top"> Ghi chú</TextBlock>
-                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                        </TextBlock>
+                                    </WrapPanel>
+
+                                    <WrapPanel Margin="5">
+                                        <TextBlock VerticalAlignment="Top"> Ghi chú</TextBlock>
+                                        <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
                                   Text="{Binding SelectedCongVanNote, Mode=OneWay}">
-                                    
-                                </TextBlock>
-                            </WrapPanel>
 
-                            <!--Cong Van Content-->
-                        </StackPanel>
-                        <!--PdfViewer-->
-                        <StackPanel x:Name="pdfZone" Orientation="Vertical" Margin="0,10">
-                            
-                        </StackPanel>
+                                        </TextBlock>
+                                    </WrapPanel>
+
+                                    <!--Cong Van Content-->
+                                </StackPanel>
+                            </Grid>
+                            <!--PdfViewer-->
+                            <Grid x:Name="pdfZone" Grid.Row="1">
+                                
+                            </Grid>
+                        </Grid>
                     </StackPanel>
                 </ScrollViewer>
+
 
                 <!--Action bar-->
                 <DockPanel DockPanel.Dock="Bottom" Height="50" VerticalAlignment="Bottom">
