@@ -24,7 +24,7 @@ namespace CongVanManager
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            DataContext = MainWindowViewModel.instance;
         }
     }
 }

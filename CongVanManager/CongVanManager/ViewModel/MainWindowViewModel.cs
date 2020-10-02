@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace CongVanManager.ViewModel
 {
@@ -20,9 +21,20 @@ namespace CongVanManager.ViewModel
                 _selectedPage = value; OnPropertyChanged();
             }
         }
-        public MainWindowViewModel()
+
+        private MainWindowViewModel()
         {
             SelectedPage = page[0];
+        }
+        private static MainWindowViewModel _instance = null;
+        public static MainWindowViewModel instance
+        {
+            get {
+                if (_instance == null)
+                    _instance = new MainWindowViewModel();
+                return _instance;
+            }
+            private set { }
         }
 
         public void ChangePage(int pageNumber)

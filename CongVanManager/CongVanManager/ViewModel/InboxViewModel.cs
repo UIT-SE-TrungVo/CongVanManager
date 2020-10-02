@@ -194,7 +194,7 @@ namespace CongVanManager.ViewModel
         }
 
 
-        public InboxViewModel()
+        private InboxViewModel()
         {
             LienHe contact = new LienHe
             {
@@ -250,6 +250,16 @@ namespace CongVanManager.ViewModel
             CongVan.DB.CollectionChanged += 
                 (object sender, NotifyCollectionChangedEventArgs e)
                 => { OnPropertyChanged("DSCongVan"); };
+        }
+        private static InboxViewModel _instance = null;
+        public static InboxViewModel Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new InboxViewModel();
+                return _instance;
+            }
         }
     }
 }

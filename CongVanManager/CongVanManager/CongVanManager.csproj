@@ -70,6 +70,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="ViewModel\ObservableObject.cs" />
     <Page Include="Page\InboxLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -84,7 +85,6 @@
     </Compile>
     <Compile Include="Model\CongVan.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\InboxViewModel.cs" />
     <Compile Include="Model\LienHe.cs" />
     <Compile Include="Model\LoaiCongVan.cs" />
