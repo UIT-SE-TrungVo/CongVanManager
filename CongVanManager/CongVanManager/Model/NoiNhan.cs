@@ -11,12 +11,25 @@ namespace CongVanManager
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Collections.ObjectModel;
+
     public partial class NoiNhan
     {
         public int Id { get; set; }
     
         public virtual CongVan CongVan { get; set; }
         public virtual LienHe LienHe { get; set; }
+
+        private static ObservableCollection<NoiNhan> _db;
+        public static ObservableCollection<NoiNhan> DB
+        {
+            get
+            {
+                if (_db == null)
+                    _db = new ObservableCollection<NoiNhan>();
+                return _db;
+            }
+            private set { }
+        }
     }
 }

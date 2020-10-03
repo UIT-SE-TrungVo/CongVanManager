@@ -11,7 +11,8 @@ namespace CongVanManager
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Collections.ObjectModel;
+
     public partial class LienHe
     {
         public LienHe()
@@ -25,5 +26,17 @@ namespace CongVanManager
     
         public virtual ICollection<CongVan> CongVans { get; set; }
         public virtual ICollection<NoiNhan> DanhSachNoiNhan { get; set; }
+
+        private static ObservableCollection<LienHe> _db;
+        public static ObservableCollection<LienHe> DB
+        {
+            get
+            {
+                if (_db == null)
+                    _db = new ObservableCollection<LienHe>();
+                return _db;
+            }
+            private set { }
+        }
     }
 }

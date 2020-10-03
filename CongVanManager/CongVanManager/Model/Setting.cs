@@ -18,5 +18,15 @@ namespace CongVanManager
         public string SubscribedWatchlist { get; set; }
     
         public virtual User TruongPhong { get; set; }
+
+        private static Setting _instance;
+        public static Setting instance {
+            get {
+                if (_instance == null)
+                    _instance = new Setting();
+                return _instance;
+            }
+            private set { }
+        }
     }
 }

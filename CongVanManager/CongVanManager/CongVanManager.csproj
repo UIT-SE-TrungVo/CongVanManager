@@ -26,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +36,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DateTimePicker">
@@ -71,6 +73,9 @@
     </ApplicationDefinition>
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="ViewModel\ObservableObject.cs" />
+    <Page Include="Page\InboxLayout.xaml">
     <Compile Include="View\NewDocLayout_Chooser.xaml.cs">
       <DependentUpon>NewDocLayout_Chooser.xaml</DependentUpon>
     </Compile>
@@ -90,8 +95,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\CongVan.cs" />
-    <Compile Include="Model\HopCongVan.cs" />
-    <Compile Include="ViewModel\InboxView.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\InboxViewModel.cs" />
     <Compile Include="Model\LienHe.cs" />
     <Compile Include="Model\LoaiCongVan.cs" />
     <Compile Include="Model\NoiNhan.cs" />

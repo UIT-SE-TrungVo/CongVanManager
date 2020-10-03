@@ -127,9 +127,11 @@
         <!--#endregion-->
 
         <!--#region MAIN DISPLAY -->
-        <Frame Grid.Column="1" Grid.Row="1"
-            Source="/CongVanManager;component/View/NewDocLayout_In.xaml">
-        </Frame>
+        <Viewbox Stretch="Uniform" Grid.Column="1" Grid.Row="1">
+            <Frame 
+               Content="{Binding SelectedPage, Mode=TwoWay}">
+            </Frame>
+        </Viewbox>
         <!--#endregion-->
         
     </Grid>

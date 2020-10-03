@@ -30,16 +30,16 @@
         <!--#region TOP LAYOUT-->
         <DockPanel>
             <WrapPanel>
-                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Margin="10">
+                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Margin="10" Command="{Binding ButtonFilterCongVan}">
                     Lọc thư 
                 </Button>
-                <CheckBox Margin="5">Chưa đọc</CheckBox>
-                <CheckBox Margin="5">Đã tiếp nhận</CheckBox>
-                <CheckBox Margin="5">Đã duyệt</CheckBox>
-                <CheckBox Margin="5">Đã chuyển</CheckBox>
+                <CheckBox Margin="5" IsThreeState="True" IsChecked="{Binding ChuaDoc}">Chưa đọc</CheckBox>
+                <CheckBox Margin="5" IsThreeState="True" IsChecked="{Binding DaTiepNhan}">Đã tiếp nhận</CheckBox>
+                <CheckBox Margin="5" IsThreeState="True" IsChecked="{Binding DaDuyet}">Đã duyệt</CheckBox>
+                <CheckBox Margin="5" IsThreeState="True" IsChecked="{Binding DaChuyen}">Đã chuyển</CheckBox>
             </WrapPanel>
             <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10,0">
-                <TextBlock HorizontalAlignment="Right" Style="{StaticResource MaterialDesignHeadline6TextBlock}"> Tổng số thư: 1283 </TextBlock>
+                <TextBlock HorizontalAlignment="Right" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="{Binding AmountOfLetters,StringFormat=Tổng số thư: {0}}"></TextBlock>
                 <TextBlock HorizontalAlignment="Right" Style="{StaticResource MaterialDesignBody2TextBlock}"> Thông tin hộp thư </TextBlock>
             </StackPanel>
         </DockPanel>
@@ -57,18 +57,21 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ListBox materialDesign:ListViewAssist.ListViewItemPadding="10"
                  materialDesign:ListBoxAssist.IsToggle="False"
-                 Style="{StaticResource MaterialDesignCardsListBox}">
-                    <ListBoxItem Style="{StaticResource MaterialDesignCardsListBoxItem}" HorizontalAlignment="Stretch" Height="40" Margin="5">
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Stretch" Height="40">
-                            <DockPanel LastChildFill="True">
-                                <CheckBox Margin="5"/>
-                                <TextBlock Margin="5" Width="100"> Phòng đào tạo</TextBlock>
-                                <TextBlock Margin="5"> [KẾ HOẠCH]</TextBlock>
-                                <TextBlock Margin="5" DockPanel.Dock="Right" MinWidth="100"> Đã tiếp nhận</TextBlock>
-                                <TextBlock Margin="5"> Ngày hội qua môn cho sinh viên năm 6</TextBlock>
-                            </DockPanel>
-                        </Button>
-                    </ListBoxItem>
+                 Style="{StaticResource MaterialDesignCardsListBox}"
+                 ItemsSource="{Binding DSCongVan}" SelectedItem="{Binding SelectedCongVan, Mode=TwoWay}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <!--Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Stretch" Height="40"-->
+                                <DockPanel LastChildFill="True">
+                                    <CheckBox Margin="5"/>
+                                    <TextBlock Margin="5" Width="100" Text="{Binding NoiGui.Name}"></TextBlock>
+                                    <TextBlock Margin="5" Text="{Binding LoaiCongVan.Id, StringFormat=[{0}]}"></TextBlock>
+                                    <TextBlock Margin="5" DockPanel.Dock="Right" MinWidth="100" Text="{Binding Status}"></TextBlock>
+                                    <TextBlock Margin="5" Text="{Binding TrichYeu}"></TextBlock>
+                                </DockPanel>
+                            <!--/Button-->
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </ScrollViewer>
             
@@ -84,12 +87,15 @@
                         <!--Header-->
                         <StackPanel Margin="5">
                             <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" 
-                               TextWrapping="WrapWithOverflow" TextAlignment="Center"> 
-                        KẾ HOẠCH
+                               TextWrapping="WrapWithOverflow" TextAlignment="Center"
+                               Text="{Binding SelectedLoaiCongVan}"
+                               > 
+                        
                             </TextBlock>
                             <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                               TextWrapping="WrapWithOverflow" TextAlignment="Center">
-                        Ngày hội qua môn cho sinh viên năm 6
+                               TextWrapping="WrapWithOverflow" TextAlignment="Center"
+                               Text="{Binding SelectedCongVanTrichYeu}">
+                        
                             </TextBlock>
                         </StackPanel>
 
@@ -97,52 +103,56 @@
                         <StackPanel Orientation="Vertical" Margin="0,10">
                             <WrapPanel Margin="5">
                                 <TextBlock VerticalAlignment="Top"> Số vào</TextBlock>
-                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}">
-                                    001
+                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                  Text="{Binding SelectedCongVanNumber, StringFormat={}{0:000}, Mode=OneWay}">
+                                    
                                 </TextBlock>
                             </WrapPanel>
                             <WrapPanel Margin="5">
                                 <TextBlock> Nơi gửi:</TextBlock>
                                 <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0">
                                     <ListBoxItem>
-                                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}">
-                                    phongdaotao@gmail.com
+                                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                          Text="{Binding SelectedCongVanSender, Mode=OneWay}">
+                                    
                                         </TextBlock>
                                     </ListBoxItem>
                                 </ListBox>
                             </WrapPanel>
                             <WrapPanel Margin="5">
                                 <TextBlock> Nơi nhận:</TextBlock>
-                                <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0">
-                                    <ListBoxItem >
-                                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}">
-                                    phongdaotao@gmail.com
-                                        </TextBlock>
-                                    </ListBoxItem>
-                                    <ListBoxItem>
-                                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}">
-                                    phongdaotao@gmail.com
-                                        </TextBlock>
-                                    </ListBoxItem>
+                                <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0"
+                                    ItemsSource="{Binding SelectedCongVanDestination, Mode=OneWay}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                               Text="{Binding LienHe.Name, Mode=OneWay}">
+                                    
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
                                 </ListBox>
                             </WrapPanel>
                             <WrapPanel Margin="5">
                                 <TextBlock> Ngày gửi:</TextBlock>
-                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}">
-                                    16:59 ngày 31/09/2020
+                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                    Text="{Binding SelectedCongVanSentDate, StringFormat={}{0:HH:mm} ngày {0:dd-MM-yyyy}, Mode=OneWay}">
+                                    
                                 </TextBlock>
                             </WrapPanel>
                             <WrapPanel Margin="5">
                                 <TextBlock> Số ký hiệu:</TextBlock>
-                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}">
-                                    01/ĐH-CNTT
+                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                    Text="{Binding SelectedCongVanKeyNumber, Mode=OneWay}">
+                                    
                                 </TextBlock>
                             </WrapPanel>
 
                             <WrapPanel Margin="5">
                                 <TextBlock VerticalAlignment="Top"> Ghi chú</TextBlock>
-                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}">
-                                    Đme ngày hội xàm vài lòn
+                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                  Text="{Binding SelectedCongVanNote, Mode=OneWay}">
+                                    
                                 </TextBlock>
                             </WrapPanel>
 
