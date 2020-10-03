@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyChamThi.Command;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -6,16 +7,16 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace CongVanManager.ViewModel
 {
     class InboxViewModel : ObservableObject
     {
-        #region Binding
         #region DanhSachCongVan
         public ICollection<CongVan> DSCongVan
         {
-            get { return CongVan.DB; }
+            get { return CongVan.DB.Where(Filter).ToList(); }
             set
             // Call to refresh data, 
             // Does not set value
@@ -27,6 +28,8 @@ namespace CongVanManager.ViewModel
             get { return CongVan.DB.Count; }
         }
         #endregion
+
+        #region SelectedCongVan
 
         private CongVan _selectedCongVan;
         public CongVan SelectedCongVan
@@ -47,7 +50,9 @@ namespace CongVanManager.ViewModel
                 OnPropertyChanged("SelectedCongVanDestination");
             }
         }
-        #region CongVanDetail
+        #endregion
+
+        #region SelectedCongVanDetail
         public string SelectedLoaiCongVan
         {
             get { return _selectedCongVan?.LoaiCongVan?.Id; }
@@ -132,8 +137,11 @@ namespace CongVanManager.ViewModel
         }
         public DateTime SelectedCongVanSentDate
         {
-            get { return (_selectedCongVan?.NgayCongVan).
-                    GetValueOrDefault(DateTime.MinValue); }
+            get
+            {
+                return (_selectedCongVan?.NgayCongVan).
+                  GetValueOrDefault(DateTime.MinValue);
+            }
             set
             {
                 OnPropertyChanged();
@@ -177,6 +185,90 @@ namespace CongVanManager.ViewModel
             }
         }
         #endregion
+
+        #region FilterSetting
+        private List<Func<CongVan, bool>> filterList = new List<Func<CongVan, bool>>(4);
+        private Func<CongVan, bool> defaultFilter = (item) => true;
+        private bool Filter(CongVan item)
+        {
+            foreach(var func in filterList)
+                if (func?.Invoke(item) == false)
+                    return false;
+            return true;
+        }
+        private bool? _chuaDoc;
+        public bool? ChuaDoc
+        {
+            get => _chuaDoc;
+            set
+            {
+                _chuaDoc = value;
+                if (value == null)
+                    filterList[0] = defaultFilter;
+                else
+                    filterList[0] = (item) => 
+                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDoc)
+                        ^ value.Value;
+            }
+        }
+        private bool? _daDuyet;
+        public bool? DaDuyet
+        {
+            get => _daDuyet;
+            set
+            {
+                _daDuyet = value;
+                if (value == null)
+                    filterList[1] = defaultFilter;
+                else
+                    filterList[1] = (item) =>
+                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDuyet)
+                        ^ value.Value;
+            }
+        }
+        private bool? _daTiepNhan;
+        public bool? DaTiepNhan
+        {
+            get => _daTiepNhan;
+            set
+            {
+                _daTiepNhan = value;
+                if (value == null)
+                    filterList[2] = defaultFilter;
+                else
+                    filterList[2] = (item) =>
+                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaTiepNhan)
+                        ^ value.Value;
+            }
+        }
+        private bool? _daChuyen;
+        public bool? DaChuyen
+        {
+            get => _daChuyen;
+            set
+            {
+                _daChuyen = value;
+                if (value == null)
+                    filterList[3] = defaultFilter;
+                else
+                    filterList[3] = (item) =>
+                        !(item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DangChuyen)
+                        && item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDuyet))
+                        ^ value.Value;
+            }
+        }
+        #endregion
+
+        #region ButtonFilter
+        private ICommand _buttonFilterCongVan;
+        public ICommand ButtonFilterCongVan
+        {
+            get {
+                if (_buttonFilterCongVan == null)
+                    _buttonFilterCongVan = new RelayCommand(param => UpdateData(this, null));
+                return _buttonFilterCongVan;
+            }
+        }
         #endregion
 
         public void ValueChanged(object sender, string[] args = null)
@@ -190,12 +282,17 @@ namespace CongVanManager.ViewModel
         }
         public void UpdateData(object target, string[] args)
         {
-            // DanhSachCongVan
+            // Update this ViewModel
+            OnPropertyChanged("DSCongVan");
+            if (args == null)
+                return;
         }
 
 
         private InboxViewModel()
         {
+            while (filterList.Count < 4) filterList.Add(defaultFilter);
+
             LienHe contact = new LienHe
             {
                 Name = "Phòng Đào tạo",
@@ -221,7 +318,8 @@ namespace CongVanManager.ViewModel
                 SoCongVan = 1,
                 NgayCongVan = System.DateTime.Now,
                 GhiChu = "Đme ngày hội xàm vài lòn",
-                StatusCode = 6,
+                StatusCode = CongVan.StatusCodeEnum.DaDuyet |
+                             CongVan.StatusCodeEnum.DangChuyen,
 
             };
             CongVan congVan2 = new CongVan
@@ -235,7 +333,8 @@ namespace CongVanManager.ViewModel
                 SoCongVan = 2,
                 NgayCongVan = System.DateTime.Now,
                 GhiChu = "Chỉ là để chia sẻ cách để viết một xâu vô cùng dài trong tựa đề chỉ vì lý do kiểm thử phần mềm cho sinh viên năm 6, 7, 8, 9, thực ra ai cũng vô được mời mọi người cùng vô cho nó vui",
-                StatusCode = 3,
+                StatusCode = CongVan.StatusCodeEnum.DaDuyet |
+                             CongVan.StatusCodeEnum.DaTiepNhan,
 
             };
             noiNhan1.CongVan = noiNhan2.CongVan = congVan;
@@ -246,12 +345,14 @@ namespace CongVanManager.ViewModel
             NoiNhan.DB.Add(noiNhan2);
             NoiNhan.DB.Add(noiNhan1);
             LienHe.DB.Add(contact);
-            
-            CongVan.DB.CollectionChanged += 
+
+            CongVan.DB.CollectionChanged +=
                 (object sender, NotifyCollectionChangedEventArgs e)
-                => { OnPropertyChanged("DSCongVan"); };
+                =>
+                { OnPropertyChanged("DSCongVan"); };
         }
         private static InboxViewModel _instance = null;
+
         public static InboxViewModel Instance
         {
             get

@@ -61,8 +61,8 @@
             get => _ngayXuLi;
             set { _ngayXuLi = value; OnPropertyChanged(); }
         }
-        private int _statusCode;
-        public int StatusCode
+        private StatusCodeEnum _statusCode;
+        public StatusCodeEnum StatusCode
         {
             get => _statusCode;
             set { _statusCode = value; OnPropertyChanged(); }
@@ -71,14 +71,31 @@
         // 1: Đã tiếp nhận
         // 2: Đã duyệt
         // 4: Đang chuyển
+        [Flags]
+        public enum StatusCodeEnum : int 
+        {
+            DaTiepNhan = 1,
+            DaDuyet = 2,
+            DangChuyen = 4,
+            DaDoc = 7,      //contains any flag
+            ChuaDoc = 0     //contains any flag
+            //DaChuyen = 6  //contains all flag
+            //DaXong = 3    //contains all flag
+        }
         public string Status
         {
             get
             {
-                if (StatusCode >= 6) return "Đã chuyển";
-                if (StatusCode >= 2) return "Đã duyệt";
-                if (StatusCode == 1) return "Đã tiếp nhận";
-                else return "Chưa đọc";
+                if (StatusCode.HasFlag(StatusCodeEnum.DangChuyen) && 
+                    StatusCode.HasFlag(StatusCodeEnum.DaDuyet))
+                    return "Đã chuyển";
+                if (StatusCode.HasFlag(StatusCodeEnum.DaDuyet))
+                    return "Đã duyệt";
+                if (StatusCode.HasFlag(StatusCodeEnum.DaTiepNhan))
+                    return "Đã tiếp nhận";
+                if (!StatusCode.HasFlag(StatusCodeEnum.DaDoc))
+                    return "Chưa đọc";
+                return "Không xác định";
             }
         }
         private LoaiCongVan _loaiCongVan;
