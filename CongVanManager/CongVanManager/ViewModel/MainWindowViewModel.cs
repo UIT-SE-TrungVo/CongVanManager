@@ -5,12 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CongVanManager.Command;
+using CongVanManager.View;
 
 namespace CongVanManager.ViewModel
 {
     public class MainWindowViewModel : ObservableObject
     {
-        private readonly Page[] page = { new InboxLayout() };
+        private readonly Page[] page = { new InboxLayout(), new NewDocLayout_Chooser(), new NewDocLayout_In() };
+        public enum PageName {InboxLayout, NewDocLayout_Chooser, NewDocLayout_In};
+
         private Page _selectedPage;
         public Page SelectedPage
         {
@@ -24,8 +28,9 @@ namespace CongVanManager.ViewModel
 
         private MainWindowViewModel()
         {
-            SelectedPage = page[0];
+            ChangePage(0);
         }
+
         private static MainWindowViewModel _instance = null;
         public static MainWindowViewModel instance
         {
@@ -37,22 +42,55 @@ namespace CongVanManager.ViewModel
             private set { }
         }
 
-        public void ChangePage(int pageNumber)
+        private int currentPageIndex = -1;
+        void ChangePage(int pageNumber)
         {
+            if (pageNumber == currentPageIndex) return;
             SelectedPage = page[pageNumber];
+            currentPageIndex = pageNumber;
         }
 
-        public void PageSwitch(int messageID)
+        public void PageSwitch(PageName messageID)
         {
             switch (messageID)
             {
-                case 0:
+                case PageName.InboxLayout:
                     ChangePage(0);
                     break;
-                case 1:
+                case PageName.NewDocLayout_Chooser:
+                    ChangePage(1);
+                    break;
+                case PageName.NewDocLayout_In:
+                    ChangePage(2);
                     break;
                 default:
                     break;
+            }
+        }
+
+        //COMMANDS
+        public ICommand Open_NewDocLayout_Chooser
+        {
+            get
+            {
+                return new RelayCommand(
+                   x =>
+                   {
+                       NewDocLayout_ChooserViewModel.instance.SetPreviousPage(currentPageIndex);
+                       MainWindowViewModel.instance.PageSwitch(MainWindowViewModel.PageName.NewDocLayout_Chooser);
+                   });
+            }
+        }
+
+        public ICommand Open_InboxLayout
+        {
+            get
+            {
+                return new RelayCommand(
+                   x =>
+                   {
+                       MainWindowViewModel.instance.PageSwitch(MainWindowViewModel.PageName.InboxLayout);
+                   });
             }
         }
     }

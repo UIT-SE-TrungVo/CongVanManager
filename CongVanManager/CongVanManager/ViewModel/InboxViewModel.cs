@@ -1,5 +1,4 @@
-﻿using QuanLyChamThi.Command;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CongVanManager.Command;
 
 namespace CongVanManager.ViewModel
 {
@@ -196,7 +196,7 @@ namespace CongVanManager.ViewModel
                     return false;
             return true;
         }
-        private bool? _chuaDoc;
+        private bool? _chuaDoc = true;
         public bool? ChuaDoc
         {
             get => _chuaDoc;
@@ -211,7 +211,7 @@ namespace CongVanManager.ViewModel
                         ^ value.Value;
             }
         }
-        private bool? _daDuyet;
+        private bool? _daDuyet = true;
         public bool? DaDuyet
         {
             get => _daDuyet;
@@ -226,7 +226,7 @@ namespace CongVanManager.ViewModel
                         ^ value.Value;
             }
         }
-        private bool? _daTiepNhan;
+        private bool? _daTiepNhan = true;
         public bool? DaTiepNhan
         {
             get => _daTiepNhan;
@@ -241,7 +241,7 @@ namespace CongVanManager.ViewModel
                         ^ value.Value;
             }
         }
-        private bool? _daChuyen;
+        private bool? _daChuyen = true;
         public bool? DaChuyen
         {
             get => _daChuyen;

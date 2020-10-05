@@ -16,7 +16,7 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
  
-      Height="645" Width="1080"
+      MinHeight="600" MinWidth="1000" 
       Title="Chọn loại công văn cần nhập">
     
     <Grid Margin="10">
@@ -101,14 +101,27 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <WrapPanel>
-                        <TextBlock Margin="10">
-                            Nơi gửi
-                        </TextBlock>
-                        <Button Margin="10">
-                            Chọn nơi gửi
-                        </Button>
-                    </WrapPanel>
+                    <StackPanel>
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="10">
+                                Nơi gửi
+                            </TextBlock>
+                            <TextBox Grid.Column="1"/>
+                            <WrapPanel Grid.Column="2">
+                                <Button Style="{StaticResource MaterialDesignFlatButton}">
+                                    <materialDesign:PackIcon Kind="Tick" Height="30" Width="30"/>
+                                </Button>
+                                <Button Style="{StaticResource MaterialDesignFlatButton}">
+                                    <materialDesign:PackIcon Kind="Contact" Height="30" Width="30"/>
+                                </Button>
+                            </WrapPanel>
+                        </Grid>
+                    </StackPanel>
                     
                     <StackPanel Grid.Column="1">
                         <Grid Grid.Column="1">

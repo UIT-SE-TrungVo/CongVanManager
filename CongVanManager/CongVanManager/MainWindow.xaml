@@ -47,7 +47,8 @@
             <StackPanel DockPanel.Dock="Top">
                 <Separator Height="10"/>
                 <Button materialDesign:ButtonAssist.CornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth2" 
-                        Style="{StaticResource MaterialDesignFlatAccentBgButton}" Margin="20,10" Height="40" Background="WhiteSmoke" BorderBrush="MediumPurple">
+                        Style="{StaticResource MaterialDesignFlatAccentBgButton}" Margin="20,10" Height="40" Background="WhiteSmoke"
+                        BorderBrush="MediumPurple" Command="{Binding Open_NewDocLayout_Chooser}">
                     <DockPanel>
                         <materialDesign:PackIcon Kind="Add" Margin="0,0,20,0">
                             <materialDesign:PackIcon.RenderTransform>
@@ -57,7 +58,8 @@
                         <TextBlock TextWrapping="Wrap" TextAlignment="Center"> Nhập công văn mới </TextBlock>
                     </DockPanel>
                 </Button>
-                <Button Margin="2,5" HorizontalContentAlignment="Left">
+                <Button Margin="2,5" HorizontalContentAlignment="Left"
+                        Command="{Binding Open_InboxLayout}">
                     <DockPanel LastChildFill="True">
                         <materialDesign:PackIcon Kind="InboxArrowDown"/>
                         <TextBlock Margin="20,0"> Công văn đến </TextBlock>
@@ -127,11 +129,9 @@
         <!--#endregion-->
 
         <!--#region MAIN DISPLAY -->
-        <Viewbox Stretch="Uniform" Grid.Column="1" Grid.Row="1">
-            <Frame 
-               Content="{Binding SelectedPage, Mode=TwoWay}">
-            </Frame>
-        </Viewbox>
+        <Frame x:Uid="MainDisplay" Grid.Column="1" Grid.Row="1"
+               Content="{Binding SelectedPage, Mode=OneWay}" NavigationUIVisibility="Hidden">
+        </Frame>
         <!--#endregion-->
         
     </Grid>

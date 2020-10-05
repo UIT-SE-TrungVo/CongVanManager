@@ -16,7 +16,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
  
-      Height="645" Width="1080"
+      MinHeight="600" MinWidth="1000" 
       Title="Hộp thư đến">
 
     <Grid Margin="10">
@@ -33,10 +33,10 @@
                 <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Margin="10" Command="{Binding ButtonFilterCongVan}">
                     Lọc thư 
                 </Button>
-                <CheckBox Margin="5" IsThreeState="True" IsChecked="{Binding ChuaDoc}">Chưa đọc</CheckBox>
-                <CheckBox Margin="5" IsThreeState="True" IsChecked="{Binding DaTiepNhan}">Đã tiếp nhận</CheckBox>
-                <CheckBox Margin="5" IsThreeState="True" IsChecked="{Binding DaDuyet}">Đã duyệt</CheckBox>
-                <CheckBox Margin="5" IsThreeState="True" IsChecked="{Binding DaChuyen}">Đã chuyển</CheckBox>
+                <CheckBox Margin="5" IsChecked="{Binding ChuaDoc}">Chưa đọc</CheckBox>
+                <CheckBox Margin="5" IsChecked="{Binding DaTiepNhan}">Đã tiếp nhận</CheckBox>
+                <CheckBox Margin="5" IsChecked="{Binding DaDuyet}">Đã duyệt</CheckBox>
+                <CheckBox Margin="5" IsChecked="{Binding DaChuyen}">Đã chuyển</CheckBox>
             </WrapPanel>
             <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10,0">
                 <TextBlock HorizontalAlignment="Right" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="{Binding AmountOfLetters,StringFormat=Tổng số thư: {0}}"></TextBlock>

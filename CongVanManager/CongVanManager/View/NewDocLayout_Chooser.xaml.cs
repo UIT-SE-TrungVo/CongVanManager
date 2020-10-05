@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CongVanManager.ViewModel;
 
 namespace CongVanManager.View
 {
@@ -23,6 +24,7 @@ namespace CongVanManager.View
         public NewDocLayout_Chooser()
         {
             InitializeComponent();
+            DataContext = NewDocLayout_ChooserViewModel.instance;
         }
     }
 }
