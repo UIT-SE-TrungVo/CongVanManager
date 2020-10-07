@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PdfiumViewer;
+using System.Windows.Forms;
+using System.IO;
 
 namespace CongVanManager
 {

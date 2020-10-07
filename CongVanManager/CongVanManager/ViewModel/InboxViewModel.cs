@@ -1,11 +1,15 @@
-﻿using System;
+﻿using PdfiumViewer;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 using System.Windows.Input;
 using CongVanManager.Command;
 
@@ -32,6 +36,7 @@ namespace CongVanManager.ViewModel
         #region SelectedCongVan
 
         private CongVan _selectedCongVan;
+
         public CongVan SelectedCongVan
         {
             get { return _selectedCongVan; }
@@ -271,6 +276,10 @@ namespace CongVanManager.ViewModel
         }
         #endregion
 
+        #region
+        private WindowsFormsHost _pdf;
+        public WindowsFormsHost PDF { get => _pdf; set => _pdf = value; }
+        #endregion
         public void ValueChanged(object sender, string[] args = null)
         {
             if (sender is CongVan)
@@ -291,6 +300,17 @@ namespace CongVanManager.ViewModel
 
         private InboxViewModel()
         {
+
+
+
+            PdfViewer pdf = new PdfViewer();
+            PdfDocument pdfdoc = PdfDocument.Load(new MemoryStream(File.ReadAllBytes("C:/Users/longt/Downloads/Danh sách đề tài OOAD-46-62.pdf")));
+            pdf.Document = pdfdoc;
+            WindowsFormsHost host = new WindowsFormsHost();
+            host.Child = pdf;
+            PDF = host;
+
+
             while (filterList.Count < 4) filterList.Add(defaultFilter);
 
             LienHe contact = new LienHe
