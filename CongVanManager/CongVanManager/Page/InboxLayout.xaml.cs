@@ -29,21 +29,5 @@ namespace CongVanManager
             InitializeComponent();
             this.DataContext = new InboxViewModel();
         }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Forms.Integration.WindowsFormsHost host =
-        new System.Windows.Forms.Integration.WindowsFormsHost();
-
-            PdfViewer pdf = new PdfViewer();
-
-            host.Child = pdf;
-
-            // Add the interop host control to the Grid
-            // control's collection of child controls.
-            this.pdfZone.Children.Add(host);
-            PdfDocument pdfdoc = PdfDocument.Load(new MemoryStream(File.ReadAllBytes("D:/Document/Bảo trì/C2-NentangThaydoi(updated2).pdf")));
-            pdf.Document = pdfdoc;
-        }
     }
 }

@@ -17,7 +17,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
  
       Height="645" Width="1080"
-      Title="Hộp thư đến" Loaded="Page_Loaded">
+      Title="Hộp thư đến">
 
     <Grid>
         <!--#region LAYOUT DEFINITION-->
@@ -167,7 +167,9 @@
                             </Grid>
                             <!--PdfViewer-->
                             <Grid x:Name="pdfZone" Grid.Row="1">
-                                
+                                <ContentControl Content="{Binding PDF}">
+                                    
+                                </ContentControl>
                             </Grid>
                         </Grid>
                     </StackPanel>

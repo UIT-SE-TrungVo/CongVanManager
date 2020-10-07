@@ -1,11 +1,15 @@
-﻿using System;
+﻿using PdfiumViewer;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 
 namespace CongVanManager.ViewModel
 {
@@ -29,6 +33,7 @@ namespace CongVanManager.ViewModel
         #endregion
 
         private CongVan _selectedCongVan;
+
         public CongVan SelectedCongVan
         {
             get { return _selectedCongVan; }
@@ -132,8 +137,11 @@ namespace CongVanManager.ViewModel
         }
         public DateTime SelectedCongVanSentDate
         {
-            get { return (_selectedCongVan?.NgayCongVan).
-                    GetValueOrDefault(DateTime.MinValue); }
+            get
+            {
+                return (_selectedCongVan?.NgayCongVan).
+                  GetValueOrDefault(DateTime.MinValue);
+            }
             set
             {
                 OnPropertyChanged();
@@ -179,6 +187,10 @@ namespace CongVanManager.ViewModel
         #endregion
         #endregion
 
+        #region
+        private WindowsFormsHost _pdf;
+        public WindowsFormsHost PDF { get => _pdf; set => _pdf = value; }
+        #endregion
         public void ValueChanged(object sender, string[] args = null)
         {
             if (sender is CongVan)
@@ -196,6 +208,17 @@ namespace CongVanManager.ViewModel
 
         public InboxViewModel()
         {
+
+
+
+            PdfViewer pdf = new PdfViewer();
+            PdfDocument pdfdoc = PdfDocument.Load(new MemoryStream(File.ReadAllBytes("C:/Users/longt/Downloads/Danh sách đề tài OOAD-46-62.pdf")));
+            pdf.Document = pdfdoc;
+            WindowsFormsHost host = new WindowsFormsHost();
+            host.Child = pdf;
+            PDF = host;
+
+
             LienHe contact = new LienHe
             {
                 Name = "Phòng Đào tạo",
@@ -246,10 +269,11 @@ namespace CongVanManager.ViewModel
             NoiNhan.DB.Add(noiNhan2);
             NoiNhan.DB.Add(noiNhan1);
             LienHe.DB.Add(contact);
-            
-            CongVan.DB.CollectionChanged += 
+
+            CongVan.DB.CollectionChanged +=
                 (object sender, NotifyCollectionChangedEventArgs e)
-                => { OnPropertyChanged("DSCongVan"); };
+                =>
+                { OnPropertyChanged("DSCongVan"); };
         }
     }
 }
