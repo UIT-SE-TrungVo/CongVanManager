@@ -42,7 +42,8 @@
                     </TextBlock>
                 </DockPanel>
             </Button>
-            <Button HorizontalAlignment="Stretch" Margin="20,10" Height="40">
+            <Button HorizontalAlignment="Stretch" Margin="20,10" Height="40"
+                    Command="{Binding Open_NewDocLayout_Out}">
                 <DockPanel>
                     <TextBlock>
                         Nhập công văn đi

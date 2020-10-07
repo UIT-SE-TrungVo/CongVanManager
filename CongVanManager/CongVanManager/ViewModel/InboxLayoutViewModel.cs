@@ -6,12 +6,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using CongVanManager.Command;
+using CongVanManager.View;
 
 namespace CongVanManager.ViewModel
 {
-    class InboxViewModel : ObservableObject
+    class InboxLayoutViewModel : ObservableObject
     {
         #region DanhSachCongVan
         public ICollection<CongVan> DSCongVan
@@ -289,7 +291,7 @@ namespace CongVanManager.ViewModel
         }
 
 
-        private InboxViewModel()
+        private InboxLayoutViewModel()
         {
             while (filterList.Count < 4) filterList.Add(defaultFilter);
 
@@ -351,16 +353,31 @@ namespace CongVanManager.ViewModel
                 =>
                 { OnPropertyChanged("DSCongVan"); };
         }
-        private static InboxViewModel _instance = null;
+        private static InboxLayoutViewModel _instance = null;
 
-        public static InboxViewModel Instance
+        public static InboxLayoutViewModel Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new InboxViewModel();
+                    _instance = new InboxLayoutViewModel();
                 return _instance;
             }
         }
+
+        #region COMMANDS
+        public ICommand Open_ActionLayout
+        {
+            get
+            {
+                return new RelayCommand(
+                   x =>
+                   {
+                       ActionLayout actionLayout = new ActionLayout();
+                       actionLayout.Show();
+                   });
+            }
+        }
+        #endregion
     }
 }

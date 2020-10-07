@@ -77,14 +77,31 @@
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="ViewModel\ActionLayoutViewModel.cs" />
+    <Compile Include="ViewModel\LoginLayoutViewModel.cs" />
+    <Compile Include="ViewModel\NewDocLayoutViewModel.cs" />
     <Compile Include="ViewModel\NewDocLayout_ChooserViewModel.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
+    <Compile Include="ViewModel\SettingLayoutViewModel.cs" />
+    <Compile Include="View\ActionLayout.xaml.cs">
+      <DependentUpon>ActionLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginLayout.xaml.cs">
+      <DependentUpon>LoginLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewDocLayout.xaml.cs">
+      <DependentUpon>NewDocLayout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NewDocLayout_Chooser.xaml.cs">
       <DependentUpon>NewDocLayout_Chooser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\NewDocLayout_In.xaml.cs">
-      <DependentUpon>NewDocLayout_In.xaml</DependentUpon>
+    <Compile Include="View\SettingLayout.xaml.cs">
+      <DependentUpon>SettingLayout.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ActionLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\InboxLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -99,7 +116,7 @@
     </Compile>
     <Compile Include="Model\CongVan.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\InboxViewModel.cs" />
+    <Compile Include="ViewModel\InboxLayoutViewModel.cs" />
     <Compile Include="Model\LienHe.cs" />
     <Compile Include="Model\LoaiCongVan.cs" />
     <Compile Include="Model\NoiNhan.cs" />
@@ -110,11 +127,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\LoginLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NewDocLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\NewDocLayout_Chooser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\NewDocLayout_In.xaml">
+    <Page Include="View\SettingLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,6 +187,9 @@
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Asset\Image\download.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />

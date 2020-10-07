@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using CongVanManager.View;
 
 namespace CongVanManager
 {
@@ -19,6 +20,17 @@ namespace CongVanManager
         {
             CultureInfo ci = CultureInfo.GetCultureInfoByIetfLanguageTag("vi-VN");
             Thread.CurrentThread.CurrentCulture = ci;
+        }
+
+        public void ApplicationStart(object sender, StartupEventArgs e)
+        {
+            Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+            MainWindow mainWindow = new MainWindow();
+            LoginLayout login = new LoginLayout();
+            login.ShowDialog();
+
+            Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            mainWindow.Show();
         }
     }
 }

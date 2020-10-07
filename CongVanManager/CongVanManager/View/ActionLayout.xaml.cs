@@ -8,24 +8,22 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CongVanManager.ViewModel;
 
 namespace CongVanManager.View
 {
     /// <summary>
-    /// Interaction logic for NewDocLayout_In.xaml
+    /// Interaction logic for ActionLayout.xaml
     /// </summary>
-    public partial class NewDocLayout_In : Page
+    public partial class ActionLayout : Window
     {
-        public NewDocLayout_In()
+        public ActionLayout()
         {
             InitializeComponent();
-            this.Language = XmlLanguage.GetLanguage(System.Globalization.CultureInfo.CurrentCulture.IetfLanguageTag);
-            dp2 = dp1;
+            this.DataContext = ActionLayoutViewModel.instance;
         }
     }
 }
