@@ -7,13 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using CongVanManager.Command;
 using CongVanManager.View;
+using CongVanManager.View.usercontrol;
 
 namespace CongVanManager.ViewModel
 {
-    class InboxLayoutViewModel : ObservableObject
+    class BoxLayoutViewModel : ObservableObject
     {
         #region DanhSachCongVan
         public ICollection<CongVan> DSCongVan
@@ -193,7 +195,7 @@ namespace CongVanManager.ViewModel
         private Func<CongVan, bool> defaultFilter = (item) => true;
         private bool Filter(CongVan item)
         {
-            foreach(var func in filterList)
+            foreach (var func in filterList)
                 if (func?.Invoke(item) == false)
                     return false;
             return true;
@@ -208,7 +210,7 @@ namespace CongVanManager.ViewModel
                 if (value == null)
                     filterList[0] = defaultFilter;
                 else
-                    filterList[0] = (item) => 
+                    filterList[0] = (item) =>
                         !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDoc)
                         ^ value.Value;
             }
@@ -265,7 +267,8 @@ namespace CongVanManager.ViewModel
         private ICommand _buttonFilterCongVan;
         public ICommand ButtonFilterCongVan
         {
-            get {
+            get
+            {
                 if (_buttonFilterCongVan == null)
                     _buttonFilterCongVan = new RelayCommand(param => UpdateData(this, null));
                 return _buttonFilterCongVan;
@@ -290,10 +293,43 @@ namespace CongVanManager.ViewModel
                 return;
         }
 
-        private InboxLayoutViewModel()
+        #region BOX TYPE SWITCHER VARIABLE
+        public DocType BoxType;
+        public int iDocType { get; set; }
+        private Page _ucfilter;
+        public Page UCFilter
+        {
+            get
+            {
+                return _ucfilter;
+            }
+            set
+            {
+                _ucfilter = value; OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        public BoxLayoutViewModel(DocType docType)
         {
             while (filterList.Count < 4) filterList.Add(defaultFilter);
 
+            BoxType = docType;
+            iDocType = (int)BoxType;
+            switch (docType)
+            {
+                case DocType.In:
+                    UCFilter = new uc_InBoxFilter();
+                    break;
+                case DocType.Out:
+                    UCFilter = new uc_OutBoxFilter();
+                    break;
+            }
+
+            //[TESTING: avoid input for doctype.out]
+            if (BoxType == DocType.Out) return;
+
+            #region DATA SAMPLE BINDING
             LienHe contact = new LienHe
             {
                 Name = "Phòng Đào tạo",
@@ -351,17 +387,7 @@ namespace CongVanManager.ViewModel
                 (object sender, NotifyCollectionChangedEventArgs e)
                 =>
                 { OnPropertyChanged("DSCongVan"); };
-        }
-        private static InboxLayoutViewModel _instance = null;
-
-        public static InboxLayoutViewModel Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new InboxLayoutViewModel();
-                return _instance;
-            }
+            #endregion
         }
 
         #region COMMANDS

@@ -35,7 +35,7 @@
                                 <Style TargetType="TextBlock">
                                     <Setter Property="Text" Value="Số vào:"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding NewDocLayout_Type}" Value="DocType.Out">
+                                        <DataTrigger Binding="{Binding iNewDocLayout_Type}" Value="1">
                                             <Setter Property="Text" Value="Số ra:"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -50,7 +50,7 @@
                                 <Style TargetType="TextBlock">
                                     <Setter Property="Text" Value="Thời gian nhận:"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding NewDocLayout_Type}" Value="DocType.Out">
+                                        <DataTrigger Binding="{Binding iNewDocLayout_Type}" Value="1">
                                             <Setter Property="Text" Value="Thời gian gửi:"/>
                                         </DataTrigger>
                                     </Style.Triggers>

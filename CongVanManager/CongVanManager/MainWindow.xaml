@@ -65,7 +65,8 @@
                         <TextBlock Margin="20,0"> Công văn đến </TextBlock>
                     </DockPanel>
                 </Button>
-                <Button Margin="2,5" HorizontalContentAlignment="Left">
+                <Button Margin="2,5" HorizontalContentAlignment="Left"
+                        Command="{Binding Open_OutboxLayout}">
                     <DockPanel LastChildFill="True">
                         <materialDesign:PackIcon Kind="InboxArrowDown"/>
                         <TextBlock Margin="20,0"> Công văn đi</TextBlock>

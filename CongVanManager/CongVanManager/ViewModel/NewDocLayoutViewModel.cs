@@ -13,10 +13,12 @@ namespace CongVanManager.ViewModel
     class NewDocLayoutViewModel
     {
         public DocType NewDocLayout_Type;
+        public int iNewDocLayout_Type { get; set; }
 
         public NewDocLayoutViewModel(DocType type)
         {
             NewDocLayout_Type = type;
+            iNewDocLayout_Type = (int)NewDocLayout_Type;
         }
     }
 }
