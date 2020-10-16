@@ -7,6 +7,8 @@
         xmlns:local="clr-namespace:CongVanManager"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:Controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+      
+        xmlns:uc="clr-namespace:CongVanManager.View.usercontrol"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -29,15 +31,7 @@
         
         <!--#region TOP LAYOUT-->
         <DockPanel>
-            <WrapPanel>
-                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Margin="10" Command="{Binding ButtonFilterCongVan}">
-                    Lọc thư 
-                </Button>
-                <CheckBox Margin="5" IsChecked="{Binding ChuaDoc}">Chưa đọc</CheckBox>
-                <CheckBox Margin="5" IsChecked="{Binding DaTiepNhan}">Đã tiếp nhận</CheckBox>
-                <CheckBox Margin="5" IsChecked="{Binding DaDuyet}">Đã duyệt</CheckBox>
-                <CheckBox Margin="5" IsChecked="{Binding DaChuyen}">Đã chuyển</CheckBox>
-            </WrapPanel>
+            <uc:uc_InBoxFilter/>
             <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10,0">
                 <TextBlock HorizontalAlignment="Right" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="{Binding AmountOfLetters,StringFormat=Tổng số thư: {0}}"></TextBlock>
                 <TextBlock HorizontalAlignment="Right" Style="{StaticResource MaterialDesignBody2TextBlock}"> Thông tin hộp thư </TextBlock>
@@ -178,7 +172,10 @@
 
                 <!--Action bar-->
                 <DockPanel DockPanel.Dock="Bottom" Height="50" VerticalAlignment="Bottom">
-                    <Button HorizontalAlignment="Center" VerticalAlignment="Center"> Thực hiện hành động </Button>
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding Open_ActionLayout}"> 
+                    Thực hiện hành động 
+                    </Button>
                 </DockPanel>
             </DockPanel>
             <!--#endregion -->

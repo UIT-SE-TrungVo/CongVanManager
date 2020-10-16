@@ -1,0 +1,28 @@
+﻿<Page x:Class="CongVanManager.View.usercontrol.uc_InBoxFilter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:CongVanManager"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:Controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+         
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid>
+        <WrapPanel>
+            <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Margin="10" Command="{Binding ButtonFilterCongVan}">
+                Lọc thư
+            </Button>
+            <CheckBox Margin="5" IsChecked="{Binding ChuaDoc}">Chưa đọc</CheckBox>
+            <CheckBox Margin="5" IsChecked="{Binding DaTiepNhan}">Đã tiếp nhận</CheckBox>
+            <CheckBox Margin="5" IsChecked="{Binding DaDuyet}">Đã duyệt</CheckBox>
+            <CheckBox Margin="5" IsChecked="{Binding DaChuyen}">Đã chuyển</CheckBox>
+        </WrapPanel>
+    </Grid>
+</Page>

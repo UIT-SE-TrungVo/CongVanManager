@@ -27,7 +27,7 @@ namespace CongVanManager
         public InboxLayout()
         {
             InitializeComponent();
-            this.DataContext = InboxViewModel.Instance;
+            this.DataContext = InboxLayoutViewModel.Instance;
         }
     }
 }

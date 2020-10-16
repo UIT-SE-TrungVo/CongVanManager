@@ -1,0 +1,45 @@
+﻿<Window x:Class="CongVanManager.View.LoginLayout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CongVanManager.View"
+        mc:Ignorable="d"
+        Title="Đăng nhập" Height="200" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Left"
+                   Style="{StaticResource MaterialDesignHeadline2TextBlock}">
+            Đăng nhập
+        </TextBlock>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Right" Margin="10">
+                Tên tài khoản:
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Right" Margin="10">
+                Mật khẩu: 
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                    Margin="0,0,75,0">
+            <TextBox Margin="5"/>
+            <TextBox Margin="5"/>
+        </StackPanel>
+
+        <Button Grid.Column="1" Grid.Row="2"
+                Command="{Binding Login}">
+            Đăng nhập
+        </Button>
+    </Grid>
+</Window>

@@ -8,12 +8,19 @@ using System.Windows.Input;
 using CongVanManager.Command;
 using CongVanManager.View;
 
+public enum PageName { InboxLayout, NewDocLayout_Chooser, NewDocLayout_In, NewDocLayout_Out, SettingLayout, OutboxLayout};
+
 namespace CongVanManager.ViewModel
 {
     public class MainWindowViewModel : ObservableObject
     {
-        private readonly Page[] page = { new InboxLayout(), new NewDocLayout_Chooser(), new NewDocLayout_In() };
-        public enum PageName {InboxLayout, NewDocLayout_Chooser, NewDocLayout_In};
+        private readonly Page[] page = {    new BoxLayout(DocType.In), //0
+                                            new NewDocLayout_Chooser(), //1
+                                            new NewDocLayout(DocType.In), //2
+                                            new NewDocLayout(DocType.Out), //3
+                                            new SettingLayout(), //4
+                                            new BoxLayout(DocType.Out) //5
+        };
 
         private Page _selectedPage;
         public Page SelectedPage
@@ -63,6 +70,15 @@ namespace CongVanManager.ViewModel
                 case PageName.NewDocLayout_In:
                     ChangePage(2);
                     break;
+                case PageName.NewDocLayout_Out:
+                    ChangePage(3);
+                    break;
+                case PageName.SettingLayout:
+                    ChangePage(4);
+                    break;
+                case PageName.OutboxLayout:
+                    ChangePage(5);
+                    break;
                 default:
                     break;
             }
@@ -77,7 +93,7 @@ namespace CongVanManager.ViewModel
                    x =>
                    {
                        NewDocLayout_ChooserViewModel.instance.SetPreviousPage(currentPageIndex);
-                       MainWindowViewModel.instance.PageSwitch(MainWindowViewModel.PageName.NewDocLayout_Chooser);
+                       MainWindowViewModel.instance.PageSwitch(PageName.NewDocLayout_Chooser);
                    });
             }
         }
@@ -89,7 +105,31 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                    x =>
                    {
-                       MainWindowViewModel.instance.PageSwitch(MainWindowViewModel.PageName.InboxLayout);
+                       MainWindowViewModel.instance.PageSwitch(PageName.InboxLayout);
+                   });
+            }
+        }
+
+        public ICommand Open_OutboxLayout
+        {
+            get
+            {
+                return new RelayCommand(
+                   x =>
+                   {
+                       MainWindowViewModel.instance.PageSwitch(PageName.OutboxLayout);
+                   });
+            }
+        }
+
+        public ICommand Open_SettingLayout
+        {
+            get
+            {
+                return new RelayCommand(
+                   x =>
+                   {
+                       MainWindowViewModel.instance.PageSwitch(PageName.SettingLayout);
                    });
             }
         }

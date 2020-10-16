@@ -4,8 +4,7 @@
              xmlns:local="clr-namespace:CongVanManager"
              xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:dateTime="clr-namespace:DateTimePicker;assembly=DateTimePicker"
-             StartupUri="MainWindow.xaml">
+             Startup="ApplicationStart">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

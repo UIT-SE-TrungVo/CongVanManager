@@ -17,7 +17,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         
         mc:Ignorable="d"
-        Title="Công Văn Manager" Height="720" Width="1280" MinHeight="720" MinWidth="1280" WindowStartupLocation="CenterOwner">
+        Title="Công Văn Manager" Height="720" Width="1280" MinHeight="720" MinWidth="1280" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
     <Grid>
         
         <!--#region LAYOUT DEFINITION-->
@@ -65,7 +65,8 @@
                         <TextBlock Margin="20,0"> Công văn đến </TextBlock>
                     </DockPanel>
                 </Button>
-                <Button Margin="2,5" HorizontalContentAlignment="Left">
+                <Button Margin="2,5" HorizontalContentAlignment="Left"
+                        Command="{Binding Open_OutboxLayout}">
                     <DockPanel LastChildFill="True">
                         <materialDesign:PackIcon Kind="InboxArrowDown"/>
                         <TextBlock Margin="20,0"> Công văn đi</TextBlock>
@@ -73,7 +74,8 @@
                 </Button>
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom">
-                <Button Margin="2,5" HorizontalContentAlignment="Left">
+                <Button Margin="2,5" HorizontalContentAlignment="Left"
+                        Command="{Binding Open_SettingLayout}">
                     <DockPanel LastChildFill="True">
                         <materialDesign:PackIcon Kind="Settings"/>
                         <TextBlock Margin="20,0"> Cài đặt</TextBlock>
@@ -87,27 +89,24 @@
                 </Button>
                 <Separator Height="10"/>
             </StackPanel>
-            <Separator DockPanel.Dock="Top" Background="Transparent"></Separator>
+            <!--#region A FUCKING ADVERTISEMENT-->
+            <Grid Margin="10">
+                <Image Source="Asset/Image/download.jpg"/>
+                <TextBlock Background="WhiteSmoke" VerticalAlignment="Top" HorizontalAlignment="Left"
+                           Foreground="Blue" FontSize="10"> 
+                    Quảng cáo bởi Google Ad
+                </TextBlock>
+            </Grid>
+            <!--#endregion-->
         </DockPanel>
         <!--#endregion-->
         
         <!--#region TOP BAR-->
-        <DockPanel Grid.Column="1" Background="WhiteSmoke" LastChildFill="True">
-            <DockPanel Grid.Column="1" DockPanel.Dock="Right" Margin="25,0">
-                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="100">
-                    <TextBlock TextAlignment="Center" TextWrapping="Wrap"> Lê Hoàng Minh Sơn </TextBlock>
-                    <TextBlock TextAlignment="Right"> 12783712379 </TextBlock>
-                </StackPanel>
-                <Ellipse Width="60" Height="60">
-                    <Ellipse.Fill>
-                        <ImageBrush>
-                            <ImageBrush.ImageSource>
-                                <BitmapImage UriSource="Asset/Image/116708945_963250040791127_2325266720546025099_n.png"/>
-                            </ImageBrush.ImageSource>
-                        </ImageBrush>
-                    </Ellipse.Fill>
-                </Ellipse>
-            </DockPanel>
+        <Grid Grid.Column="1" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
             <Border CornerRadius="20" Margin="100,15,25,15" Padding="20,5" BorderBrush="MediumPurple" BorderThickness="3">
                 <DockPanel LastChildFill="True">
                     <WrapPanel DockPanel.Dock="Right" VerticalAlignment="Center">
@@ -125,7 +124,23 @@
                     <TextBox VerticalContentAlignment="Center" Margin="100,0,10,0" BorderBrush="Transparent" FontWeight="SemiBold"/>
                 </DockPanel>
             </Border>
-        </DockPanel>
+            <DockPanel Grid.Column="1" Margin="25,0">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="100">
+                    <TextBlock TextAlignment="Center" TextWrapping="Wrap"> Lê Hoàng Minh Sơn</TextBlock>
+                    <TextBlock TextAlignment="Right"> 12783712379</TextBlock>
+                </StackPanel>
+                <Ellipse Width="60" Height="60">
+                    <Ellipse.Fill>
+                        <ImageBrush>
+                            <ImageBrush.ImageSource>
+                                <BitmapImage UriSource="Asset/Image/116708945_963250040791127_2325266720546025099_n.png"/>
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </DockPanel>
+        </Grid>
+        
         <!--#endregion-->
 
         <!--#region MAIN DISPLAY -->
