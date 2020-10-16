@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\UIT_2020-2021\CongVanManager\CongVanManager\CongVanManager\View\QLCV.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\longt\source\repos\CongVanManager\CongVanManager\CongVanManager\View\QLCV.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

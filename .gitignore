@@ -3,3 +3,6 @@
 ################################################################################
 
 /CongVanManager/.vs/CongVanManager/v15
+/CongVanManager/CongVanManager/bin
+/CongVanManager/CongVanManager/obj
+/CongVanManager/packages

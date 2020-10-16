@@ -11,15 +11,22 @@
           </Key>
           <Property Name="MaCongVan" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="MaLoaiCongVan" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="NoiGui" Type="nvarchar" MaxLength="50" />
-          <Property Name="DanhSachNoiNhan" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoiGui" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SoKyHieu" Type="varchar" MaxLength="20" />
-          <Property Name="SoCongVan" Type="varchar" MaxLength="20" />
+          <Property Name="SoCongVan" Type="int" />
           <Property Name="NgayCongVan" Type="smalldatetime" />
           <Property Name="TrichYeu" Type="nvarchar" MaxLength="50" />
-          <Property Name="TinhTrang" Type="nvarchar" MaxLength="50" />
+          <Property Name="TinhTrang" Type="int" />
           <Property Name="GhiChu" Type="nvarchar" MaxLength="50" />
           <Property Name="PDFScan" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DanhSachNoiNhan">
+          <Key>
+            <PropertyRef Name="MaCongVan" />
+            <PropertyRef Name="NoiNhan" />
+          </Key>
+          <Property Name="MaCongVan" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NoiNhan" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="LienHe">
           <Key>
@@ -43,14 +50,6 @@
           <Property Name="LoaiNguoiDung" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MatKhau" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="NoiNhan">
-          <Key>
-            <PropertyRef Name="MaCongVan" />
-            <PropertyRef Name="Email" />
-          </Key>
-          <Property Name="MaCongVan" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="PhanHoi">
           <Key>
             <PropertyRef Name="MaPhanHoi" />
@@ -65,16 +64,9 @@
             <PropertyRef Name="MaQuyDinh" />
           </Key>
           <Property Name="MaQuyDinh" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="TenQuyDinh" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GiaTri" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="TruongPhong">
-          <Key>
-            <PropertyRef Name="MaTruongPhong" />
-          </Key>
-          <Property Name="MaTruongPhong" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="TenTaiKhoan" Type="varchar" MaxLength="20" Nullable="false" />
-        </EntityType>
-        <Association Name="FK__CongVan__MaLoaiC__6C190EBB">
+        <Association Name="FK__CongVan__MaLoaiC__29221CFB">
           <End Role="LoaiCongVan" Type="Self.LoaiCongVan" Multiplicity="1" />
           <End Role="CongVan" Type="Self.CongVan" Multiplicity="*" />
           <ReferentialConstraint>
@@ -86,31 +78,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NoiNhan__Email__7B5B524B">
+        <Association Name="FK__CongVan__NoiGui__2A164134">
           <End Role="LienHe" Type="Self.LienHe" Multiplicity="1" />
-          <End Role="NoiNhan" Type="Self.NoiNhan" Multiplicity="*" />
+          <End Role="CongVan" Type="Self.CongVan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LienHe">
               <PropertyRef Name="Email" />
             </Principal>
-            <Dependent Role="NoiNhan">
+            <Dependent Role="CongVan">
+              <PropertyRef Name="NoiGui" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DanhSachN__MaCon__339FAB6E">
+          <End Role="CongVan" Type="Self.CongVan" Multiplicity="1" />
+          <End Role="DanhSachNoiNhan" Type="Self.DanhSachNoiNhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CongVan">
+              <PropertyRef Name="MaCongVan" />
+            </Principal>
+            <Dependent Role="DanhSachNoiNhan">
+              <PropertyRef Name="MaCongVan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DanhSachN__NoiNh__3493CFA7">
+          <End Role="LienHe" Type="Self.LienHe" Multiplicity="1" />
+          <End Role="DanhSachNoiNhan" Type="Self.DanhSachNoiNhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LienHe">
               <PropertyRef Name="Email" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__NoiNhan__MaCongV__7A672E12">
-          <End Role="CongVan" Type="Self.CongVan" Multiplicity="1" />
-          <End Role="NoiNhan" Type="Self.NoiNhan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CongVan">
-              <PropertyRef Name="MaCongVan" />
             </Principal>
-            <Dependent Role="NoiNhan">
-              <PropertyRef Name="MaCongVan" />
+            <Dependent Role="DanhSachNoiNhan">
+              <PropertyRef Name="NoiNhan" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PhanHoi__MaCongV__00200768">
+        <Association Name="FK__PhanHoi__MaCongV__2DE6D218">
           <End Role="CongVan" Type="Self.CongVan" Multiplicity="1" />
           <End Role="PhanHoi" Type="Self.PhanHoi" Multiplicity="*" />
           <ReferentialConstraint>
@@ -122,7 +126,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PhanHoi__TenTaiK__01142BA1">
+        <Association Name="FK__PhanHoi__TenTaiK__2EDAF651">
           <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
           <End Role="PhanHoi" Type="Self.PhanHoi" Multiplicity="*" />
           <ReferentialConstraint>
@@ -130,54 +134,41 @@
               <PropertyRef Name="TenTaiKhoan" />
             </Principal>
             <Dependent Role="PhanHoi">
-              <PropertyRef Name="TenTaiKhoan" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TruongPho__TenTa__03F0984C">
-          <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
-          <End Role="TruongPhong" Type="Self.TruongPhong" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NguoiDung">
-              <PropertyRef Name="TenTaiKhoan" />
-            </Principal>
-            <Dependent Role="TruongPhong">
               <PropertyRef Name="TenTaiKhoan" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CONGVANMANAGERModelStoreContainer">
           <EntitySet Name="CongVan" EntityType="Self.CongVan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DanhSachNoiNhan" EntityType="Self.DanhSachNoiNhan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LienHe" EntityType="Self.LienHe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoaiCongVan" EntityType="Self.LoaiCongVan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NoiNhan" EntityType="Self.NoiNhan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhanHoi" EntityType="Self.PhanHoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuyDinh" EntityType="Self.QuyDinh" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TruongPhong" EntityType="Self.TruongPhong" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__CongVan__MaLoaiC__6C190EBB" Association="Self.FK__CongVan__MaLoaiC__6C190EBB">
+          <AssociationSet Name="FK__CongVan__MaLoaiC__29221CFB" Association="Self.FK__CongVan__MaLoaiC__29221CFB">
             <End Role="LoaiCongVan" EntitySet="LoaiCongVan" />
             <End Role="CongVan" EntitySet="CongVan" />
           </AssociationSet>
-          <AssociationSet Name="FK__NoiNhan__Email__7B5B524B" Association="Self.FK__NoiNhan__Email__7B5B524B">
+          <AssociationSet Name="FK__CongVan__NoiGui__2A164134" Association="Self.FK__CongVan__NoiGui__2A164134">
             <End Role="LienHe" EntitySet="LienHe" />
-            <End Role="NoiNhan" EntitySet="NoiNhan" />
-          </AssociationSet>
-          <AssociationSet Name="FK__NoiNhan__MaCongV__7A672E12" Association="Self.FK__NoiNhan__MaCongV__7A672E12">
             <End Role="CongVan" EntitySet="CongVan" />
-            <End Role="NoiNhan" EntitySet="NoiNhan" />
           </AssociationSet>
-          <AssociationSet Name="FK__PhanHoi__MaCongV__00200768" Association="Self.FK__PhanHoi__MaCongV__00200768">
+          <AssociationSet Name="FK__DanhSachN__MaCon__339FAB6E" Association="Self.FK__DanhSachN__MaCon__339FAB6E">
+            <End Role="CongVan" EntitySet="CongVan" />
+            <End Role="DanhSachNoiNhan" EntitySet="DanhSachNoiNhan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DanhSachN__NoiNh__3493CFA7" Association="Self.FK__DanhSachN__NoiNh__3493CFA7">
+            <End Role="LienHe" EntitySet="LienHe" />
+            <End Role="DanhSachNoiNhan" EntitySet="DanhSachNoiNhan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanHoi__MaCongV__2DE6D218" Association="Self.FK__PhanHoi__MaCongV__2DE6D218">
             <End Role="CongVan" EntitySet="CongVan" />
             <End Role="PhanHoi" EntitySet="PhanHoi" />
           </AssociationSet>
-          <AssociationSet Name="FK__PhanHoi__TenTaiK__01142BA1" Association="Self.FK__PhanHoi__TenTaiK__01142BA1">
+          <AssociationSet Name="FK__PhanHoi__TenTaiK__2EDAF651" Association="Self.FK__PhanHoi__TenTaiK__2EDAF651">
             <End Role="NguoiDung" EntitySet="NguoiDung" />
             <End Role="PhanHoi" EntitySet="PhanHoi" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TruongPho__TenTa__03F0984C" Association="Self.FK__TruongPho__TenTa__03F0984C">
-            <End Role="NguoiDung" EntitySet="NguoiDung" />
-            <End Role="TruongPhong" EntitySet="TruongPhong" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -191,26 +182,25 @@
           <EntitySet Name="NguoiDungs" EntityType="CONGVANMANAGERModel.NguoiDung" />
           <EntitySet Name="PhanHois" EntityType="CONGVANMANAGERModel.PhanHoi" />
           <EntitySet Name="QuyDinhs" EntityType="CONGVANMANAGERModel.QuyDinh" />
-          <EntitySet Name="TruongPhongs" EntityType="CONGVANMANAGERModel.TruongPhong" />
-          <AssociationSet Name="FK__CongVan__MaLoaiC__6C190EBB" Association="CONGVANMANAGERModel.FK__CongVan__MaLoaiC__6C190EBB">
+          <AssociationSet Name="FK__CongVan__MaLoaiC__29221CFB" Association="CONGVANMANAGERModel.FK__CongVan__MaLoaiC__29221CFB">
             <End Role="LoaiCongVan" EntitySet="LoaiCongVans" />
             <End Role="CongVan" EntitySet="CongVans" />
           </AssociationSet>
-          <AssociationSet Name="FK__PhanHoi__MaCongV__00200768" Association="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__00200768">
-            <End Role="CongVan" EntitySet="CongVans" />
-            <End Role="PhanHoi" EntitySet="PhanHois" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PhanHoi__TenTaiK__01142BA1" Association="CONGVANMANAGERModel.FK__PhanHoi__TenTaiK__01142BA1">
-            <End Role="NguoiDung" EntitySet="NguoiDungs" />
-            <End Role="PhanHoi" EntitySet="PhanHois" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TruongPho__TenTa__03F0984C" Association="CONGVANMANAGERModel.FK__TruongPho__TenTa__03F0984C">
-            <End Role="NguoiDung" EntitySet="NguoiDungs" />
-            <End Role="TruongPhong" EntitySet="TruongPhongs" />
-          </AssociationSet>
-          <AssociationSet Name="NoiNhan" Association="CONGVANMANAGERModel.NoiNhan">
+          <AssociationSet Name="FK__CongVan__NoiGui__2A164134" Association="CONGVANMANAGERModel.FK__CongVan__NoiGui__2A164134">
             <End Role="LienHe" EntitySet="LienHes" />
             <End Role="CongVan" EntitySet="CongVans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanHoi__MaCongV__2DE6D218" Association="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__2DE6D218">
+            <End Role="CongVan" EntitySet="CongVans" />
+            <End Role="PhanHoi" EntitySet="PhanHois" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanHoi__TenTaiK__2EDAF651" Association="CONGVANMANAGERModel.FK__PhanHoi__TenTaiK__2EDAF651">
+            <End Role="NguoiDung" EntitySet="NguoiDungs" />
+            <End Role="PhanHoi" EntitySet="PhanHois" />
+          </AssociationSet>
+          <AssociationSet Name="DanhSachNoiNhan" Association="CONGVANMANAGERModel.DanhSachNoiNhan">
+            <End Role="CongVan" EntitySet="CongVans" />
+            <End Role="LienHe" EntitySet="LienHes" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="CongVan">
@@ -219,18 +209,18 @@
           </Key>
           <Property Name="MaCongVan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MaLoaiCongVan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="NoiGui" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DanhSachNoiNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiGui" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SoKyHieu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="SoCongVan" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SoCongVan" Type="Int32" />
           <Property Name="NgayCongVan" Type="DateTime" Precision="0" />
           <Property Name="TrichYeu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TinhTrang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TinhTrang" Type="Int32" />
           <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PDFScan" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="LoaiCongVan" Relationship="CONGVANMANAGERModel.FK__CongVan__MaLoaiC__6C190EBB" FromRole="CongVan" ToRole="LoaiCongVan" />
-          <NavigationProperty Name="PhanHois" Relationship="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__00200768" FromRole="CongVan" ToRole="PhanHoi" />
-          <NavigationProperty Name="LienHes" Relationship="CONGVANMANAGERModel.NoiNhan" FromRole="CongVan" ToRole="LienHe" />
+          <NavigationProperty Name="LoaiCongVan" Relationship="CONGVANMANAGERModel.FK__CongVan__MaLoaiC__29221CFB" FromRole="CongVan" ToRole="LoaiCongVan" />
+          <NavigationProperty Name="LienHe" Relationship="CONGVANMANAGERModel.FK__CongVan__NoiGui__2A164134" FromRole="CongVan" ToRole="LienHe" />
+          <NavigationProperty Name="PhanHois" Relationship="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__2DE6D218" FromRole="CongVan" ToRole="PhanHoi" />
+          <NavigationProperty Name="LienHes" Relationship="CONGVANMANAGERModel.DanhSachNoiNhan" FromRole="CongVan" ToRole="LienHe" />
         </EntityType>
         <EntityType Name="LienHe">
           <Key>
@@ -238,7 +228,8 @@
           </Key>
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TenLienHe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CongVans" Relationship="CONGVANMANAGERModel.NoiNhan" FromRole="LienHe" ToRole="CongVan" />
+          <NavigationProperty Name="CongVans" Relationship="CONGVANMANAGERModel.FK__CongVan__NoiGui__2A164134" FromRole="LienHe" ToRole="CongVan" />
+          <NavigationProperty Name="CongVans1" Relationship="CONGVANMANAGERModel.DanhSachNoiNhan" FromRole="LienHe" ToRole="CongVan" />
         </EntityType>
         <EntityType Name="LoaiCongVan">
           <Key>
@@ -246,7 +237,7 @@
           </Key>
           <Property Name="MaLoaiCongVan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="TenLoaiCongVan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CongVans" Relationship="CONGVANMANAGERModel.FK__CongVan__MaLoaiC__6C190EBB" FromRole="LoaiCongVan" ToRole="CongVan" />
+          <NavigationProperty Name="CongVans" Relationship="CONGVANMANAGERModel.FK__CongVan__MaLoaiC__29221CFB" FromRole="LoaiCongVan" ToRole="CongVan" />
         </EntityType>
         <EntityType Name="NguoiDung">
           <Key>
@@ -255,8 +246,7 @@
           <Property Name="TenTaiKhoan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="LoaiNguoiDung" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MatKhau" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PhanHois" Relationship="CONGVANMANAGERModel.FK__PhanHoi__TenTaiK__01142BA1" FromRole="NguoiDung" ToRole="PhanHoi" />
-          <NavigationProperty Name="TruongPhongs" Relationship="CONGVANMANAGERModel.FK__TruongPho__TenTa__03F0984C" FromRole="NguoiDung" ToRole="TruongPhong" />
+          <NavigationProperty Name="PhanHois" Relationship="CONGVANMANAGERModel.FK__PhanHoi__TenTaiK__2EDAF651" FromRole="NguoiDung" ToRole="PhanHoi" />
         </EntityType>
         <EntityType Name="PhanHoi">
           <Key>
@@ -266,25 +256,17 @@
           <Property Name="MaCongVan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="TenTaiKhoan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="BinhLuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CongVan" Relationship="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__00200768" FromRole="PhanHoi" ToRole="CongVan" />
-          <NavigationProperty Name="NguoiDung" Relationship="CONGVANMANAGERModel.FK__PhanHoi__TenTaiK__01142BA1" FromRole="PhanHoi" ToRole="NguoiDung" />
+          <NavigationProperty Name="CongVan" Relationship="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__2DE6D218" FromRole="PhanHoi" ToRole="CongVan" />
+          <NavigationProperty Name="NguoiDung" Relationship="CONGVANMANAGERModel.FK__PhanHoi__TenTaiK__2EDAF651" FromRole="PhanHoi" ToRole="NguoiDung" />
         </EntityType>
         <EntityType Name="QuyDinh">
           <Key>
             <PropertyRef Name="MaQuyDinh" />
           </Key>
           <Property Name="MaQuyDinh" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="TenQuyDinh" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GiaTri" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="TruongPhong">
-          <Key>
-            <PropertyRef Name="MaTruongPhong" />
-          </Key>
-          <Property Name="MaTruongPhong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="TenTaiKhoan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="NguoiDung" Relationship="CONGVANMANAGERModel.FK__TruongPho__TenTa__03F0984C" FromRole="TruongPhong" ToRole="NguoiDung" />
-        </EntityType>
-        <Association Name="FK__CongVan__MaLoaiC__6C190EBB">
+        <Association Name="FK__CongVan__MaLoaiC__29221CFB">
           <End Type="CONGVANMANAGERModel.LoaiCongVan" Role="LoaiCongVan" Multiplicity="1" />
           <End Type="CONGVANMANAGERModel.CongVan" Role="CongVan" Multiplicity="*" />
           <ReferentialConstraint>
@@ -296,7 +278,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PhanHoi__MaCongV__00200768">
+        <Association Name="FK__CongVan__NoiGui__2A164134">
+          <End Type="CONGVANMANAGERModel.LienHe" Role="LienHe" Multiplicity="1" />
+          <End Type="CONGVANMANAGERModel.CongVan" Role="CongVan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LienHe">
+              <PropertyRef Name="Email" />
+            </Principal>
+            <Dependent Role="CongVan">
+              <PropertyRef Name="NoiGui" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanHoi__MaCongV__2DE6D218">
           <End Type="CONGVANMANAGERModel.CongVan" Role="CongVan" Multiplicity="1" />
           <End Type="CONGVANMANAGERModel.PhanHoi" Role="PhanHoi" Multiplicity="*" />
           <ReferentialConstraint>
@@ -308,7 +302,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PhanHoi__TenTaiK__01142BA1">
+        <Association Name="FK__PhanHoi__TenTaiK__2EDAF651">
           <End Type="CONGVANMANAGERModel.NguoiDung" Role="NguoiDung" Multiplicity="1" />
           <End Type="CONGVANMANAGERModel.PhanHoi" Role="PhanHoi" Multiplicity="*" />
           <ReferentialConstraint>
@@ -320,23 +314,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TruongPho__TenTa__03F0984C">
-          <End Type="CONGVANMANAGERModel.NguoiDung" Role="NguoiDung" Multiplicity="1" />
-          <End Type="CONGVANMANAGERModel.TruongPhong" Role="TruongPhong" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NguoiDung">
-              <PropertyRef Name="TenTaiKhoan" />
-            </Principal>
-            <Dependent Role="TruongPhong">
-              <PropertyRef Name="TenTaiKhoan" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="NoiNhan">
-          <End Type="CONGVANMANAGERModel.LienHe" Role="LienHe" Multiplicity="*" />
+        <Association Name="DanhSachNoiNhan">
           <End Type="CONGVANMANAGERModel.CongVan" Role="CongVan" Multiplicity="*" />
+          <End Type="CONGVANMANAGERModel.LienHe" Role="LienHe" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -352,7 +334,6 @@
                 <ScalarProperty Name="NgayCongVan" ColumnName="NgayCongVan" />
                 <ScalarProperty Name="SoCongVan" ColumnName="SoCongVan" />
                 <ScalarProperty Name="SoKyHieu" ColumnName="SoKyHieu" />
-                <ScalarProperty Name="DanhSachNoiNhan" ColumnName="DanhSachNoiNhan" />
                 <ScalarProperty Name="NoiGui" ColumnName="NoiGui" />
                 <ScalarProperty Name="MaLoaiCongVan" ColumnName="MaLoaiCongVan" />
                 <ScalarProperty Name="MaCongVan" ColumnName="MaCongVan" />
@@ -397,25 +378,17 @@
           <EntitySetMapping Name="QuyDinhs">
             <EntityTypeMapping TypeName="CONGVANMANAGERModel.QuyDinh">
               <MappingFragment StoreEntitySet="QuyDinh">
-                <ScalarProperty Name="TenQuyDinh" ColumnName="TenQuyDinh" />
+                <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
                 <ScalarProperty Name="MaQuyDinh" ColumnName="MaQuyDinh" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TruongPhongs">
-            <EntityTypeMapping TypeName="CONGVANMANAGERModel.TruongPhong">
-              <MappingFragment StoreEntitySet="TruongPhong">
-                <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
-                <ScalarProperty Name="MaTruongPhong" ColumnName="MaTruongPhong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="NoiNhan" TypeName="CONGVANMANAGERModel.NoiNhan" StoreEntitySet="NoiNhan">
+          <AssociationSetMapping Name="DanhSachNoiNhan" TypeName="CONGVANMANAGERModel.DanhSachNoiNhan" StoreEntitySet="DanhSachNoiNhan">
+            <EndProperty Name="LienHe">
+              <ScalarProperty Name="Email" ColumnName="NoiNhan" />
+            </EndProperty>
             <EndProperty Name="CongVan">
               <ScalarProperty Name="MaCongVan" ColumnName="MaCongVan" />
-            </EndProperty>
-            <EndProperty Name="LienHe">
-              <ScalarProperty Name="Email" ColumnName="Email" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

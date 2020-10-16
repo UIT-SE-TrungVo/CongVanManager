@@ -18,6 +18,7 @@ namespace CongVanManager.View
         public LienHe()
         {
             this.CongVans = new HashSet<CongVan>();
+            this.CongVans1 = new HashSet<CongVan>();
         }
     
         public string Email { get; set; }
@@ -25,5 +26,7 @@ namespace CongVanManager.View
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CongVan> CongVans { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CongVan> CongVans1 { get; set; }
     }
 }

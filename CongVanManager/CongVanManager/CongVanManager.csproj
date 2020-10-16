@@ -103,9 +103,6 @@
     <Compile Include="View\QuyDinh.cs">
       <DependentUpon>QLCV.tt</DependentUpon>
     </Compile>
-    <Compile Include="View\TruongPhong.cs">
-      <DependentUpon>QLCV.tt</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

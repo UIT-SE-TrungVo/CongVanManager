@@ -24,16 +24,16 @@ namespace CongVanManager.View
         public string MaCongVan { get; set; }
         public string MaLoaiCongVan { get; set; }
         public string NoiGui { get; set; }
-        public string DanhSachNoiNhan { get; set; }
         public string SoKyHieu { get; set; }
-        public string SoCongVan { get; set; }
+        public Nullable<int> SoCongVan { get; set; }
         public Nullable<System.DateTime> NgayCongVan { get; set; }
         public string TrichYeu { get; set; }
-        public string TinhTrang { get; set; }
+        public Nullable<int> TinhTrang { get; set; }
         public string GhiChu { get; set; }
         public string PDFScan { get; set; }
     
         public virtual LoaiCongVan LoaiCongVan { get; set; }
+        public virtual LienHe LienHe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhanHoi> PhanHois { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

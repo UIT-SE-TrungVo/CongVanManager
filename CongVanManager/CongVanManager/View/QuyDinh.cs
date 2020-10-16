@@ -15,6 +15,6 @@ namespace CongVanManager.View
     public partial class QuyDinh
     {
         public string MaQuyDinh { get; set; }
-        public string TenQuyDinh { get; set; }
+        public string GiaTri { get; set; }
     }
 }

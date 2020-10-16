@@ -18,7 +18,6 @@ namespace CongVanManager.View
         public NguoiDung()
         {
             this.PhanHois = new HashSet<PhanHoi>();
-            this.TruongPhongs = new HashSet<TruongPhong>();
         }
     
         public string TenTaiKhoan { get; set; }
@@ -27,7 +26,5 @@ namespace CongVanManager.View
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhanHoi> PhanHois { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TruongPhong> TruongPhongs { get; set; }
     }
 }

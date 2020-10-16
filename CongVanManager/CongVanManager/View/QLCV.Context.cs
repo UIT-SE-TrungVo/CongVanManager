@@ -31,6 +31,5 @@ namespace CongVanManager.View
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
         public virtual DbSet<PhanHoi> PhanHois { get; set; }
         public virtual DbSet<QuyDinh> QuyDinhs { get; set; }
-        public virtual DbSet<TruongPhong> TruongPhongs { get; set; }
     }
 }
