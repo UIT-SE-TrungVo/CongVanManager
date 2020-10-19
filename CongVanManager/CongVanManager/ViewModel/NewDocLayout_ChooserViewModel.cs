@@ -30,7 +30,7 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                    x =>
                    {
-                       MainWindowViewModel.instance.PageSwitch(PageName.NewDocLayout_In);
+                       MainWindowViewModel.Ins.PageSwitch(PageName.NewDocLayout_In);
                    });
             }
         }
@@ -42,7 +42,7 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                    x =>
                    {
-                       MainWindowViewModel.instance.PageSwitch(PageName.NewDocLayout_Out);
+                       MainWindowViewModel.Ins.PageSwitch(PageName.NewDocLayout_Out);
                    });
             }
         }
@@ -54,7 +54,7 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                    x =>
                    {
-                       MainWindowViewModel.instance.PageSwitch((PageName)previousPage); //cast <int> to <enum>
+                       MainWindowViewModel.Ins.PageSwitch((PageName)previousPage); //cast <int> to <enum>
                    });
             }
         }

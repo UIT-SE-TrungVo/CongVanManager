@@ -295,7 +295,11 @@ namespace CongVanManager.ViewModel
 
         #region BOX TYPE SWITCHER VARIABLE
         public DocType BoxType;
-        public int iDocType { get; set; }
+        public int iDocType
+        {
+            get;
+            set;
+        }
         private Page _ucfilter;
         public Page UCFilter
         {
@@ -312,7 +316,7 @@ namespace CongVanManager.ViewModel
 
         public BoxLayoutViewModel(DocType docType)
         {
-            while (filterList.Count < 4) filterList.Add(defaultFilter);
+            while (filterList.Count < filterList.Capacity) filterList.Add(defaultFilter);
 
             BoxType = docType;
             iDocType = (int)BoxType;
@@ -328,66 +332,6 @@ namespace CongVanManager.ViewModel
 
             //[TESTING: avoid input for doctype.out]
             if (BoxType == DocType.Out) return;
-
-            #region DATA SAMPLE BINDING
-            LienHe contact = new LienHe
-            {
-                Name = "Phòng Đào tạo",
-                Email = "phongdaotao@gmail.com"
-            };
-            NoiNhan noiNhan1 = new NoiNhan
-            {
-                LienHe = contact
-            };
-            NoiNhan noiNhan2 = new NoiNhan
-            {
-                LienHe = contact
-            };
-            LoaiCongVan loaiCongVan = new LoaiCongVan { Id = "Kế hoạch" };
-            CongVan congVan = new CongVan
-            {
-                LoaiCongVan = loaiCongVan,
-                TrichYeu = "Ngày hội qua môn cho sinh viên năm 6",
-                SoKyHieu = "01/ĐH-CNTT",
-                NoiGui = contact,
-                DanhSachNoiNhan = new ObservableCollection<NoiNhan> {
-                    noiNhan1, noiNhan2 },
-                SoCongVan = 1,
-                NgayCongVan = System.DateTime.Now,
-                GhiChu = "Đme ngày hội xàm vài lòn",
-                StatusCode = CongVan.StatusCodeEnum.DaDuyet |
-                             CongVan.StatusCodeEnum.DangChuyen,
-
-            };
-            CongVan congVan2 = new CongVan
-            {
-                LoaiCongVan = loaiCongVan,
-                TrichYeu = "Ngày hội chia sẻ cách để viết một xâu vô cùng dài trong tựa đề chỉ vì lý do kiểm thử phần mềm cho sinh viên năm 6, 7, 8, 9, thực ra ai cũng vô được",
-                SoKyHieu = "02/ĐH-CNTT",
-                NoiGui = contact,
-                DanhSachNoiNhan = new ObservableCollection<NoiNhan> {
-                    noiNhan1},
-                SoCongVan = 2,
-                NgayCongVan = System.DateTime.Now,
-                GhiChu = "Chỉ là để chia sẻ cách để viết một xâu vô cùng dài trong tựa đề chỉ vì lý do kiểm thử phần mềm cho sinh viên năm 6, 7, 8, 9, thực ra ai cũng vô được mời mọi người cùng vô cho nó vui",
-                StatusCode = CongVan.StatusCodeEnum.DaDuyet |
-                             CongVan.StatusCodeEnum.DaTiepNhan,
-
-            };
-            noiNhan1.CongVan = noiNhan2.CongVan = congVan;
-
-            CongVan.DB.Add(congVan);
-            CongVan.DB.Add(congVan2);
-            LoaiCongVan.DB.Add(loaiCongVan);
-            NoiNhan.DB.Add(noiNhan2);
-            NoiNhan.DB.Add(noiNhan1);
-            LienHe.DB.Add(contact);
-
-            CongVan.DB.CollectionChanged +=
-                (object sender, NotifyCollectionChangedEventArgs e)
-                =>
-                { OnPropertyChanged("DSCongVan"); };
-            #endregion
         }
 
         #region COMMANDS
