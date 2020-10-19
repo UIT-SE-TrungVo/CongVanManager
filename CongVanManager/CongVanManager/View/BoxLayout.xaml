@@ -156,7 +156,7 @@
                                     </TextBlock.Style>
                                 </TextBlock>
                                 <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
-                                    Text="{Binding SelectedCongVanSentDate, StringFormat={}{0:HH:mm} ngày {0:dd-MM-yyyy}, Mode=OneWay}">
+                                    Text="{Binding SelectedCongVanSentDate, Mode=OneWay}">
 
                                 </TextBlock>
                             </WrapPanel>

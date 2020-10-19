@@ -19,10 +19,10 @@
             <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Margin="10" Command="{Binding ButtonFilterCongVan}">
                 Lọc thư
             </Button>
-            <CheckBox Margin="5" IsChecked="{Binding ChuaDoc}">Chờ duyệt</CheckBox>
-            <CheckBox Margin="5" IsChecked="{Binding DaTiepNhan}">Đã duyệt</CheckBox>
-            <CheckBox Margin="5" IsChecked="{Binding DaDuyet}">Đã lưu trữ</CheckBox>
-            <CheckBox Margin="5" IsChecked="{Binding DaChuyen}">Đã gửi đi</CheckBox>
+            <CheckBox Margin="5" IsChecked="{Binding ChoDuyet}">Chờ duyệt</CheckBox>
+            <CheckBox Margin="5" IsChecked="{Binding DaDuyet}">Đã duyệt</CheckBox>
+            <CheckBox Margin="5" IsChecked="{Binding DaLuuTru}">Đã lưu trữ</CheckBox>
+            <CheckBox Margin="5" IsChecked="{Binding DaGui}">Đã gửi đi</CheckBox>
         </WrapPanel>
     </Grid>
 </Page>

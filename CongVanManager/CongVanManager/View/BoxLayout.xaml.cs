@@ -24,7 +24,7 @@ namespace CongVanManager.View
         public BoxLayout(DocType doc)
         {
             InitializeComponent();
-            this.DataContext = new BoxLayoutViewModel(doc);
+            this.DataContext = BoxLayoutViewModel.Ins(doc);
         }
     }
 }

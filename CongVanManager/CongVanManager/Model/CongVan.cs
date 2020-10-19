@@ -72,29 +72,36 @@
         // 2: Đã duyệt
         // 4: Đang chuyển
         [Flags]
-        public enum StatusCodeEnum : int 
+        public enum StatusCodeEnum : int
         {
+            ChuaDoc = 0,
             DaTiepNhan = 1,
-            DaDuyet = 2,
-            DangChuyen = 4,
-            DaDoc = 7,      //contains any flag
-            ChuaDoc = 0     //contains any flag
-            //DaChuyen = 6  //contains all flag
-            //DaXong = 3    //contains all flag
+            DaDuyet_Den = 2,
+            DaChuyen = 3,
+            ChoDuyet = 4,
+            DaDuyet_Di = 5,
+            DaLuuTru = 6,
+            DaGui = 7,
         }
         public string Status
         {
             get
             {
-                if (StatusCode.HasFlag(StatusCodeEnum.DangChuyen) && 
-                    StatusCode.HasFlag(StatusCodeEnum.DaDuyet))
-                    return "Đã chuyển";
-                if (StatusCode.HasFlag(StatusCodeEnum.DaDuyet))
+                if (StatusCode == StatusCodeEnum.DaDuyet_Den || 
+                    StatusCode == StatusCodeEnum.DaDuyet_Di)
                     return "Đã duyệt";
-                if (StatusCode.HasFlag(StatusCodeEnum.DaTiepNhan))
+                if (StatusCode == StatusCodeEnum.ChoDuyet)
+                    return "Chờ duyệt";
+                if (StatusCode == StatusCodeEnum.DaTiepNhan)
                     return "Đã tiếp nhận";
-                if (!StatusCode.HasFlag(StatusCodeEnum.DaDoc))
+                if (StatusCode == StatusCodeEnum.ChuaDoc)
                     return "Chưa đọc";
+                if (StatusCode == StatusCodeEnum.DaChuyen)
+                    return "Đã chuyển";
+                if (StatusCode == StatusCodeEnum.DaGui)
+                    return "Đã gửi";
+                if (StatusCode == StatusCodeEnum.DaLuuTru)
+                    return "Đã lưu trữ";
                 return "Không xác định";
             }
         }

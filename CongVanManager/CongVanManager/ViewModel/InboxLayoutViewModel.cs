@@ -22,7 +22,7 @@ namespace CongVanManager.ViewModel
         #region DanhSachCongVan
         public ICollection<CongVan> DSCongVan
         {
-            get { return CongVan.DB.Where(Filter).ToList(); }
+            get { return CongVan.DB./*Where(Filter).*/ToList(); }
             set
             // Call to refresh data, 
             // Does not set value
@@ -192,7 +192,7 @@ namespace CongVanManager.ViewModel
             }
         }
         #endregion
-
+        /*
         #region FilterSetting
         private List<Func<CongVan, bool>> filterList = new List<Func<CongVan, bool>>(4);
         private Func<CongVan, bool> defaultFilter = (item) => true;
@@ -265,7 +265,7 @@ namespace CongVanManager.ViewModel
             }
         }
         #endregion
-
+        //*/
         #region ButtonFilter
         private ICommand _buttonFilterCongVan;
         public ICommand ButtonFilterCongVan
@@ -307,9 +307,10 @@ namespace CongVanManager.ViewModel
             WindowsFormsHost host = new WindowsFormsHost();
             host.Child = pdf;
             PDF = host;
-            
+            /*
             while (filterList.Count < filterList.Capacity)
                 filterList.Add(defaultFilter);
+            //*/
         }
         private static InboxLayoutViewModel _instance = null;
 

@@ -86,11 +86,14 @@
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="ViewModel\ActionLayoutViewModel.cs" />
     <Compile Include="ViewModel\BoxLayoutViewModel.cs" />
+    <Compile Include="ViewModel\FilterSetting.cs" />
     <Compile Include="ViewModel\LoginLayoutViewModel.cs" />
     <Compile Include="ViewModel\NewDocLayoutViewModel.cs" />
     <Compile Include="ViewModel\NewDocLayout_ChooserViewModel.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\SettingLayoutViewModel.cs" />
+    <Compile Include="ViewModel\UC_InBoxViewModel.cs" />
+    <Compile Include="ViewModel\UC_OutBoxViewModel.cs" />
     <Compile Include="View\ActionLayout.xaml.cs">
       <DependentUpon>ActionLayout.xaml</DependentUpon>
     </Compile>

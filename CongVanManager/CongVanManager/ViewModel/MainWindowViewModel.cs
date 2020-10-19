@@ -64,9 +64,7 @@ namespace CongVanManager.ViewModel
                 SoCongVan = 1,
                 NgayCongVan = System.DateTime.Now,
                 GhiChu = "Đme ngày hội xàm vài lòn",
-                StatusCode = CongVan.StatusCodeEnum.DaDuyet |
-                             CongVan.StatusCodeEnum.DangChuyen,
-
+                StatusCode = CongVan.StatusCodeEnum.DaGui
             };
             CongVan congVan2 = new CongVan
             {
@@ -79,9 +77,7 @@ namespace CongVanManager.ViewModel
                 SoCongVan = 2,
                 NgayCongVan = System.DateTime.Now,
                 GhiChu = "Chỉ là để chia sẻ cách để viết một xâu vô cùng dài trong tựa đề chỉ vì lý do kiểm thử phần mềm cho sinh viên năm 6, 7, 8, 9, thực ra ai cũng vô được mời mọi người cùng vô cho nó vui",
-                StatusCode = CongVan.StatusCodeEnum.DaDuyet |
-                             CongVan.StatusCodeEnum.DaTiepNhan,
-
+                StatusCode = CongVan.StatusCodeEnum.DaDuyet_Den
             };
             noiNhan1.CongVan = noiNhan2.CongVan = congVan;
 

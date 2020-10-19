@@ -52,6 +52,7 @@ namespace CongVanManager.ViewModel
                 OnPropertyChanged("SelectedCongVanKeyNumber");
                 OnPropertyChanged("SelectedCongVanNumber");
                 OnPropertyChanged("SelectedCongVanDestination");
+                OnPropertyChanged();
             }
         }
         #endregion
@@ -139,16 +140,23 @@ namespace CongVanManager.ViewModel
                 }
             }
         }
-        public DateTime SelectedCongVanSentDate
+        public string SelectedCongVanSentDate
         {
             get
             {
-                return (_selectedCongVan?.NgayCongVan).
-                  GetValueOrDefault(DateTime.MinValue);
+                //*
+                if (_selectedCongVan?.NgayCongVan == null)
+                    return "";
+                else
+                    return string.Format("{0:HH:mm} ngày {0:dd-MM-yyyy}", _selectedCongVan.NgayCongVan);
+                /*/
+                return _selectedCongVan?.NgayCongVan;
+                //*/
             }
             set
             {
                 OnPropertyChanged();
+                /*
                 if (_selectedCongVan == null)
                     return;
                 if (SelectedCongVanSentDate != value)
@@ -156,6 +164,7 @@ namespace CongVanManager.ViewModel
                     _selectedCongVan.NgayCongVan = value;
                     ValueChanged(_selectedCongVan);
                 }
+                //*/
             }
         }
         public string SelectedCongVanNote
@@ -191,75 +200,9 @@ namespace CongVanManager.ViewModel
         #endregion
 
         #region FilterSetting
-        private List<Func<CongVan, bool>> filterList = new List<Func<CongVan, bool>>(4);
-        private Func<CongVan, bool> defaultFilter = (item) => true;
         private bool Filter(CongVan item)
         {
-            foreach (var func in filterList)
-                if (func?.Invoke(item) == false)
-                    return false;
-            return true;
-        }
-        private bool? _chuaDoc = true;
-        public bool? ChuaDoc
-        {
-            get => _chuaDoc;
-            set
-            {
-                _chuaDoc = value;
-                if (value == null)
-                    filterList[0] = defaultFilter;
-                else
-                    filterList[0] = (item) =>
-                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDoc)
-                        ^ value.Value;
-            }
-        }
-        private bool? _daDuyet = true;
-        public bool? DaDuyet
-        {
-            get => _daDuyet;
-            set
-            {
-                _daDuyet = value;
-                if (value == null)
-                    filterList[1] = defaultFilter;
-                else
-                    filterList[1] = (item) =>
-                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDuyet)
-                        ^ value.Value;
-            }
-        }
-        private bool? _daTiepNhan = true;
-        public bool? DaTiepNhan
-        {
-            get => _daTiepNhan;
-            set
-            {
-                _daTiepNhan = value;
-                if (value == null)
-                    filterList[2] = defaultFilter;
-                else
-                    filterList[2] = (item) =>
-                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaTiepNhan)
-                        ^ value.Value;
-            }
-        }
-        private bool? _daChuyen = true;
-        public bool? DaChuyen
-        {
-            get => _daChuyen;
-            set
-            {
-                _daChuyen = value;
-                if (value == null)
-                    filterList[3] = defaultFilter;
-                else
-                    filterList[3] = (item) =>
-                        !(item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DangChuyen)
-                        && item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDuyet))
-                        ^ value.Value;
-            }
+            return (UCFilter.DataContext as FilterSetting).Filter(item);
         }
         #endregion
 
@@ -314,10 +257,8 @@ namespace CongVanManager.ViewModel
         }
         #endregion
 
-        public BoxLayoutViewModel(DocType docType)
+        private BoxLayoutViewModel(DocType docType)
         {
-            while (filterList.Count < filterList.Capacity) filterList.Add(defaultFilter);
-
             BoxType = docType;
             iDocType = (int)BoxType;
             switch (docType)
@@ -329,9 +270,28 @@ namespace CongVanManager.ViewModel
                     UCFilter = new uc_OutBoxFilter();
                     break;
             }
-
+            
             //[TESTING: avoid input for doctype.out]
             if (BoxType == DocType.Out) return;
+        }
+
+        private static BoxLayoutViewModel ins_in = null;
+        private static BoxLayoutViewModel ins_out = null;
+        public static BoxLayoutViewModel Ins(DocType doc)
+        {
+            if (doc == DocType.In)
+            {
+                if (ins_in == null)
+                    ins_in = new BoxLayoutViewModel(doc);
+                return ins_in;
+            }
+            if (doc == DocType.Out)
+            {
+                if (ins_out == null)
+                    ins_out = new BoxLayoutViewModel(doc);
+                return ins_out;
+            }
+            return null;
         }
 
         #region COMMANDS
