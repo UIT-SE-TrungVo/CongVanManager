@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d9d76d62e739442dbfc27d4e5beee16f" Name="Diagram1">
+        <EntityTypeShape EntityType="CONGVANMANAGERModel.CongVan" Width="1.5" PointX="3" PointY="1.5" />
+        <EntityTypeShape EntityType="CONGVANMANAGERModel.LienHe" Width="1.5" PointX="5.25" PointY="5.5" />
+        <EntityTypeShape EntityType="CONGVANMANAGERModel.LoaiCongVan" Width="1.5" PointX="0.75" PointY="2.625" />
+        <EntityTypeShape EntityType="CONGVANMANAGERModel.NguoiDung" Width="1.5" PointX="3" PointY="7.5" />
+        <EntityTypeShape EntityType="CONGVANMANAGERModel.PhanHoi" Width="1.5" PointX="5.25" PointY="2.375" />
+        <EntityTypeShape EntityType="CONGVANMANAGERModel.QuyDinh" Width="1.5" PointX="7.75" PointY="0.75" />
+        <AssociationConnector Association="CONGVANMANAGERModel.FK__CongVan__MaLoaiC__29221CFB" />
+        <AssociationConnector Association="CONGVANMANAGERModel.FK__CongVan__NoiGui__2A164134" />
+        <AssociationConnector Association="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__2DE6D218" />
+        <AssociationConnector Association="CONGVANMANAGERModel.FK__PhanHoi__TenTaiK__2EDAF651" />
+        <AssociationConnector Association="CONGVANMANAGERModel.DanhSachNoiNhan" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
