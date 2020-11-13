@@ -55,6 +55,7 @@
             get => _pDFScanLocation;
             set { _pDFScanLocation = value; OnPropertyChanged(); }
         }
+        // WARNING: member not stored
         private DateTime _ngayXuLi;
         public DateTime NgayXuLi
         {
@@ -143,6 +144,10 @@
                 {
                     _db = new ObservableCollection<CongVan>();
                     // TODO: syncronize mechanic
+                    _db.CollectionChanged += (obj, arg) => 
+                    {
+                        
+                    };
                 }
                 return _db;
             }

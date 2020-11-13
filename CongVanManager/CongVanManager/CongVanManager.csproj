@@ -110,6 +110,9 @@
     <Compile Include="View\BoxLayout.xaml.cs">
       <DependentUpon>BoxLayout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\database_firewall_rules.cs">
+      <DependentUpon>QLCV.tt</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginLayout.xaml.cs">
       <DependentUpon>LoginLayout.xaml</DependentUpon>
     </Compile>
