@@ -15,7 +15,7 @@ namespace CongVanManager.View
     public partial class PhanHoi
     {
         public string MaPhanHoi { get; set; }
-        public string MaCongVan { get; set; }
+        public long MaCongVan { get; set; }
         public string TenTaiKhoan { get; set; }
         public string BinhLuan { get; set; }
     

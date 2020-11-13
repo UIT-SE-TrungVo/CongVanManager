@@ -20,6 +20,12 @@ namespace CongVanManager
             this.CongVans = new HashSet<CongVan>();
             this.DanhSachNoiNhan = new HashSet<NoiNhan>();
         }
+
+        public LienHe(View.LienHe lh)
+        {
+            Email = lh.Email;
+            Name = lh.TenLienHe;
+        }
     
         public string Email { get; set; }
         public string Name { get; set; }
@@ -37,6 +43,15 @@ namespace CongVanManager
                 return _db;
             }
             private set { }
+        }
+        public static LienHe Get(View.LienHe lcv)
+        {
+            foreach (LienHe item in DB)
+            {
+                if (item.Email == lcv.Email)
+                    return item;
+            }
+            return null;
         }
     }
 }

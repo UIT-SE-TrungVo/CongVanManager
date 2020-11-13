@@ -12,12 +12,18 @@ namespace CongVanManager
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using CongVanManager.View;
 
     public class LoaiCongVan
     {
         public LoaiCongVan()
         {
             this.CongVans = new HashSet<CongVan>();
+        }
+
+        public LoaiCongVan(View.LoaiCongVan loaiCongVan)
+        {
+            Id = loaiCongVan.MaLoaiCongVan;
         }
 
         public string Id { get => _id; set { _id = value.ToUpper(); } }
@@ -27,6 +33,7 @@ namespace CongVanManager
 
         private static ObservableCollection<LoaiCongVan> _db;
         private string _id;
+        private string _tenLoai;
 
         public static ObservableCollection<LoaiCongVan> DB
         {
@@ -37,6 +44,15 @@ namespace CongVanManager
                 return _db;
             }
             private set { }
+        }
+        public static LoaiCongVan Get(View.LoaiCongVan lcv)
+        {
+            foreach (LoaiCongVan item in DB)
+            {
+                if (item.Id == lcv.MaLoaiCongVan)
+                    return item;
+            }
+            return null;
         }
     }
 }

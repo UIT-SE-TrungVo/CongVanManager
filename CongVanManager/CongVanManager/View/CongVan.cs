@@ -21,7 +21,7 @@ namespace CongVanManager.View
             this.LienHes = new HashSet<LienHe>();
         }
     
-        public string MaCongVan { get; set; }
+        public long MaCongVan { get; set; }
         public string MaLoaiCongVan { get; set; }
         public string NoiGui { get; set; }
         public string SoKyHieu { get; set; }
@@ -31,6 +31,7 @@ namespace CongVanManager.View
         public Nullable<int> TinhTrang { get; set; }
         public string GhiChu { get; set; }
         public string PDFScan { get; set; }
+        public System.DateTime NgayXuLi { get; set; }
     
         public virtual LoaiCongVan LoaiCongVan { get; set; }
         public virtual LienHe LienHe { get; set; }

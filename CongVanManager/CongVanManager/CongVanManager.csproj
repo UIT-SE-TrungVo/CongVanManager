@@ -91,6 +91,7 @@
     </ApplicationDefinition>
     <Compile Include="Command\EventArgs.cs" />
     <Compile Include="Command\EventRaiser.cs" />
+    <Compile Include="DataProvider.cs" />
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Command\RelayCommand.cs" />
@@ -282,6 +283,7 @@
       <DependentUpon>QLCV.edmx</DependentUpon>
       <LastGenOutput>QLCV.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="View\QLCV.edmx.sql" />
     <Content Include="View\QLCV.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>QLCV.edmx</DependentUpon>
