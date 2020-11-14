@@ -28,15 +28,18 @@ namespace CongVanManager
         }
 
         public CONGVANMANAGEREntities DB { get; set; } = new CONGVANMANAGEREntities();
-
-        private bool Lock;
+        
         private const int TimeToRefresh = 10000;
 
         private async Task RefreshAsync()
         {
             while (true)
             {
-                DB.SaveChanges();
+                try
+                {
+                    DB.SaveChanges();
+                }
+                catch (Exception e) { Console.WriteLine(e.ToString()); }
                 await Task.Delay(TimeToRefresh);
             }
         }

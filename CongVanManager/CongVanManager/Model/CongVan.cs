@@ -24,7 +24,7 @@
             LoaiCongVan = LoaiCongVan.Get(cv.LoaiCongVan);
             if (LoaiCongVan == null)
                 LoaiCongVan.DB.Add(new LoaiCongVan(cv.LoaiCongVan));
-            LoaiCongVan.CongVans.Add(this);
+            LoaiCongVan.CongVanDaGui.Add(this);
 
             NgayCongVan = cv.NgayCongVan;
             NgayXuLi = cv.NgayXuLi;
@@ -32,6 +32,7 @@
             NoiGui = LienHe.Get(cv.LienHe);
             if (NoiGui == null)
                 LienHe.DB.Add(new LienHe(cv.LienHe));
+            NoiGui.CongVans.Add(this);
 
             PDFScanLocation = cv.PDFScan;
 
@@ -207,23 +208,23 @@
                     _db = new ObservableCollection<CongVan>();
 
                     // Load Database from DataProvider
-                    foreach (View.CongVan cv in DataProvider.Ins.DB.CongVans)
+                    foreach (View.CongVan cv in DataProvider.Ins.DB.CongVan)
                         _db.Add(new CongVan(cv));
 
-                    // TODO: syncronize mechanic
+                    // syncronize mechanic
                     _db.CollectionChanged += (obj, arg) =>
                     {
                         if (arg.Action == NotifyCollectionChangedAction.Move)
                             return;
-                        foreach (CongVan item in arg.OldItems)
-                        {
-                            var cvs = DataProvider.Ins.DB.CongVans;
-                            cvs.Remove(cvs.Find(item.Id));
-                        }
-                        foreach (CongVan item in arg.NewItems)
-                        {
-                            DataProvider.Ins.DB.CongVans.Add(item.ToCongVan());
-                        }
+                        if (arg.OldItems != null)
+                            foreach (CongVan item in arg.OldItems)
+                            {
+                                var cvs = DataProvider.Ins.DB.CongVan;
+                                cvs.Remove(cvs.Find(item.Id));
+                            }
+                        if (arg.NewItems != null)
+                            foreach (CongVan item in arg.NewItems)
+                                DataProvider.Ins.DB.CongVan.Add(item.ToCongVan());
                     };
                 }
                 return _db;

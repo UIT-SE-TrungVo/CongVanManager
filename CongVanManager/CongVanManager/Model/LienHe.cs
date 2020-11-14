@@ -12,6 +12,8 @@ namespace CongVanManager
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using CongVanManager.View;
 
     public partial class LienHe
     {
@@ -25,6 +27,8 @@ namespace CongVanManager
         {
             Email = lh.Email;
             Name = lh.TenLienHe;
+            this.CongVans = new HashSet<CongVan>();
+            this.DanhSachNoiNhan = new HashSet<NoiNhan>();
         }
     
         public string Email { get; set; }
@@ -39,11 +43,37 @@ namespace CongVanManager
             get
             {
                 if (_db == null)
+                {
                     _db = new ObservableCollection<LienHe>();
+
+                    foreach (View.LienHe cv in DataProvider.Ins.DB.LienHe)
+                        _db.Add(new LienHe(cv));
+
+                    _db.CollectionChanged += (obj, arg) =>
+                    {
+                        if (arg.Action == NotifyCollectionChangedAction.Move)
+                            return;
+                        if (arg.OldItems != null)
+                            foreach (LienHe item in arg.OldItems)
+                            {
+                                var cvs = DataProvider.Ins.DB.LienHe;
+                                cvs.Remove(cvs.Find(item.Email));
+                            }
+                        if (arg.NewItems != null)
+                            foreach (LienHe item in arg.NewItems)
+                                DataProvider.Ins.DB.LienHe.Add(item.ToLienHe());
+                    };
+                }
                 return _db;
             }
             private set { }
         }
+
+        private View.LienHe ToLienHe()
+        {
+            return new View.LienHe { Email = Email, TenLienHe = Name};
+        }
+
         public static LienHe Get(View.LienHe lcv)
         {
             foreach (LienHe item in DB)

@@ -25,11 +25,11 @@ namespace CongVanManager.View
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CongVan> CongVans { get; set; }
-        public virtual DbSet<LienHe> LienHes { get; set; }
-        public virtual DbSet<LoaiCongVan> LoaiCongVans { get; set; }
-        public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
-        public virtual DbSet<PhanHoi> PhanHois { get; set; }
+        public virtual DbSet<CongVan> CongVan { get; set; }
+        public virtual DbSet<LienHe> LienHe { get; set; }
+        public virtual DbSet<LoaiCongVan> LoaiCongVan { get; set; }
+        public virtual DbSet<NguoiDung> NguoiDung { get; set; }
+        public virtual DbSet<PhanHoi> PhanHoi { get; set; }
         public virtual DbSet<QuyDinh> QuyDinhs { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     }
