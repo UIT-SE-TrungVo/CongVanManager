@@ -18,10 +18,69 @@
       MinHeight="600" MinWidth="1000" 
       Title="Cài đặt">
 
-    <Grid Margin="10">
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"
-                   Style="{StaticResource MaterialDesignHeadline2TextBlock}">
-            Đang xâm nhập vào hệ thống tên lửa hạt nhân liên vũ trụ của CHDCND Triều Tiên
-        </TextBlock>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!--CHỌN TRƯỞNG PHÒNG-->
+        <StackPanel Margin="32">
+            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 
+            Chọn trưởng phòng
+            </TextBlock>
+
+            <Border BorderBrush="MediumPurple" BorderThickness="2"
+                CornerRadius="8" Margin="8">
+                <StackPanel Orientation="Horizontal" Margin="8">
+                    <TextBlock Margin="8" VerticalAlignment="Center"> 
+                    Trưởng phòng
+                    </TextBlock>
+                    <ComboBox Width="300" Margin="8">
+
+                    </ComboBox>
+                    <Button Margin="8">
+                        Xác nhận
+                    </Button>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+           
+        <!--DANH SÁCH NGƯỜI DÙNG-->
+        <DockPanel Margin="32" Grid.Row="1" LastChildFill="True">
+            <TextBlock DockPanel.Dock="Top" Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 
+                Danh sách người dùng
+            </TextBlock>
+
+            <Border DockPanel.Dock="Top" BorderBrush="MediumPurple" BorderThickness="2"
+                    CornerRadius="8" Margin="8">
+                <DockPanel Margin="8">
+                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" 
+                                HorizontalAlignment="Right">
+                        <Button Margin="8" Background="Green" BorderBrush="Green">
+                            Thêm mới
+                        </Button>
+                        <Button Margin="8">
+                            Sửa
+                        </Button>
+                        <Button Margin="8" Background="Red" BorderBrush="Red">
+                            Xóa
+                        </Button>
+                    </StackPanel>
+                    <ScrollViewer DockPanel.Dock="Top" Margin="8">
+                        <ListBox>
+                            <ListBoxItem>
+                                <StackPanel>
+                                    <TextBlock Text="Trần dần" Margin="8"/>
+                                    <TextBlock Text="Trần dần" Margin="8"/>
+                                    <TextBlock Text="Trần dần" Margin="8"/>
+                                    <TextBlock Text="Trần dần" Margin="8"/>
+                                </StackPanel>
+                            </ListBoxItem>
+                        </ListBox>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+        </DockPanel>
     </Grid>
 </Page>
