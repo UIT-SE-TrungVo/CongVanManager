@@ -27,7 +27,7 @@
         <!--CHỌN TRƯỞNG PHÒNG-->
         <StackPanel Margin="32">
             <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 
-            Chọn trưởng phòng
+                Chọn trưởng phòng
             </TextBlock>
 
             <Border BorderBrush="MediumPurple" BorderThickness="2"
@@ -57,28 +57,51 @@
                 <DockPanel Margin="8">
                     <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" 
                                 HorizontalAlignment="Right">
-                        <Button Margin="8" Background="Green" BorderBrush="Green">
+                        <Button Margin="8" Background="Green" BorderBrush="Green"
+                                Command="{Binding CreateNewUser}">
                             Thêm mới
                         </Button>
-                        <Button Margin="8">
+                        <Button Margin="8" Command="{Binding EditUser}">
                             Sửa
                         </Button>
-                        <Button Margin="8" Background="Red" BorderBrush="Red">
+                        <Button Margin="8" Background="Red" BorderBrush="Red"
+                                Command="{Binding RemoveUser}">
                             Xóa
                         </Button>
                     </StackPanel>
-                    <ScrollViewer DockPanel.Dock="Top" Margin="8">
-                        <ListBox>
-                            <ListBoxItem>
-                                <StackPanel>
-                                    <TextBlock Text="Trần dần" Margin="8"/>
-                                    <TextBlock Text="Trần dần" Margin="8"/>
-                                    <TextBlock Text="Trần dần" Margin="8"/>
-                                    <TextBlock Text="Trần dần" Margin="8"/>
-                                </StackPanel>
-                            </ListBoxItem>
-                        </ListBox>
-                    </ScrollViewer>
+                    <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                 DockPanel.Dock="Top" Margin="8">
+                        <ListBoxItem>
+                            <TextBlock Text="Trần Dần"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBlock Text="Trần Dần"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBlock Text="Trần Dần"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBlock Text="Trần Dần"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBlock Text="Trần Dần"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBlock Text="Trần Dần"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBlock Text="Trần Dần"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBlock Text="Trần Dần"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBlock Text="Trần Dần"/>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <TextBlock Text="Trần Dần"/>
+                        </ListBoxItem>
+                    </ListBox>
                 </DockPanel>
             </Border>
         </DockPanel>

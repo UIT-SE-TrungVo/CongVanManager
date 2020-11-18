@@ -84,6 +84,7 @@
     <Compile Include="ViewModel\NewDocLayout_ChooserViewModel.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\SettingLayoutViewModel.cs" />
+    <Compile Include="ViewModel\UserDetailLayoutViewModel.cs" />
     <Compile Include="View\ActionLayout.xaml.cs">
       <DependentUpon>ActionLayout.xaml</DependentUpon>
     </Compile>
@@ -107,6 +108,9 @@
     </Compile>
     <Compile Include="View\usercontrol\uc_OutBoxFilter.xaml.cs">
       <DependentUpon>uc_OutBoxFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserDetailLayout.xaml.cs">
+      <DependentUpon>UserDetailLayout.xaml</DependentUpon>
     </Compile>
     <Page Include="View\ActionLayout.xaml">
       <SubType>Designer</SubType>
@@ -162,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\usercontrol\uc_OutBoxFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserDetailLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

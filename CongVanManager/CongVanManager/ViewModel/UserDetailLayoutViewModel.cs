@@ -1,64 +1,57 @@
 ﻿using CongVanManager.Command;
+using CongVanManager.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using CongVanManager.View;
 
 namespace CongVanManager.ViewModel
 {
-    class SettingLayoutViewModel
+    class UserDetailLayoutViewModel
     {
-        private static SettingLayoutViewModel _instance;
-        public static SettingLayoutViewModel instance
+        UserDetailLayout window;
+        public UserDetailLayoutViewModel(UserDetailLayout w)
         {
-            get
-            {
-                if (_instance == null)
-                    _instance = new SettingLayoutViewModel();
-                return _instance;
-            }
-            private set { }
+            window = w;
         }
 
-        public ICommand CreateNewUser
+        public ICommand Save
         {
             get
             {
                 return new RelayCommand(
                    x =>
                    {
-                       UserDetailLayout window = new UserDetailLayout();
-                       window.ShowDialog();
+                       //save before close
+                       window.Close();
                    });
             }
         }
 
-        public ICommand EditUser
+        public ICommand Reset
         {
             get
             {
                 return new RelayCommand(
                    x =>
                    {
-                       UserDetailLayout window = new UserDetailLayout();
-                       window.ShowDialog();
+                       //reset everything
                    });
             }
         }
 
-        public ICommand RemovwUser
+        public ICommand Cancel
         {
             get
             {
                 return new RelayCommand(
                    x =>
                    {
-                       
+                       window.Close();
                    });
             }
         }
-    }
+    }    
 }

@@ -1,0 +1,94 @@
+﻿<Window x:Class="CongVanManager.View.UserDetailLayout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CongVanManager.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:Controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="16"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        Title="Thực hiện hành động" Width="500" Height="325" ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" BorderBrush="MediumPurple" BorderThickness="2">
+    <Grid Margin="32" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--TÊN TÀI KHOẢN-->
+        <TextBlock Margin="8" VerticalAlignment="Center">
+            Tên tài khoản :
+        </TextBlock>
+
+        <DockPanel Grid.Column="1" Margin="8" VerticalAlignment="Center">
+            <Border BorderBrush="MediumPurple" BorderThickness="2" CornerRadius="8">
+                <TextBox Margin="8">
+
+                </TextBox>
+            </Border>
+        </DockPanel>
+
+        <!-- MẬT KHẨU -->
+        <TextBlock Grid.Row="1" Margin="8" VerticalAlignment="Center">
+            Mật khẩu :
+        </TextBlock>
+
+        <DockPanel Grid.Row="1" Grid.Column="1" Margin="8" VerticalAlignment="Center">
+            <Border BorderBrush="MediumPurple" BorderThickness="2" CornerRadius="8">
+                <PasswordBox Margin="8">
+
+                </PasswordBox>
+            </Border>
+        </DockPanel>
+
+        <!-- LOẠI TÀI KHOẢN -->
+        <TextBlock Grid.Row="2" Margin="8" VerticalAlignment="Center">
+            Loại tài khoản :
+        </TextBlock>
+
+        <DockPanel Grid.Row="2" Grid.Column="1" Margin="8" VerticalAlignment="Center">
+            <Border BorderBrush="MediumPurple" BorderThickness="2" CornerRadius="8">
+                <ComboBox Margin="8">
+                    <ComboBoxItem>
+                        Admin
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        Nhân viên
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        Khách
+                    </ComboBoxItem>
+                </ComboBox>
+            </Border>
+        </DockPanel>
+
+        <!-- CÁC NÚT BẤM -->
+        <WrapPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="8" Grid.RowSpan="2">
+            <Button Margin="8" Command="{Binding Save}">
+                Lưu
+            </Button>
+            <Button Margin="8" Command="{Binding Reset}">
+                Làm lại
+            </Button>
+            <Button Margin="8" Style="{StaticResource MaterialDesignFlatButton}"
+                    Command="{Binding Cancel}">
+                Hủy
+            </Button>
+        </WrapPanel>
+    </Grid>
+</Window>
+
