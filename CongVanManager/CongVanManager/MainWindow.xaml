@@ -121,7 +121,7 @@
                             </materialDesign:PackIcon.LayoutTransform>
                         </materialDesign:PackIcon>
                     </WrapPanel>
-                    <TextBox VerticalContentAlignment="Center" Margin="100,0,10,0" BorderBrush="Transparent" FontWeight="SemiBold"/>
+                    <TextBox VerticalContentAlignment="Center" Margin="100,0,10,0" BorderBrush="Transparent" FontWeight="SemiBold" Text="{Binding FilterText, Mode=TwoWay}"/>
                 </DockPanel>
             </Border>
             <DockPanel Grid.Column="1" Margin="25,0">

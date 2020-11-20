@@ -17,6 +17,7 @@ using CongVanManager.View;
 
 namespace CongVanManager.ViewModel
 {
+    // KHONG CON DUNG
     class InboxLayoutViewModel : ObservableObject
     {
         #region DanhSachCongVan

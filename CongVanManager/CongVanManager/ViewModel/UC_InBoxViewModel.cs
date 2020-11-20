@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CongVanManager.Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace CongVanManager.ViewModel
 {
@@ -13,6 +15,11 @@ namespace CongVanManager.ViewModel
         private Func<CongVan, bool> defaultFilter = (item) => false;
         public override bool Filter(CongVan item)
         {
+            string filterText = MainWindowViewModel.Ins.FilterText;
+
+            if (!Match(item, filterText))
+                return false;
+
             foreach (var func in filterList)
                 if (func?.Invoke(item) == true)
                     return true;
@@ -98,6 +105,22 @@ namespace CongVanManager.ViewModel
                     filterList[3] = (item) =>
                         item.StatusCode == CongVan.StatusCodeEnum.DaChuyen;
                 OnPropertyChanged();
+            }
+        }
+        #endregion
+        
+        #region ButtonFilter
+        private ICommand _buttonFilterCongVan;
+        public ICommand ButtonFilterCongVan
+        {
+            get
+            {
+                if (_buttonFilterCongVan == null)
+                    _buttonFilterCongVan = new RelayCommand(param =>
+                    {
+                        MainWindowViewModel.Ins.ButtonFilterCongVan.Execute(null);
+                    });
+                return _buttonFilterCongVan;
             }
         }
         #endregion

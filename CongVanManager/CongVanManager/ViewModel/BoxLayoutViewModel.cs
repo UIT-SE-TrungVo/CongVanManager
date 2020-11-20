@@ -206,19 +206,6 @@ namespace CongVanManager.ViewModel
         }
         #endregion
 
-        #region ButtonFilter
-        private ICommand _buttonFilterCongVan;
-        public ICommand ButtonFilterCongVan
-        {
-            get
-            {
-                if (_buttonFilterCongVan == null)
-                    _buttonFilterCongVan = new RelayCommand(param => UpdateData(this, null));
-                return _buttonFilterCongVan;
-            }
-        }
-        #endregion
-
         public void ValueChanged(object sender, string[] args = null)
         {
             if (sender is CongVan)

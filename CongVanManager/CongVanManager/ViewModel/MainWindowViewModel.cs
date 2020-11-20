@@ -190,5 +190,34 @@ namespace CongVanManager.ViewModel
                    });
             }
         }
+
+        public string FilterText
+        {
+            get => filterText;
+            set
+            {
+                filterText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string filterText;
+        
+        #region ButtonFilter
+        private ICommand _buttonFilterCongVan;
+        public ICommand ButtonFilterCongVan
+        {
+            get
+            {
+                if (_buttonFilterCongVan == null)
+                    _buttonFilterCongVan = new RelayCommand(param => 
+                    {
+                        (page[0].DataContext as BoxLayoutViewModel).UpdateData(this, null);
+                        (page[5].DataContext as BoxLayoutViewModel).UpdateData(this, null);
+                    });
+                return _buttonFilterCongVan;
+            }
+        }
+        #endregion
     }
 }

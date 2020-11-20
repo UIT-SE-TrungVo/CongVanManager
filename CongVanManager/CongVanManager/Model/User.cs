@@ -23,8 +23,10 @@ namespace CongVanManager
         public string Username { get; set; }
         public string Password { get; set; }
         public short Loai { get; set; }
+
+        // show the time this user's last reloaded the database
+        public DateTime lastSeen { get; set; }
     
-        public virtual Setting Setting { get; set; }
         public virtual ICollection<PhanHoi> PhanHois { get; set; }
 
         private static ObservableCollection<User> _db;
