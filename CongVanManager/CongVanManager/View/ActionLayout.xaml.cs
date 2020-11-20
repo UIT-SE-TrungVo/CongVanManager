@@ -25,5 +25,12 @@ namespace CongVanManager.View
             InitializeComponent();
             this.DataContext = ActionLayoutViewModel.instance;
         }
+        public ActionLayout(CongVanManager.CongVan input, DocType bt)
+        {
+            InitializeComponent();
+            ActionLayoutViewModel.instance.selectedCongVan = input;
+            ActionLayoutViewModel.instance.BoxType = bt;
+            this.DataContext = ActionLayoutViewModel.instance;
+        }
     }
 }
