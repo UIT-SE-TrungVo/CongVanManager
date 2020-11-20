@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/13/2020 21:36:04
+-- Date Created: 11/20/2020 12:20:47
 -- Generated from EDMX file: C:\Users\longt\source\repos\CongVanManager\CongVanManager\CongVanManager\View\QLCV.edmx
 -- --------------------------------------------------
 
@@ -101,8 +101,9 @@ GO
 -- Creating table 'NguoiDung'
 CREATE TABLE [dbo].[NguoiDung] (
     [TenTaiKhoan] varchar(20)  NOT NULL,
-    [LoaiNguoiDung] nvarchar(50)  NOT NULL,
-    [MatKhau] varchar(50)  NOT NULL
+    [LoaiNguoiDung] smallint  NOT NULL,
+    [MatKhau] varchar(50)  NOT NULL,
+    [LastSeen] datetime  NOT NULL
 );
 GO
 

@@ -15,6 +15,10 @@ namespace CongVanManager.ViewModel
 {
     public class MainWindowViewModel : ObservableObject
     {
+        private string username;
+        
+        public string Username { get => username; set => username = value; }
+
         private readonly Page[] page = {    new BoxLayout(DocType.In), //0
                                             new NewDocLayout_Chooser(), //1
                                             new NewDocLayout(DocType.In), //2

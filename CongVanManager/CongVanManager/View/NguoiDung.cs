@@ -21,8 +21,9 @@ namespace CongVanManager.View
         }
     
         public string TenTaiKhoan { get; set; }
-        public string LoaiNguoiDung { get; set; }
+        public short LoaiNguoiDung { get; set; }
         public string MatKhau { get; set; }
+        public System.DateTime LastSeen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhanHoi> PhanHois { get; set; }

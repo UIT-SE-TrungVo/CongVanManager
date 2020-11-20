@@ -224,7 +224,10 @@
                             }
                         if (arg.NewItems != null)
                             foreach (CongVan item in arg.NewItems)
+                            {
+                                item.NgayXuLi = DateTime.Now;
                                 DataProvider.Ins.DB.CongVan.Add(item.ToCongVan());
+                            }
                     };
                 }
                 return _db;

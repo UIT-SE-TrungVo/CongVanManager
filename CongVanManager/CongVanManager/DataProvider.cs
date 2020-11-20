@@ -1,4 +1,5 @@
 ﻿using CongVanManager.View;
+using CongVanManager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,8 @@ namespace CongVanManager
     class DataProvider
     {
         private static DataProvider _ins;
-        private static Task _refresher;
+        private static Task _uploadRefresher;
+        private static Task _downloadRefresher;
         public static DataProvider Ins
         {
             get
@@ -18,29 +20,63 @@ namespace CongVanManager
                 if (_ins == null)
                 {
                     _ins = new DataProvider();
-                    _refresher = _ins.RefreshAsync();
+                    _ins.DB.Configuration.AutoDetectChangesEnabled = false;
+                    _uploadRefresher = _ins.RefreshUploadAsync();
+                    _downloadRefresher = _ins.RefreshDownloadAsync();
+                    /*
+                    NguoiDung user = _ins.DB.NguoiDung.Find(MainWindowViewModel.Ins.Username);
+                    user.LastSeen = DateTime.Now;
+                    //*/
                 }
 
                 return _ins;
             }
 
-            set { _ins = value; _refresher = _ins.RefreshAsync(); }
+            set { _ins = value; _uploadRefresher = _ins.RefreshUploadAsync(); }
         }
 
         public CONGVANMANAGEREntities DB { get; set; } = new CONGVANMANAGEREntities();
         
-        private const int TimeToRefresh = 10000;
+        private const int TimeToRefresh_Upload = 10000; // 10 sec
+        private const int TimeToRefresh_Download = 600000; // 10 min
 
-        private async Task RefreshAsync()
+        private async Task RefreshUploadAsync()
         {
             while (true)
             {
                 try
                 {
+                    await Task.Delay(TimeToRefresh_Upload);
+                    DB.ChangeTracker.DetectChanges();
+                    if (DB.ChangeTracker.HasChanges())
+                    {
+                        QuyDinh setting = DB.QuyDinhs.Find("LastUpdated");
+                        // TODO: remove this
+                        //*
+                        if (setting == null) {
+                            setting = new QuyDinh { MaQuyDinh = "LastUpdated" };
+                            DB.QuyDinhs.Add(setting);
+                        }
+                        //*/
+                        setting.GiaTri = DateTime.Now.ToString();
+                    }
                     DB.SaveChanges();
                 }
                 catch (Exception e) { Console.WriteLine(e.ToString()); }
-                await Task.Delay(TimeToRefresh);
+            }
+        }
+
+        private async Task RefreshDownloadAsync()
+        {
+            while (true)
+            {
+                await Task.Delay(TimeToRefresh_Download);
+                try
+                {
+                    DB.Dispose();
+                    DB = new CONGVANMANAGEREntities();
+                }
+                catch (Exception e) { Console.WriteLine(e.ToString()); }
             }
         }
     }

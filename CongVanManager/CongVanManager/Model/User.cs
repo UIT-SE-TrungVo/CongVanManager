@@ -12,6 +12,8 @@ namespace CongVanManager
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using CongVanManager.View;
 
     public partial class User
     {
@@ -19,10 +21,26 @@ namespace CongVanManager
         {
             this.PhanHois = new HashSet<PhanHoi>();
         }
-    
+
+        public User(NguoiDung user)
+        {
+            Username = user.TenTaiKhoan;
+            Password = user.MatKhau;
+            lastSeen = user.LastSeen;
+            /* TODO
+            Loai = user.LoaiNguoiDung;
+            //*/
+        }
+
         public string Username { get; set; }
         public string Password { get; set; }
         public short Loai { get; set; }
+        enum LoaiNguoiDung : short
+        {
+            TruongPhong = 0,
+            NhanVien = 1,
+            Khach = 2
+        }
 
         // show the time this user's last reloaded the database
         public DateTime lastSeen { get; set; }
@@ -30,15 +48,51 @@ namespace CongVanManager
         public virtual ICollection<PhanHoi> PhanHois { get; set; }
 
         private static ObservableCollection<User> _db;
+
         public static ObservableCollection<User> DB
         {
             get
             {
                 if (_db == null)
+                {
                     _db = new ObservableCollection<User>();
+
+                    // Load Database from DataProvider
+                    foreach (View.NguoiDung user in DataProvider.Ins.DB.NguoiDung)
+                        _db.Add(new User(user));
+
+                    // syncronize mechanic
+                    _db.CollectionChanged += (obj, arg) =>
+                    {
+                        if (arg.Action == NotifyCollectionChangedAction.Move)
+                            return;
+                        if (arg.OldItems != null)
+                            foreach (User item in arg.OldItems)
+                            {
+                                var cvs = DataProvider.Ins.DB.NguoiDung;
+                                cvs.Remove(cvs.Find(item.Username));
+                            }
+                        if (arg.NewItems != null)
+                            foreach (User item in arg.NewItems)
+                            {
+                                DataProvider.Ins.DB.NguoiDung.Add(item.ToNguoiDung());
+                            }
+                    };
+                }
                 return _db;
             }
             private set { }
+        }
+
+        private View.NguoiDung ToNguoiDung()
+        {
+            return new View.NguoiDung
+            {
+                LastSeen = lastSeen,
+                LoaiNguoiDung = Loai,
+                MatKhau = Password,
+                TenTaiKhoan = Username
+            };
         }
     }
 }

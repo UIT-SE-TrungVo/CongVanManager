@@ -17,7 +17,8 @@ namespace CongVanManager
         public int Id { get; set; }
         public string SubscribedWatchlist { get; set; }
     
-        public virtual User TruongPhong { get; set; }
+        public User TruongPhong { get; set; }
+        public DateTime lastUpdated { get; set; }
 
         private static Setting _instance;
         public static Setting instance {
