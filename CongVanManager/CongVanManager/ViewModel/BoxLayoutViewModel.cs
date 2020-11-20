@@ -17,6 +17,14 @@ namespace CongVanManager.ViewModel
 {
     class BoxLayoutViewModel : ObservableObject
     {
+        private bool _isEnable;
+
+        public bool isEnable
+        {
+            get { return _isEnable; }
+            set { _isEnable = value; OnPropertyChanged(); }
+        }
+
         #region DanhSachCongVan
         public ICollection<CongVan> DSCongVan
         {
@@ -42,6 +50,8 @@ namespace CongVanManager.ViewModel
             set
             {
                 _selectedCongVan = value;
+                if(SelectedCongVan != null)
+                    isEnable = true;
                 OnPropertyChanged("SelectedCongVanKeyNumber");
                 OnPropertyChanged("SelectedCongVanNumber");
                 OnPropertyChanged("SelectedLoaiCongVan");
@@ -259,6 +269,7 @@ namespace CongVanManager.ViewModel
 
         private BoxLayoutViewModel(DocType docType)
         {
+            isEnable = false;
             BoxType = docType;
             iDocType = (int)BoxType;
             switch (docType)
@@ -299,11 +310,11 @@ namespace CongVanManager.ViewModel
         {
             get
             {
-                return new RelayCommand(
+                return new RelayCommand<CongVan>(
                    x =>
                    {
-                       ActionLayout actionLayout = new ActionLayout();
-                       actionLayout.Show();
+                       ActionLayout actionLayout = new ActionLayout(SelectedCongVan, BoxType);
+                       actionLayout.ShowDialog();
                    });
             }
         }

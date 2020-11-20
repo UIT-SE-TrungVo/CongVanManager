@@ -16,7 +16,7 @@
         <AssociationConnector Association="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__2DE6D218" />
         <AssociationConnector Association="CONGVANMANAGERModel.FK__PhanHoi__TenTaiK__2EDAF651" />
         <AssociationConnector Association="CONGVANMANAGERModel.DanhSachNoiNhan" />
-        <EntityTypeShape EntityType="CONGVANMANAGERModel.database_firewall_rules" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="CONGVANMANAGERModel.database_firewall_rules" Width="2.625" PointX="7.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

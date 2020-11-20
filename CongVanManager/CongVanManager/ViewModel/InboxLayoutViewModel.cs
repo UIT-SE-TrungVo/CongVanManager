@@ -19,6 +19,16 @@ namespace CongVanManager.ViewModel
 {
     class InboxLayoutViewModel : ObservableObject
     {
+        #region IsVisible
+        private string _isVisibleRightGrid;
+
+        public string isVisibleRightGrid
+        {
+            get { return _isVisibleRightGrid; }
+            set { _isVisibleRightGrid = value; OnPropertyChanged(); }
+        }
+
+        #endregion
         #region DanhSachCongVan
         public ICollection<CongVan> DSCongVan
         {
@@ -329,11 +339,11 @@ namespace CongVanManager.ViewModel
         {
             get
             {
-                return new RelayCommand(
+                return new RelayCommand<CongVan>(
                    x =>
                    {
                        ActionLayout actionLayout = new ActionLayout();
-                       actionLayout.Show();
+                       actionLayout.ShowDialog();
                    });
             }
         }

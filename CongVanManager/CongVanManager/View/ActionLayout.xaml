@@ -36,11 +36,13 @@
             <Border Margin="10" CornerRadius="20" BorderBrush="MediumPurple" BorderThickness="2">
                 <ListBox Margin="30" HorizontalContentAlignment="Stretch">
                     <Button Background="#FFB73A3A" BorderBrush="#FFB73A3A" 
-                            materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                            materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                            Command="{Binding DeleteCongVan}">
                         Xóa 
                     </Button>
                     <Button Background="#FFADB73A" BorderBrush="#FFADB73A" 
-                            materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                            materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                            Command="{Binding EditCongVan}">
                         Chỉnh sửa
                     </Button>
                 </ListBox>
@@ -58,11 +60,15 @@
             <Border Margin="10" CornerRadius="20" BorderBrush="MediumPurple" BorderThickness="2">
                 <ListBox Margin="30" HorizontalContentAlignment="Stretch">
                     <Button BorderBrush="#FF46B73A" Background="#FF46B73A" 
-                            materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                            materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                            Command="{Binding DuyetCongVan}"
+                            IsEnabled="{Binding isDuyetEnable}">
                         Duyệt
                     </Button>
                     <Button Background="#FF3A68B7" BorderBrush="#FF3A68B7" 
-                            materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                            materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                            Command="{Binding GuiCongVan}"
+                            IsEnabled="{Binding isGuiEnable}">
                         Gửi đi
                     </Button>
                 </ListBox>
