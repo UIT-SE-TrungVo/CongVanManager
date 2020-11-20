@@ -28,6 +28,9 @@ namespace CongVanManager
             {
                 if (_db == null)
                     _db = new ObservableCollection<PhanHoi>();
+
+                throw new NotImplementedException();
+
                 return _db;
             }
             private set { }

@@ -1,20 +1,83 @@
 ﻿namespace CongVanManager
 {
     using CongVanManager.ViewModel;
+    using CongVanManager.View;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
 
-    public partial class CongVan : ObservableObject
+    public class CongVan : ObservableObject
     {
         public CongVan()
         {
             this.DanhSachNoiNhan = new ObservableCollection<NoiNhan>();
             this.PhanHois = new ObservableCollection<PhanHoi>();
         }
-        private int _id;
-        public int Id
+
+        public CongVan(in View.CongVan cv)
+        {
+            Id = cv.MaCongVan;
+            StatusCode = (StatusCodeEnum)cv.TinhTrang.GetValueOrDefault(0);
+            GhiChu = cv.GhiChu;
+
+            LoaiCongVan = LoaiCongVan.Get(cv.LoaiCongVan);
+            if (LoaiCongVan == null)
+                LoaiCongVan.DB.Add(new LoaiCongVan(cv.LoaiCongVan));
+            LoaiCongVan.CongVanDaGui.Add(this);
+
+            NgayCongVan = cv.NgayCongVan;
+            NgayXuLi = cv.NgayXuLi;
+            
+            NoiGui = LienHe.Get(cv.LienHe);
+            if (NoiGui == null)
+                LienHe.DB.Add(new LienHe(cv.LienHe));
+            NoiGui.CongVans.Add(this);
+
+            PDFScanLocation = cv.PDFScan;
+
+            PhanHois = new ObservableCollection<PhanHoi>();
+
+            SoCongVan = cv.SoCongVan;
+            SoKyHieu = cv.SoKyHieu;
+            TrichYeu = cv.TrichYeu;
+
+            DanhSachNoiNhan = new ObservableCollection<NoiNhan>();
+            foreach (View.LienHe lh in cv.LienHes)
+            {
+                LienHe lienHe = LienHe.Get(lh);
+                if (lienHe == null)
+                    LienHe.DB.Add(new LienHe(lh));
+                NoiNhan noiNhan = new NoiNhan{
+                    CongVan = this,
+                    LienHe = lienHe
+                };
+                lienHe.DanhSachNoiNhan.Add(noiNhan);
+                DanhSachNoiNhan.Add(noiNhan);
+                NoiNhan.DB.Add(noiNhan);
+            }
+        }
+
+        public View.CongVan ToCongVan()
+        {
+            return new View.CongVan
+            {
+                MaCongVan = Id,
+                GhiChu = GhiChu,
+                NgayCongVan = NgayCongVan,
+                NoiGui = NoiGui.Email,
+                MaLoaiCongVan = LoaiCongVan.Id,
+                NgayXuLi = NgayXuLi,
+                PDFScan = PDFScanLocation,
+                SoCongVan = SoCongVan,
+                SoKyHieu = SoKyHieu,
+                TinhTrang = (int)StatusCode,
+                TrichYeu = TrichYeu
+            };
+        }
+
+        private long _id;
+        public long Id
         {
             get => _id;
             set { _id = value; OnPropertyChanged(); }
@@ -55,6 +118,7 @@
             get => _pDFScanLocation;
             set { _pDFScanLocation = value; OnPropertyChanged(); }
         }
+        // WARNING: member not stored
         private DateTime _ngayXuLi;
         public DateTime NgayXuLi
         {
@@ -87,7 +151,7 @@
         {
             get
             {
-                if (StatusCode == StatusCodeEnum.DaDuyet_Den || 
+                if (StatusCode == StatusCodeEnum.DaDuyet_Den ||
                     StatusCode == StatusCodeEnum.DaDuyet_Di)
                     return "Đã duyệt";
                 if (StatusCode == StatusCodeEnum.ChoDuyet)
@@ -134,7 +198,7 @@
         }
 
         private static ObservableCollection<CongVan> _db;
- 
+
         public static ObservableCollection<CongVan> DB
         {
             get
@@ -142,12 +206,40 @@
                 if (_db == null)
                 {
                     _db = new ObservableCollection<CongVan>();
-                    // TODO: syncronize mechanic
+
+                    // Load Database from DataProvider
+                    foreach (View.CongVan cv in DataProvider.Ins.DB.CongVan)
+                        _db.Add(new CongVan(cv));
+
+                    // syncronize mechanic
+                    _db.CollectionChanged += (obj, arg) =>
+                    {
+                        if (arg.Action == NotifyCollectionChangedAction.Move)
+                            return;
+                        if (arg.OldItems != null)
+                            foreach (CongVan item in arg.OldItems)
+                            {
+                                var cvs = DataProvider.Ins.DB.CongVan;
+                                cvs.Remove(cvs.Find(item.Id));
+                            }
+                        if (arg.NewItems != null)
+                            foreach (CongVan item in arg.NewItems)
+                                DataProvider.Ins.DB.CongVan.Add(item.ToCongVan());
+                    };
                 }
                 return _db;
             }
             private set { }
         }
         // TODO: syncronize mechanic
+        public static CongVan Get(View.CongVan cv)
+        {
+            foreach (CongVan item in DB)
+            {
+                if (item.Id == cv.MaCongVan)
+                    return item;
+            }
+            return null;
+        }
     }
 }

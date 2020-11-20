@@ -3,6 +3,7 @@
   <Import Project="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.0\build\Microsoft.CodeAnalysis.Analyzers.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.0\build\Microsoft.CodeAnalysis.Analyzers.props')" />
   <Import Project="..\packages\PdfiumViewer.Native.x86_64.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.v8-xfa.props" Condition="Exists('..\packages\PdfiumViewer.Native.x86_64.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86_64.v8-xfa.props')" />
   <Import Project="..\packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props" Condition="Exists('..\packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\build\PdfiumViewer.Native.x86.v8-xfa.props')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -42,6 +43,12 @@
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="DateTimePicker">
       <HintPath>..\..\DateTimePicker\releases\0\DateTimePicker\DateTimePicker\obj\Debug\DateTimePicker.dll</HintPath>
     </Reference>
@@ -58,7 +65,10 @@
       <HintPath>..\packages\PdfiumViewer.2.13.0.0\lib\net20\PdfiumViewer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -81,6 +91,7 @@
     </ApplicationDefinition>
     <Compile Include="Command\EventArgs.cs" />
     <Compile Include="Command\EventRaiser.cs" />
+    <Compile Include="DataProvider.cs" />
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Command\RelayCommand.cs" />
@@ -99,6 +110,9 @@
     </Compile>
     <Compile Include="View\BoxLayout.xaml.cs">
       <DependentUpon>BoxLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\database_firewall_rules.cs">
+      <DependentUpon>QLCV.tt</DependentUpon>
     </Compile>
     <Compile Include="View\LoginLayout.xaml.cs">
       <DependentUpon>LoginLayout.xaml</DependentUpon>
@@ -130,6 +144,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="View\CongVan.cs">
+      <DependentUpon>QLCV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\LienHe.cs">
+      <DependentUpon>QLCV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoaiCongVan.cs">
+      <DependentUpon>QLCV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\NguoiDung.cs">
+      <DependentUpon>QLCV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\PhanHoi.cs">
+      <DependentUpon>QLCV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\QLCV.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLCV.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\QLCV.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLCV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\QLCV.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLCV.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuyDinh.cs">
+      <DependentUpon>QLCV.tt</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -200,6 +247,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <EntityDeploy Include="View\QLCV.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QLCV.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="View\QLCV.edmx.diagram">
+      <DependentUpon>QLCV.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -223,6 +277,22 @@
   <ItemGroup>
     <Resource Include="Asset\Image\download.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="View\QLCV.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLCV.edmx</DependentUpon>
+      <LastGenOutput>QLCV.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="View\QLCV.edmx.sql" />
+    <Content Include="View\QLCV.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLCV.edmx</DependentUpon>
+      <LastGenOutput>QLCV.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -239,4 +309,12 @@
   <Import Project="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.0\build\Microsoft.CodeAnalysis.Analyzers.targets" Condition="Exists('..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.0\build\Microsoft.CodeAnalysis.Analyzers.targets')" />
   <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />
   <Import Project="..\packages\PDFium.Windows.1.0.0\build\PDFium.Windows.targets" Condition="Exists('..\packages\PDFium.Windows.1.0.0\build\PDFium.Windows.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>

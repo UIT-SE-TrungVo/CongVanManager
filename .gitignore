@@ -1,4 +1,5 @@
-.vs
+﻿.vs
 CongVanManager/.vs
 CongVanManager/CongVanManager/bin
-CongVanManager/CongVanManager/obj
+CongVanManager/CongVanManager/obj/
+CongVanManager/packages
