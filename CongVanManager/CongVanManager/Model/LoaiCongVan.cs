@@ -12,18 +12,26 @@ namespace CongVanManager
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using CongVanManager.View;
 
     public class LoaiCongVan
     {
         public LoaiCongVan()
         {
-            this.CongVans = new HashSet<CongVan>();
+            this.CongVanDaGui = new HashSet<CongVan>();
+        }
+
+        public LoaiCongVan(View.LoaiCongVan loaiCongVan)
+        {
+            Id = loaiCongVan.MaLoaiCongVan;
+            this.CongVanDaGui = new HashSet<CongVan>();
         }
 
         public string Id { get => _id; set { _id = value.ToUpper(); } }
         // Only in uppercase please
 
-        public virtual ICollection<CongVan> CongVans { get; set; }
+        public virtual ICollection<CongVan> CongVanDaGui { get; set; }
 
         private static ObservableCollection<LoaiCongVan> _db;
         private string _id;
@@ -33,10 +41,45 @@ namespace CongVanManager
             get
             {
                 if (_db == null)
+                {
                     _db = new ObservableCollection<LoaiCongVan>();
+
+                    foreach (View.LoaiCongVan cv in DataProvider.Ins.DB.LoaiCongVan)
+                        _db.Add(new LoaiCongVan(cv));
+
+                    _db.CollectionChanged += (obj, arg) =>
+                    {
+                        if (arg.Action == NotifyCollectionChangedAction.Move)
+                            return;
+                        if (arg.OldItems != null)
+                            foreach (LoaiCongVan item in arg.OldItems)
+                            {
+                                var cvs = DataProvider.Ins.DB.LoaiCongVan;
+                                cvs.Remove(cvs.Find(item.Id));
+                            }
+                        if (arg.NewItems != null)
+                            foreach (LoaiCongVan item in arg.NewItems)
+                                DataProvider.Ins.DB.LoaiCongVan.Add(item.ToLoaiCongVan());
+                    };
+                }
                 return _db;
             }
             private set { }
+        }
+
+        private View.LoaiCongVan ToLoaiCongVan()
+        {
+            return new View.LoaiCongVan{ MaLoaiCongVan = Id};
+        }
+
+        public static LoaiCongVan Get(View.LoaiCongVan lcv)
+        {
+            foreach (LoaiCongVan item in DB)
+            {
+                if (item.Id == lcv.MaLoaiCongVan)
+                    return item;
+            }
+            return null;
         }
     }
 }

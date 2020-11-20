@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CONGVANMANAGERModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CONGVANMANAGERModelStoreContainer">
+    <EntitySet Name="CongVan" EntityType="CONGVANMANAGERModel.Store.CongVan" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LienHe" EntityType="CONGVANMANAGERModel.Store.LienHe" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LoaiCongVan" EntityType="CONGVANMANAGERModel.Store.LoaiCongVan" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NguoiDung" EntityType="CONGVANMANAGERModel.Store.NguoiDung" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhanHoi" EntityType="CONGVANMANAGERModel.Store.PhanHoi" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QuyDinhs" EntityType="CONGVANMANAGERModel.Store.QuyDinhs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="database_firewall_rules" EntityType="CONGVANMANAGERModel.Store.database_firewall_rules" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DanhSachNoiNhan" EntityType="CONGVANMANAGERModel.Store.DanhSachNoiNhan" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__CongVan__MaLoaiC__29221CFB" Association="CONGVANMANAGERModel.Store.FK__CongVan__MaLoaiC__29221CFB">
+      <End Role="LoaiCongVan" EntitySet="LoaiCongVan" />
+      <End Role="CongVan" EntitySet="CongVan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CongVan__NoiGui__2A164134" Association="CONGVANMANAGERModel.Store.FK__CongVan__NoiGui__2A164134">
+      <End Role="LienHe" EntitySet="LienHe" />
+      <End Role="CongVan" EntitySet="CongVan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PhanHoi__MaCongV__2DE6D218" Association="CONGVANMANAGERModel.Store.FK__PhanHoi__MaCongV__2DE6D218">
+      <End Role="CongVan" EntitySet="CongVan" />
+      <End Role="PhanHoi" EntitySet="PhanHoi" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PhanHoi__TenTaiK__2EDAF651" Association="CONGVANMANAGERModel.Store.FK__PhanHoi__TenTaiK__2EDAF651">
+      <End Role="NguoiDung" EntitySet="NguoiDung" />
+      <End Role="PhanHoi" EntitySet="PhanHoi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DanhSachNoiNhan_CongVan" Association="CONGVANMANAGERModel.Store.FK_DanhSachNoiNhan_CongVan">
+      <End Role="CongVan" EntitySet="CongVan" />
+      <End Role="DanhSachNoiNhan" EntitySet="DanhSachNoiNhan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DanhSachNoiNhan_LienHe" Association="CONGVANMANAGERModel.Store.FK_DanhSachNoiNhan_LienHe">
+      <End Role="LienHe" EntitySet="LienHe" />
+      <End Role="DanhSachNoiNhan" EntitySet="DanhSachNoiNhan" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CongVan">
+    <Key>
+      <PropertyRef Name="MaCongVan" />
+    </Key>
+    <Property Name="MaCongVan" Type="bigint" Nullable="false" />
+    <Property Name="MaLoaiCongVan" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="NoiGui" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="SoKyHieu" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="SoCongVan" Type="int" Nullable="true" />
+    <Property Name="NgayCongVan" Type="datetime" Nullable="true" />
+    <Property Name="TrichYeu" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TinhTrang" Type="int" Nullable="true" />
+    <Property Name="GhiChu" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PDFScan" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="NgayXuLi" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LienHe">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="TenLienHe" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LoaiCongVan">
+    <Key>
+      <PropertyRef Name="MaLoaiCongVan" />
+    </Key>
+    <Property Name="MaLoaiCongVan" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="NguoiDung">
+    <Key>
+      <PropertyRef Name="TenTaiKhoan" />
+    </Key>
+    <Property Name="TenTaiKhoan" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="LoaiNguoiDung" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="MatKhau" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PhanHoi">
+    <Key>
+      <PropertyRef Name="MaPhanHoi" />
+    </Key>
+    <Property Name="MaPhanHoi" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="MaCongVan" Type="bigint" Nullable="false" />
+    <Property Name="TenTaiKhoan" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="BinhLuan" Type="nvarchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="QuyDinhs">
+    <Key>
+      <PropertyRef Name="MaQuyDinh" />
+    </Key>
+    <Property Name="MaQuyDinh" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="GiaTri" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="start_ip_address" Type="varchar" Nullable="false" MaxLength="45" />
+    <Property Name="end_ip_address" Type="varchar" Nullable="false" MaxLength="45" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modify_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DanhSachNoiNhan">
+    <Key>
+      <PropertyRef Name="CongVans1_MaCongVan" />
+      <PropertyRef Name="LienHes_Email" />
+    </Key>
+    <Property Name="CongVans1_MaCongVan" Type="bigint" Nullable="false" />
+    <Property Name="LienHes_Email" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__CongVan__MaLoaiC__29221CFB">
+    <End Role="LoaiCongVan" Type="CONGVANMANAGERModel.Store.LoaiCongVan" Multiplicity="1" />
+    <End Role="CongVan" Type="CONGVANMANAGERModel.Store.CongVan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiCongVan">
+        <PropertyRef Name="MaLoaiCongVan" />
+      </Principal>
+      <Dependent Role="CongVan">
+        <PropertyRef Name="MaLoaiCongVan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CongVan__NoiGui__2A164134">
+    <End Role="LienHe" Type="CONGVANMANAGERModel.Store.LienHe" Multiplicity="1" />
+    <End Role="CongVan" Type="CONGVANMANAGERModel.Store.CongVan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LienHe">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="CongVan">
+        <PropertyRef Name="NoiGui" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PhanHoi__MaCongV__2DE6D218">
+    <End Role="CongVan" Type="CONGVANMANAGERModel.Store.CongVan" Multiplicity="1" />
+    <End Role="PhanHoi" Type="CONGVANMANAGERModel.Store.PhanHoi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CongVan">
+        <PropertyRef Name="MaCongVan" />
+      </Principal>
+      <Dependent Role="PhanHoi">
+        <PropertyRef Name="MaCongVan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PhanHoi__TenTaiK__2EDAF651">
+    <End Role="NguoiDung" Type="CONGVANMANAGERModel.Store.NguoiDung" Multiplicity="1" />
+    <End Role="PhanHoi" Type="CONGVANMANAGERModel.Store.PhanHoi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NguoiDung">
+        <PropertyRef Name="TenTaiKhoan" />
+      </Principal>
+      <Dependent Role="PhanHoi">
+        <PropertyRef Name="TenTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DanhSachNoiNhan_CongVan">
+    <End Role="CongVan" Type="CONGVANMANAGERModel.Store.CongVan" Multiplicity="1" />
+    <End Role="DanhSachNoiNhan" Type="CONGVANMANAGERModel.Store.DanhSachNoiNhan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CongVan">
+        <PropertyRef Name="MaCongVan" />
+      </Principal>
+      <Dependent Role="DanhSachNoiNhan">
+        <PropertyRef Name="CongVans1_MaCongVan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DanhSachNoiNhan_LienHe">
+    <End Role="DanhSachNoiNhan" Type="CONGVANMANAGERModel.Store.DanhSachNoiNhan" Multiplicity="*" />
+    <End Role="LienHe" Type="CONGVANMANAGERModel.Store.LienHe" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="LienHe">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="DanhSachNoiNhan">
+        <PropertyRef Name="LienHes_Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CONGVANMANAGERModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CONGVANMANAGEREntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CongVan" EntityType="CONGVANMANAGERModel.CongVan" />
+          <EntitySet Name="LienHe" EntityType="CONGVANMANAGERModel.LienHe" />
+          <EntitySet Name="LoaiCongVan" EntityType="CONGVANMANAGERModel.LoaiCongVan" />
+          <EntitySet Name="NguoiDung" EntityType="CONGVANMANAGERModel.NguoiDung" />
+          <EntitySet Name="PhanHoi" EntityType="CONGVANMANAGERModel.PhanHoi" />
+          <EntitySet Name="QuyDinhs" EntityType="CONGVANMANAGERModel.QuyDinh" />
+          <AssociationSet Name="FK__CongVan__MaLoaiC__29221CFB" Association="CONGVANMANAGERModel.FK__CongVan__MaLoaiC__29221CFB">
+            <End Role="LoaiCongVan" EntitySet="LoaiCongVan" />
+            <End Role="CongVan" EntitySet="CongVan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CongVan__NoiGui__2A164134" Association="CONGVANMANAGERModel.FK__CongVan__NoiGui__2A164134">
+            <End Role="LienHe" EntitySet="LienHe" />
+            <End Role="CongVan" EntitySet="CongVan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanHoi__MaCongV__2DE6D218" Association="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__2DE6D218">
+            <End Role="CongVan" EntitySet="CongVan" />
+            <End Role="PhanHoi" EntitySet="PhanHoi" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PhanHoi__TenTaiK__2EDAF651" Association="CONGVANMANAGERModel.FK__PhanHoi__TenTaiK__2EDAF651">
+            <End Role="NguoiDung" EntitySet="NguoiDung" />
+            <End Role="PhanHoi" EntitySet="PhanHoi" />
+          </AssociationSet>
+          <AssociationSet Name="DanhSachNoiNhan" Association="CONGVANMANAGERModel.DanhSachNoiNhan">
+            <End Role="CongVan" EntitySet="CongVan" />
+            <End Role="LienHe" EntitySet="LienHe" />
+          </AssociationSet>
+          <EntitySet Name="database_firewall_rules" EntityType="CONGVANMANAGERModel.database_firewall_rules" />
+        </EntityContainer>
+        <EntityType Name="CongVan">
+          <Key>
+            <PropertyRef Name="MaCongVan" />
+          </Key>
+          <Property Name="MaCongVan" Type="Int64" Nullable="false" />
+          <Property Name="MaLoaiCongVan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NoiGui" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SoKyHieu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SoCongVan" Type="Int32" />
+          <Property Name="NgayCongVan" Type="DateTime" Precision="0" />
+          <Property Name="TrichYeu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TinhTrang" Type="Int32" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PDFScan" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LoaiCongVan" Relationship="CONGVANMANAGERModel.FK__CongVan__MaLoaiC__29221CFB" FromRole="CongVan" ToRole="LoaiCongVan" />
+          <NavigationProperty Name="LienHe" Relationship="CONGVANMANAGERModel.FK__CongVan__NoiGui__2A164134" FromRole="CongVan" ToRole="LienHe" />
+          <NavigationProperty Name="PhanHois" Relationship="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__2DE6D218" FromRole="CongVan" ToRole="PhanHoi" />
+          <NavigationProperty Name="LienHes" Relationship="CONGVANMANAGERModel.DanhSachNoiNhan" FromRole="CongVan" ToRole="LienHe" />
+          <Property Name="NgayXuLi" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LienHe">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TenLienHe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CongVans" Relationship="CONGVANMANAGERModel.FK__CongVan__NoiGui__2A164134" FromRole="LienHe" ToRole="CongVan" />
+          <NavigationProperty Name="CongVans1" Relationship="CONGVANMANAGERModel.DanhSachNoiNhan" FromRole="LienHe" ToRole="CongVan" />
+        </EntityType>
+        <EntityType Name="LoaiCongVan">
+          <Key>
+            <PropertyRef Name="MaLoaiCongVan" />
+          </Key>
+          <Property Name="MaLoaiCongVan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CongVans" Relationship="CONGVANMANAGERModel.FK__CongVan__MaLoaiC__29221CFB" FromRole="LoaiCongVan" ToRole="CongVan" />
+        </EntityType>
+        <EntityType Name="NguoiDung">
+          <Key>
+            <PropertyRef Name="TenTaiKhoan" />
+          </Key>
+          <Property Name="TenTaiKhoan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LoaiNguoiDung" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MatKhau" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PhanHois" Relationship="CONGVANMANAGERModel.FK__PhanHoi__TenTaiK__2EDAF651" FromRole="NguoiDung" ToRole="PhanHoi" />
+        </EntityType>
+        <EntityType Name="PhanHoi">
+          <Key>
+            <PropertyRef Name="MaPhanHoi" />
+          </Key>
+          <Property Name="MaPhanHoi" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MaCongVan" Type="Int64" Nullable="false" />
+          <Property Name="TenTaiKhoan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BinhLuan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CongVan" Relationship="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__2DE6D218" FromRole="PhanHoi" ToRole="CongVan" />
+          <NavigationProperty Name="NguoiDung" Relationship="CONGVANMANAGERModel.FK__PhanHoi__TenTaiK__2EDAF651" FromRole="PhanHoi" ToRole="NguoiDung" />
+        </EntityType>
+        <EntityType Name="QuyDinh">
+          <Key>
+            <PropertyRef Name="MaQuyDinh" />
+          </Key>
+          <Property Name="MaQuyDinh" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GiaTri" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__CongVan__MaLoaiC__29221CFB">
+          <End Type="CONGVANMANAGERModel.LoaiCongVan" Role="LoaiCongVan" Multiplicity="1" />
+          <End Type="CONGVANMANAGERModel.CongVan" Role="CongVan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiCongVan">
+              <PropertyRef Name="MaLoaiCongVan" />
+            </Principal>
+            <Dependent Role="CongVan">
+              <PropertyRef Name="MaLoaiCongVan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CongVan__NoiGui__2A164134">
+          <End Type="CONGVANMANAGERModel.LienHe" Role="LienHe" Multiplicity="1" />
+          <End Type="CONGVANMANAGERModel.CongVan" Role="CongVan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LienHe">
+              <PropertyRef Name="Email" />
+            </Principal>
+            <Dependent Role="CongVan">
+              <PropertyRef Name="NoiGui" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanHoi__MaCongV__2DE6D218">
+          <End Type="CONGVANMANAGERModel.CongVan" Role="CongVan" Multiplicity="1" />
+          <End Type="CONGVANMANAGERModel.PhanHoi" Role="PhanHoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CongVan">
+              <PropertyRef Name="MaCongVan" />
+            </Principal>
+            <Dependent Role="PhanHoi">
+              <PropertyRef Name="MaCongVan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PhanHoi__TenTaiK__2EDAF651">
+          <End Type="CONGVANMANAGERModel.NguoiDung" Role="NguoiDung" Multiplicity="1" />
+          <End Type="CONGVANMANAGERModel.PhanHoi" Role="PhanHoi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiDung">
+              <PropertyRef Name="TenTaiKhoan" />
+            </Principal>
+            <Dependent Role="PhanHoi">
+              <PropertyRef Name="TenTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DanhSachNoiNhan">
+          <End Type="CONGVANMANAGERModel.CongVan" Role="CongVan" Multiplicity="*" />
+          <End Type="CONGVANMANAGERModel.LienHe" Role="LienHe" Multiplicity="*" />
+        </Association>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CONGVANMANAGERModelStoreContainer" CdmEntityContainer="CONGVANMANAGEREntities">
+    <EntitySetMapping Name="CongVan">
+      <EntityTypeMapping TypeName="IsTypeOf(CONGVANMANAGERModel.CongVan)">
+        <MappingFragment StoreEntitySet="CongVan">
+          <ScalarProperty Name="MaCongVan" ColumnName="MaCongVan" />
+          <ScalarProperty Name="MaLoaiCongVan" ColumnName="MaLoaiCongVan" />
+          <ScalarProperty Name="NoiGui" ColumnName="NoiGui" />
+          <ScalarProperty Name="SoKyHieu" ColumnName="SoKyHieu" />
+          <ScalarProperty Name="SoCongVan" ColumnName="SoCongVan" />
+          <ScalarProperty Name="NgayCongVan" ColumnName="NgayCongVan" />
+          <ScalarProperty Name="TrichYeu" ColumnName="TrichYeu" />
+          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="PDFScan" ColumnName="PDFScan" />
+          <ScalarProperty Name="NgayXuLi" ColumnName="NgayXuLi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LienHe">
+      <EntityTypeMapping TypeName="IsTypeOf(CONGVANMANAGERModel.LienHe)">
+        <MappingFragment StoreEntitySet="LienHe">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="TenLienHe" ColumnName="TenLienHe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoaiCongVan">
+      <EntityTypeMapping TypeName="IsTypeOf(CONGVANMANAGERModel.LoaiCongVan)">
+        <MappingFragment StoreEntitySet="LoaiCongVan">
+          <ScalarProperty Name="MaLoaiCongVan" ColumnName="MaLoaiCongVan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NguoiDung">
+      <EntityTypeMapping TypeName="IsTypeOf(CONGVANMANAGERModel.NguoiDung)">
+        <MappingFragment StoreEntitySet="NguoiDung">
+          <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
+          <ScalarProperty Name="LoaiNguoiDung" ColumnName="LoaiNguoiDung" />
+          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhanHoi">
+      <EntityTypeMapping TypeName="IsTypeOf(CONGVANMANAGERModel.PhanHoi)">
+        <MappingFragment StoreEntitySet="PhanHoi">
+          <ScalarProperty Name="MaPhanHoi" ColumnName="MaPhanHoi" />
+          <ScalarProperty Name="MaCongVan" ColumnName="MaCongVan" />
+          <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
+          <ScalarProperty Name="BinhLuan" ColumnName="BinhLuan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuyDinhs">
+      <EntityTypeMapping TypeName="IsTypeOf(CONGVANMANAGERModel.QuyDinh)">
+        <MappingFragment StoreEntitySet="QuyDinhs">
+          <ScalarProperty Name="MaQuyDinh" ColumnName="MaQuyDinh" />
+          <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="database_firewall_rules">
+      <EntityTypeMapping TypeName="IsTypeOf(CONGVANMANAGERModel.database_firewall_rules)">
+        <MappingFragment StoreEntitySet="database_firewall_rules">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+          <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="DanhSachNoiNhan" TypeName="CONGVANMANAGERModel.DanhSachNoiNhan" StoreEntitySet="DanhSachNoiNhan">
+      <EndProperty Name="CongVan">
+        <ScalarProperty Name="MaCongVan" ColumnName="CongVans1_MaCongVan" />
+      </EndProperty>
+      <EndProperty Name="LienHe">
+        <ScalarProperty Name="Email" ColumnName="LienHes_Email" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

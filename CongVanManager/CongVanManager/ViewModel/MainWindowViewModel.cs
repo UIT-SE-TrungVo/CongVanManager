@@ -38,7 +38,8 @@ namespace CongVanManager.ViewModel
         {
             ChangePage(0);
 
-            #region DATA SAMPLE BINDING
+            #region DATA SAMPLE BINDING (DISABLED)
+            /*
             LienHe contact = new LienHe
             {
                 Name = "Phòng Đào tạo",
@@ -55,6 +56,7 @@ namespace CongVanManager.ViewModel
             LoaiCongVan loaiCongVan = new LoaiCongVan { Id = "Kế hoạch" };
             CongVan congVan = new CongVan
             {
+                Id = 0,
                 LoaiCongVan = loaiCongVan,
                 TrichYeu = "Ngày hội qua môn cho sinh viên năm 6",
                 SoKyHieu = "01/ĐH-CNTT",
@@ -64,10 +66,12 @@ namespace CongVanManager.ViewModel
                 SoCongVan = 1,
                 NgayCongVan = System.DateTime.Now,
                 GhiChu = "Đme ngày hội xàm vài lòn",
-                StatusCode = CongVan.StatusCodeEnum.DaGui
+                StatusCode = CongVan.StatusCodeEnum.DaGui,
+                NgayXuLi = System.DateTime.Now
             };
             CongVan congVan2 = new CongVan
             {
+                Id = 1,
                 LoaiCongVan = loaiCongVan,
                 TrichYeu = "Ngày hội chia sẻ cách để viết một xâu vô cùng dài trong tựa đề chỉ vì lý do kiểm thử phần mềm cho sinh viên năm 6, 7, 8, 9, thực ra ai cũng vô được",
                 SoKyHieu = "02/ĐH-CNTT",
@@ -77,7 +81,8 @@ namespace CongVanManager.ViewModel
                 SoCongVan = 2,
                 NgayCongVan = System.DateTime.Now,
                 GhiChu = "Chỉ là để chia sẻ cách để viết một xâu vô cùng dài trong tựa đề chỉ vì lý do kiểm thử phần mềm cho sinh viên năm 6, 7, 8, 9, thực ra ai cũng vô được mời mọi người cùng vô cho nó vui",
-                StatusCode = CongVan.StatusCodeEnum.DaDuyet_Den
+                StatusCode = CongVan.StatusCodeEnum.DaDuyet_Den,
+                NgayXuLi = System.DateTime.Now
             };
             noiNhan1.CongVan = noiNhan2.CongVan = congVan;
 
@@ -92,6 +97,7 @@ namespace CongVanManager.ViewModel
                 (sender, e)
                 =>
                 { OnPropertyChanged("DSCongVan"); };
+            //*/
             #endregion
         }
 

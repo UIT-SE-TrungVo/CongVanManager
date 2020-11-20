@@ -184,7 +184,8 @@
                 <!--Action bar-->
                 <DockPanel DockPanel.Dock="Bottom" Height="50" VerticalAlignment="Bottom">
                     <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-                            Command="{Binding Open_ActionLayout}">
+                            Command="{Binding Open_ActionLayout}"
+                            IsEnabled="{Binding isEnable}">
                         Thực hiện hành động
                     </Button>
                 </DockPanel>

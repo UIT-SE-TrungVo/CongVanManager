@@ -15,8 +15,6 @@ namespace CongVanManager
 
     public partial class NoiNhan
     {
-        public int Id { get; set; }
-    
         public virtual CongVan CongVan { get; set; }
         public virtual LienHe LienHe { get; set; }
 
