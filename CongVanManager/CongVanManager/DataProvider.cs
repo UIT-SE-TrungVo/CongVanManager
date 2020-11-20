@@ -23,10 +23,6 @@ namespace CongVanManager
                     _ins.DB.Configuration.AutoDetectChangesEnabled = false;
                     _uploadRefresher = _ins.RefreshUploadAsync();
                     _downloadRefresher = _ins.RefreshDownloadAsync();
-                    /*
-                    NguoiDung user = _ins.DB.NguoiDung.Find(MainWindowViewModel.Ins.Username);
-                    user.LastSeen = DateTime.Now;
-                    //*/
                 }
 
                 return _ins;
@@ -75,6 +71,10 @@ namespace CongVanManager
                 {
                     DB.Dispose();
                     DB = new CONGVANMANAGEREntities();
+                    
+                    NguoiDung user = DB.NguoiDung.Find(MainWindowViewModel.Ins.User.Username);
+                    if (user != null)
+                        user.LastSeen = DateTime.Now;
                 }
                 catch (Exception e) { Console.WriteLine(e.ToString()); }
             }

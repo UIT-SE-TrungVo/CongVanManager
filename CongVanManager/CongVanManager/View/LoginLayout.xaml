@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CongVanManager.View"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="Đăng nhập" Height="200" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
@@ -33,8 +34,8 @@
 
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center"
                     Margin="0,0,75,0">
-            <TextBox Margin="5"/>
-            <TextBox Margin="5"/>
+            <TextBox Margin="5" Text="{Binding Username, Mode=TwoWay}"/>
+            <PasswordBox Margin="5" x:Name="PasswordBox" PasswordChar="*"/>
         </StackPanel>
 
         <Button Grid.Column="1" Grid.Row="2"

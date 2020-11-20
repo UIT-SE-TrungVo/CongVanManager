@@ -26,7 +26,7 @@ namespace CongVanManager
         {
             Username = user.TenTaiKhoan;
             Password = user.MatKhau;
-            lastSeen = user.LastSeen;
+            LastSeen = user.LastSeen;
             /* TODO
             Loai = user.LoaiNguoiDung;
             //*/
@@ -35,7 +35,7 @@ namespace CongVanManager
         public string Username { get; set; }
         public string Password { get; set; }
         public short Loai { get; set; }
-        enum LoaiNguoiDung : short
+        public enum UserType : short
         {
             TruongPhong = 0,
             NhanVien = 1,
@@ -43,7 +43,7 @@ namespace CongVanManager
         }
 
         // show the time this user's last reloaded the database
-        public DateTime lastSeen { get; set; }
+        public DateTime LastSeen { get; set; }
     
         public virtual ICollection<PhanHoi> PhanHois { get; set; }
 
@@ -84,11 +84,11 @@ namespace CongVanManager
             private set { }
         }
 
-        private View.NguoiDung ToNguoiDung()
+        public View.NguoiDung ToNguoiDung()
         {
             return new View.NguoiDung
             {
-                LastSeen = lastSeen,
+                LastSeen = LastSeen,
                 LoaiNguoiDung = Loai,
                 MatKhau = Password,
                 TenTaiKhoan = Username

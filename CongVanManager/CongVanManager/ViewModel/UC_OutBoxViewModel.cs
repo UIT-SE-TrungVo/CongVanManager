@@ -10,7 +10,7 @@ namespace CongVanManager.ViewModel
 {
     class UC_OutBoxFilterViewModel : FilterSetting
     {
-        private List<Func<CongVan, bool>> filterList = new List<Func<CongVan, bool>>(4);
+        private List<Func<CongVan, bool>> filterList = new List<Func<CongVan, bool>>(5);
         private Func<CongVan, bool> defaultFilter = (item) => false;
         public override bool Filter(CongVan item)
         {
@@ -24,6 +24,8 @@ namespace CongVanManager.ViewModel
                     return true;
             return false;
         }
+
+        #region Binding
         private bool _choDuyet;
         public bool ChoDuyet
         {
@@ -107,6 +109,23 @@ namespace CongVanManager.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private bool moiDoi;
+        public bool MoiDoi
+        {
+            get => moiDoi;
+            set
+            {
+                moiDoi = value;
+                if (value == false)
+                    filterList[4] = defaultFilter;
+                else
+                    filterList[4] = (item) =>
+                        item.NgayXuLi > (MainWindowViewModel.Ins.User?.LastSeen??DateTime.MinValue);
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
         #region ButtonFilter
         private ICommand _buttonFilterCongVan;

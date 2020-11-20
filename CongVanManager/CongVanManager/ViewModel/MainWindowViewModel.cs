@@ -15,9 +15,13 @@ namespace CongVanManager.ViewModel
 {
     public class MainWindowViewModel : ObservableObject
     {
-        private string username;
-        
-        public string Username { get => username; set => username = value; }
+        private User user;
+        // TODO: set this field
+        public User User { get => user; set => user = value; }
+        public void SetUser(string username)
+        {
+            User = User.DB.First(item => item.Username == username);
+        }
 
         private readonly Page[] page = {    new BoxLayout(DocType.In), //0
                                             new NewDocLayout_Chooser(), //1
@@ -44,6 +48,27 @@ namespace CongVanManager.ViewModel
 
             #region DATA SAMPLE BINDING (DISABLED)
             /*
+            User user1 = new User
+            {
+                LastSeen = DateTime.Now,
+                Loai = (int) User.UserType.TruongPhong,
+                Username = "admin",
+                Password = "admin"
+            };
+            User user2 = new User
+            {
+                LastSeen = DateTime.Now,
+                Loai = (int)User.UserType.NhanVien,
+                Username = "nv",
+                Password = "nv"
+            };
+            User user3 = new User
+            {
+                LastSeen = DateTime.Now,
+                Loai = (int)User.UserType.Khach,
+                Username = "guest",
+                Password = "guest"
+            };
             LienHe contact = new LienHe
             {
                 Name = "Phòng Đào tạo",
@@ -96,6 +121,9 @@ namespace CongVanManager.ViewModel
             NoiNhan.DB.Add(noiNhan2);
             NoiNhan.DB.Add(noiNhan1);
             LienHe.DB.Add(contact);
+            User.DB.Add(user1);
+            User.DB.Add(user2);
+            User.DB.Add(user3);
 
             CongVan.DB.CollectionChanged +=
                 (sender, e)

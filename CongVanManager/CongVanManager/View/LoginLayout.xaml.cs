@@ -23,7 +23,7 @@ namespace CongVanManager.View
         public LoginLayout()
         {
             InitializeComponent();
-            this.DataContext = new LoginLayoutViewModel(this);
+            this.DataContext = new LoginLayoutViewModel(this, PasswordBox);
         }
     }
 }
