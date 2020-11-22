@@ -4,6 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CongVanManager"
+      
+            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:Controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
         xmlns:dateTime="clr-namespace:DateTimePicker;assembly=DateTimePicker"
@@ -42,7 +45,7 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-                        <TextBox Margin="0,10,10,10"/>
+                        <TextBox Margin="0,10,10,10" Text="{Binding SoVao}"/>
                     </DockPanel>
                     <DockPanel Grid.Column="1">
                         <TextBlock x:Name="tbGetTime" Margin="10" VerticalAlignment="Center">
@@ -57,14 +60,20 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-                        <materialDesign:TimePicker Margin="10" Width="100" Is24Hours="True" SelectedTimeFormat="Long"/>
-                        <DatePicker x:Name="dp1" Margin="10" MinWidth="100" FirstDayOfWeek="Monday" SelectedDateFormat="Long"/>
+                        <materialDesign:TimePicker Margin="10" Width="100"
+                                                   Is24Hours="True"
+                                                   SelectedTime="{Binding GioNhan}"
+                                                   SelectedTimeFormat="Long"/>
+                        <DatePicker x:Name="dp1" Margin="10" MinWidth="100"
+                                    FirstDayOfWeek="Monday" SelectedDateFormat="Long"
+                                    SelectedDate="{Binding NgayNhan, Mode=TwoWay}"/>
                     </DockPanel>
                     <DockPanel Grid.Column="2" LastChildFill="True">
                         <TextBlock Margin="10" VerticalAlignment="Center">
                             Ngày trên công văn:
                         </TextBlock>
-                        <DatePicker x:Name="dp2" MinWidth="100"/>
+                        <DatePicker x:Name="dp2" MinWidth="100"
+                                    SelectedDate="{Binding NgayTrenCongVan}"/>
                         <!--these properties can be changed via dp1-->
                     </DockPanel>
 
@@ -92,25 +101,25 @@
                         <TextBlock Margin="10" VerticalAlignment="Center" Grid.Column="0">
                         Loại công văn
                         </TextBlock>
-                        <ComboBox Width="100" Margin="10" Grid.Column="1">
-                            <ComboBoxItem>Kế hoạch</ComboBoxItem>
-                            <ComboBoxItem>Thông báo</ComboBoxItem>
-                            <ComboBoxItem>Quyết định</ComboBoxItem>
-                            <ComboBoxItem>(Thêm loại công văn mới)</ComboBoxItem>
+                        <ComboBox Width="100" Margin="10"
+                                  Grid.Column="1"
+                                  ItemsSource="{Binding listLoaiCongVan, Mode=TwoWay}"
+                                  SelectedItem="{Binding selectedLoaiCongVan, Mode=TwoWay}">
                         </ComboBox>
 
                         <!--Số ký hiệu-->
                         <TextBlock Margin="10" VerticalAlignment="Center" Grid.Column="2">
                         Số ký hiệu
                         </TextBlock>
-                        <TextBox Margin="10" Grid.Column="3" HorizontalContentAlignment="Right"/>
+                        <TextBox Margin="10" Grid.Column="3"
+                                 HorizontalContentAlignment="Right"
+                                 Text="{Binding SoKyHieu}"/>
                         <DockPanel Grid.Column="4">
                             <TextBlock VerticalAlignment="Center" FontSize="18">/</TextBlock>
-                            <ComboBox MinWidth="50" Margin="5,10" DockPanel.Dock="Right">
-                                <ComboBoxItem>HSV</ComboBoxItem>
-                                <ComboBoxItem>ĐH-CNTT</ComboBoxItem>
-                                <ComboBoxItem>ĐT</ComboBoxItem>
-                                <ComboBoxItem>(Thêm ký hiệu mới)</ComboBoxItem>
+                            <ComboBox MinWidth="50" Margin="5,10" DockPanel.Dock="Right"
+                                      ItemsSource="{Binding listMaKyHieu, Mode=TwoWay}"
+                                      SelectedItem="{Binding MaKyHieu}">
+
                             </ComboBox>
                         </DockPanel>
                     </Grid>
@@ -120,7 +129,8 @@
                             <TextBlock Margin="10" VerticalAlignment="Center">
                             Trích yếu
                             </TextBlock>
-                            <TextBox Margin="10"/>
+                            <TextBox Margin="10"
+                                     Text="{Binding TrichYeu, Mode=TwoWay}"/>
                         </DockPanel>
                     </Grid>
                 </Grid>
@@ -146,21 +156,15 @@
                             <TextBlock Margin="10">
                                 Nơi gửi
                             </TextBlock>
-                            <TextBox Grid.Column="1"/>
+                            <TextBox Grid.Column="1" Margin="1,10,9,0"
+                                     Text="{Binding NoiGui, Mode=TwoWay}"/>
                             <WrapPanel Grid.Column="2">
-                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
-                                    <materialDesign:PackIcon Kind="Tick" Height="30" Width="30"/>
-                                </Button>
                                 <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
                                     <materialDesign:PackIcon Kind="Contact" Height="30" Width="30"/>
                                 </Button>
                             </WrapPanel>
                         </Grid>
-                        <WrapPanel Margin="60,5">
-                            <Button Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray">
-                                Phòng Quản lí Đào tạo - Trường ĐH CNTT
-                            </Button>
-                        </WrapPanel>
+                        <WrapPanel Margin="60,5"/>
                     </StackPanel>
                     <!--#endregion-->
 
@@ -175,9 +179,11 @@
                             <TextBlock Margin="10">
                                 Nơi nhận
                             </TextBlock>
-                            <TextBox Grid.Column="1"/>
+                            <TextBox Grid.Column="1" Margin="0,10,10,0"
+                                     Text="{Binding NoiNhan, Mode=TwoWay}"/>
                             <WrapPanel Grid.Column="2">
-                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
+                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0"
+                                        Command="{Binding ClickThemNoiNhan}">
                                     <materialDesign:PackIcon Kind="PersonAdd" Height="30" Width="30"/>
                                 </Button>
                                 <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
@@ -185,16 +191,28 @@
                                 </Button>
                             </WrapPanel>
                         </Grid>
-                        <WrapPanel Margin="20,5">
-                            <Button Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray">
-                                Hội Sinh Viên
-                            </Button>
-                            <Button Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray">
-                                tronglt@uit.edu.vn
-                            </Button>
-                            <Button Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray">
-                                hct@uit.edu.vn
-                            </Button>
+                        <WrapPanel Margin="20,5" Height="auto">
+                            <ItemsControl Name="ListNoiNhan" ItemsSource="{Binding DSNoiNhan}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button materialDesign:HintAssist.Hint="{Binding Email}"
+                                                materialDesign:HintAssist.Background="White"
+                                                materialDesign:HintAssist.IsFloating="True"
+                                                Content="{Binding TenLienHe}"
+                                                Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray"
+                                                Width="auto"
+                                                Height="50"
+                                                Command="{Binding Path=DataContext.XoaNoiNhan, ElementName=ListNoiNhan}"
+                                                CommandParameter="{Binding}"
+                                                />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </WrapPanel>
                     </StackPanel>
                     <!--#endregion-->
@@ -209,16 +227,30 @@
                     <TextBlock Margin="10">
                             Ghi chú
                     </TextBlock>
-                    <TextBox Margin="10" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBox Margin="10" TextWrapping="Wrap" VerticalAlignment="Top"
+                             Text="{Binding GhiChu}"/>
                 </DockPanel>
             </Border>
             <!--#endregion-->
 
             <!--#region PDF BAR -->
             <StackPanel Orientation="Vertical">
-                <Button materialDesign:ButtonAssist.CornerRadius="5" Width="200" Margin="10">
+                <Button materialDesign:ButtonAssist.CornerRadius="5" Width="200" Margin="10"
+                        Command="{Binding PinPdf}">
                     Đính kèm công văn
                 </Button>
+                <TextBlock Margin="10"
+                           Width="auto"
+                           TextDecorations="Underline"
+                           HorizontalAlignment="Center"
+                           FontSize="15"
+                           Text="{Binding showFileName}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding ClickOnFileNameCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
                 <Button materialDesign:ButtonAssist.CornerRadius="5" Width="200" Margin="10">
                     Xem nội dung công văn
                 </Button>

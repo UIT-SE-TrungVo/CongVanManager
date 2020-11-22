@@ -41,7 +41,6 @@ namespace CongVanManager.ViewModel
         private MainWindowViewModel()
         {
             ChangePage(0);
-
             #region DATA SAMPLE BINDING (DISABLED)
             /*
             LienHe contact = new LienHe
