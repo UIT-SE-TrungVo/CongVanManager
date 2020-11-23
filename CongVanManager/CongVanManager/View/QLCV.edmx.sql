@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/23/2020 16:23:40
+-- Date Created: 11/23/2020 18:25:51
 -- Generated from EDMX file: C:\Users\longt\source\repos\CongVanManager\CongVanManager\CongVanManager\View\QLCV.edmx
 -- --------------------------------------------------
 
@@ -61,8 +61,11 @@ GO
 IF OBJECT_ID(N'[dbo].[database_firewall_rules]', 'U') IS NOT NULL
     DROP TABLE [dbo].[database_firewall_rules];
 GO
-IF OBJECT_ID(N'[dbo].[KyHieu]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[KyHieu];
+IF OBJECT_ID(N'[dbo].[KyHieuCongVan]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[KyHieuCongVan];
+GO
+IF OBJECT_ID(N'[dbo].[PDFScan]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PDFScan];
 GO
 IF OBJECT_ID(N'[dbo].[DanhSachNoiNhan]', 'U') IS NOT NULL
     DROP TABLE [dbo].[DanhSachNoiNhan];
@@ -143,6 +146,13 @@ CREATE TABLE [dbo].[KyHieuCongVan] (
 );
 GO
 
+-- Creating table 'PDFScan'
+CREATE TABLE [dbo].[PDFScan] (
+    [PDFName] nvarchar(100)  NOT NULL,
+    [Content] varbinary(max)  NOT NULL
+);
+GO
+
 -- Creating table 'DanhSachNoiNhan'
 CREATE TABLE [dbo].[DanhSachNoiNhan] (
     [CongVans1_MaCongVan] bigint  NOT NULL,
@@ -200,6 +210,12 @@ GO
 ALTER TABLE [dbo].[KyHieuCongVan]
 ADD CONSTRAINT [PK_KyHieuCongVan]
     PRIMARY KEY CLUSTERED ([MaKyHieu] ASC);
+GO
+
+-- Creating primary key on [PDFName] in table 'PDFScan'
+ALTER TABLE [dbo].[PDFScan]
+ADD CONSTRAINT [PK_PDFScan]
+    PRIMARY KEY CLUSTERED ([PDFName] ASC);
 GO
 
 -- Creating primary key on [CongVans1_MaCongVan], [LienHes_Email] in table 'DanhSachNoiNhan'

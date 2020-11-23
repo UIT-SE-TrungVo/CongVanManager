@@ -14,6 +14,7 @@
     <EntitySet Name="QuyDinhs" EntityType="CONGVANMANAGERModel.Store.QuyDinhs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="database_firewall_rules" EntityType="CONGVANMANAGERModel.Store.database_firewall_rules" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="KyHieuCongVan" EntityType="CONGVANMANAGERModel.Store.KyHieuCongVan" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PDFScan" EntityType="CONGVANMANAGERModel.Store.PDFScan" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DanhSachNoiNhan" EntityType="CONGVANMANAGERModel.Store.DanhSachNoiNhan" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK__CongVan__MaLoaiC__29221CFB" Association="CONGVANMANAGERModel.Store.FK__CongVan__MaLoaiC__29221CFB">
       <End Role="LoaiCongVan" EntitySet="LoaiCongVan" />
@@ -115,6 +116,13 @@
       <PropertyRef Name="MaKyHieu" />
     </Key>
     <Property Name="MaKyHieu" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="PDFScan">
+    <Key>
+      <PropertyRef Name="PDFName" />
+    </Key>
+    <Property Name="PDFName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Content" Type="varbinary(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="DanhSachNoiNhan">
     <Key>
@@ -229,6 +237,7 @@
           </AssociationSet>
           <EntitySet Name="database_firewall_rules" EntityType="CONGVANMANAGERModel.database_firewall_rules" />
           <EntitySet Name="KyHieuCongVan" EntityType="CONGVANMANAGERModel.KyHieuCongVan" />
+          <EntitySet Name="PDFScan" EntityType="CONGVANMANAGERModel.PDFScan" />
         </EntityContainer>
         <EntityType Name="CongVan">
           <Key>
@@ -368,6 +377,13 @@
           </Key>
           <Property Name="MaKyHieu" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="20" FixedLength="false" />
         </EntityType>
+        <EntityType Name="PDFScan">
+          <Key>
+            <PropertyRef Name="PDFName" />
+          </Key>
+          <Property Name="PDFName" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="100" />
+          <Property Name="Content" Type="Binary" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -450,6 +466,14 @@
       <EntityTypeMapping TypeName="IsTypeOf(CONGVANMANAGERModel.KyHieuCongVan)">
         <MappingFragment StoreEntitySet="KyHieuCongVan">
           <ScalarProperty Name="MaKyHieu" ColumnName="MaKyHieu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PDFScan">
+      <EntityTypeMapping TypeName="IsTypeOf(CONGVANMANAGERModel.PDFScan)">
+        <MappingFragment StoreEntitySet="PDFScan">
+          <ScalarProperty Name="PDFName" ColumnName="PDFName" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

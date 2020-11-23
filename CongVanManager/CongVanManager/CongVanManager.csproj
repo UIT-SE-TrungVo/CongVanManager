@@ -135,6 +135,9 @@
     <Compile Include="View\NewDocLayout_Chooser.xaml.cs">
       <DependentUpon>NewDocLayout_Chooser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PDFScan.cs">
+      <DependentUpon>QLCV.tt</DependentUpon>
+    </Compile>
     <Compile Include="View\SettingLayout.xaml.cs">
       <DependentUpon>SettingLayout.xaml</DependentUpon>
     </Compile>

@@ -18,6 +18,7 @@
         <AssociationConnector Association="CONGVANMANAGERModel.DanhSachNoiNhan" />
         <EntityTypeShape EntityType="CONGVANMANAGERModel.database_firewall_rules" Width="2.625" PointX="7.375" PointY="3.75" />
         <EntityTypeShape EntityType="CONGVANMANAGERModel.KyHieuCongVan" Width="1.5" PointX="0.875" PointY="1" />
+        <EntityTypeShape EntityType="CONGVANMANAGERModel.PDFScan" Width="1.5" PointX="1" PointY="5.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
