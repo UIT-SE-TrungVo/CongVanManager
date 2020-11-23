@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/20/2020 12:20:47
+-- Date Created: 11/23/2020 16:23:40
 -- Generated from EDMX file: C:\Users\longt\source\repos\CongVanManager\CongVanManager\CongVanManager\View\QLCV.edmx
 -- --------------------------------------------------
 
@@ -60,6 +60,9 @@ IF OBJECT_ID(N'[dbo].[QuyDinhs]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[database_firewall_rules]', 'U') IS NOT NULL
     DROP TABLE [dbo].[database_firewall_rules];
+GO
+IF OBJECT_ID(N'[dbo].[KyHieu]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[KyHieu];
 GO
 IF OBJECT_ID(N'[dbo].[DanhSachNoiNhan]', 'U') IS NOT NULL
     DROP TABLE [dbo].[DanhSachNoiNhan];
@@ -134,6 +137,12 @@ CREATE TABLE [dbo].[database_firewall_rules] (
 );
 GO
 
+-- Creating table 'KyHieuCongVan'
+CREATE TABLE [dbo].[KyHieuCongVan] (
+    [MaKyHieu] nvarchar(20)  NOT NULL
+);
+GO
+
 -- Creating table 'DanhSachNoiNhan'
 CREATE TABLE [dbo].[DanhSachNoiNhan] (
     [CongVans1_MaCongVan] bigint  NOT NULL,
@@ -185,6 +194,12 @@ GO
 ALTER TABLE [dbo].[database_firewall_rules]
 ADD CONSTRAINT [PK_database_firewall_rules]
     PRIMARY KEY CLUSTERED ([id], [name], [start_ip_address], [end_ip_address], [create_date], [modify_date] ASC);
+GO
+
+-- Creating primary key on [MaKyHieu] in table 'KyHieuCongVan'
+ALTER TABLE [dbo].[KyHieuCongVan]
+ADD CONSTRAINT [PK_KyHieuCongVan]
+    PRIMARY KEY CLUSTERED ([MaKyHieu] ASC);
 GO
 
 -- Creating primary key on [CongVans1_MaCongVan], [LienHes_Email] in table 'DanhSachNoiNhan'

@@ -9,26 +9,26 @@ using System.Threading.Tasks;
 
 namespace CongVanManager.Model
 {
-    class KyHieuCongVan : ObservableObject
+    class KyHieu : ObservableObject
     {
         string _maKyHieu;
 
         public string MaKyHieu { get => _maKyHieu; set => _maKyHieu = value; }
 
-        private static DelayedObservableCollection<KyHieuCongVan> _db;
+        private static DelayedObservableCollection<KyHieu> _db;
 
-        public KyHieuCongVan(View.KyHieuCongVan item)
+        public KyHieu(View.KyHieuCongVan item)
         {
             MaKyHieu = item.MaKyHieu;
         }
 
-        public static DelayedObservableCollection<KyHieuCongVan> DB
+        public static DelayedObservableCollection<KyHieu> DB
         {
             get
             {
                 if (_db == null)
                 {
-                    _db = new DelayedObservableCollection<KyHieuCongVan>();
+                    _db = new DelayedObservableCollection<KyHieu>();
                     ReloadDatabase();
                 }
                 return _db;
@@ -46,22 +46,22 @@ namespace CongVanManager.Model
             if (arg.Action == NotifyCollectionChangedAction.Move)
                 return;
             if (arg.OldItems != null)
-                foreach (KyHieuCongVan item in arg.OldItems)
+                foreach (KyHieu item in arg.OldItems)
                 {
                     var cvs = DataProvider.Ins.DB.LienHe;
                     cvs.Remove(cvs.Find(item.MaKyHieu));
                 }
             if (arg.NewItems != null)
-                foreach (KyHieuCongVan item in arg.NewItems)
-                    DataProvider.Ins.DB.KyHieu.Add(item.ToKyHieuCongVan());
+                foreach (KyHieu item in arg.NewItems)
+                    DataProvider.Ins.DB.KyHieuCongVan.Add(item.ToKyHieuCongVan());
         }
 
         private static void ReloadDatabase()
         {
             _db.CollectionChanged -= KyHieuCongVanDBChanged;
 
-            foreach (View.KyHieuCongVan item in DataProvider.Ins.DB.KyHieu)
-                _db.Add(new KyHieuCongVan(item));
+            foreach (View.KyHieuCongVan item in DataProvider.Ins.DB.KyHieuCongVan)
+                _db.Add(new KyHieu(item));
 
             _db.CollectionChanged += KyHieuCongVanDBChanged;
         }

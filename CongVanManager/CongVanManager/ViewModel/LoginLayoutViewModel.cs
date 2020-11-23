@@ -54,14 +54,14 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                    x =>
                    {
-                       if (User.DB.FirstOrDefault(user => user.Username == Username).Password != Password)
+                       if (User.DB.FirstOrDefault(user => user.Username == Username)?.Password != Password)
                        {
                            // TODO: better message box
                            MessageBox.Show("Tên đăng nhập hoặc mật khẩu sai.");
                            return;
                        }
-                       window.Close();
                        MainWindowViewModel.Ins.SetUser(Username);
+                       window.Close();
                    });
             }
         }

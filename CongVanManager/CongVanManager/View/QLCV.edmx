@@ -13,6 +13,7 @@
     <EntitySet Name="PhanHoi" EntityType="CONGVANMANAGERModel.Store.PhanHoi" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="QuyDinhs" EntityType="CONGVANMANAGERModel.Store.QuyDinhs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="database_firewall_rules" EntityType="CONGVANMANAGERModel.Store.database_firewall_rules" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="KyHieuCongVan" EntityType="CONGVANMANAGERModel.Store.KyHieuCongVan" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DanhSachNoiNhan" EntityType="CONGVANMANAGERModel.Store.DanhSachNoiNhan" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK__CongVan__MaLoaiC__29221CFB" Association="CONGVANMANAGERModel.Store.FK__CongVan__MaLoaiC__29221CFB">
       <End Role="LoaiCongVan" EntitySet="LoaiCongVan" />
@@ -108,6 +109,12 @@
     <Property Name="end_ip_address" Type="varchar" Nullable="false" MaxLength="45" />
     <Property Name="create_date" Type="datetime" Nullable="false" />
     <Property Name="modify_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KyHieuCongVan">
+    <Key>
+      <PropertyRef Name="MaKyHieu" />
+    </Key>
+    <Property Name="MaKyHieu" Type="nvarchar" Nullable="false" MaxLength="20" />
   </EntityType>
   <EntityType Name="DanhSachNoiNhan">
     <Key>
@@ -221,7 +228,7 @@
             <End Role="LienHe" EntitySet="LienHe" />
           </AssociationSet>
           <EntitySet Name="database_firewall_rules" EntityType="CONGVANMANAGERModel.database_firewall_rules" />
-          <EntitySet Name="KyHieu" EntityType="CONGVANMANAGERModel.KyHieuCongVan" />
+          <EntitySet Name="KyHieuCongVan" EntityType="CONGVANMANAGERModel.KyHieuCongVan" />
         </EntityContainer>
         <EntityType Name="CongVan">
           <Key>
@@ -359,7 +366,7 @@
           <Key>
             <PropertyRef Name="MaKyHieu" />
           </Key>
-          <Property Name="MaKyHieu" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="MaKyHieu" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="20" FixedLength="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -436,6 +443,13 @@
           <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
           <ScalarProperty Name="create_date" ColumnName="create_date" />
           <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KyHieuCongVan">
+      <EntityTypeMapping TypeName="IsTypeOf(CONGVANMANAGERModel.KyHieuCongVan)">
+        <MappingFragment StoreEntitySet="KyHieuCongVan">
+          <ScalarProperty Name="MaKyHieu" ColumnName="MaKyHieu" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

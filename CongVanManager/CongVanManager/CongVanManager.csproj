@@ -98,7 +98,7 @@
     <Compile Include="Command\EventArgs.cs" />
     <Compile Include="Command\EventRaiser.cs" />
     <Compile Include="DataProvider.cs" />
-    <Compile Include="Model\KyHieuCongVan.cs" />
+    <Compile Include="Model\KyHieu.cs" />
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Command\RelayCommand.cs" />
