@@ -90,7 +90,7 @@ namespace CongVanManager.ViewModel
                 TrichYeu = "Ngày hội qua môn cho sinh viên năm 6",
                 SoKyHieu = "01/ĐH-CNTT",
                 NoiGui = contact,
-                DanhSachNoiNhan = new ObservableCollection<NoiNhan> {
+                DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan> {
                     noiNhan1, noiNhan2 },
                 SoCongVan = 1,
                 NgayCongVan = System.DateTime.Now,
@@ -105,7 +105,7 @@ namespace CongVanManager.ViewModel
                 TrichYeu = "Ngày hội chia sẻ cách để viết một xâu vô cùng dài trong tựa đề chỉ vì lý do kiểm thử phần mềm cho sinh viên năm 6, 7, 8, 9, thực ra ai cũng vô được",
                 SoKyHieu = "02/ĐH-CNTT",
                 NoiGui = contact,
-                DanhSachNoiNhan = new ObservableCollection<NoiNhan> {
+                DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan> {
                     noiNhan1},
                 SoCongVan = 2,
                 NgayCongVan = System.DateTime.Now,

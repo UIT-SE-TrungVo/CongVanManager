@@ -14,8 +14,9 @@ namespace CongVanManager
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using CongVanManager.View;
+    using CongVanManager.ViewModel;
 
-    public partial class LienHe
+    public partial class LienHe : ObservableObject
     {
         public LienHe()
         {
@@ -37,32 +38,39 @@ namespace CongVanManager
         public virtual ICollection<CongVan> CongVans { get; set; }
         public virtual ICollection<NoiNhan> DanhSachNoiNhan { get; set; }
 
-        private static ObservableCollection<LienHe> _db;
-        public static ObservableCollection<LienHe> DB
+        public static void ReloadDatabase()
+        {
+            _db.CollectionChanged -= LienHeDBChanged;
+
+            foreach (View.LienHe cv in DataProvider.Ins.DB.LienHe)
+                _db.Add(new LienHe(cv));
+
+            _db.CollectionChanged += LienHeDBChanged;
+        }
+        static void LienHeDBChanged(object sender, NotifyCollectionChangedEventArgs arg)
+        {
+            if (arg.Action == NotifyCollectionChangedAction.Move)
+                return;
+            if (arg.OldItems != null)
+                foreach (LienHe item in arg.OldItems)
+                {
+                    var cvs = DataProvider.Ins.DB.LienHe;
+                    cvs.Remove(cvs.Find(item.Email));
+                }
+            if (arg.NewItems != null)
+                foreach (LienHe item in arg.NewItems)
+                    DataProvider.Ins.DB.LienHe.Add(item.ToLienHe());
+        }
+
+        private static DelayedObservableCollection<LienHe> _db;
+        public static DelayedObservableCollection<LienHe> DB
         {
             get
             {
                 if (_db == null)
                 {
-                    _db = new ObservableCollection<LienHe>();
-
-                    foreach (View.LienHe cv in DataProvider.Ins.DB.LienHe)
-                        _db.Add(new LienHe(cv));
-
-                    _db.CollectionChanged += (obj, arg) =>
-                    {
-                        if (arg.Action == NotifyCollectionChangedAction.Move)
-                            return;
-                        if (arg.OldItems != null)
-                            foreach (LienHe item in arg.OldItems)
-                            {
-                                var cvs = DataProvider.Ins.DB.LienHe;
-                                cvs.Remove(cvs.Find(item.Email));
-                            }
-                        if (arg.NewItems != null)
-                            foreach (LienHe item in arg.NewItems)
-                                DataProvider.Ins.DB.LienHe.Add(item.ToLienHe());
-                    };
+                    _db = new DelayedObservableCollection<LienHe>();
+                    ReloadDatabase();
                 }
                 return _db;
             }

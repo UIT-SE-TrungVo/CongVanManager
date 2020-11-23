@@ -14,8 +14,9 @@ namespace CongVanManager
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using CongVanManager.View;
+    using CongVanManager.ViewModel;
 
-    public partial class User
+    public partial class User : ObservableObject
     {
         public User()
         {
@@ -47,37 +48,44 @@ namespace CongVanManager
     
         public virtual ICollection<PhanHoi> PhanHois { get; set; }
 
-        private static ObservableCollection<User> _db;
+        public static void ReloadDatabase()
+        {
+            _db.CollectionChanged -= UserDBChanged;
 
-        public static ObservableCollection<User> DB
+            // Load Database from DataProvider
+            foreach (View.NguoiDung user in DataProvider.Ins.DB.NguoiDung)
+                _db.Add(new User(user));
+
+            // syncronize mechanic
+            _db.CollectionChanged += UserDBChanged;
+        }
+
+        static void UserDBChanged(object sender, NotifyCollectionChangedEventArgs arg)
+        {
+            if (arg.Action == NotifyCollectionChangedAction.Move)
+                return;
+            if (arg.OldItems != null)
+                foreach (User item in arg.OldItems)
+                {
+                    var cvs = DataProvider.Ins.DB.NguoiDung;
+                    cvs.Remove(cvs.Find(item.Username));
+                }
+            if (arg.NewItems != null)
+                foreach (User item in arg.NewItems)
+                {
+                    DataProvider.Ins.DB.NguoiDung.Add(item.ToNguoiDung());
+                }
+        }
+
+        private static DelayedObservableCollection<User> _db;
+        public static DelayedObservableCollection<User> DB
         {
             get
             {
                 if (_db == null)
                 {
-                    _db = new ObservableCollection<User>();
-
-                    // Load Database from DataProvider
-                    foreach (View.NguoiDung user in DataProvider.Ins.DB.NguoiDung)
-                        _db.Add(new User(user));
-
-                    // syncronize mechanic
-                    _db.CollectionChanged += (obj, arg) =>
-                    {
-                        if (arg.Action == NotifyCollectionChangedAction.Move)
-                            return;
-                        if (arg.OldItems != null)
-                            foreach (User item in arg.OldItems)
-                            {
-                                var cvs = DataProvider.Ins.DB.NguoiDung;
-                                cvs.Remove(cvs.Find(item.Username));
-                            }
-                        if (arg.NewItems != null)
-                            foreach (User item in arg.NewItems)
-                            {
-                                DataProvider.Ins.DB.NguoiDung.Add(item.ToNguoiDung());
-                            }
-                    };
+                    _db = new DelayedObservableCollection<User>();
+                    ReloadDatabase();
                 }
                 return _db;
             }

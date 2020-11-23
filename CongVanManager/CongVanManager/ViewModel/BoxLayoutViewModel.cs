@@ -202,7 +202,7 @@ namespace CongVanManager.ViewModel
                     return;
                 if (SelectedCongVanDestination != value)
                 {
-                    _selectedCongVan.DanhSachNoiNhan = new ObservableCollection<NoiNhan>(value);
+                    _selectedCongVan.DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan>(value);
                     ValueChanged(_selectedCongVan);
                 }
             }
@@ -268,7 +268,13 @@ namespace CongVanManager.ViewModel
                     UCFilter = new uc_OutBoxFilter();
                     break;
             }
-            
+
+            // Update ViewModel when database change
+            CongVan.DB.CollectionChanged += (obj, arg) =>
+            {
+                UpdateData(obj, null);
+            };
+
             //[TESTING: avoid input for doctype.out]
             if (BoxType == DocType.Out) return;
         }

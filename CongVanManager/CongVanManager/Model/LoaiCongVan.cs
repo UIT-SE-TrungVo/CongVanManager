@@ -14,8 +14,9 @@ namespace CongVanManager
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using CongVanManager.View;
+    using CongVanManager.ViewModel;
 
-    public class LoaiCongVan
+    public class LoaiCongVan : ObservableObject
     {
         public LoaiCongVan()
         {
@@ -27,40 +28,45 @@ namespace CongVanManager
             Id = loaiCongVan.MaLoaiCongVan;
             this.CongVanDaGui = new HashSet<CongVan>();
         }
-
+        private string _id;
         public string Id { get => _id; set { _id = value.ToUpper(); } }
         // Only in uppercase please
 
         public virtual ICollection<CongVan> CongVanDaGui { get; set; }
+        
+        public static void ReloadDatabase()
+        {
+            _db.CollectionChanged -= LoaiCongVanDBChanged;
 
-        private static ObservableCollection<LoaiCongVan> _db;
-        private string _id;
+            foreach (View.LoaiCongVan cv in DataProvider.Ins.DB.LoaiCongVan)
+                _db.Add(new LoaiCongVan(cv));
 
-        public static ObservableCollection<LoaiCongVan> DB
+            _db.CollectionChanged += LoaiCongVanDBChanged;
+        }
+        static void LoaiCongVanDBChanged(object sender, NotifyCollectionChangedEventArgs arg)
+        {
+            if (arg.Action == NotifyCollectionChangedAction.Move)
+                return;
+            if (arg.OldItems != null)
+                foreach (LoaiCongVan item in arg.OldItems)
+                {
+                    var cvs = DataProvider.Ins.DB.LoaiCongVan;
+                    cvs.Remove(cvs.Find(item.Id));
+                }
+            if (arg.NewItems != null)
+                foreach (LoaiCongVan item in arg.NewItems)
+                    DataProvider.Ins.DB.LoaiCongVan.Add(item.ToLoaiCongVan());
+        }
+
+        private static DelayedObservableCollection<LoaiCongVan> _db;
+        public static DelayedObservableCollection<LoaiCongVan> DB
         {
             get
             {
                 if (_db == null)
                 {
-                    _db = new ObservableCollection<LoaiCongVan>();
-
-                    foreach (View.LoaiCongVan cv in DataProvider.Ins.DB.LoaiCongVan)
-                        _db.Add(new LoaiCongVan(cv));
-
-                    _db.CollectionChanged += (obj, arg) =>
-                    {
-                        if (arg.Action == NotifyCollectionChangedAction.Move)
-                            return;
-                        if (arg.OldItems != null)
-                            foreach (LoaiCongVan item in arg.OldItems)
-                            {
-                                var cvs = DataProvider.Ins.DB.LoaiCongVan;
-                                cvs.Remove(cvs.Find(item.Id));
-                            }
-                        if (arg.NewItems != null)
-                            foreach (LoaiCongVan item in arg.NewItems)
-                                DataProvider.Ins.DB.LoaiCongVan.Add(item.ToLoaiCongVan());
-                    };
+                    _db = new DelayedObservableCollection<LoaiCongVan>();
+                    ReloadDatabase();
                 }
                 return _db;
             }

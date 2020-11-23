@@ -25,6 +25,9 @@ namespace CongVanManager.ViewModel
                     return true;
             return false;
         }
+        #endregion
+
+        #region Binding
         private bool _chuaDoc;
         public bool ChuaDoc
         {
@@ -71,6 +74,41 @@ namespace CongVanManager.ViewModel
             }
         }
 
+
+        private bool _daChuyen;
+        public bool DaChuyen
+        {
+            get => _daChuyen;
+            set
+            {
+                _daChuyen = value;
+                if (value == false)
+                    filterList[3] = defaultFilter;
+                else
+                    filterList[3] = (item) =>
+                        item.StatusCode == CongVan.StatusCodeEnum.DaChuyen;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool moiDoi;
+        public bool MoiDoi
+        {
+            get => moiDoi;
+            set
+            {
+                moiDoi = value;
+                if (value == false)
+                    filterList[4] = defaultFilter;
+                else
+                    filterList[4] = (item) =>
+                        item.NgayXuLi > (MainWindowViewModel.Ins.User?.LastSeen ?? DateTime.MinValue);
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region Singleton
         private UC_InBoxFilterViewModel()
         {
             while (filterList.Count < filterList.Capacity)
@@ -91,24 +129,8 @@ namespace CongVanManager.ViewModel
             }
             private set => ins = value;
         }
-
-        private bool _daChuyen;
-        public bool DaChuyen
-        {
-            get => _daChuyen;
-            set
-            {
-                _daChuyen = value;
-                if (value == false)
-                    filterList[3] = defaultFilter;
-                else
-                    filterList[3] = (item) =>
-                        item.StatusCode == CongVan.StatusCodeEnum.DaChuyen;
-                OnPropertyChanged();
-            }
-        }
         #endregion
-        
+
         #region ButtonFilter
         private ICommand _buttonFilterCongVan;
         public ICommand ButtonFilterCongVan

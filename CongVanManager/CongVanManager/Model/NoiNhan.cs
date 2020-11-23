@@ -9,22 +9,23 @@
 
 namespace CongVanManager
 {
+    using CongVanManager.ViewModel;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    public partial class NoiNhan
+    public partial class NoiNhan : ObservableObject
     {
         public virtual CongVan CongVan { get; set; }
         public virtual LienHe LienHe { get; set; }
 
-        private static ObservableCollection<NoiNhan> _db;
-        public static ObservableCollection<NoiNhan> DB
+        private static DelayedObservableCollection<NoiNhan> _db;
+        public static DelayedObservableCollection<NoiNhan> DB
         {
             get
             {
                 if (_db == null)
-                    _db = new ObservableCollection<NoiNhan>();
+                    _db = new DelayedObservableCollection<NoiNhan>();
                 return _db;
             }
             private set { }

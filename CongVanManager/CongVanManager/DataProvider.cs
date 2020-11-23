@@ -10,6 +10,7 @@ namespace CongVanManager
 {
     class DataProvider
     {
+        private DataProvider() { }
         private static DataProvider _ins;
         private static Task _uploadRefresher;
         private static Task _downloadRefresher;
@@ -27,8 +28,6 @@ namespace CongVanManager
 
                 return _ins;
             }
-
-            set { _ins = value; _uploadRefresher = _ins.RefreshUploadAsync(); }
         }
 
         public CONGVANMANAGEREntities DB { get; set; } = new CONGVANMANAGEREntities();
@@ -71,7 +70,13 @@ namespace CongVanManager
                 {
                     DB.Dispose();
                     DB = new CONGVANMANAGEREntities();
-                    
+                    DB.Configuration.AutoDetectChangesEnabled = false;
+
+                    CongVan.ReloadDatabase();
+                    LienHe.ReloadDatabase();
+                    User.ReloadDatabase();
+                    LoaiCongVan.ReloadDatabase();
+
                     NguoiDung user = DB.NguoiDung.Find(MainWindowViewModel.Ins.User.Username);
                     if (user != null)
                         user.LastSeen = DateTime.Now;

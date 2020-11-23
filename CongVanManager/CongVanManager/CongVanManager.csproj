@@ -95,9 +95,11 @@
     <Compile Include="Command\EventArgs.cs" />
     <Compile Include="Command\EventRaiser.cs" />
     <Compile Include="DataProvider.cs" />
+    <Compile Include="Model\KyHieuCongVan.cs" />
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="ViewModel\DelayedObservableCollection.cs" />
     <Compile Include="ViewModel\ActionLayoutViewModel.cs" />
     <Compile Include="ViewModel\BoxLayoutViewModel.cs" />
     <Compile Include="ViewModel\FilterSetting.cs" />
@@ -116,6 +118,9 @@
       <DependentUpon>BoxLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\database_firewall_rules.cs">
+      <DependentUpon>QLCV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\KyHieuCongVan.cs">
       <DependentUpon>QLCV.tt</DependentUpon>
     </Compile>
     <Compile Include="View\LoginLayout.xaml.cs">

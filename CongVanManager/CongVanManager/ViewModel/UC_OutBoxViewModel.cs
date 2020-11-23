@@ -10,6 +10,7 @@ namespace CongVanManager.ViewModel
 {
     class UC_OutBoxFilterViewModel : FilterSetting
     {
+        #region Filter Setting
         private List<Func<CongVan, bool>> filterList = new List<Func<CongVan, bool>>(5);
         private Func<CongVan, bool> defaultFilter = (item) => false;
         public override bool Filter(CongVan item)
@@ -24,6 +25,7 @@ namespace CongVanManager.ViewModel
                     return true;
             return false;
         }
+        #endregion
 
         #region Binding
         private bool _choDuyet;
@@ -71,29 +73,6 @@ namespace CongVanManager.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        private UC_OutBoxFilterViewModel()
-        {
-            while (filterList.Count < filterList.Capacity)
-                filterList.Add(defaultFilter);
-
-            DaLuuTru = true;
-            DaDuyet = true;
-            DaGui = true;
-            ChoDuyet = true;
-        }
-        private static UC_OutBoxFilterViewModel ins = null;
-        public static UC_OutBoxFilterViewModel Ins
-        {
-            get
-            {
-                if (ins == null)
-                    ins = new UC_OutBoxFilterViewModel();
-                return ins;
-            }
-            private set => ins = value;
-        }
-
         private bool _daGui;
         public bool DaGui
         {
@@ -124,6 +103,31 @@ namespace CongVanManager.ViewModel
                         item.NgayXuLi > (MainWindowViewModel.Ins.User?.LastSeen??DateTime.MinValue);
                 OnPropertyChanged();
             }
+        }
+        #endregion
+
+        #region Singleton
+        private UC_OutBoxFilterViewModel()
+        {
+            while (filterList.Count < filterList.Capacity)
+                filterList.Add(defaultFilter);
+
+            DaLuuTru = true;
+            DaDuyet = true;
+            DaGui = true;
+            ChoDuyet = true;
+        }
+
+        private static UC_OutBoxFilterViewModel ins = null;
+        public static UC_OutBoxFilterViewModel Ins
+        {
+            get
+            {
+                if (ins == null)
+                    ins = new UC_OutBoxFilterViewModel();
+                return ins;
+            }
+            private set => ins = value;
         }
         #endregion
 

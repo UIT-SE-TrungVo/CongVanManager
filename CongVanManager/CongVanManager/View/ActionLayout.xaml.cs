@@ -23,14 +23,18 @@ namespace CongVanManager.View
         public ActionLayout()
         {
             InitializeComponent();
-            this.DataContext = ActionLayoutViewModel.instance;
+            ActionLayoutViewModel temp = ActionLayoutViewModel.instance;
+            temp.layout = this;
+            this.DataContext = temp;
         }
         public ActionLayout(CongVanManager.CongVan input, DocType bt)
         {
             InitializeComponent();
-            ActionLayoutViewModel.instance.selectedCongVan = input;
-            ActionLayoutViewModel.instance.BoxType = bt;
-            this.DataContext = ActionLayoutViewModel.instance;
+            ActionLayoutViewModel inst = ActionLayoutViewModel.instance;
+            inst.selectedCongVan = input;
+            inst.BoxType = bt;
+            inst.layout = this;
+            this.DataContext = inst;
         }
     }
 }

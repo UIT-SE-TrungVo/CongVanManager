@@ -9,11 +9,12 @@
 
 namespace CongVanManager
 {
+    using CongVanManager.ViewModel;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    public partial class PhanHoi
+    public partial class PhanHoi : ObservableObject
     {
         public int Id { get; set; }
         public string Comment { get; set; }
@@ -21,13 +22,13 @@ namespace CongVanManager
         public virtual CongVan CongVan { get; set; }
         public virtual User User { get; set; }
 
-        private static ObservableCollection<PhanHoi> _db;
-        public static ObservableCollection<PhanHoi> DB
+        private static DelayedObservableCollection<PhanHoi> _db;
+        public static DelayedObservableCollection<PhanHoi> DB
         {
             get
             {
                 if (_db == null)
-                    _db = new ObservableCollection<PhanHoi>();
+                    _db = new DelayedObservableCollection<PhanHoi>();
 
                 throw new NotImplementedException();
 

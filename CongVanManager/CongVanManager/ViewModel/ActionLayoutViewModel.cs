@@ -17,7 +17,7 @@ namespace CongVanManager.ViewModel
 {
     class ActionLayoutViewModel : ObservableObject
     {
-
+        public ActionLayout layout;
         public ActionLayoutViewModel()
         {
             isDuyetEnable = false;
@@ -55,14 +55,15 @@ namespace CongVanManager.ViewModel
             get { return _selectedCongVan; }
             set {
                 _selectedCongVan = value;
-                if(value.StatusCode == CongVan.StatusCodeEnum.ChoDuyet || value.StatusCode == CongVan.StatusCodeEnum.ChuaDoc)
+                if (_selectedCongVan == null)
                 {
-                    isDuyetEnable = true;
+                    isDuyetEnable = isGuiEnable = false;
+                    return;
                 }
-                if(value.StatusCode == CongVan.StatusCodeEnum.DaDuyet_Den || value.StatusCode == CongVan.StatusCodeEnum.DaLuuTru )
-                {
-                    isGuiEnable = true;
-                }
+                isDuyetEnable = value.StatusCode == CongVan.StatusCodeEnum.ChoDuyet || 
+                    value.StatusCode == CongVan.StatusCodeEnum.DaTiepNhan;
+                isGuiEnable = value.StatusCode == CongVan.StatusCodeEnum.DaDuyet_Den || 
+                    value.StatusCode == CongVan.StatusCodeEnum.DaLuuTru;
             }
         }
 
@@ -88,6 +89,7 @@ namespace CongVanManager.ViewModel
                    {
                        //them phan quyen o day
                        CongVan.DB.Remove(selectedCongVan);
+                       layout?.Close();
                    });
             }
         }
@@ -99,6 +101,7 @@ namespace CongVanManager.ViewModel
                    x =>
                    {
                        MessageBox.Show("EDIT" + selectedCongVan.Id);
+                       layout?.Close();
                    });
             }
         }
@@ -142,6 +145,7 @@ namespace CongVanManager.ViewModel
                         {
                             MessageBox.Show("Không thành công!");
                         }
+                        layout?.Close();
                     });
             }
         }
@@ -158,7 +162,7 @@ namespace CongVanManager.ViewModel
                        {
                            if (BoxType == DocType.In)
                            {
-                               item.StatusCode = CongVan.StatusCodeEnum.DaGui;
+                               item.StatusCode = CongVan.StatusCodeEnum.DaChuyen;
                            }
                            else
                            {
@@ -184,6 +188,7 @@ namespace CongVanManager.ViewModel
                        {
                            MessageBox.Show("Không thành công!");
                        }
+                       layout?.Close();
                    });
             }
         }

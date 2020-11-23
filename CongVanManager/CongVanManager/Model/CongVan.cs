@@ -11,8 +11,8 @@
     {
         public CongVan()
         {
-            this.DanhSachNoiNhan = new ObservableCollection<NoiNhan>();
-            this.PhanHois = new ObservableCollection<PhanHoi>();
+            this.DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan>();
+            this.PhanHois = new DelayedObservableCollection<PhanHoi>();
         }
 
         public CongVan(in View.CongVan cv)
@@ -36,13 +36,13 @@
 
             PDFScanLocation = cv.PDFScan;
 
-            PhanHois = new ObservableCollection<PhanHoi>();
+            PhanHois = new DelayedObservableCollection<PhanHoi>();
 
             SoCongVan = cv.SoCongVan;
             SoKyHieu = cv.SoKyHieu;
             TrichYeu = cv.TrichYeu;
 
-            DanhSachNoiNhan = new ObservableCollection<NoiNhan>();
+            DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan>();
             foreach (View.LienHe lh in cv.LienHes)
             {
                 LienHe lienHe = LienHe.Get(lh);
@@ -181,8 +181,8 @@
             get => _noiGui;
             set { _noiGui = value; OnPropertyChanged(); }
         }
-        private ObservableCollection<NoiNhan> _danhSachNoiNhan;
-        public virtual ObservableCollection<NoiNhan> DanhSachNoiNhan { get => _danhSachNoiNhan;
+        private DelayedObservableCollection<NoiNhan> _danhSachNoiNhan;
+        public virtual DelayedObservableCollection<NoiNhan> DanhSachNoiNhan { get => _danhSachNoiNhan;
             set {
                 value.CollectionChanged +=
                 (object sender, NotifyCollectionChangedEventArgs e)
@@ -190,51 +190,58 @@
                 _danhSachNoiNhan = value;
                 OnPropertyChanged(); }
         }
-        public virtual ObservableCollection<PhanHoi> PhanHois { get; set; }
+        public virtual DelayedObservableCollection<PhanHoi> PhanHois { get; set; }
 
         public CongVan Clone
         {
             get { return MemberwiseClone() as CongVan; }
         }
 
-        private static ObservableCollection<CongVan> _db;
+        private static DelayedObservableCollection<CongVan> _db;
 
-        public static ObservableCollection<CongVan> DB
+        public static void ReloadDatabase()
+        {
+            _db.CollectionChanged -= CongVanDBChanged;
+
+            // Load Database from DataProvider
+            foreach (View.CongVan cv in DataProvider.Ins.DB.CongVan)
+                _db.Add(new CongVan(cv));
+
+            _db.CollectionChanged += CongVanDBChanged;
+        }
+
+        public static DelayedObservableCollection<CongVan> DB
         {
             get
             {
                 if (_db == null)
                 {
-                    _db = new ObservableCollection<CongVan>();
-
-                    // Load Database from DataProvider
-                    foreach (View.CongVan cv in DataProvider.Ins.DB.CongVan)
-                        _db.Add(new CongVan(cv));
-
-                    // syncronize mechanic
-                    _db.CollectionChanged += (obj, arg) =>
-                    {
-                        if (arg.Action == NotifyCollectionChangedAction.Move)
-                            return;
-                        if (arg.OldItems != null)
-                            foreach (CongVan item in arg.OldItems)
-                            {
-                                var cvs = DataProvider.Ins.DB.CongVan;
-                                cvs.Remove(cvs.Find(item.Id));
-                            }
-                        if (arg.NewItems != null)
-                            foreach (CongVan item in arg.NewItems)
-                            {
-                                item.NgayXuLi = DateTime.Now;
-                                DataProvider.Ins.DB.CongVan.Add(item.ToCongVan());
-                            }
-                    };
+                    _db = new DelayedObservableCollection<CongVan>();
+                    ReloadDatabase();
                 }
                 return _db;
             }
             private set { }
         }
-        // TODO: syncronize mechanic
+        static void CongVanDBChanged(object sender, NotifyCollectionChangedEventArgs arg)
+        {
+            if (arg.Action == NotifyCollectionChangedAction.Move)
+                return;
+            if (arg.OldItems != null)
+                foreach (CongVan item in arg.OldItems)
+                {
+                    var cvs = DataProvider.Ins.DB.CongVan;
+                    cvs.Remove(cvs.Find(item.Id));
+                }
+            if (arg.NewItems != null)
+                foreach (CongVan item in arg.NewItems)
+                {
+                    var temp = item.ToCongVan();
+                    temp.NgayXuLi = DateTime.Now;
+                    DataProvider.Ins.DB.CongVan.Add(temp);
+                }
+        }
+
         public static CongVan Get(View.CongVan cv)
         {
             foreach (CongVan item in DB)

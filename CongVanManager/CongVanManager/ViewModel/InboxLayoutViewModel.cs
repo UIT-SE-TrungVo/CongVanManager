@@ -197,7 +197,7 @@ namespace CongVanManager.ViewModel
                     return;
                 if (SelectedCongVanDestination != value)
                 {
-                    _selectedCongVan.DanhSachNoiNhan = new ObservableCollection<NoiNhan>(value);
+                    _selectedCongVan.DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan>(value);
                     ValueChanged(_selectedCongVan);
                 }
             }
