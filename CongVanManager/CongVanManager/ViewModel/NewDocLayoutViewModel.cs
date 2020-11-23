@@ -30,6 +30,7 @@ namespace CongVanManager.ViewModel
             listLoaiCongVan = new ObservableCollection<string>();
 
             ResetListCongVan();
+            ResetListMaKyHieu();
         }
         #region Binding
         //So vao
@@ -82,7 +83,7 @@ namespace CongVanManager.ViewModel
                 _selectedLoaiCongVan = value; OnPropertyChanged();
                 if(selectedLoaiCongVan == "(Thêm mới loại công văn)")
                 {
-                    //mo cua so them loai cong van (material design)
+                    ShowDialogLCV();
                 }
             }
         }
@@ -106,7 +107,7 @@ namespace CongVanManager.ViewModel
             set { _SoKyHieu = value; OnPropertyChanged(); }
         }
         //chu ki hieu
-        private ObservableCollection<string> _listMaKyHieu;
+        private ObservableCollection<string> _listMaKyHieu = new ObservableCollection<string>();
 
         public ObservableCollection<string> listMaKyHieu
         {
@@ -120,6 +121,17 @@ namespace CongVanManager.ViewModel
         {
             get { return _MaKyHieu; }
             set { _MaKyHieu = value; OnPropertyChanged(); }
+        }
+
+        public void ResetListMaKyHieu()
+        {
+            if (listMaKyHieu.Count != 0)
+                listMaKyHieu.Clear();
+            //foreach (LoaiCongVan item in LoaiCongVan.DB)
+            //{
+            //    listMaKyHieu.Add(item.Id);
+            //}
+            listMaKyHieu.Add("(Thêm mới loại công văn)");
         }
         //Trich yeu
         private string _TrichYeu;
@@ -185,6 +197,22 @@ namespace CongVanManager.ViewModel
             get { return _showFileName; }
             set { _showFileName = value; OnPropertyChanged(); }
         }
+        //ThemLoaiCongVan
+        private bool _IsDialogLoaiCongVanOpen;
+
+        public bool IsDialogLoaiCongVanOpen
+        {
+            get { return _IsDialogLoaiCongVanOpen; }
+            set { _IsDialogLoaiCongVanOpen = value; OnPropertyChanged(); }
+        }
+        private string _newLoaiCongVan;
+
+        public string newLoaiCongVan
+        {
+            get { return _newLoaiCongVan; }
+            set { _newLoaiCongVan = value; OnPropertyChanged(); }
+        }
+
 
         #endregion
         #region Command
@@ -245,6 +273,42 @@ namespace CongVanManager.ViewModel
                     DSNoiNhan.Remove(x);
                 });
             }
+        }
+
+        public ICommand SaveLoaiCongVan
+        {
+            get
+            {
+                return new RelayCommand(
+                x =>
+                {
+                    LoaiCongVan lcv = new LoaiCongVan() { Id = newLoaiCongVan };
+                    LoaiCongVan.DB.Add(lcv);
+                    ResetListCongVan();
+                    IsDialogLoaiCongVanOpen = false;
+                    selectedLoaiCongVan = newLoaiCongVan;
+                    newLoaiCongVan = "";
+                });
+            }
+        }
+        public ICommand Cancel
+        {
+            get
+            {
+                return new RelayCommand(
+                x =>
+                {
+                    newLoaiCongVan = "";
+                    IsDialogLoaiCongVanOpen = false;
+                    selectedLoaiCongVan = "";
+                });
+            }
+        }
+        #endregion
+        #region other function
+        public void ShowDialogLCV()
+        {
+            IsDialogLoaiCongVanOpen = true;
         }
         #endregion
     }
