@@ -47,15 +47,17 @@
             <StackPanel DockPanel.Dock="Top">
                 <Separator Height="10"/>
                 <Button materialDesign:ButtonAssist.CornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth2" 
-                        Style="{StaticResource MaterialDesignFlatAccentBgButton}" Margin="20,10" Height="40" Background="WhiteSmoke"
-                        BorderBrush="MediumPurple" Command="{Binding Open_NewDocLayout_Chooser}">
+                        Style="{StaticResource MaterialDesignFlatAccentButton}" Margin="20,10" Height="40" Background="WhiteSmoke"
+                        BorderBrush="Blue" BorderThickness="1" Command="{Binding Open_NewDocLayout_Chooser}">
                     <DockPanel>
                         <materialDesign:PackIcon Kind="Add" Margin="0,0,20,0">
                             <materialDesign:PackIcon.RenderTransform>
                                 <ScaleTransform CenterY="-5" ScaleX="1.5" ScaleY="1.5"/>
                             </materialDesign:PackIcon.RenderTransform>
                         </materialDesign:PackIcon>
-                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"> Nhập công văn mới </TextBlock>
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center"> 
+                            Nhập công văn mới 
+                        </TextBlock>
                     </DockPanel>
                 </Button>
                 <Button Margin="2,5" HorizontalContentAlignment="Left"

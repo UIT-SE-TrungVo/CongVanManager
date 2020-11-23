@@ -146,9 +146,15 @@
                             <TextBlock Margin="10">
                                 Nơi gửi
                             </TextBlock>
-                            <TextBox Grid.Column="1"/>
+                            <Grid Grid.Column="1">
+                                <TextBox x:Name="tbSender" VerticalAlignment="Center"/>
+                                <Button x:Name="btnSender" Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray" HorizontalAlignment="Left"
+                                   Content="{Binding ElementName=tbSender, Path=Text, Mode=TwoWay}" Visibility="Collapsed" Click="btnSender_Click">
+                                </Button>
+                            </Grid>
                             <WrapPanel Grid.Column="2">
-                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
+                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0" Click="btnConfirmSender_Click"
+                                        x:Name="btnConfirmSender">
                                     <materialDesign:PackIcon Kind="Tick" Height="30" Width="30"/>
                                 </Button>
                                 <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
@@ -156,11 +162,6 @@
                                 </Button>
                             </WrapPanel>
                         </Grid>
-                        <WrapPanel Margin="60,5">
-                            <Button Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray">
-                                Phòng Quản lí Đào tạo - Trường ĐH CNTT
-                            </Button>
-                        </WrapPanel>
                     </StackPanel>
                     <!--#endregion-->
 
@@ -175,7 +176,7 @@
                             <TextBlock Margin="10">
                                 Nơi nhận
                             </TextBlock>
-                            <TextBox Grid.Column="1"/>
+                            <TextBox Grid.Column="1" VerticalAlignment="Center"/>
                             <WrapPanel Grid.Column="2">
                                 <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
                                     <materialDesign:PackIcon Kind="PersonAdd" Height="30" Width="30"/>
