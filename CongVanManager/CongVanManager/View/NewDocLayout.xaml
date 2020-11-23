@@ -4,6 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CongVanManager"
+      
+            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:Controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
         xmlns:dateTime="clr-namespace:DateTimePicker;assembly=DateTimePicker"
@@ -19,212 +22,274 @@
       MinHeight="600" MinWidth="1000" 
       Title="Chọn loại công văn cần nhập">
 
-    <Grid Margin="10">
-        <StackPanel Orientation="Vertical">
-            <!--#region TIME BAR && IN_NUMBER-->
-            <Border Margin="10" CornerRadius="10" BorderBrush="MediumPurple" BorderThickness="3">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="4.5*"/>
-                        <ColumnDefinition Width="3.5*"/>
-                    </Grid.ColumnDefinitions>
-                    <DockPanel LastChildFill="True">
-                        <TextBlock x:Name="tbBoxNumber" VerticalAlignment="Center" Margin="10">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Text" Value="Số vào:"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding iNewDocLayout_Type}" Value="1">
-                                            <Setter Property="Text" Value="Số ra:"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <TextBox Margin="0,10,10,10"/>
-                    </DockPanel>
-                    <DockPanel Grid.Column="1">
-                        <TextBlock x:Name="tbGetTime" Margin="10" VerticalAlignment="Center">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Text" Value="Thời gian nhận:"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding iNewDocLayout_Type}" Value="1">
-                                            <Setter Property="Text" Value="Thời gian gửi:"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <materialDesign:TimePicker Margin="10" Width="100" Is24Hours="True" SelectedTimeFormat="Long"/>
-                        <DatePicker x:Name="dp1" Margin="10" MinWidth="100" FirstDayOfWeek="Monday" SelectedDateFormat="Long"/>
-                    </DockPanel>
-                    <DockPanel Grid.Column="2" LastChildFill="True">
-                        <TextBlock Margin="10" VerticalAlignment="Center">
-                            Ngày trên công văn:
-                        </TextBlock>
-                        <DatePicker x:Name="dp2" MinWidth="100"/>
-                        <!--these properties can be changed via dp1-->
-                    </DockPanel>
-
-                </Grid>
-            </Border>
-            <!--#endregion-->
-
-            <!--#region OVERALL INFORMATION BAR -->
-            <Border Margin="10" CornerRadius="10" BorderBrush="MediumPurple" BorderThickness="3">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                            <ColumnDefinition Width="80"></ColumnDefinition>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition MinWidth="100" Width="2*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <!--Loại công văn-->
-                        <TextBlock Margin="10" VerticalAlignment="Center" Grid.Column="0">
-                        Loại công văn
-                        </TextBlock>
-                        <ComboBox Width="100" Margin="10" Grid.Column="1">
-                            <ComboBoxItem>Kế hoạch</ComboBoxItem>
-                            <ComboBoxItem>Thông báo</ComboBoxItem>
-                            <ComboBoxItem>Quyết định</ComboBoxItem>
-                            <ComboBoxItem>(Thêm loại công văn mới)</ComboBoxItem>
-                        </ComboBox>
-
-                        <!--Số ký hiệu-->
-                        <TextBlock Margin="10" VerticalAlignment="Center" Grid.Column="2">
-                        Số ký hiệu
-                        </TextBlock>
-                        <TextBox Margin="10" Grid.Column="3" HorizontalContentAlignment="Right"/>
-                        <DockPanel Grid.Column="4">
-                            <TextBlock VerticalAlignment="Center" FontSize="18">/</TextBlock>
-                            <ComboBox MinWidth="50" Margin="5,10" DockPanel.Dock="Right">
-                                <ComboBoxItem>HSV</ComboBoxItem>
-                                <ComboBoxItem>ĐH-CNTT</ComboBoxItem>
-                                <ComboBoxItem>ĐT</ComboBoxItem>
-                                <ComboBoxItem>(Thêm ký hiệu mới)</ComboBoxItem>
-                            </ComboBox>
-                        </DockPanel>
-                    </Grid>
-
-                    <Grid Grid.Column="1">
-                        <DockPanel Grid.Column="5">
-                            <TextBlock Margin="10" VerticalAlignment="Center">
-                            Trích yếu
-                            </TextBlock>
-                            <TextBox Margin="10"/>
-                        </DockPanel>
-                    </Grid>
-                </Grid>
-            </Border>
-            <!--#endregion-->
-
-            <!--#region ADRESS BAR -->
-            <Border Margin="10" CornerRadius="10" BorderBrush="MediumPurple" BorderThickness="3"
-                    MinHeight="100">
-                <Grid>
-                    <!--#region SENDER-->
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel>
-                        <Grid Grid.Column="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Margin="10">
-                                Nơi gửi
-                            </TextBlock>
-                            <TextBox Grid.Column="1"/>
-                            <WrapPanel Grid.Column="2">
-                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
-                                    <materialDesign:PackIcon Kind="Tick" Height="30" Width="30"/>
-                                </Button>
-                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
-                                    <materialDesign:PackIcon Kind="Contact" Height="30" Width="30"/>
-                                </Button>
-                            </WrapPanel>
-                        </Grid>
-                        <WrapPanel Margin="60,5">
-                            <Button Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray">
-                                Phòng Quản lí Đào tạo - Trường ĐH CNTT
-                            </Button>
-                        </WrapPanel>
-                    </StackPanel>
-                    <!--#endregion-->
-
-                    <!--#region RECEIVER-->
-                    <StackPanel Grid.Column="1">
-                        <Grid Grid.Column="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Margin="10">
-                                Nơi nhận
-                            </TextBlock>
-                            <TextBox Grid.Column="1"/>
-                            <WrapPanel Grid.Column="2">
-                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
-                                    <materialDesign:PackIcon Kind="PersonAdd" Height="30" Width="30"/>
-                                </Button>
-                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
-                                    <materialDesign:PackIcon Kind="Contact" Height="30" Width="30"/>
-                                </Button>
-                            </WrapPanel>
-                        </Grid>
-                        <WrapPanel Margin="20,5">
-                            <Button Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray">
-                                Hội Sinh Viên
-                            </Button>
-                            <Button Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray">
-                                tronglt@uit.edu.vn
-                            </Button>
-                            <Button Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray">
-                                hct@uit.edu.vn
-                            </Button>
-                        </WrapPanel>
-                    </StackPanel>
-                    <!--#endregion-->
-                </Grid>
-            </Border>
-            <!--#endregion-->
-
-            <!--#region NOTE BAR -->
-            <Border Margin="10" CornerRadius="10" BorderBrush="MediumPurple" BorderThickness="3"
-  >
-                <DockPanel LastChildFill="True">
-                    <TextBlock Margin="10">
-                            Ghi chú
-                    </TextBlock>
-                    <TextBox Margin="10" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                </DockPanel>
-            </Border>
-            <!--#endregion-->
-
-            <!--#region PDF BAR -->
-            <StackPanel Orientation="Vertical">
-                <Button materialDesign:ButtonAssist.CornerRadius="5" Width="200" Margin="10">
-                    Đính kèm công văn
-                </Button>
-                <Button materialDesign:ButtonAssist.CornerRadius="5" Width="200" Margin="10">
-                    Xem nội dung công văn
-                </Button>
+    <materialDesign:DialogHost
+  IsOpen="{Binding IsDialogLoaiCongVanOpen, Mode=TwoWay}"
+  CloseOnClickAway="True"
+  Style="{StaticResource MaterialDesignEmbeddedDialogHost}"
+  DialogMargin="8">
+        <materialDesign:DialogHost.DialogContent>
+            <StackPanel Margin="16">
+                <TextBlock>
+                    Nhập loại công văn mới
+                </TextBlock>
+                <TextBox
+                    Margin="0 8 0 0"
+                    HorizontalAlignment="Stretch"
+                    x:Name="LoaiCongVanTextBox" 
+                    Text="{Binding newLoaiCongVan}"/>
+                <StackPanel
+        Orientation="Horizontal"
+        HorizontalAlignment="Right">
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            IsDefault="True"
+                            Margin="0 8 8 0"
+                            Command="{Binding SaveLoaiCongVan}">
+                        ACCEPT
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            IsCancel="True"
+                            Margin="0 8 8 0"
+                            Command="{Binding Cancel}">
+                        CANCEL
+                    </Button>
+                </StackPanel>
             </StackPanel>
-            <!--#endregion-->
-        </StackPanel>
-    </Grid>
+        </materialDesign:DialogHost.DialogContent>
+        <Grid Margin="10">
+            <StackPanel Orientation="Vertical">
+                <!--#region TIME BAR && IN_NUMBER-->
+                <Border Margin="10" CornerRadius="10" BorderBrush="MediumPurple" BorderThickness="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="4.5*"/>
+                            <ColumnDefinition Width="3.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <DockPanel LastChildFill="True">
+                            <TextBlock x:Name="tbBoxNumber" VerticalAlignment="Center" Margin="10">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text" Value="Số vào:"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding iNewDocLayout_Type}" Value="1">
+                                                <Setter Property="Text" Value="Số ra:"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox Margin="0,10,10,10" Text="{Binding SoVao}"/>
+                        </DockPanel>
+                        <DockPanel Grid.Column="1">
+                            <TextBlock x:Name="tbGetTime" Margin="10" VerticalAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text" Value="Thời gian nhận:"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding iNewDocLayout_Type}" Value="1">
+                                                <Setter Property="Text" Value="Thời gian gửi:"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <materialDesign:TimePicker Margin="10" Width="100"
+                                                   Is24Hours="True"
+                                                   SelectedTime="{Binding GioNhan}"
+                                                   SelectedTimeFormat="Long"/>
+                            <DatePicker x:Name="dp1" Margin="10" MinWidth="100"
+                                    FirstDayOfWeek="Monday" SelectedDateFormat="Short"
+                                    SelectedDate="{Binding NgayNhan, Mode=TwoWay}"/>
+                        </DockPanel>
+                        <DockPanel Grid.Column="2" LastChildFill="True">
+                            <TextBlock Margin="10" VerticalAlignment="Center">
+                            Ngày trên công văn:
+                            </TextBlock>
+                            <DatePicker x:Name="dp2" MinWidth="100"
+                                    SelectedDate="{Binding NgayTrenCongVan}"/>
+                            <!--these properties can be changed via dp1-->
+                        </DockPanel>
+
+                    </Grid>
+                </Border>
+                <!--#endregion-->
+
+                <!--#region OVERALL INFORMATION BAR -->
+                <Border Margin="10" CornerRadius="10" BorderBrush="MediumPurple" BorderThickness="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="80"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition MinWidth="100" Width="2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Loại công văn-->
+                            <TextBlock Margin="10" VerticalAlignment="Center" Grid.Column="0">
+                        Loại công văn
+                            </TextBlock>
+                            <ComboBox Margin="0,10,10,10"
+                                  Grid.Column="1"
+                                  ItemsSource="{Binding listLoaiCongVan, Mode=TwoWay}"
+                                  SelectedValue="{Binding selectedLoaiCongVan, Mode=TwoWay}"
+                                  />
+
+                            <!--Số ký hiệu-->
+                            <TextBlock Margin="10" VerticalAlignment="Center" Grid.Column="2">
+                        Số ký hiệu
+                            </TextBlock>
+                            <TextBox Margin="10" Grid.Column="3"
+                                 HorizontalContentAlignment="Right"
+                                 Text="{Binding SoKyHieu}"/>
+                            <DockPanel Grid.Column="4">
+                                <TextBlock VerticalAlignment="Center" FontSize="18">/</TextBlock>
+                                <ComboBox MinWidth="50" Margin="5,10" DockPanel.Dock="Right"
+                                      ItemsSource="{Binding listMaKyHieu, Mode=TwoWay}"
+                                      SelectedItem="{Binding MaKyHieu}">
+                                </ComboBox>
+                            </DockPanel>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <DockPanel Grid.Column="5">
+                                <TextBlock Margin="10" VerticalAlignment="Center">
+                            Trích yếu
+                                </TextBlock>
+                                <TextBox Margin="10"
+                                     Text="{Binding TrichYeu, Mode=TwoWay}"/>
+                            </DockPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+                <!--#endregion-->
+
+                <!--#region ADRESS BAR -->
+                <Border Margin="10" CornerRadius="10" BorderBrush="MediumPurple" BorderThickness="3"
+                    MinHeight="100">
+                    <Grid>
+                        <!--#region SENDER-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Margin="10">
+                                Nơi gửi
+                                </TextBlock>
+                                <TextBox Grid.Column="1" Margin="1,10,9,0"
+                                     Text="{Binding NoiGui, Mode=TwoWay}"/>
+                                <WrapPanel Grid.Column="2">
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
+                                        <materialDesign:PackIcon Kind="Contact" Height="30" Width="30"/>
+                                    </Button>
+                                </WrapPanel>
+                            </Grid>
+                            <WrapPanel Margin="60,5"/>
+                        </StackPanel>
+                        <!--#endregion-->
+
+                        <!--#region RECEIVER-->
+                        <StackPanel Grid.Column="1">
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Margin="10">
+                                Nơi nhận
+                                </TextBlock>
+                                <TextBox Grid.Column="1" Margin="0,10,10,0"
+                                     Text="{Binding NoiNhan, Mode=TwoWay}"/>
+                                <WrapPanel Grid.Column="2">
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0"
+                                        Command="{Binding ClickThemNoiNhan}">
+                                        <materialDesign:PackIcon Kind="PersonAdd" Height="30" Width="30"/>
+                                    </Button>
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
+                                        <materialDesign:PackIcon Kind="Contact" Height="30" Width="30"/>
+                                    </Button>
+                                </WrapPanel>
+                            </Grid>
+                            <WrapPanel Margin="20,5" Height="auto">
+                                <ItemsControl Name="ListNoiNhan" ItemsSource="{Binding DSNoiNhan}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Button materialDesign:HintAssist.Hint="{Binding Email}"
+                                                materialDesign:HintAssist.Background="White"
+                                                materialDesign:HintAssist.IsFloating="True"
+                                                Content="{Binding TenLienHe}"
+                                                Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray"
+                                                Width="auto"
+                                                Height="50"
+                                                Command="{Binding Path=DataContext.XoaNoiNhan, ElementName=ListNoiNhan}"
+                                                CommandParameter="{Binding}"
+                                                />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </WrapPanel>
+                        </StackPanel>
+                        <!--#endregion-->
+                    </Grid>
+                </Border>
+                <!--#endregion-->
+
+                <!--#region NOTE BAR -->
+                <Border Margin="10" CornerRadius="10" BorderBrush="MediumPurple" BorderThickness="3"
+  >
+                    <DockPanel LastChildFill="True">
+                        <TextBlock Margin="10">
+                            Ghi chú
+                        </TextBlock>
+                        <TextBox Margin="10" TextWrapping="Wrap" VerticalAlignment="Top"
+                             Text="{Binding GhiChu}"/>
+                    </DockPanel>
+                </Border>
+                <!--#endregion-->
+
+                <!--#region PDF BAR -->
+                <StackPanel Orientation="Vertical">
+                    <Button materialDesign:ButtonAssist.CornerRadius="5" Width="200" Margin="10"
+                        Command="{Binding PinPdf}">
+                        Đính kèm công văn
+                    </Button>
+                    <TextBlock Margin="10"
+                           Width="auto"
+                           TextDecorations="Underline"
+                           HorizontalAlignment="Center"
+                           FontSize="15"
+                           Text="{Binding showFileName}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding ClickOnFileNameCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    </TextBlock>
+                    <Button materialDesign:ButtonAssist.CornerRadius="5" Width="200" Margin="10">
+                        Xem nội dung công văn
+                    </Button>
+                </StackPanel>
+                <!--#endregion-->
+            </StackPanel>
+        </Grid>
+    </materialDesign:DialogHost>
 </Page>
 

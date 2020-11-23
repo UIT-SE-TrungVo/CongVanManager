@@ -45,7 +45,6 @@ namespace CongVanManager.ViewModel
         private MainWindowViewModel()
         {
             ChangePage(0);
-
             #region DATA SAMPLE BINDING (DISABLED)
             /*
             User user1 = new User
