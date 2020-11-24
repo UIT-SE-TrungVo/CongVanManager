@@ -365,6 +365,10 @@ namespace CongVanManager.ViewModel
                     {
                         cv.StatusCode = CongVan.StatusCodeEnum.ChoDuyet;
                     }
+                    foreach (LienHeShort item in DSNoiNhan)
+                    {
+                        cv.DanhSachNoiNhan.Add(new NoiNhan() { LienHe = new LienHe() {Email = item.Email, Name=item.TenLienHe } });
+                    }
                     LienHe.DB.Add(cv.NoiGui);
                     CongVan.DB.Add(cv);
                 });
