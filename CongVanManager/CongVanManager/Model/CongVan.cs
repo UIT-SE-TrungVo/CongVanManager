@@ -6,8 +6,9 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.Threading.Tasks;
 
-    public class CongVan : ObservableObject
+    public class CongVan : ObservableObject, IComparable
     {
         public CongVan()
         {
@@ -50,7 +51,9 @@
                     LienHe.DB.Add(new LienHe(lh));
                 NoiNhan noiNhan = new NoiNhan{
                     CongVan = this,
-                    LienHe = lienHe
+                    LienHe = lienHe,
+                    CongVan1 = cv,
+                    LienHe1 = lh
                 };
                 lienHe.DanhSachNoiNhan.Add(noiNhan);
                 DanhSachNoiNhan.Add(noiNhan);
@@ -238,6 +241,20 @@
                 {
                     var temp = item.ToCongVan();
                     temp.NgayXuLi = DateTime.Now;
+
+                    if (temp.LienHes == null)
+                        temp.LienHes = new List<View.LienHe>();
+
+                    foreach(NoiNhan nh in item.DanhSachNoiNhan)
+                    {
+                        nh.CongVan1 = temp;
+                        if (nh.LienHe1 != null)
+                        {
+                            temp.LienHes.Add(nh.LienHe1);
+                            nh.LienHe1.CongVans1.Add(temp);
+                        }
+                    }
+
                     DataProvider.Ins.DB.CongVan.Add(temp);
                 }
         }
@@ -250,6 +267,11 @@
                     return item;
             }
             return null;
+        }
+
+        public int CompareTo(object obj)
+        {
+            return Id.CompareTo((obj as CongVan).Id);
         }
     }
 }

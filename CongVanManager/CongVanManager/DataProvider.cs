@@ -68,14 +68,17 @@ namespace CongVanManager
                 await Task.Delay(TimeToRefresh_Download);
                 try
                 {
+                    //*
                     DB.Dispose();
                     DB = new CONGVANMANAGEREntities();
                     DB.Configuration.AutoDetectChangesEnabled = false;
-
+                    //*/
                     CongVan.ReloadDatabase();
                     LienHe.ReloadDatabase();
                     User.ReloadDatabase();
                     LoaiCongVan.ReloadDatabase();
+                    Setting.ReloadDatabase();
+                    KyHieu.ReloadDatabase();
 
                     NguoiDung user = DB.NguoiDung.Find(MainWindowViewModel.Ins.User.Username);
                     if (user != null)

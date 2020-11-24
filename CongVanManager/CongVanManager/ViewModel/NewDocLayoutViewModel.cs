@@ -356,7 +356,7 @@ namespace CongVanManager.ViewModel
                         GhiChu = GhiChu,
                         NoiGui = new LienHe() { Email = NoiGui, Name = NoiGui},
                         LoaiCongVan = new LoaiCongVan() { Id=selectedLoaiCongVan },
-                    };
+                    }; // TODO: add check for existing LienHe & LoaiCongVan
                     if(iNewDocLayout_Type == (int)DocType.In)
                     {
                         cv.StatusCode = CongVan.StatusCodeEnum.DaTiepNhan;                    
@@ -367,7 +367,11 @@ namespace CongVanManager.ViewModel
                     }
                     foreach (LienHeShort item in DSNoiNhan)
                     {
-                        cv.DanhSachNoiNhan.Add(new NoiNhan() { LienHe = new LienHe() {Email = item.Email, Name=item.TenLienHe } });
+                        // TODO: add check for existing LienHe
+                        LienHe lh = new LienHe() { Email = item.Email, Name = item.TenLienHe };
+                        NoiNhan nn = new NoiNhan() { LienHe = lh, CongVan = cv };
+                        cv.DanhSachNoiNhan.Add(nn);
+                        lh.DanhSachNoiNhan.Add(nn);
                     }
                     LienHe.DB.Add(cv.NoiGui);
                     CongVan.DB.Add(cv);

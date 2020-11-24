@@ -60,7 +60,7 @@ namespace CongVanManager
                     DataProvider.Ins.DB.KyHieuCongVan.Add(item.ToKyHieuCongVan());
         }
 
-        private static void ReloadDatabase()
+        public static void ReloadDatabase()
         {
             _db.CollectionChanged -= KyHieuCongVanDBChanged;
 

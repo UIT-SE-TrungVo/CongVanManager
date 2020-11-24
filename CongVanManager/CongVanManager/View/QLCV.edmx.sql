@@ -294,7 +294,7 @@ ADD CONSTRAINT [FK_DanhSachNoiNhan_CongVan]
     FOREIGN KEY ([CongVans1_MaCongVan])
     REFERENCES [dbo].[CongVan]
         ([MaCongVan])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating foreign key on [LienHes_Email] in table 'DanhSachNoiNhan'
@@ -303,7 +303,7 @@ ADD CONSTRAINT [FK_DanhSachNoiNhan_LienHe]
     FOREIGN KEY ([LienHes_Email])
     REFERENCES [dbo].[LienHe]
         ([Email])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DanhSachNoiNhan_LienHe'

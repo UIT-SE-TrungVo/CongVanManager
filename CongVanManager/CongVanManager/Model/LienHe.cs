@@ -13,10 +13,11 @@ namespace CongVanManager
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.Linq;
     using CongVanManager.View;
     using CongVanManager.ViewModel;
 
-    public partial class LienHe : ObservableObject
+    public partial class LienHe : ObservableObject, IComparable
     {
         public LienHe()
         {
@@ -59,7 +60,24 @@ namespace CongVanManager
                 }
             if (arg.NewItems != null)
                 foreach (LienHe item in arg.NewItems)
-                    DataProvider.Ins.DB.LienHe.Add(item.ToLienHe());
+                {
+                    var temp = item.ToLienHe();
+
+                    if (temp.CongVans == null)
+                        temp.CongVans = new List<View.CongVan>();
+
+                    foreach (NoiNhan nh in item.DanhSachNoiNhan)
+                    {
+                        nh.LienHe1 = temp;
+                        if (nh.CongVan1 != null)
+                        {
+                            temp.CongVans.Add(nh.CongVan1);
+                            nh.CongVan1.LienHes.Add(temp);
+                        }
+                    }
+
+                    DataProvider.Ins.DB.LienHe.Add(temp);
+                }
         }
 
         private static DelayedObservableCollection<LienHe> _db;
@@ -79,7 +97,11 @@ namespace CongVanManager
 
         private View.LienHe ToLienHe()
         {
-            return new View.LienHe { Email = Email, TenLienHe = Name};
+            return new View.LienHe
+            {
+                Email = Email,
+                TenLienHe = Name
+            };
         }
 
         public static LienHe Get(View.LienHe lcv)
@@ -90,6 +112,11 @@ namespace CongVanManager
                     return item;
             }
             return null;
+        }
+
+        public int CompareTo(object obj)
+        {
+            return Email.CompareTo((obj as LienHe).Email);
         }
     }
 }

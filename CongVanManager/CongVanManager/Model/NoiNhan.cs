@@ -13,11 +13,15 @@ namespace CongVanManager
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
 
     public partial class NoiNhan : ObservableObject
     {
-        public virtual CongVan CongVan { get; set; }
-        public virtual LienHe LienHe { get; set; }
+        public CongVan CongVan { get; set; }
+        public LienHe LienHe { get; set; }
+
+        public View.CongVan CongVan1 { get; set; }
+        public View.LienHe LienHe1 { get; set; }
 
         private static DelayedObservableCollection<NoiNhan> _db;
         public static DelayedObservableCollection<NoiNhan> DB

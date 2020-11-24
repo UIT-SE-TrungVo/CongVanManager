@@ -352,8 +352,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="DanhSachNoiNhan">
-          <End Type="CONGVANMANAGERModel.CongVan" Role="CongVan" Multiplicity="*" />
-          <End Type="CONGVANMANAGERModel.LienHe" Role="LienHe" Multiplicity="*" />
+          <End Type="CONGVANMANAGERModel.CongVan" Role="CongVan" Multiplicity="*" ></End>
+          <End Type="CONGVANMANAGERModel.LienHe" Role="LienHe" Multiplicity="*" ></End>
         </Association>
         <EntityType Name="database_firewall_rules">
           <Key>
