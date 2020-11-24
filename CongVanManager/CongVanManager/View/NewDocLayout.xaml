@@ -23,14 +23,13 @@
       Title="Chọn loại công văn cần nhập">
 
     <materialDesign:DialogHost
-  IsOpen="{Binding IsDialogLoaiCongVanOpen, Mode=TwoWay}"
+  IsOpen="{Binding IsDialogOpen, Mode=TwoWay}"
   CloseOnClickAway="True"
   Style="{StaticResource MaterialDesignEmbeddedDialogHost}"
   DialogMargin="8">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="16">
-                <TextBlock>
-                    Nhập loại công văn mới
+                <TextBlock Text="{Binding type}">
                 </TextBlock>
                 <TextBox
                     Margin="0 8 0 0"
@@ -43,7 +42,7 @@
                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                             IsDefault="True"
                             Margin="0 8 8 0"
-                            Command="{Binding SaveLoaiCongVan}">
+                            Command="{Binding Save}">
                         ACCEPT
                     </Button>
                     <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -151,7 +150,7 @@
                                 <TextBlock VerticalAlignment="Center" FontSize="18">/</TextBlock>
                                 <ComboBox MinWidth="50" Margin="5,10" DockPanel.Dock="Right"
                                       ItemsSource="{Binding listMaKyHieu, Mode=TwoWay}"
-                                      SelectedItem="{Binding MaKyHieu}">
+                                      SelectedValue="{Binding MaKyHieu}">
                                 </ComboBox>
                             </DockPanel>
                         </Grid>
@@ -283,8 +282,11 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     </TextBlock>
-                    <Button materialDesign:ButtonAssist.CornerRadius="5" Width="200" Margin="10">
-                        Xem nội dung công văn
+                    <Button materialDesign:ButtonAssist.CornerRadius="5"
+                            Width="200"
+                            Margin="10"
+                            Command="{Binding LuuCongVan}">
+                        Lưu
                     </Button>
                 </StackPanel>
                 <!--#endregion-->
