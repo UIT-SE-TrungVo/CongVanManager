@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CongVanManager.Model
+namespace CongVanManager
 {
     class KyHieu : ObservableObject
     {
@@ -20,6 +20,10 @@ namespace CongVanManager.Model
         public KyHieu(View.KyHieuCongVan item)
         {
             MaKyHieu = item.MaKyHieu;
+        }
+
+        public KyHieu()
+        {
         }
 
         public static DelayedObservableCollection<KyHieu> DB
