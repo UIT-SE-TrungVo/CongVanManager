@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="CONGVANMANAGERModel.LoaiCongVan" Width="1.5" PointX="0.75" PointY="2.625" />
         <EntityTypeShape EntityType="CONGVANMANAGERModel.NguoiDung" Width="1.5" PointX="3" PointY="7.5" />
         <EntityTypeShape EntityType="CONGVANMANAGERModel.PhanHoi" Width="1.5" PointX="5.25" PointY="2.375" />
-        <EntityTypeShape EntityType="CONGVANMANAGERModel.QuyDinh" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CONGVANMANAGERModel.QuyDinh" Width="1.5" PointX="7.125" PointY="1.75" />
         <AssociationConnector Association="CONGVANMANAGERModel.FK__CongVan__MaLoaiC__29221CFB" />
         <AssociationConnector Association="CONGVANMANAGERModel.FK__CongVan__NoiGui__2A164134" />
         <AssociationConnector Association="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__2DE6D218" />
@@ -18,7 +18,7 @@
         <AssociationConnector Association="CONGVANMANAGERModel.DanhSachNoiNhan" />
         <EntityTypeShape EntityType="CONGVANMANAGERModel.database_firewall_rules" Width="2.625" PointX="7.375" PointY="3.75" />
         <EntityTypeShape EntityType="CONGVANMANAGERModel.KyHieuCongVan" Width="1.5" PointX="0.875" PointY="1" />
-        <EntityTypeShape EntityType="CONGVANMANAGERModel.PDFScan" Width="1.5" PointX="1" PointY="5.5" />
+        <EntityTypeShape EntityType="CONGVANMANAGERModel.PDFScan" Width="1.5" PointX="0.875" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

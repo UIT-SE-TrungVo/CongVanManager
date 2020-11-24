@@ -11,10 +11,10 @@
     <EntitySet Name="LoaiCongVan" EntityType="CONGVANMANAGERModel.Store.LoaiCongVan" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NguoiDung" EntityType="CONGVANMANAGERModel.Store.NguoiDung" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PhanHoi" EntityType="CONGVANMANAGERModel.Store.PhanHoi" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="QuyDinhs" EntityType="CONGVANMANAGERModel.Store.QuyDinhs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QuyDinh" EntityType="CONGVANMANAGERModel.Store.QuyDinh" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="database_firewall_rules" EntityType="CONGVANMANAGERModel.Store.database_firewall_rules" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="KyHieuCongVan" EntityType="CONGVANMANAGERModel.Store.KyHieuCongVan" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PDFScan" EntityType="CONGVANMANAGERModel.Store.PDFScan" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PDFScans" EntityType="CONGVANMANAGERModel.Store.PDFScans" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DanhSachNoiNhan" EntityType="CONGVANMANAGERModel.Store.DanhSachNoiNhan" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK__CongVan__MaLoaiC__29221CFB" Association="CONGVANMANAGERModel.Store.FK__CongVan__MaLoaiC__29221CFB">
       <End Role="LoaiCongVan" EntitySet="LoaiCongVan" />
@@ -88,7 +88,7 @@
     <Property Name="TenTaiKhoan" Type="varchar" Nullable="false" MaxLength="20" />
     <Property Name="BinhLuan" Type="nvarchar" Nullable="true" MaxLength="100" />
   </EntityType>
-  <EntityType Name="QuyDinhs">
+  <EntityType Name="QuyDinh">
     <Key>
       <PropertyRef Name="MaQuyDinh" />
     </Key>
@@ -117,7 +117,7 @@
     </Key>
     <Property Name="MaKyHieu" Type="nvarchar" Nullable="false" MaxLength="20" />
   </EntityType>
-  <EntityType Name="PDFScan">
+  <EntityType Name="PDFScans">
     <Key>
       <PropertyRef Name="PDFName" />
     </Key>
@@ -214,7 +214,7 @@
           <EntitySet Name="LoaiCongVan" EntityType="CONGVANMANAGERModel.LoaiCongVan" />
           <EntitySet Name="NguoiDung" EntityType="CONGVANMANAGERModel.NguoiDung" />
           <EntitySet Name="PhanHoi" EntityType="CONGVANMANAGERModel.PhanHoi" />
-          <EntitySet Name="QuyDinhs" EntityType="CONGVANMANAGERModel.QuyDinh" />
+          <EntitySet Name="QuyDinh" EntityType="CONGVANMANAGERModel.QuyDinh" />
           <AssociationSet Name="FK__CongVan__MaLoaiC__29221CFB" Association="CONGVANMANAGERModel.FK__CongVan__MaLoaiC__29221CFB">
             <End Role="LoaiCongVan" EntitySet="LoaiCongVan" />
             <End Role="CongVan" EntitySet="CongVan" />
@@ -237,7 +237,7 @@
           </AssociationSet>
           <EntitySet Name="database_firewall_rules" EntityType="CONGVANMANAGERModel.database_firewall_rules" />
           <EntitySet Name="KyHieuCongVan" EntityType="CONGVANMANAGERModel.KyHieuCongVan" />
-          <EntitySet Name="PDFScan" EntityType="CONGVANMANAGERModel.PDFScan" />
+          <EntitySet Name="PDFScans" EntityType="CONGVANMANAGERModel.PDFScan" />
         </EntityContainer>
         <EntityType Name="CongVan">
           <Key>
@@ -248,7 +248,7 @@
           <Property Name="NoiGui" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SoKyHieu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="SoCongVan" Type="Int32" />
-          <Property Name="NgayCongVan" Type="DateTime" Precision="0" />
+          <Property Name="NgayCongVan" Type="DateTime" Precision="3" />
           <Property Name="TrichYeu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TinhTrang" Type="Int32" />
           <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -257,7 +257,7 @@
           <NavigationProperty Name="LienHe" Relationship="CONGVANMANAGERModel.FK__CongVan__NoiGui__2A164134" FromRole="CongVan" ToRole="LienHe" />
           <NavigationProperty Name="PhanHois" Relationship="CONGVANMANAGERModel.FK__PhanHoi__MaCongV__2DE6D218" FromRole="CongVan" ToRole="PhanHoi" />
           <NavigationProperty Name="LienHes" Relationship="CONGVANMANAGERModel.DanhSachNoiNhan" FromRole="CongVan" ToRole="LienHe" />
-          <Property Name="NgayXuLi" Type="DateTime" Nullable="false" />
+          <Property Name="NgayXuLi" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="LienHe">
           <Key>
@@ -283,7 +283,7 @@
           <Property Name="LoaiNguoiDung" Type="Int16" Nullable="false" />
           <Property Name="MatKhau" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PhanHois" Relationship="CONGVANMANAGERModel.FK__PhanHoi__TenTaiK__2EDAF651" FromRole="NguoiDung" ToRole="PhanHoi" />
-          <Property Name="LastSeen" Type="DateTime" Nullable="false" />
+          <Property Name="LastSeen" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="PhanHoi">
           <Key>
@@ -375,14 +375,14 @@
           <Key>
             <PropertyRef Name="MaKyHieu" />
           </Key>
-          <Property Name="MaKyHieu" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="20" FixedLength="false" />
+          <Property Name="MaKyHieu" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PDFScan">
           <Key>
             <PropertyRef Name="PDFName" />
           </Key>
           <Property Name="PDFName" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="100" />
-          <Property Name="Content" Type="Binary" Nullable="false" />
+          <Property Name="Content" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -442,9 +442,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="QuyDinhs">
+    <EntitySetMapping Name="QuyDinh">
       <EntityTypeMapping TypeName="IsTypeOf(CONGVANMANAGERModel.QuyDinh)">
-        <MappingFragment StoreEntitySet="QuyDinhs">
+        <MappingFragment StoreEntitySet="QuyDinh">
           <ScalarProperty Name="MaQuyDinh" ColumnName="MaQuyDinh" />
           <ScalarProperty Name="GiaTri" ColumnName="GiaTri" />
         </MappingFragment>
@@ -469,9 +469,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PDFScan">
+    <EntitySetMapping Name="PDFScans">
       <EntityTypeMapping TypeName="IsTypeOf(CONGVANMANAGERModel.PDFScan)">
-        <MappingFragment StoreEntitySet="PDFScan">
+        <MappingFragment StoreEntitySet="PDFScans">
           <ScalarProperty Name="PDFName" ColumnName="PDFName" />
           <ScalarProperty Name="Content" ColumnName="Content" />
         </MappingFragment>

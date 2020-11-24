@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/23/2020 18:25:51
+-- Date Created: 11/24/2020 15:31:11
 -- Generated from EDMX file: C:\Users\longt\source\repos\CongVanManager\CongVanManager\CongVanManager\View\QLCV.edmx
 -- --------------------------------------------------
 
@@ -55,8 +55,8 @@ GO
 IF OBJECT_ID(N'[dbo].[PhanHoi]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PhanHoi];
 GO
-IF OBJECT_ID(N'[dbo].[QuyDinhs]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[QuyDinhs];
+IF OBJECT_ID(N'[dbo].[QuyDinh]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[QuyDinh];
 GO
 IF OBJECT_ID(N'[dbo].[database_firewall_rules]', 'U') IS NOT NULL
     DROP TABLE [dbo].[database_firewall_rules];
@@ -64,8 +64,8 @@ GO
 IF OBJECT_ID(N'[dbo].[KyHieuCongVan]', 'U') IS NOT NULL
     DROP TABLE [dbo].[KyHieuCongVan];
 GO
-IF OBJECT_ID(N'[dbo].[PDFScan]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PDFScan];
+IF OBJECT_ID(N'[dbo].[PDFScans]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PDFScans];
 GO
 IF OBJECT_ID(N'[dbo].[DanhSachNoiNhan]', 'U') IS NOT NULL
     DROP TABLE [dbo].[DanhSachNoiNhan];
@@ -122,8 +122,8 @@ CREATE TABLE [dbo].[PhanHoi] (
 );
 GO
 
--- Creating table 'QuyDinhs'
-CREATE TABLE [dbo].[QuyDinhs] (
+-- Creating table 'QuyDinh'
+CREATE TABLE [dbo].[QuyDinh] (
     [MaQuyDinh] varchar(20)  NOT NULL,
     [GiaTri] nvarchar(50)  NOT NULL
 );
@@ -146,8 +146,8 @@ CREATE TABLE [dbo].[KyHieuCongVan] (
 );
 GO
 
--- Creating table 'PDFScan'
-CREATE TABLE [dbo].[PDFScan] (
+-- Creating table 'PDFScans'
+CREATE TABLE [dbo].[PDFScans] (
     [PDFName] nvarchar(100)  NOT NULL,
     [Content] varbinary(max)  NOT NULL
 );
@@ -194,9 +194,9 @@ ADD CONSTRAINT [PK_PhanHoi]
     PRIMARY KEY CLUSTERED ([MaPhanHoi] ASC);
 GO
 
--- Creating primary key on [MaQuyDinh] in table 'QuyDinhs'
-ALTER TABLE [dbo].[QuyDinhs]
-ADD CONSTRAINT [PK_QuyDinhs]
+-- Creating primary key on [MaQuyDinh] in table 'QuyDinh'
+ALTER TABLE [dbo].[QuyDinh]
+ADD CONSTRAINT [PK_QuyDinh]
     PRIMARY KEY CLUSTERED ([MaQuyDinh] ASC);
 GO
 
@@ -212,9 +212,9 @@ ADD CONSTRAINT [PK_KyHieuCongVan]
     PRIMARY KEY CLUSTERED ([MaKyHieu] ASC);
 GO
 
--- Creating primary key on [PDFName] in table 'PDFScan'
-ALTER TABLE [dbo].[PDFScan]
-ADD CONSTRAINT [PK_PDFScan]
+-- Creating primary key on [PDFName] in table 'PDFScans'
+ALTER TABLE [dbo].[PDFScans]
+ADD CONSTRAINT [PK_PDFScans]
     PRIMARY KEY CLUSTERED ([PDFName] ASC);
 GO
 

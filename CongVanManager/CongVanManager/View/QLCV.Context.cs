@@ -30,9 +30,9 @@ namespace CongVanManager.View
         public virtual DbSet<LoaiCongVan> LoaiCongVan { get; set; }
         public virtual DbSet<NguoiDung> NguoiDung { get; set; }
         public virtual DbSet<PhanHoi> PhanHoi { get; set; }
-        public virtual DbSet<QuyDinh> QuyDinhs { get; set; }
+        public virtual DbSet<QuyDinh> QuyDinh { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
         public virtual DbSet<KyHieuCongVan> KyHieuCongVan { get; set; }
-        public virtual DbSet<PDFScan> PDFScan { get; set; }
+        public virtual DbSet<PDFScan> PDFScans { get; set; }
     }
 }

@@ -16,8 +16,8 @@ namespace CongVanManager
         {
             var db = DataProvider.Ins.DB;
 
-            _ins.LastUpdated = DateTime.Parse(db.QuyDinhs.Find("LastUpdated").GiaTri);
-            string headName = db.QuyDinhs.Find("TruongPhong")?.GiaTri;
+            _ins.LastUpdated = DateTime.Parse(db.QuyDinh.Find("LastUpdated").GiaTri);
+            string headName = db.QuyDinh.Find("TruongPhong")?.GiaTri;
             if (headName != null)
                 _ins.TruongPhong = User.DB.FirstOrDefault(item => item.Username == headName);
 

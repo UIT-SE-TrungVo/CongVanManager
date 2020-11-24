@@ -289,7 +289,7 @@ namespace CongVanManager.ViewModel
         }
         #endregion
 
-        #region
+        #region PDF
         private WindowsFormsHost _pdf;
         public WindowsFormsHost PDF { get => _pdf; set => _pdf = value; }
         #endregion

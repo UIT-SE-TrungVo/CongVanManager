@@ -45,12 +45,12 @@ namespace CongVanManager
                     DB.ChangeTracker.DetectChanges();
                     if (DB.ChangeTracker.HasChanges())
                     {
-                        QuyDinh setting = DB.QuyDinhs.Find("LastUpdated");
+                        var setting = DB.QuyDinh.Find("LastUpdated");
                         // TODO: remove this
                         //*
                         if (setting == null) {
                             setting = new QuyDinh { MaQuyDinh = "LastUpdated" };
-                            DB.QuyDinhs.Add(setting);
+                            DB.QuyDinh.Add(setting);
                         }
                         //*/
                         setting.GiaTri = DateTime.Now.ToString();

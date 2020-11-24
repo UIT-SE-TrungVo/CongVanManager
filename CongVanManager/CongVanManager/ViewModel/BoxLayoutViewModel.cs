@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms.Integration;
 using System.Windows.Input;
 using CongVanManager.Command;
 using CongVanManager.View;
 using CongVanManager.View.usercontrol;
+using PdfiumViewer;
 
 namespace CongVanManager.ViewModel
 {
@@ -254,8 +257,57 @@ namespace CongVanManager.ViewModel
         }
         #endregion
 
+        #region PDFViewer
+        public string PDFScan
+        {
+            get => _selectedCongVan?.PDFScanLocation;
+            set
+            {
+                OnPropertyChanged();
+                if (_selectedCongVan == null)
+                    return;
+                if (value != _selectedCongVan.PDFScanLocation)
+                {
+                    _selectedCongVan.PDFScanLocation = value;
+                    OnPropertyChanged("PDF");
+                }
+            }
+        }
+        private PdfViewer _pdf;
+        private WindowsFormsHost _wfh;
+        public WindowsFormsHost PDF
+        {
+            get
+            {
+                string pdfLoc = PDFScan;
+                try
+                {
+                    if (pdfLoc == null)
+                        throw new ArgumentNullException("pdfLoc","Field PDFScan is empty");
+                    IPdfDocument prevPDF = _pdf.Document;
+                    if (File.Exists(pdfLoc))
+                        _pdf.Document = PdfDocument.Load(pdfLoc);
+                    else
+                    {
+                        if (!PDFDownloader.LoadPDF(pdfLoc))
+                            throw new FileNotFoundException(
+                                "Cannot find PDF file in machine or database", pdfLoc);
+                        _pdf.Document = PdfDocument.Load(pdfLoc);
+                    }
+                    prevPDF.Dispose();
+                }
+                catch (Exception e) { Console.WriteLine(e.ToString()); }
+                return _wfh;
+            }
+        }
+        #endregion
+
         private BoxLayoutViewModel(DocType docType)
         {
+            _pdf = new PdfViewer();
+            _wfh = new WindowsFormsHost();
+            _wfh.Child = _pdf;
+
             isEnable = false;
             BoxType = docType;
             iDocType = (int)BoxType;
