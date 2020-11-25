@@ -365,16 +365,21 @@ namespace CongVanManager.ViewModel
                     {
                         cv.StatusCode = CongVan.StatusCodeEnum.ChoDuyet;
                     }
+                    LienHe.DB.Add(cv.NoiGui);
+                    CongVan.DB.Add(cv);
                     foreach (LienHeShort item in DSNoiNhan)
                     {
-                        // TODO: add check for existing LienHe
                         LienHe lh = new LienHe() { Email = item.Email, Name = item.TenLienHe };
                         NoiNhan nn = new NoiNhan() { LienHe = lh, CongVan = cv };
                         cv.DanhSachNoiNhan.Add(nn);
                         lh.DanhSachNoiNhan.Add(nn);
                     }
-                    LienHe.DB.Add(cv.NoiGui);
-                    CongVan.DB.Add(cv);
+                    foreach(NoiNhan item in cv.DanhSachNoiNhan)
+                    {
+                        LienHe.DB.Add(item.LienHe);
+                        item.CongVan = cv;
+                        CongVanManager.NoiNhan.DB.Add(item);
+                    }
                 });
             }
         }

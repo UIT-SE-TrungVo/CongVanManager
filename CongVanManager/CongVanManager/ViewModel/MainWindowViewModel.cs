@@ -128,7 +128,7 @@ namespace CongVanManager.ViewModel
                 (sender, e)
                 =>
                 { OnPropertyChanged("DSCongVan"); };
-            //*/
+            */
             #endregion
         }
 
