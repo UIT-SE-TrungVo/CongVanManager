@@ -26,6 +26,11 @@ namespace CongVanManager.View
         {
             InitializeComponent();
             this.DataContext = new NewDocLayoutViewModel(type);
-        }      
+        }
+        public NewDocLayout(CongVanManager.CongVan CongVan)
+        {
+            InitializeComponent();
+            this.DataContext = new NewDocLayoutViewModel(true, CongVan);
+        }
     }
 }

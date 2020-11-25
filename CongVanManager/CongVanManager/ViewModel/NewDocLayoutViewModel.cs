@@ -19,6 +19,8 @@ namespace CongVanManager.ViewModel
     {
         public DocType NewDocLayout_Type;
         public int iNewDocLayout_Type { get; set; }
+        public bool edit = false;
+        public long editID;
 
         public NewDocLayoutViewModel(DocType type)
         {
@@ -31,6 +33,33 @@ namespace CongVanManager.ViewModel
 
             ResetListCongVan();
             ResetListMaKyHieu();
+        }
+
+        public NewDocLayoutViewModel(bool isedit, CongVan cv)
+        {
+            edit = isedit;
+
+            editID = cv.Id;
+            SoVao = (int)cv.SoCongVan;
+            NgayNhan = cv.NgayXuLi;
+            TrichYeu = cv.TrichYeu;
+            NoiGui = cv.NoiGui.Name;
+            foreach(NoiNhan item in cv.DanhSachNoiNhan)
+            {
+                DSNoiNhan.Add(new LienHeShort() { Email = item.LienHe.Email, TenLienHe = item.LienHe.Name }) ;
+            }
+            NgayTrenCongVan = (DateTime)cv.NgayCongVan;
+            GhiChu = cv.GhiChu;
+
+            listLoaiCongVan = new ObservableCollection<string>();
+
+            ResetListCongVan();
+            ResetListMaKyHieu();
+            SoKyHieu = cv.SoKyHieu.Remove(cv.SoKyHieu.IndexOf("/"));
+            MaKyHieu = cv.SoKyHieu.Remove(0, cv.SoKyHieu.IndexOf("/")+1);
+            selectedLoaiCongVan = cv.LoaiCongVan.Id;
+
+            IsVisibleHuy = "Visible";
         }
         #region Binding
         //So vao
@@ -228,6 +257,15 @@ namespace CongVanManager.ViewModel
             get { return _type; }
             set { _type = value; OnPropertyChanged(); }
         }
+        //huy button
+
+        private string _IsVisibleHuy = "Hidden";
+
+        public string IsVisibleHuy
+        {
+            get { return _IsVisibleHuy; }
+            set { _IsVisibleHuy = value; OnPropertyChanged(); }
+        }
 
         #endregion
         #region Command
@@ -345,42 +383,58 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                 x =>
                 {
-                    CongVan cv = new CongVan()
+                    if (!edit)
                     {
-                        Id = CongVan.DB.Last().Id + 1,
-                        SoCongVan = SoVao,
-                        SoKyHieu = this.SoKyHieu + "/" + MaKyHieu,
-                        NgayCongVan = NgayTrenCongVan,
-                        NgayXuLi = NgayNhan,
-                        TrichYeu = TrichYeu,
-                        GhiChu = GhiChu,
-                        NoiGui = new LienHe() { Email = NoiGui, Name = NoiGui},
-                        LoaiCongVan = new LoaiCongVan() { Id=selectedLoaiCongVan },
-                    }; // TODO: add check for existing LienHe & LoaiCongVan
-                    if(iNewDocLayout_Type == (int)DocType.In)
-                    {
-                        cv.StatusCode = CongVan.StatusCodeEnum.DaTiepNhan;                    
-                    }
-                    else
-                    {
-                        cv.StatusCode = CongVan.StatusCodeEnum.ChoDuyet;
-                    }
-                    LienHe.DB.Add(cv.NoiGui);
-                    CongVan.DB.Add(cv);
-                    foreach (LienHeShort item in DSNoiNhan)
-                    {
-                        LienHe lh = new LienHe() { Email = item.Email, Name = item.TenLienHe };
-                        NoiNhan nn = new NoiNhan() { LienHe = lh, CongVan = cv };
-                        cv.DanhSachNoiNhan.Add(nn);
-                        lh.DanhSachNoiNhan.Add(nn);
-                    }
-                    foreach(NoiNhan item in cv.DanhSachNoiNhan)
-                    {
-                        LienHe.DB.Add(item.LienHe);
-                        item.CongVan = cv;
-                        CongVanManager.NoiNhan.DB.Add(item);
+                        CongVan cv = new CongVan()
+                        {
+                            Id = CongVan.DB.Last().Id + 1,
+                            SoCongVan = SoVao,
+                            SoKyHieu = this.SoKyHieu + "/" + MaKyHieu,
+                            NgayCongVan = NgayTrenCongVan,
+                            NgayXuLi = NgayNhan,
+                            TrichYeu = TrichYeu,
+                            GhiChu = GhiChu,
+                            NoiGui = new LienHe() { Email = NoiGui, Name = NoiGui },
+                            LoaiCongVan = new LoaiCongVan() { Id = selectedLoaiCongVan },
+                        }; // TODO: add check for existing LienHe & LoaiCongVan
+                        if (iNewDocLayout_Type == (int)DocType.In)
+                        {
+                            cv.StatusCode = CongVan.StatusCodeEnum.DaTiepNhan;
+                        }
+                        else
+                        {
+                            cv.StatusCode = CongVan.StatusCodeEnum.ChoDuyet;
+                        }
+                        LienHe.DB.Add(cv.NoiGui);
+                        CongVan.DB.Add(cv);
+                        foreach (LienHeShort item in DSNoiNhan)
+                        {
+                            LienHe lh = new LienHe() { Email = item.Email, Name = item.TenLienHe };
+                            NoiNhan nn = new NoiNhan() { LienHe = lh, CongVan = cv };
+                            cv.DanhSachNoiNhan.Add(nn);
+                            lh.DanhSachNoiNhan.Add(nn);
+                        }
+                        foreach (NoiNhan item in cv.DanhSachNoiNhan)
+                        {
+                            LienHe.DB.Add(item.LienHe);
+                            item.CongVan = cv;
+                            CongVanManager.NoiNhan.DB.Add(item);
+                        }
                     }
                 });
+            }
+        }
+        public ICommand HuyChinhSua
+        {
+            get
+            {
+                return new RelayCommand(
+                    x=>
+                    {
+                        //MainWindowViewModel.Ins.PageSwitch(PageName.SettingLayout);
+                        MainWindowViewModel.Ins.PageSwitch(PageName.InboxLayout);
+                    }
+                    );
             }
         }
         #endregion

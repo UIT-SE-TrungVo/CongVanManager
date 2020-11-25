@@ -143,7 +143,7 @@ namespace CongVanManager.ViewModel
             private set { }
         }
 
-        private int currentPageIndex = -1;
+        public int currentPageIndex = -1;
         void ChangePage(int pageNumber)
         {
             if (pageNumber == currentPageIndex) return;

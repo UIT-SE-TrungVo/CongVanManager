@@ -150,7 +150,7 @@
                                 <TextBlock VerticalAlignment="Center" FontSize="18">/</TextBlock>
                                 <ComboBox MinWidth="50" Margin="5,10" DockPanel.Dock="Right"
                                       ItemsSource="{Binding listMaKyHieu, Mode=TwoWay}"
-                                      SelectedValue="{Binding MaKyHieu}">
+                                      SelectedValue="{Binding MaKyHieu, Mode=TwoWay}">
                                 </ComboBox>
                             </DockPanel>
                         </Grid>
@@ -288,6 +288,10 @@
                             Command="{Binding LuuCongVan}">
                         Lưu
                     </Button>
+                    <Button materialDesign:ButtonAssist.CornerRadius="5"
+                    Width="200"
+                    Margin="390,10"
+                    Command="{Binding HuyChinhSua}" Content="Huỷ" Visibility="{Binding IsVisibleHuy}"/>
                 </StackPanel>
                 <!--#endregion-->
             </StackPanel>
