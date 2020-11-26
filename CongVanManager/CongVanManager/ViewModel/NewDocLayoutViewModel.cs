@@ -414,7 +414,7 @@ namespace CongVanManager.ViewModel
                             cv.DanhSachNoiNhan.Add(nn);
                             lh.DanhSachNoiNhan.Add(nn);
                             LienHe.DB.Add(lh);
-                            CongVanManager.NoiNhan.DB.Add(item);
+                            CongVanManager.NoiNhan.DB.Add(nn);
                         }
                     }
                 });

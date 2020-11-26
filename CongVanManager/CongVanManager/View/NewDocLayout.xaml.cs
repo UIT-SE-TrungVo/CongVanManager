@@ -28,6 +28,12 @@ namespace CongVanManager.View
             this.DataContext = new NewDocLayoutViewModel(type);
         }
 
+        public NewDocLayout(CongVanManager.CongVan congVan)
+        {
+            InitializeComponent();
+            this.DataContext = new NewDocLayoutViewModel(true, congVan);
+        }
+
         private void btnConfirmSender_Click(object sender, RoutedEventArgs e)
         {
             if (btnSender.Visibility == Visibility.Visible) return;
