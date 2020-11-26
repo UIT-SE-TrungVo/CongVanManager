@@ -26,5 +26,26 @@ namespace CongVanManager
             InitializeComponent();
             DataContext = MainWindowViewModel.instance;
         }
+
+        private void btnShowHide_Click(object sender, RoutedEventArgs e)
+        {
+            switch (pnlSideBar.Visibility)
+            {
+                case (Visibility.Collapsed): //SHOW sidebar
+                    {
+                        pnlMainDisplay.SetValue(Grid.ColumnProperty, 1);
+                        pnlMainDisplay.SetValue(Grid.ColumnSpanProperty, 1);
+                        pnlSideBar.Visibility = Visibility.Visible;
+                        break;
+                    }
+                case (Visibility.Visible): //HIDE sidebar
+                    {
+                        pnlMainDisplay.SetValue(Grid.ColumnProperty, 0);
+                        pnlMainDisplay.SetValue(Grid.ColumnSpanProperty, 2);
+                        pnlSideBar.Visibility = Visibility.Collapsed;
+                        break;
+                    }
+            }
+        }
     }
 }

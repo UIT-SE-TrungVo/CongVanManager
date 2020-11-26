@@ -120,10 +120,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\InboxLayout.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -134,13 +130,9 @@
     </Compile>
     <Compile Include="Model\CongVan.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\InboxLayoutViewModel.cs" />
     <Compile Include="Model\LienHe.cs" />
     <Compile Include="Model\LoaiCongVan.cs" />
     <Compile Include="Model\NoiNhan.cs" />
-    <Compile Include="View\InboxLayout.xaml.cs">
-      <DependentUpon>InboxLayout.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

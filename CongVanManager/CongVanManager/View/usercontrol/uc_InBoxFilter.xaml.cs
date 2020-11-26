@@ -24,7 +24,6 @@ namespace CongVanManager.View.usercontrol
         public uc_InBoxFilter()
         {
             InitializeComponent();
-            this.DataContext = InboxLayoutViewModel.Instance;
         }
     }
 }

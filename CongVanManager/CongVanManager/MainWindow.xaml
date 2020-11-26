@@ -32,18 +32,23 @@
         <!--#endregion-->
 
         <!--#region TOP LEFT CORNER-->
-        <StackPanel Orientation="Horizontal" Background="WhiteSmoke" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <materialDesign:PackIcon Kind="Menu" VerticalAlignment="Center" Margin="20,0">
-                <materialDesign:PackIcon.RenderTransform>
-                    <ScaleTransform CenterY="5" ScaleX="2" ScaleY="2"/>
-                </materialDesign:PackIcon.RenderTransform>
-            </materialDesign:PackIcon>
-            <Image Source="Asset/Image/Logo.png" Margin="20,-15"/>
+        <StackPanel Orientation="Horizontal" Background="WhiteSmoke" VerticalAlignment="Stretch" HorizontalAlignment="Center">
+            <Button x:Name="btnShowHide" Height="50" Style="{StaticResource MaterialDesignFlatButton}" Click="btnShowHide_Click">
+                <materialDesign:PackIcon Kind="Menu" VerticalAlignment="Center" Margin="20,0">
+                    <materialDesign:PackIcon.RenderTransform>
+                        <ScaleTransform CenterY="5" ScaleX="2" ScaleY="2"/>
+                    </materialDesign:PackIcon.RenderTransform>
+                </materialDesign:PackIcon>
+            </Button>
+            <Button Height="75" VerticalAlignment="Stretch" Style="{StaticResource MaterialDesignFlatButton}"
+                    Command="{Binding Open_InboxLayout}">
+                <Image Source="Asset/Image/Logo.png" Margin="10,-10"/>
+            </Button>
         </StackPanel>
-        <!--#endregion-->
+        <!--#endregion--> 
         
         <!--#region SIDE BAR-->
-        <DockPanel Grid.Row="1" Background="WhiteSmoke" LastChildFill="True">
+        <DockPanel x:Name="pnlSideBar" Grid.Row="1" Background="WhiteSmoke" LastChildFill="True">
             <StackPanel DockPanel.Dock="Top">
                 <Separator Height="10"/>
                 <Button materialDesign:ButtonAssist.CornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth2" 
@@ -72,6 +77,13 @@
                     <DockPanel LastChildFill="True">
                         <materialDesign:PackIcon Kind="InboxArrowDown"/>
                         <TextBlock Margin="20,0"> Công văn đi</TextBlock>
+                    </DockPanel>
+                </Button>
+                <Button Margin="2,5" HorizontalContentAlignment="Left"
+                        Command="{Binding Open_OutboxLayout}">
+                    <DockPanel LastChildFill="True">
+                        <materialDesign:PackIcon Kind="ChartBar"/>
+                        <TextBlock Margin="20,0"> Báo cáo</TextBlock>
                     </DockPanel>
                 </Button>
             </StackPanel>
@@ -146,7 +158,7 @@
         <!--#endregion-->
 
         <!--#region MAIN DISPLAY -->
-        <Frame x:Uid="MainDisplay" Grid.Column="1" Grid.Row="1"
+        <Frame x:Name="pnlMainDisplay" x:Uid="MainDisplay" Grid.Column="1" Grid.Row="1"
                Content="{Binding SelectedPage, Mode=OneWay}" NavigationUIVisibility="Hidden">
         </Frame>
         <!--#endregion-->
