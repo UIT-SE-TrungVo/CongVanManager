@@ -100,7 +100,9 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                    x =>
                    {
-                       MessageBox.Show("EDIT" + selectedCongVan.Id);
+                       Page edit = new NewDocLayout(selectedCongVan);
+                       MainWindowViewModel.Ins.SelectedPage = edit;
+                       MainWindowViewModel.Ins.currentPageIndex = 6;
                        layout?.Close();
                    });
             }
