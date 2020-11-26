@@ -385,6 +385,10 @@ namespace CongVanManager.ViewModel
                 {
                     if (!edit)
                     {
+                        string PDFFileName = filename;
+                        PDFDownloader.PublishPDF(ref PDFFileName, showFileName);
+                        //PDFDownloader.PublishPDF(ref PDFFileName);
+
                         CongVan cv = new CongVan()
                         {
                             Id = CongVan.DB.Last().Id + 1,
@@ -396,6 +400,7 @@ namespace CongVanManager.ViewModel
                             GhiChu = GhiChu,
                             NoiGui = new LienHe() { Email = NoiGui, Name = NoiGui },
                             LoaiCongVan = new LoaiCongVan() { Id = selectedLoaiCongVan },
+                            PDFScanLocation = PDFFileName
                         }; // TODO: add check for existing LienHe & LoaiCongVan
                         if (iNewDocLayout_Type == (int)DocType.In)
                         {

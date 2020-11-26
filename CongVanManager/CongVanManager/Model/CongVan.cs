@@ -7,6 +7,7 @@
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.Threading.Tasks;
+    using System.Linq;
 
     public class CongVan : ObservableObject, IComparable
     {
@@ -246,25 +247,28 @@
                 }
             if (arg.NewItems != null)
                 foreach (CongVan item in arg.NewItems)
-                {
-                    var temp = item.ToCongVan();
-                    temp.NgayXuLi = DateTime.Now;
-
-                    if (temp.LienHes == null)
-                        temp.LienHes = new List<View.LienHe>();
-
-                    foreach(NoiNhan nh in item.DanhSachNoiNhan)
+                    if (DB.Where(temp => item.Id == temp.Id) != null)
                     {
-                        nh.CongVan1 = temp;
-                        if (nh.LienHe1 != null)
-                        {
-                            temp.LienHes.Add(nh.LienHe1);
-                            nh.LienHe1.CongVans1.Add(temp);
-                        }
-                    }
+                        var temp = item.ToCongVan();
+                        temp.NgayXuLi = DateTime.Now;
 
-                    DataProvider.Ins.DB.CongVan.Add(temp);
-                }
+                        if (temp.LienHes == null)
+                            temp.LienHes = new List<View.LienHe>();
+
+                        foreach (NoiNhan nh in item.DanhSachNoiNhan)
+                        {
+                            nh.CongVan1 = temp;
+                            if (nh.LienHe1 != null)
+                            {
+                                temp.LienHes.Add(nh.LienHe1);
+                                nh.LienHe1.CongVans1.Add(temp);
+                            }
+                        }
+
+                        DataProvider.Ins.DB.CongVan.Add(temp);
+                    }
+                    else
+                        Console.WriteLine("ERROR: Primary key duplication at CongVan.");
         }
 
         public static CongVan Get(View.CongVan cv)

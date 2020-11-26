@@ -13,6 +13,7 @@ namespace CongVanManager
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.Linq;
     using CongVanManager.View;
     using CongVanManager.ViewModel;
 
@@ -55,7 +56,10 @@ namespace CongVanManager
                 }
             if (arg.NewItems != null)
                 foreach (LoaiCongVan item in arg.NewItems)
-                    DataProvider.Ins.DB.LoaiCongVan.Add(item.ToLoaiCongVan());
+                    if (DB.Where(temp => item.Id == temp.Id) != null)
+                        DataProvider.Ins.DB.LoaiCongVan.Add(item.ToLoaiCongVan());
+                    else
+                        Console.WriteLine("ERROR: Primary key duplication at LoaiCongVan.");
         }
 
         private static DelayedObservableCollection<LoaiCongVan> _db;

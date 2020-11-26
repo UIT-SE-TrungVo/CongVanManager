@@ -57,7 +57,10 @@ namespace CongVanManager
                 }
             if (arg.NewItems != null)
                 foreach (KyHieu item in arg.NewItems)
-                    DataProvider.Ins.DB.KyHieuCongVan.Add(item.ToKyHieuCongVan());
+                    if (DB.Where(temp => item.MaKyHieu == temp.MaKyHieu) != null)
+                        DataProvider.Ins.DB.KyHieuCongVan.Add(item.ToKyHieuCongVan());
+                    else
+                        Console.WriteLine("ERROR: Primary key duplication at KyHieu.");
         }
 
         public static void ReloadDatabase()

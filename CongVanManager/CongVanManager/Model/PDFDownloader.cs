@@ -36,6 +36,18 @@ namespace CongVanManager
             }
         }
 
+        private static bool IsEqual(byte[] one, byte[] other)
+        {
+            if (one.Length != other.Length)
+                return false;
+
+            int len = one.Length;
+            for (int i = 0; i < len; i++)
+                if (one[i] != other[i])
+                    return false;
+            return true;
+        }
+
         // WARNING: FilePath changed.
         public static void PublishPDF(ref string FilePath, string FileName = null)
         {
@@ -54,7 +66,9 @@ namespace CongVanManager
                     fs.Close();
                 }
 
-                if (DataProvider.Ins.DB.PDFScans.Find(FileName) != null)
+                var dbItem = DataProvider.Ins.DB.PDFScans.Find(FileName);
+                // If the item is not in the DB and the content is different
+                if (dbItem != null && !IsEqual(dbItem.Content, pdf.Content)) 
                 {
                     PublishPDF(ref FilePath);
                     return;

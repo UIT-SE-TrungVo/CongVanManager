@@ -13,6 +13,7 @@ namespace CongVanManager
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.Linq;
     using CongVanManager.View;
     using CongVanManager.ViewModel;
 
@@ -73,11 +74,14 @@ namespace CongVanManager
                 }
             if (arg.NewItems != null)
                 foreach (User item in arg.NewItems)
-                {
-                    var temp = item.ToNguoiDung();
-                    if (temp != null)
-                        DataProvider.Ins.DB.NguoiDung.Add(temp);
-                }
+                    if (DB.Where(temp => item.Username == temp.Username) != null)
+                    {
+                        var temp = item.ToNguoiDung();
+                        if (temp != null)
+                            DataProvider.Ins.DB.NguoiDung.Add(temp);
+                    }
+                    else
+                        Console.WriteLine("ERROR: Primary key duplication at User.");
         }
 
         private static DelayedObservableCollection<User> _db;

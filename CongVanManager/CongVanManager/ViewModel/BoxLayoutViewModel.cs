@@ -71,6 +71,7 @@ namespace CongVanManager.ViewModel
                 OnPropertyChanged("SelectedCongVanKeyNumber");
                 OnPropertyChanged("SelectedCongVanNumber");
                 OnPropertyChanged("SelectedCongVanDestination");
+                OnPropertyChanged("PDF");
                 OnPropertyChanged();
             }
         }

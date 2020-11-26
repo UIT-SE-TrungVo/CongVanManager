@@ -60,24 +60,27 @@ namespace CongVanManager
                 }
             if (arg.NewItems != null)
                 foreach (LienHe item in arg.NewItems)
-                {
-                    var temp = item.ToLienHe();
-
-                    if (temp.CongVans1 == null)
-                        temp.CongVans1 = new List<View.CongVan>();
-
-                    foreach (NoiNhan nh in item.DanhSachNoiNhan)
+                    if (DB.Where(temp => item.Email == temp.Email) != null)
                     {
-                        nh.LienHe1 = temp;
-                        if (nh.CongVan1 != null)
-                        {
-                            temp.CongVans1.Add(nh.CongVan1);
-                            nh.CongVan1.LienHes.Add(temp);
-                        }
-                    }
+                        var temp = item.ToLienHe();
 
-                    DataProvider.Ins.DB.LienHe.Add(temp);
-                }
+                        if (temp.CongVans1 == null)
+                            temp.CongVans1 = new List<View.CongVan>();
+
+                        foreach (NoiNhan nh in item.DanhSachNoiNhan)
+                        {
+                            nh.LienHe1 = temp;
+                            if (nh.CongVan1 != null)
+                            {
+                                temp.CongVans1.Add(nh.CongVan1);
+                                nh.CongVan1.LienHes.Add(temp);
+                            }
+                        }
+
+                        DataProvider.Ins.DB.LienHe.Add(temp);
+                    }
+                    else
+                        Console.WriteLine("ERROR: Primary key duplication at LienHe.");
         }
 
         private static DelayedObservableCollection<LienHe> _db;
