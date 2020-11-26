@@ -44,6 +44,8 @@ namespace CongVanManager.ViewModel
             NgayNhan = cv.NgayXuLi;
             TrichYeu = cv.TrichYeu;
             NoiGui = cv.NoiGui.Name;
+            VisibleButton = "Visible";
+            VisibleTextBox = "Collapsed";
             foreach(NoiNhan item in cv.DanhSachNoiNhan)
             {
                 DSNoiNhan.Add(new LienHeShort() { Email = item.LienHe.Email, TenLienHe = item.LienHe.Name }) ;
@@ -185,6 +187,22 @@ namespace CongVanManager.ViewModel
             get { return _NoiGui; }
             set { _NoiGui = value; OnPropertyChanged(); }
         }
+
+        private string _VisibleTextBox = "Visible";
+
+        public string VisibleTextBox
+        {
+            get { return _VisibleTextBox; }
+            set { _VisibleTextBox = value;  OnPropertyChanged(); }
+        }
+        private string _VisibleButton = "Collapsed";
+
+        public string VisibleButton
+        {
+            get { return _VisibleButton; }
+            set { _VisibleButton = value; OnPropertyChanged(); }
+        }
+
         //Noi nhan
         private string _NoiNhan;
 
@@ -316,6 +334,27 @@ namespace CongVanManager.ViewModel
             }
         }
 
+        public ICommand ClickNoiGui
+        {
+            get
+            {
+                return new RelayCommand(
+                x =>
+                {
+                    if(VisibleTextBox == "Visible")
+                    {
+                        VisibleTextBox = "Collapsed";
+                        VisibleButton = "Visible";
+                    }
+                    else
+                    {
+                        VisibleTextBox = "Visible";
+                        VisibleButton = "Collapsed";
+                    }
+                });
+            }
+        }
+
         public ICommand XoaNoiNhan
         {
             get
@@ -405,7 +444,10 @@ namespace CongVanManager.ViewModel
                         {
                             cv.StatusCode = CongVan.StatusCodeEnum.ChoDuyet;
                         }
-                        LienHe.DB.Add(cv.NoiGui);
+                        if (LienHe.DB.Where(l => l.Email == cv.NoiGui.Email).Count() == 0)
+                        {
+                            LienHe.DB.Add(cv.NoiGui);
+                        }
                         CongVan.DB.Add(cv);
                         foreach (LienHeShort item in DSNoiNhan)
                         {
@@ -413,7 +455,57 @@ namespace CongVanManager.ViewModel
                             NoiNhan nn = new NoiNhan() { LienHe = lh, CongVan = cv };
                             cv.DanhSachNoiNhan.Add(nn);
                             lh.DanhSachNoiNhan.Add(nn);
-                            LienHe.DB.Add(lh);
+                            if (LienHe.DB.Where(l => l.Email == item.Email).Count() == 0)
+                            {
+                                LienHe.DB.Add(lh);
+                            }
+                            CongVanManager.NoiNhan.DB.Add(nn);
+                        }
+                    }
+                    else
+                    {
+                        CongVan cv = new CongVan()
+                        {
+                            Id = editID,
+                            SoCongVan = SoVao,
+                            SoKyHieu = this.SoKyHieu + "/" + MaKyHieu,
+                            NgayCongVan = NgayTrenCongVan,
+                            NgayXuLi = NgayNhan,
+                            TrichYeu = TrichYeu,
+                            GhiChu = GhiChu,
+                            NoiGui = new LienHe() { Email = NoiGui, Name = NoiGui },
+                            LoaiCongVan = new LoaiCongVan() { Id = selectedLoaiCongVan },
+                        }; // TODO: add check for existing LienHe & LoaiCongVan
+                        if (iNewDocLayout_Type == (int)DocType.In)
+                        {
+                            cv.StatusCode = CongVan.StatusCodeEnum.DaTiepNhan;
+                        }
+                        else
+                        {
+                            cv.StatusCode = CongVan.StatusCodeEnum.ChoDuyet;
+                        }
+                        if (LienHe.DB.Where(l => l.Email == cv.NoiGui.Email).Count() == 0)
+                        {
+                            LienHe.DB.Add(cv.NoiGui);
+                        }
+                        CongVan.DB.Remove(CongVan.DB.Where(c => c.Id == cv.Id)?.First());
+                        CongVan.DB.Add(cv);
+                        //chinhsua = cv;
+                        //while(CongVanManager.NoiNhan.DB.IndexOf(CongVanManager.NoiNhan.DB.Where(nn => nn.CongVan.Id == editID)?.First()) != -1)
+                        //{
+                        //    CongVanManager.NoiNhan.DB.RemoveAt(CongVanManager.NoiNhan.DB.IndexOf(CongVanManager.NoiNhan.DB.Where(nn => nn.CongVan.Id == editID)?.First()));
+                        //}
+                        foreach (LienHeShort item in DSNoiNhan)
+                        {
+                            LienHe lh = new LienHe() { Email = item.Email, Name = item.TenLienHe };
+                            NoiNhan nn = new NoiNhan() { LienHe = lh, CongVan = cv };
+                            cv.DanhSachNoiNhan.Clear();
+                            cv.DanhSachNoiNhan.Add(nn);
+                            lh.DanhSachNoiNhan.Add(nn);
+                            if (LienHe.DB.Where(l => l.Email == item.Email).Count() == 0)
+                            {
+                                LienHe.DB.Add(lh);
+                            }
                             CongVanManager.NoiNhan.DB.Add(nn);
                         }
                     }
@@ -444,6 +536,15 @@ namespace CongVanManager.ViewModel
         {
             IsDialogOpen = true;
             type = "Nhập mã kí hiệu mới";
+        }
+        public bool CheckValid()
+        {
+            bool result = true;
+            if (VisibleTextBox == "Visible")
+                result = false;
+            if (string.IsNullOrWhiteSpace(SoVao.ToString()))
+                result = false;
+            return result;
         }
         #endregion
     }

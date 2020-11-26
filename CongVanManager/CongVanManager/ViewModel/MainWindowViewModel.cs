@@ -270,7 +270,7 @@ namespace CongVanManager.ViewModel
 
         public string Username
         {
-            get => User.Username;
+            get => User?.Username;
             set
             {
                 OnPropertyChanged();

@@ -77,7 +77,8 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Margin="0,10,10,10" Text="{Binding SoVao}"/>
+                            <TextBox Margin="0,10,10,10" Text="{Binding SoVao}"
+                                     ToolTip="Nhập số công văn."/>
                         </DockPanel>
                         <DockPanel Grid.Column="1">
                             <TextBlock x:Name="tbGetTime" Margin="10" VerticalAlignment="Center">
@@ -188,13 +189,18 @@
                                 Nơi gửi
                             </TextBlock>
                             <Grid Grid.Column="1">
-                                <TextBox x:Name="tbSender" VerticalAlignment="Center"/>
+                                <TextBox x:Name="tbSender" VerticalAlignment="Center"
+                                         Text="{Binding NoiGui}"
+                                         Visibility="{Binding VisibleTextBox}"/>
                                 <Button x:Name="btnSender" Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray" HorizontalAlignment="Left"
-                                   Content="{Binding ElementName=tbSender, Path=Text, Mode=TwoWay}" Visibility="Collapsed" Click="btnSender_Click">
+                                   Content="{Binding NoiGui, Mode=TwoWay}" Visibility="{Binding VisibleButton}"
+                                   Command="{Binding ClickNoiGui}">
                                 </Button>
                             </Grid>
                             <WrapPanel Grid.Column="2">
-                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0" Click="btnConfirmSender_Click"
+                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0"
+                                        Command="{Binding ClickNoiGui}"
+                                        Visibility="{Binding VisibleTextBox}"
                                         x:Name="btnConfirmSender">
                                     <materialDesign:PackIcon Kind="Tick" Height="30" Width="30"/>
                                 </Button>
