@@ -78,11 +78,11 @@ namespace CongVanManager
             return new View.LoaiCongVan{ MaLoaiCongVan = Id};
         }
 
-        public static LoaiCongVan Get(View.LoaiCongVan lcv)
+        public static LoaiCongVan Get(string MaLoaiCongVan)
         {
             foreach (LoaiCongVan item in DB)
             {
-                if (item.Id == lcv.MaLoaiCongVan)
+                if (item.Id == MaLoaiCongVan)
                     return item;
             }
             return null;

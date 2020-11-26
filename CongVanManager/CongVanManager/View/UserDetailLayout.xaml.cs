@@ -20,10 +20,10 @@ namespace CongVanManager.View
     /// </summary>
     public partial class UserDetailLayout : Window
     {
-        public UserDetailLayout()
+        public UserDetailLayout(User user = null)
         {
             InitializeComponent();
-            this.DataContext = new UserDetailLayoutViewModel(this);
+            this.DataContext = new UserDetailLayoutViewModel(this, user, passwordBox);
         }
     }
 }

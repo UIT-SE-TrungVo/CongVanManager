@@ -9,8 +9,12 @@ using CongVanManager.View;
 
 namespace CongVanManager.ViewModel
 {
-    class SettingLayoutViewModel
+    class SettingLayoutViewModel : ObservableObject
     {
+        private SettingLayoutViewModel()
+        {
+        }
+
         private static SettingLayoutViewModel _instance;
         public static SettingLayoutViewModel instance
         {
@@ -43,7 +47,7 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                    x =>
                    {
-                       UserDetailLayout window = new UserDetailLayout();
+                       UserDetailLayout window = new UserDetailLayout(selectedUser);
                        window.ShowDialog();
                    });
             }
@@ -56,9 +60,34 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                    x =>
                    {
-                       
+                       User.DB.Remove(selectedUser);
+                       OnPropertyChanged("UserList");
                    });
             }
         }
+
+        public DelayedObservableCollection<User> UserList
+        {
+            get
+            {
+                return User.DB;
+            }
+            set
+            {
+                OnPropertyChanged();
+            }
+        }
+
+        public User SelectedUser
+        {
+            get => selectedUser;
+            set
+            {
+                selectedUser = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private User selectedUser;
     }
 }

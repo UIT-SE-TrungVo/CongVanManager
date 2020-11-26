@@ -31,11 +31,17 @@ namespace CongVanManager.ViewModel
         #region DanhSachCongVan
         public ICollection<CongVan> DSCongVan
         {
-            get { return CongVan.DB.Where(Filter).ToList(); }
+            get {
+                OnPropertyChanged("AmountOfLetters");
+                return CongVan.DB.Where(Filter).ToList();
+            }
             set
             // Call to refresh data, 
             // Does not set value
-            { OnPropertyChanged("AmountOfLetters"); }
+            {
+                OnPropertyChanged("AmountOfLetters");
+                OnPropertyChanged();
+            }
         }
 
         public int AmountOfLetters

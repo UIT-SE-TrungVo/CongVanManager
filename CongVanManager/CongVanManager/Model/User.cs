@@ -28,19 +28,20 @@ namespace CongVanManager
             Username = user.TenTaiKhoan;
             Password = user.MatKhau;
             LastSeen = user.LastSeen;
-            /* TODO
-            Loai = user.LoaiNguoiDung;
+            //* TODO
+            Loai = (UserType)user.LoaiNguoiDung;
             //*/
         }
 
         public string Username { get; set; }
         public string Password { get; set; }
-        public short Loai { get; set; }
+        public UserType Loai { get; set; }
         public enum UserType : short
         {
             TruongPhong = 0,
             NhanVien = 1,
-            Khach = 2
+            Khach = 2,
+            Unknown = 3
         }
 
         // show the time this user's last reloaded the database
@@ -51,7 +52,7 @@ namespace CongVanManager
         public static void ReloadDatabase()
         {
             _db.CollectionChanged -= UserDBChanged;
-
+            
             // Load Database from DataProvider
             foreach (View.NguoiDung user in DataProvider.Ins.DB.NguoiDung)
                 _db.Add(new User(user));
@@ -73,7 +74,9 @@ namespace CongVanManager
             if (arg.NewItems != null)
                 foreach (User item in arg.NewItems)
                 {
-                    DataProvider.Ins.DB.NguoiDung.Add(item.ToNguoiDung());
+                    var temp = item.ToNguoiDung();
+                    if (temp != null)
+                        DataProvider.Ins.DB.NguoiDung.Add(temp);
                 }
         }
 
@@ -94,10 +97,12 @@ namespace CongVanManager
 
         public View.NguoiDung ToNguoiDung()
         {
+            if (Loai == UserType.Unknown)
+                return null;
             return new View.NguoiDung
             {
                 LastSeen = LastSeen,
-                LoaiNguoiDung = Loai,
+                LoaiNguoiDung = (short) Loai,
                 MatKhau = Password,
                 TenTaiKhoan = Username
             };

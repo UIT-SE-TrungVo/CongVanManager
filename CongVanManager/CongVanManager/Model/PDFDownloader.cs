@@ -53,6 +53,13 @@ namespace CongVanManager
                     pdf.Content = data;
                     fs.Close();
                 }
+
+                if (DataProvider.Ins.DB.PDFScans.Find(FileName) != null)
+                {
+                    PublishPDF(ref FilePath);
+                    return;
+                }
+
                 DataProvider.Ins.DB.PDFScans.Add(pdf);
 
                 FilePath = FileName;

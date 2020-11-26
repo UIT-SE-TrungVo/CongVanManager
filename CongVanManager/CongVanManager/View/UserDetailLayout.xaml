@@ -36,7 +36,7 @@
 
         <DockPanel Grid.Column="1" Margin="8" VerticalAlignment="Center">
             <Border BorderBrush="MediumPurple" BorderThickness="2" CornerRadius="8">
-                <TextBox Margin="8">
+                <TextBox Margin="8" Text="{Binding Username}" IsEnabled="{Binding CanEditUsername}">
 
                 </TextBox>
             </Border>
@@ -49,7 +49,7 @@
 
         <DockPanel Grid.Row="1" Grid.Column="1" Margin="8" VerticalAlignment="Center">
             <Border BorderBrush="MediumPurple" BorderThickness="2" CornerRadius="8">
-                <PasswordBox Margin="8">
+                <PasswordBox Margin="8" x:Name="passwordBox">
 
                 </PasswordBox>
             </Border>
@@ -62,16 +62,9 @@
 
         <DockPanel Grid.Row="2" Grid.Column="1" Margin="8" VerticalAlignment="Center">
             <Border BorderBrush="MediumPurple" BorderThickness="2" CornerRadius="8">
-                <ComboBox Margin="8">
-                    <ComboBoxItem>
-                        Admin
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        Nhân viên
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        Khách
-                    </ComboBoxItem>
+                <ComboBox Margin="8" ItemsSource="{Binding Type_NameDictionary}" 
+                          SelectedValue="{Binding UserType, Mode=TwoWay}" DisplayMemberPath="Value"
+                          SelectedValuePath="Key">
                 </ComboBox>
             </Border>
         </DockPanel>

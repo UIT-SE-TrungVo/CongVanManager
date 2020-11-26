@@ -73,11 +73,24 @@ namespace CongVanManager
                     DB = new CONGVANMANAGEREntities();
                     DB.Configuration.AutoDetectChangesEnabled = false;
                     //*/
-                    CongVan.ReloadDatabase();
-                    LienHe.ReloadDatabase();
+
+                    DateTime lastUpdate = Setting.Ins.LastUpdated;
+
+                    User.DB.Clear();
                     User.ReloadDatabase();
-                    LoaiCongVan.ReloadDatabase();
                     Setting.ReloadDatabase();
+
+                    if (lastUpdate.CompareTo(Setting.Ins.LastUpdated) >= 0)
+                        return;
+
+                    LoaiCongVan.DB.Clear();
+                    LienHe.DB.Clear();
+                    CongVan.DB.Clear();
+                    KyHieu.DB.Clear();
+
+                    LoaiCongVan.ReloadDatabase();
+                    LienHe.ReloadDatabase();
+                    CongVan.ReloadDatabase();
                     KyHieu.ReloadDatabase();
 
                     NguoiDung user = DB.NguoiDung.Find(MainWindowViewModel.Ins.User.Username);

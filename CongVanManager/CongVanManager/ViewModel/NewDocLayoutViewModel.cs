@@ -357,7 +357,13 @@ namespace CongVanManager.ViewModel
                         NoiGui = new LienHe() { Email = NoiGui, Name = NoiGui},
                         LoaiCongVan = new LoaiCongVan() { Id=selectedLoaiCongVan },
                     }; // TODO: add check for existing LienHe & LoaiCongVan
-                    if(iNewDocLayout_Type == (int)DocType.In)
+
+                    string PDFFileName = filename;
+                    PDFDownloader.PublishPDF(ref PDFFileName, showFileName);
+                    //PDFDownloader.PublishPDF(ref PDFFileName);
+                    cv.PDFScanLocation = PDFFileName;
+
+                    if (iNewDocLayout_Type == (int)DocType.In)
                     {
                         cv.StatusCode = CongVan.StatusCodeEnum.DaTiepNhan;                    
                     }
@@ -372,6 +378,7 @@ namespace CongVanManager.ViewModel
                         NoiNhan nn = new NoiNhan() { LienHe = lh, CongVan = cv };
                         cv.DanhSachNoiNhan.Add(nn);
                         lh.DanhSachNoiNhan.Add(nn);
+                        LienHe.DB.Add(lh);
                     }
                     LienHe.DB.Add(cv.NoiGui);
                     CongVan.DB.Add(cv);

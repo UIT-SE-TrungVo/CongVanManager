@@ -42,7 +42,7 @@ namespace CongVanManager
         public static void ReloadDatabase()
         {
             _db.CollectionChanged -= LienHeDBChanged;
-
+            
             foreach (View.LienHe cv in DataProvider.Ins.DB.LienHe)
                 _db.Add(new LienHe(cv));
 
@@ -63,15 +63,15 @@ namespace CongVanManager
                 {
                     var temp = item.ToLienHe();
 
-                    if (temp.CongVans == null)
-                        temp.CongVans = new List<View.CongVan>();
+                    if (temp.CongVans1 == null)
+                        temp.CongVans1 = new List<View.CongVan>();
 
                     foreach (NoiNhan nh in item.DanhSachNoiNhan)
                     {
                         nh.LienHe1 = temp;
                         if (nh.CongVan1 != null)
                         {
-                            temp.CongVans.Add(nh.CongVan1);
+                            temp.CongVans1.Add(nh.CongVan1);
                             nh.CongVan1.LienHes.Add(temp);
                         }
                     }
@@ -104,11 +104,11 @@ namespace CongVanManager
             };
         }
 
-        public static LienHe Get(View.LienHe lcv)
+        public static LienHe Get(string Email)
         {
             foreach (LienHe item in DB)
             {
-                if (item.Email == lcv.Email)
+                if (item.Email == Email)
                     return item;
             }
             return null;

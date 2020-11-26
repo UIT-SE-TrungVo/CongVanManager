@@ -10,6 +10,8 @@
 
     public class CongVan : ObservableObject, IComparable
     {
+        //public View.CongVan CongVan1 { get; set; }
+
         public CongVan()
         {
             this.DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan>();
@@ -18,21 +20,27 @@
 
         public CongVan(in View.CongVan cv)
         {
+            //CongVan1 = cv;
+            // Get LoaiCongVan first
+            //{ var temp = LoaiCongVan.DB; }
+            // Get LienHe first
+            //{ var temp = LienHe.DB; }
+
             Id = cv.MaCongVan;
             StatusCode = (StatusCodeEnum)cv.TinhTrang.GetValueOrDefault(0);
             GhiChu = cv.GhiChu;
 
-            LoaiCongVan = LoaiCongVan.Get(cv.LoaiCongVan);
+            LoaiCongVan = LoaiCongVan.Get(cv.MaLoaiCongVan);
             if (LoaiCongVan == null)
-                LoaiCongVan.DB.Add(new LoaiCongVan(cv.LoaiCongVan));
+                LoaiCongVan.DB.Add(new LoaiCongVan(cv.LoaiCongVan));// Query
             LoaiCongVan.CongVanDaGui.Add(this);
 
             NgayCongVan = cv.NgayCongVan;
             NgayXuLi = cv.NgayXuLi;
             
-            NoiGui = LienHe.Get(cv.LienHe);
+            NoiGui = LienHe.Get(cv.NoiGui);
             if (NoiGui == null)
-                LienHe.DB.Add(new LienHe(cv.LienHe));
+                LienHe.DB.Add(new LienHe(cv.LienHe));// Query
             NoiGui.CongVans.Add(this);
 
             PDFScanLocation = cv.PDFScan;
@@ -44,9 +52,9 @@
             TrichYeu = cv.TrichYeu;
 
             DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan>();
-            foreach (View.LienHe lh in cv.LienHes)
+            foreach (View.LienHe lh in cv.LienHes)// Query
             {
-                LienHe lienHe = LienHe.Get(lh);
+                LienHe lienHe = LienHe.Get(lh.Email);
                 if (lienHe == null)
                     LienHe.DB.Add(new LienHe(lh));
                 NoiNhan noiNhan = new NoiNhan{

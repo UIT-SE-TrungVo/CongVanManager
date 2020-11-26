@@ -17,7 +17,17 @@ namespace CongVanManager.ViewModel
     {
         private User user;
         // TODO: set this field
-        public User User { get => user; set => user = value; }
+        public User User
+        {
+            get => user;
+            set
+            {
+                user = value;
+                OnPropertyChanged();
+                OnPropertyChanged("isSettingEnable");
+                OnPropertyChanged("Username");
+            }
+        }
         public void SetUser(string username)
         {
             User = User.DB.First(item => item.Username == username);
@@ -45,6 +55,13 @@ namespace CongVanManager.ViewModel
         private MainWindowViewModel()
         {
             ChangePage(0);
+
+            Setting.Ins.PropertyChanged += (obj, arg) => 
+            {
+                if (arg.PropertyName == "TruongPhong")
+                    OnPropertyChanged("isSettingEnable");
+            };
+
             #region DATA SAMPLE BINDING (DISABLED)
             /*
             User user1 = new User
@@ -120,16 +137,20 @@ namespace CongVanManager.ViewModel
             NoiNhan.DB.Add(noiNhan2);
             NoiNhan.DB.Add(noiNhan1);
             LienHe.DB.Add(contact);
-            User.DB.Add(user1);
-            User.DB.Add(user2);
-            User.DB.Add(user3);
+
+            //User.DB.Add(user1);
+            //User.DB.Add(user2);
+            //User.DB.Add(user3);
+            //Setting.Ins.TruongPhong = user1;
+            //Setting.Ins.LastUpdated = DateTime.Now;
+
+            //*/
+            #endregion
 
             CongVan.DB.CollectionChanged +=
                 (sender, e)
                 =>
                 { OnPropertyChanged("DSCongVan"); };
-            //*/
-            #endregion
         }
 
         private static MainWindowViewModel _instance = null;
@@ -234,6 +255,24 @@ namespace CongVanManager.ViewModel
             set
             {
                 filterText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool isSettingEnable
+        {
+            get => User == Setting.Ins.TruongPhong && User != null;
+            set
+            {
+                OnPropertyChanged();
+            }
+        }
+
+        public string Username
+        {
+            get => User.Username;
+            set
+            {
                 OnPropertyChanged();
             }
         }

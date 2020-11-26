@@ -70,37 +70,13 @@
                         </Button>
                     </StackPanel>
                     <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                                 DockPanel.Dock="Top" Margin="8">
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
+                            DockPanel.Dock="Top" Margin="8" ItemsSource="{Binding UserList}" 
+                            SelectedItem="{Binding SelectedUser, Mode=TwoWay}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Username}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </DockPanel>
             </Border>
