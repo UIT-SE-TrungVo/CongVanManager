@@ -26,6 +26,24 @@ namespace CongVanManager.View
         {
             InitializeComponent();
             this.DataContext = new NewDocLayoutViewModel(type);
-        }      
+        }
+
+        private void btnConfirmSender_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnSender.Visibility == Visibility.Visible) return;
+
+            btnSender.Visibility = Visibility.Visible;
+            tbSender.Visibility = Visibility.Collapsed;
+            btnConfirmSender.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnSender_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnSender.Visibility == Visibility.Collapsed) return;
+
+            btnSender.Visibility = Visibility.Collapsed;
+            tbSender.Visibility = Visibility.Visible;
+            btnConfirmSender.Visibility = Visibility.Visible;
+        }
     }
 }
