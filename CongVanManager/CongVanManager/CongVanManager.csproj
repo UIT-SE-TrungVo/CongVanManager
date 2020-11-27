@@ -92,6 +92,9 @@
     <Compile Include="View\BoxLayout.xaml.cs">
       <DependentUpon>BoxLayout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ContactLayout.xaml.cs">
+      <DependentUpon>ContactLayout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginLayout.xaml.cs">
       <DependentUpon>LoginLayout.xaml</DependentUpon>
     </Compile>
@@ -141,6 +144,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ContactLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -404,7 +404,7 @@ namespace CongVanManager.ViewModel
                    x =>
                    {
                        ActionLayout actionLayout = new ActionLayout();
-                       actionLayout.Show();
+                       actionLayout.ShowDialog();
                    });
             }
         }

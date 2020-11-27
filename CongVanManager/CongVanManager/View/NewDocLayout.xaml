@@ -157,7 +157,7 @@
                                         x:Name="btnConfirmSender">
                                     <materialDesign:PackIcon Kind="Tick" Height="30" Width="30"/>
                                 </Button>
-                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
+                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0" Command="{Binding Open_ContactLayout}">
                                     <materialDesign:PackIcon Kind="Contact" Height="30" Width="30"/>
                                 </Button>
                             </WrapPanel>
@@ -181,7 +181,7 @@
                                 <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
                                     <materialDesign:PackIcon Kind="PersonAdd" Height="30" Width="30"/>
                                 </Button>
-                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
+                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0" Command="{Binding Open_ContactLayout}">
                                     <materialDesign:PackIcon Kind="Contact" Height="30" Width="30"/>
                                 </Button>
                             </WrapPanel>

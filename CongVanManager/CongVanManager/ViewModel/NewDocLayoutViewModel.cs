@@ -22,5 +22,18 @@ namespace CongVanManager.ViewModel
             NewDocLayout_Type = type;
             iNewDocLayout_Type = (int)NewDocLayout_Type;
         }
+
+        public ICommand Open_ContactLayout
+        {
+            get
+            {
+                return new RelayCommand(
+                   x =>
+                   {
+                       ContactLayout contactLayout = new ContactLayout();
+                       contactLayout.ShowDialog();
+                   });
+            }
+        }
     }
 }
