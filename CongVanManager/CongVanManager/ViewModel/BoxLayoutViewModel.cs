@@ -263,6 +263,11 @@ namespace CongVanManager.ViewModel
         }
         #endregion
 
+
+        #region Animation_Sync between Inbox and Outbox
+        public static int BoxWidth { get; set; } = 700;
+        #endregion
+        
         #region ButtonFilter
         private ICommand _buttonFilterCongVan;
         public ICommand ButtonFilterCongVan

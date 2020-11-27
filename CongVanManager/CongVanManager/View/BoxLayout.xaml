@@ -20,7 +20,7 @@
       MinHeight="600" MinWidth="1000" 
       Title="Hộp thư đến">
 
-    <Grid Margin="10">
+    <Grid Margin="10" LayoutUpdated="Reload">
         <!--#region LAYOUT DEFINITION-->
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
@@ -46,7 +46,7 @@
         <!--#region MAIN-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="700" MinWidth="400" MaxWidth="900"/>
+                <ColumnDefinition x:Name="colMailBox" Width="{Binding BoxWidth}" MinWidth="400" MaxWidth="900"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
@@ -183,7 +183,9 @@
 
                             <!--Cong Van Content-->
                             <DockPanel Background="Pink" Height="400">
-                                <ContentControl Content="{Binding PDF}"/>
+                                <ContentControl Content="{Binding PDF}">
+                                    
+                                </ContentControl>
                             </DockPanel>
                         </StackPanel>
                     </StackPanel>

@@ -21,10 +21,24 @@ namespace CongVanManager.View
     /// </summary>
     public partial class BoxLayout : Page
     {
+        bool isFocused = false;
         public BoxLayout(DocType doc)
         {
             InitializeComponent();
             this.DataContext = new BoxLayoutViewModel(doc);
+        }
+
+        private void Reload(object sender, EventArgs e)
+        {
+            if (!isFocused)
+            {
+                colMailBox.Width = new GridLength(BoxLayoutViewModel.BoxWidth);
+            }
+            else
+            {
+                BoxLayoutViewModel.BoxWidth = (int)colMailBox.Width.Value;
+            }
+            isFocused = this.IsLoaded;
         }
     }
 }
