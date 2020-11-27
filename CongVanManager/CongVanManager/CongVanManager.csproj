@@ -83,6 +83,7 @@
     <Compile Include="ViewModel\NewDocLayoutViewModel.cs" />
     <Compile Include="ViewModel\NewDocLayout_ChooserViewModel.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
+    <Compile Include="ViewModel\ReportLayoutViewModel.cs" />
     <Compile Include="ViewModel\SettingLayoutViewModel.cs" />
     <Compile Include="ViewModel\UserDetailLayoutViewModel.cs" />
     <Compile Include="View\ActionLayout.xaml.cs">
@@ -99,6 +100,9 @@
     </Compile>
     <Compile Include="View\NewDocLayout_Chooser.xaml.cs">
       <DependentUpon>NewDocLayout_Chooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportLayout.xaml.cs">
+      <DependentUpon>ReportLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingLayout.xaml.cs">
       <DependentUpon>SettingLayout.xaml</DependentUpon>
@@ -146,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NewDocLayout_Chooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

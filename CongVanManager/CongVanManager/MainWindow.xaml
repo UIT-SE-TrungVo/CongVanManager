@@ -80,7 +80,7 @@
                     </DockPanel>
                 </Button>
                 <Button Margin="2,5" HorizontalContentAlignment="Left"
-                        Command="{Binding Open_OutboxLayout}">
+                        Command="{Binding Open_ReportLayout}">
                     <DockPanel LastChildFill="True">
                         <materialDesign:PackIcon Kind="ChartBar"/>
                         <TextBlock Margin="20,0"> Báo cáo</TextBlock>

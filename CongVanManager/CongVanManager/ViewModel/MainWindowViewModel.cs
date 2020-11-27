@@ -8,7 +8,7 @@ using System.Windows.Input;
 using CongVanManager.Command;
 using CongVanManager.View;
 
-public enum PageName { InboxLayout, NewDocLayout_Chooser, NewDocLayout_In, NewDocLayout_Out, SettingLayout, OutboxLayout};
+public enum PageName { InboxLayout, NewDocLayout_Chooser, NewDocLayout_In, NewDocLayout_Out, SettingLayout, OutboxLayout, ReportLayout};
 
 namespace CongVanManager.ViewModel
 {
@@ -19,7 +19,8 @@ namespace CongVanManager.ViewModel
                                             new NewDocLayout(DocType.In), //2
                                             new NewDocLayout(DocType.Out), //3
                                             new SettingLayout(), //4
-                                            new BoxLayout(DocType.Out) //5
+                                            new BoxLayout(DocType.Out), //5
+                                            new ReportLayout(), //6
         };
 
         private Page _selectedPage;
@@ -59,28 +60,9 @@ namespace CongVanManager.ViewModel
 
         public void PageSwitch(PageName messageID)
         {
-            switch (messageID)
+            if (messageID >= 0 && (int)messageID < page.Length)
             {
-                case PageName.InboxLayout:
-                    ChangePage(0);
-                    break;
-                case PageName.NewDocLayout_Chooser:
-                    ChangePage(1);
-                    break;
-                case PageName.NewDocLayout_In:
-                    ChangePage(2);
-                    break;
-                case PageName.NewDocLayout_Out:
-                    ChangePage(3);
-                    break;
-                case PageName.SettingLayout:
-                    ChangePage(4);
-                    break;
-                case PageName.OutboxLayout:
-                    ChangePage(5);
-                    break;
-                default:
-                    break;
+                ChangePage((int)messageID);
             }
         }
 
@@ -118,6 +100,18 @@ namespace CongVanManager.ViewModel
                    x =>
                    {
                        MainWindowViewModel.instance.PageSwitch(PageName.OutboxLayout);
+                   });
+            }
+        }
+
+        public ICommand Open_ReportLayout
+        {
+            get
+            {
+                return new RelayCommand(
+                   x =>
+                   {
+                       MainWindowViewModel.instance.PageSwitch(PageName.ReportLayout);
                    });
             }
         }
