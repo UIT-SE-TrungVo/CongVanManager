@@ -166,10 +166,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\InboxLayout.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Compile Include="View\CongVan.cs">
       <DependentUpon>QLCV.tt</DependentUpon>
     </Compile>

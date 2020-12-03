@@ -226,7 +226,7 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                    x =>
                    {
-                       MainWindowViewModel.instance.PageSwitch(PageName.ReportLayout);
+                       MainWindowViewModel.Ins.PageSwitch(PageName.ReportLayout);
                    });
             }
         }
