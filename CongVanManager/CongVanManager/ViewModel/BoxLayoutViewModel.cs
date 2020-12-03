@@ -221,7 +221,89 @@ namespace CongVanManager.ViewModel
         #region FilterSetting
         private bool Filter(CongVan item)
         {
-            return (UCFilter.DataContext as FilterSetting).Filter(item);
+            foreach (var func in filterList)
+                if (func?.Invoke(item) == false)
+                    return false;
+            return true;
+        }
+        private bool? _chuaDoc = true;
+        public bool? ChuaDoc
+        {
+            get => _chuaDoc;
+            set
+            {
+                _chuaDoc = value;
+                if (value == null)
+                    filterList[0] = defaultFilter;
+                else
+                    filterList[0] = (item) =>
+                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDoc)
+                        ^ value.Value;
+            }
+        }
+        private bool? _daDuyet = true;
+        public bool? DaDuyet
+        {
+            get => _daDuyet;
+            set
+            {
+                _daDuyet = value;
+                if (value == null)
+                    filterList[1] = defaultFilter;
+                else
+                    filterList[1] = (item) =>
+                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDuyet)
+                        ^ value.Value;
+            }
+        }
+        private bool? _daTiepNhan = true;
+        public bool? DaTiepNhan
+        {
+            get => _daTiepNhan;
+            set
+            {
+                _daTiepNhan = value;
+                if (value == null)
+                    filterList[2] = defaultFilter;
+                else
+                    filterList[2] = (item) =>
+                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaTiepNhan)
+                        ^ value.Value;
+            }
+        }
+        private bool? _daChuyen = true;
+        public bool? DaChuyen
+        {
+            get => _daChuyen;
+            set
+            {
+                _daChuyen = value;
+                if (value == null)
+                    filterList[3] = defaultFilter;
+                else
+                    filterList[3] = (item) =>
+                        !(item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DangChuyen)
+                        && item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDuyet))
+                        ^ value.Value;
+            }
+        }
+        #endregion
+
+
+        #region Animation_Sync between Inbox and Outbox
+        public static int BoxWidth { get; set; } = 700;
+        #endregion
+        
+        #region ButtonFilter
+        private ICommand _buttonFilterCongVan;
+        public ICommand ButtonFilterCongVan
+        {
+            get
+            {
+                if (_buttonFilterCongVan == null)
+                    _buttonFilterCongVan = new RelayCommand(param => UpdateData(this, null));
+                return _buttonFilterCongVan;
+            }
         }
         #endregion
 

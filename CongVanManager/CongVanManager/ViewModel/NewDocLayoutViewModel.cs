@@ -525,6 +525,19 @@ namespace CongVanManager.ViewModel
                     );
             }
         }
+
+        public ICommand Open_ContactLayout
+        {
+            get
+            {
+                return new RelayCommand(
+                   x =>
+                   {
+                       ContactLayout contactLayout = new ContactLayout();
+                       contactLayout.ShowDialog();
+                   });
+            }
+        }
         #endregion
         #region other function
         public void ShowDialogLCV()
@@ -552,5 +565,6 @@ namespace CongVanManager.ViewModel
     {
         public string Email { get; set; }
         public string TenLienHe { get; set; }
+    
     }
 }
