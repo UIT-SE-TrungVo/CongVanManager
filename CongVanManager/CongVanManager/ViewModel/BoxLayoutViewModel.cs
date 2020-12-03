@@ -219,6 +219,8 @@ namespace CongVanManager.ViewModel
         #endregion
 
         #region FilterSetting
+        private List<Func<CongVan, bool>> filterList = new List<Func<CongVan, bool>>(4);
+        private Func<CongVan, bool> defaultFilter = (item) => true;
         private bool Filter(CongVan item)
         {
             foreach (var func in filterList)
