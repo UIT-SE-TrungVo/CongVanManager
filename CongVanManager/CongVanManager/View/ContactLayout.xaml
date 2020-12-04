@@ -12,28 +12,33 @@
                 Danh sách liên hệ
             </TextBlock>
 
-            <ListBox Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <ListBoxItem x:Name="itemContact" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+            <ListBox Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     ItemsSource="{Binding DSLienHe}"
+                     SelectedItem="{Binding SelectedLienHe, Mode=TwoWay}"
+                     SelectionMode="Single">
+                <ListBox.ItemTemplate HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Button Margin="10" VerticalAlignment="Center"
-                                Style="{StaticResource MaterialDesignFlatAccentBgButton}">
-                            Trần Đưc Po
-                        </Button>
+                            <Button Margin="10" VerticalAlignment="Center"
+                                Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                Content="{Binding Name}">
+                            </Button>
 
-                        <TextBlock Grid.Column="1" Margin="10" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
-                                   Style="{StaticResource MaterialDesignSubtitle2TextBlock}">
-                            meofmeosmeomeofmeo@gmail.com
-                        </TextBlock>
-
-                        <CheckBox Grid.Column="2"/>
-                    </Grid>
-                </ListBoxItem>
+                            <TextBlock Grid.Column="1" Margin="10" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
+                                   Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
+                                   Text="{Binding Email}">
+                            </TextBlock>
+                            <CheckBox Grid.Column="2"
+                                      IsChecked="{Binding IsSelected}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
 
             <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">

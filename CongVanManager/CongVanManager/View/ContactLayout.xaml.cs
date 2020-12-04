@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CongVanManager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace CongVanManager.View
         public ContactLayout()
         {
             InitializeComponent();
+            this.DataContext = new ContactLayoutViewModel();
         }
     }
 }
