@@ -239,7 +239,7 @@ namespace CongVanManager.ViewModel
                     filterList[0] = defaultFilter;
                 else
                     filterList[0] = (item) =>
-                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDoc)
+                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaGui)
                         ^ value.Value;
             }
         }
@@ -254,7 +254,7 @@ namespace CongVanManager.ViewModel
                     filterList[1] = defaultFilter;
                 else
                     filterList[1] = (item) =>
-                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDuyet)
+                        !item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDuyet_Den)
                         ^ value.Value;
             }
         }
@@ -284,8 +284,8 @@ namespace CongVanManager.ViewModel
                     filterList[3] = defaultFilter;
                 else
                     filterList[3] = (item) =>
-                        !(item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DangChuyen)
-                        && item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDuyet))
+                        !(item.StatusCode.HasFlag(CongVan.StatusCodeEnum.ChoDuyet)
+                        && item.StatusCode.HasFlag(CongVan.StatusCodeEnum.DaDuyet_Den))
                         ^ value.Value;
             }
         }
