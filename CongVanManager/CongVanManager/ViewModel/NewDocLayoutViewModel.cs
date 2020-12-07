@@ -43,7 +43,7 @@ namespace CongVanManager.ViewModel
             SoVao = (int)cv.SoCongVan;
             NgayNhan = cv.NgayXuLi;
             TrichYeu = cv.TrichYeu;
-            NoiGui = cv.NoiGui.Name;
+            NoiGui = cv.NoiGui;
             VisibleButton = "Visible";
             VisibleTextBox = "Collapsed";
             foreach(NoiNhan item in cv.DanhSachNoiNhan)
@@ -180,9 +180,9 @@ namespace CongVanManager.ViewModel
             set { _TrichYeu = value; OnPropertyChanged(); }
         }
         //Noi gui
-        private string _NoiGui;
+        private LienHe _NoiGui = new LienHe();
 
-        public string NoiGui
+        public LienHe NoiGui
         {
             get { return _NoiGui; }
             set { _NoiGui = value; OnPropertyChanged(); }
@@ -433,7 +433,7 @@ namespace CongVanManager.ViewModel
                             NgayXuLi = NgayNhan,
                             TrichYeu = TrichYeu,
                             GhiChu = GhiChu,
-                            NoiGui = new LienHe() { Email = NoiGui, Name = NoiGui },
+                            NoiGui = new LienHe() { Email = NoiGui.Email, Name = NoiGui.Name },
                             LoaiCongVan = new LoaiCongVan() { Id = selectedLoaiCongVan },
                         }; // TODO: add check for existing LienHe & LoaiCongVan
                         if (iNewDocLayout_Type == (int)DocType.In)
@@ -473,7 +473,7 @@ namespace CongVanManager.ViewModel
                             NgayXuLi = NgayNhan,
                             TrichYeu = TrichYeu,
                             GhiChu = GhiChu,
-                            NoiGui = new LienHe() { Email = NoiGui, Name = NoiGui },
+                            NoiGui = new LienHe() { Email = NoiGui.Email, Name = NoiGui.Name },
                             LoaiCongVan = new LoaiCongVan() { Id = selectedLoaiCongVan },
                         }; // TODO: add check for existing LienHe & LoaiCongVan
                         if (iNewDocLayout_Type == (int)DocType.In)
@@ -526,7 +526,7 @@ namespace CongVanManager.ViewModel
             }
         }
 
-        public ICommand Open_ContactLayout
+        public ICommand Open_ContactLayout_Nhan
         {
             get
             {
@@ -535,11 +535,48 @@ namespace CongVanManager.ViewModel
                    {
                        ContactLayout contactLayout = new ContactLayout();
                        contactLayout.ShowDialog();
+                       GetLienHeNoiNhan(contactLayout);
+                   });
+            }
+        }
+        public ICommand Open_ContactLayout_Gui
+        {
+            get
+            {
+                return new RelayCommand(
+                   x =>
+                   {
+                       ContactLayout contactLayout = new ContactLayout();
+                       contactLayout.ShowDialog();
+                       GetLienHeNoiGui(contactLayout);
                    });
             }
         }
         #endregion
         #region other function
+        public async void GetLienHeNoiNhan(ContactLayout contactLayout)
+        {
+            LienHe a = await ((ContactLayoutViewModel)contactLayout.DataContext).getSelectedLienHe();
+            if (a == null)
+                return;
+            LienHeShort lh = new LienHeShort();
+            lh.Email = a.Email;
+            lh.TenLienHe = a.Name;
+            DSNoiNhan.Add(lh);
+            NoiNhan = "";
+        }
+        public async void GetLienHeNoiGui(ContactLayout contactLayout)
+        {
+            LienHe a = await ((ContactLayoutViewModel)contactLayout.DataContext).getSelectedLienHe();
+            if (a == null)
+                return;
+            if (VisibleTextBox == "Visible")
+            {
+                VisibleTextBox = "Collapsed";
+                VisibleButton = "Visible";
+            }
+            NoiGui = a;
+        }
         public void ShowDialogLCV()
         {
             IsDialogOpen = true;

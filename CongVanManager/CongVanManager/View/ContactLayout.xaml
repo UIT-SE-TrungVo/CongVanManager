@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CongVanManager.View"
         mc:Ignorable="d"
-        Title="Danh sách liên hệ" MaxHeight="800" Width="600">
+        Title="Danh sách liên hệ" MaxHeight="800" Width="600"
+        x:Name="ContactLayoutWindow">
     <Grid Margin="10">
         <StackPanel VerticalAlignment="Stretch">
             <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="10">
@@ -16,12 +17,12 @@
                      ItemsSource="{Binding DSLienHe}"
                      SelectedItem="{Binding SelectedLienHe, Mode=TwoWay}"
                      SelectionMode="Single">
-                <ListBox.ItemTemplate HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="300"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
@@ -34,8 +35,6 @@
                                    Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
                                    Text="{Binding Email}">
                             </TextBlock>
-                            <CheckBox Grid.Column="2"
-                                      IsChecked="{Binding IsSelected}"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -43,10 +42,11 @@
 
             <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
                 <Button Margin="10" Style="{StaticResource MaterialDesignFlatButton}" 
-                        BorderBrush="MediumPurple" BorderThickness="2">
+                        BorderBrush="MediumPurple" BorderThickness="2"
+                        Command="{Binding Close}" CommandParameter="{Binding ElementName=ContactLayoutWindow}">
                     Hủy bỏ
                 </Button>
-                <Button Margin="10">
+                <Button Margin="10" Command="{Binding XacNhan}" CommandParameter="{Binding ElementName=ContactLayoutWindow}">
                     Xác nhận
                 </Button>
             </WrapPanel>
