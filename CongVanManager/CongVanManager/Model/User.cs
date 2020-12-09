@@ -53,8 +53,9 @@ namespace CongVanManager
         public static void ReloadDatabase()
         {
             _db.CollectionChanged -= UserDBChanged;
-            
+
             // Load Database from DataProvider
+            User.DB.Clear();
             foreach (View.NguoiDung user in DataProvider.Ins.DB.NguoiDung)
                 _db.Add(new User(user));
 

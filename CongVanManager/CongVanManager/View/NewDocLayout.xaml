@@ -285,7 +285,7 @@
                            Text="{Binding showFileName}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                            <i:InvokeCommandAction Command="{Binding ClickOnFileNameCommand}"/>
+                            <i:InvokeCommandAction Command="{Binding DoubleClickOnPDFCommand}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     </TextBlock>

@@ -210,12 +210,13 @@
         }
 
         private static DelayedObservableCollection<CongVan> _db;
-
+        
         public static void ReloadDatabase()
         {
             _db.CollectionChanged -= CongVanDBChanged;
 
             // Load Database from DataProvider
+            CongVan.DB.Clear();
             foreach (View.CongVan cv in DataProvider.Ins.DB.CongVan)
                 _db.Add(new CongVan(cv));
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -368,6 +369,19 @@ namespace CongVanManager.ViewModel
                        ActionLayout actionLayout = new ActionLayout(SelectedCongVan, BoxType);
                        actionLayout.ShowDialog();
                    });
+            }
+        }
+        public ICommand DoubleClickOnPDFCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                x =>
+                {
+                    var pdf = SelectedCongVan?.PDFScanLocation;
+                    if (pdf != null)
+                        Process.Start(pdf);
+                });
             }
         }
         #endregion

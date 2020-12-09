@@ -66,7 +66,8 @@ namespace CongVanManager
         public static void ReloadDatabase()
         {
             _db.CollectionChanged -= KyHieuCongVanDBChanged;
-            
+
+            KyHieu.DB.Clear();
             foreach (View.KyHieuCongVan item in DataProvider.Ins.DB.KyHieuCongVan)
                 _db.Add(new KyHieu(item));
 

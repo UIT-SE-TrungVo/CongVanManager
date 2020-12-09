@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CongVanManager"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:Controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-      
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:CongVanManager.View.usercontrol"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -80,7 +80,7 @@
             <!--#region RIGHT: VIEW PANEL-->
             <DockPanel Grid.Column="2" LastChildFill="True">
                 <!--View Panel-->
-                <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" Height="480">
                     <StackPanel>
                         <!--Header-->
                         <StackPanel Margin="5">
@@ -177,6 +177,16 @@
                             </WrapPanel>
 
                             <!--Cong Van Content-->
+                        </StackPanel>
+                        <!--PdfViewer-->
+                        <StackPanel x:Name="pdfZone" Grid.Row="1">
+                            <ContentControl Content="{Binding PDF}" Height="400">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDoubleClick">
+                                        <i:InvokeCommandAction Command="{Binding ClickOnPDFCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ContentControl>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>

@@ -39,6 +39,7 @@ namespace CongVanManager
         {
             _db.CollectionChanged -= LoaiCongVanDBChanged;
 
+            LoaiCongVan.DB.Clear();
             foreach (View.LoaiCongVan cv in DataProvider.Ins.DB.LoaiCongVan)
                 _db.Add(new LoaiCongVan(cv));
 

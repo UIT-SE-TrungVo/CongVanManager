@@ -42,7 +42,8 @@ namespace CongVanManager
         public static void ReloadDatabase()
         {
             _db.CollectionChanged -= LienHeDBChanged;
-            
+
+            LienHe.DB.Clear();
             foreach (View.LienHe cv in DataProvider.Ins.DB.LienHe)
                 _db.Add(new LienHe(cv));
 
