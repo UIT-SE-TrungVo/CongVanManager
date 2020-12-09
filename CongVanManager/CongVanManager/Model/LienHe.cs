@@ -59,13 +59,18 @@ namespace CongVanManager
             if (arg.OldItems != null)
                 foreach (LienHe item in arg.OldItems)
                 {
-                    var cvs = DataProvider.Ins.DB.LienHe;
-                    cvs.Remove(cvs.Find(item.Email));
                 }
             if (arg.NewItems != null)
                 foreach (LienHe item in arg.NewItems)
                 {
-                    var temp = item.ToLienHe();
+                    bool newItem = false;
+                    var temp = DataProvider.Ins.DB.LienHe.Find(item.Email);
+
+                    if (temp == null)
+                    {
+                        newItem = true;
+                        temp = item.ToLienHe();
+                    }
 
                     if (temp.CongVans1 == null)
                         temp.CongVans1 = new List<View.CongVan>();
@@ -79,8 +84,8 @@ namespace CongVanManager
                             nh.CongVan1.LienHes.Add(temp);
                         }
                     }
-
-                    DataProvider.Ins.DB.LienHe.Add(temp);
+                    if (newItem)
+                        DataProvider.Ins.DB.LienHe.Add(temp);
                 }
         }
 
