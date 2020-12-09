@@ -30,7 +30,7 @@ namespace CongVanManager
             }
         }
 
-        public CONGVANMANAGEREntities DB { get; set; } = new CONGVANMANAGEREntities();
+        public MyDBContext DB { get; set; } = new MyDBContext();
         
         private const int TimeToRefresh_Upload = 10000; // 10 sec
         private const int TimeToRefresh_Download = 600000; // 10 min
@@ -70,7 +70,7 @@ namespace CongVanManager
                 {
                     //*
                     DB.Dispose();
-                    DB = new CONGVANMANAGEREntities();
+                    DB = new MyDBContext();
                     DB.Configuration.AutoDetectChangesEnabled = false;
                     //*/
 

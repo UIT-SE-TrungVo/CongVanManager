@@ -16,7 +16,9 @@
             <ListBox Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                      ItemsSource="{Binding DSLienHe}"
                      SelectedItem="{Binding SelectedLienHe, Mode=TwoWay}"
-                     SelectionMode="Single">
+                     SelectionMode="Single"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible"
+                     MaxHeight="590">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

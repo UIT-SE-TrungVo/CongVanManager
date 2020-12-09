@@ -21,23 +21,27 @@ namespace CongVanManager
     {
         public LienHe()
         {
-            this.CongVans = new HashSet<CongVan>();
-            this.DanhSachNoiNhan = new HashSet<NoiNhan>();
+            this.CongVans = new DelayedObservableCollection<CongVan>();
+            //this.CongVans.CollectionChanged += (obj, arg) => OnPropertyChanged("CongVans");
+            this.DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan>();
+            //this.DanhSachNoiNhan.CollectionChanged += (obj, arg) => OnPropertyChanged("DanhSachNoiNhan");
         }
 
         public LienHe(View.LienHe lh)
         {
             Email = lh.Email;
             Name = lh.TenLienHe;
-            this.CongVans = new HashSet<CongVan>();
-            this.DanhSachNoiNhan = new HashSet<NoiNhan>();
+            this.CongVans = new DelayedObservableCollection<CongVan>();
+            //this.CongVans.CollectionChanged += (obj, arg) => OnPropertyChanged("CongVans");
+            this.DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan>();
+            //this.DanhSachNoiNhan.CollectionChanged += (obj, arg) => OnPropertyChanged("DanhSachNoiNhan");
         }
     
         public string Email { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<CongVan> CongVans { get; set; }
-        public virtual ICollection<NoiNhan> DanhSachNoiNhan { get; set; }
+        public virtual DelayedObservableCollection<CongVan> CongVans { get; set; }
+        public virtual DelayedObservableCollection<NoiNhan> DanhSachNoiNhan { get; set; }
 
         public static void ReloadDatabase()
         {

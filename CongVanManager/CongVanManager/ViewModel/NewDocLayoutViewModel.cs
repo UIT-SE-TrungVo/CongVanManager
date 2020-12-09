@@ -73,9 +73,9 @@ namespace CongVanManager.ViewModel
             set { _SoVao = value; OnPropertyChanged(); }
         }
         //Gio nhan
-        private string _GioNhan;
+        private DateTime _GioNhan;
 
-        public string GioNhan
+        public DateTime GioNhan
         {
             get { return _GioNhan; }
             set { _GioNhan = value; OnPropertyChanged(); }
@@ -180,6 +180,14 @@ namespace CongVanManager.ViewModel
             set { _TrichYeu = value; OnPropertyChanged(); }
         }
         //Noi gui
+        private string _inputNoiGui;
+
+        public string inputNoiGui
+        {
+            get { return _inputNoiGui; }
+            set { _inputNoiGui = value; OnPropertyChanged(); }
+        }
+
         private LienHe _NoiGui = new LienHe();
 
         public LienHe NoiGui
@@ -345,11 +353,14 @@ namespace CongVanManager.ViewModel
                     {
                         VisibleTextBox = "Collapsed";
                         VisibleButton = "Visible";
+                        NoiGui = new LienHe() { Email = inputNoiGui, Name = inputNoiGui };
                     }
                     else
                     {
                         VisibleTextBox = "Visible";
                         VisibleButton = "Collapsed";
+                        inputNoiGui = NoiGui.Name;
+                        NoiGui = new LienHe();
                     }
                 });
             }
@@ -424,13 +435,15 @@ namespace CongVanManager.ViewModel
                 {
                     if (!edit)
                     {
+                        DateTime tempDateTime = new DateTime(NgayNhan.Year, NgayNhan.Month, NgayNhan.Day, GioNhan.Hour, GioNhan.Minute, 0);
+                        
                         CongVan cv = new CongVan()
                         {
                             Id = CongVan.DB.Last().Id + 1,
                             SoCongVan = SoVao,
                             SoKyHieu = this.SoKyHieu + "/" + MaKyHieu,
                             NgayCongVan = NgayTrenCongVan,
-                            NgayXuLi = NgayNhan,
+                            NgayXuLi = tempDateTime,
                             TrichYeu = TrichYeu,
                             GhiChu = GhiChu,
                             NoiGui = new LienHe() { Email = NoiGui.Email, Name = NoiGui.Name },
@@ -451,14 +464,29 @@ namespace CongVanManager.ViewModel
                         CongVan.DB.Add(cv);
                         foreach (LienHeShort item in DSNoiNhan)
                         {
-                            LienHe lh = new LienHe() { Email = item.Email, Name = item.TenLienHe };
+                            LienHe lh;
+                            lh = new LienHe() { Email = item.Email, Name = item.TenLienHe };
+                            if (LienHe.DB.Where(l => l.Email == item.Email).Count() != 0)
+                            {
+                                lh = LienHe.DB.Where(l => l.Email == item.Email).First();
+                                //MessageBox.Show(lh.DanhSachNoiNhan.First()?.CongVan1.MaCongVan.ToString());
+                            }
+
                             NoiNhan nn = new NoiNhan() { LienHe = lh, CongVan = cv };
                             cv.DanhSachNoiNhan.Add(nn);
                             lh.DanhSachNoiNhan.Add(nn);
+
                             if (LienHe.DB.Where(l => l.Email == item.Email).Count() == 0)
                             {
-                                LienHe.DB.Add(lh);
+                               LienHe.DB.Add(lh);
                             }
+                            else
+                            {
+                                //LienHe.DB.Remove(LienHe.DB.Where(l => l.Email == item.Email).First());
+                                //LienHe.DB.Add(lh);
+                                lh.OnPropertyChanged("DanhSachNoiNhan");
+                            }
+
                             CongVanManager.NoiNhan.DB.Add(nn);
                         }
                     }
@@ -493,8 +521,9 @@ namespace CongVanManager.ViewModel
                         //chinhsua = cv;
                         //while(CongVanManager.NoiNhan.DB.IndexOf(CongVanManager.NoiNhan.DB.Where(nn => nn.CongVan.Id == editID)?.First()) != -1)
                         //{
-                        //    CongVanManager.NoiNhan.DB.RemoveAt(CongVanManager.NoiNhan.DB.IndexOf(CongVanManager.NoiNhan.DB.Where(nn => nn.CongVan.Id == editID)?.First()));
+                        //   CongVanManager.NoiNhan.DB.RemoveAt(CongVanManager.NoiNhan.DB.IndexOf(CongVanManager.NoiNhan.DB.Where(nn => nn.CongVan.Id == editID)?.First()));
                         //}
+
                         foreach (LienHeShort item in DSNoiNhan)
                         {
                             LienHe lh = new LienHe() { Email = item.Email, Name = item.TenLienHe };
@@ -594,6 +623,7 @@ namespace CongVanManager.ViewModel
                 result = false;
             if (string.IsNullOrWhiteSpace(SoVao.ToString()))
                 result = false;
+            
             return result;
         }
         #endregion

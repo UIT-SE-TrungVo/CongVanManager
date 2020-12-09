@@ -162,7 +162,8 @@
                             Trích yếu
                                 </TextBlock>
                                 <TextBox Margin="10"
-                                     Text="{Binding TrichYeu, Mode=TwoWay}"/>
+                                     Text="{Binding TrichYeu, Mode=TwoWay}"
+                                         ToolTip="Tóm tắt nội dung của công văn"/>
                             </DockPanel>
                         </Grid>
                     </Grid>
@@ -190,11 +191,12 @@
                             </TextBlock>
                             <Grid Grid.Column="1">
                                 <TextBox x:Name="tbSender" VerticalAlignment="Center"
-                                         Text="{Binding NoiGui.Name}"
+                                         Text="{Binding inputNoiGui, Mode=TwoWay}"
                                          Visibility="{Binding VisibleTextBox}"/>
                                 <Button x:Name="btnSender" Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray" HorizontalAlignment="Left"
                                    Content="{Binding NoiGui.Name, Mode=TwoWay}" Visibility="{Binding VisibleButton}"
-                                   Command="{Binding ClickNoiGui}">
+                                   Command="{Binding ClickNoiGui}"
+                                        ToolTip="{Binding NoiGui.Email}">
                                 </Button>
                             </Grid>
                             <WrapPanel Grid.Column="2">
@@ -250,6 +252,7 @@
                                                 materialDesign:HintAssist.Background="White"
                                                 materialDesign:HintAssist.IsFloating="True"
                                                 Content="{Binding TenLienHe}"
+                                                ToolTip="{Binding Email}"
                                                 Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray"
                                                 Width="auto"
                                                 Height="50"
