@@ -13,21 +13,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PdfiumViewer;
-using System.Windows.Forms;
-using System.IO;
 
-namespace CongVanManager
+namespace CongVanManager.View
 {
     /// <summary>
-    /// Interaction logic for InboxLayout.xaml
+    /// Interaction logic for ReportLayout.xaml
     /// </summary>
-    public partial class InboxLayout : Page
+    public partial class ReportLayout : Page
     {
-        public InboxLayout()
+        public ReportLayout()
         {
             InitializeComponent();
-            this.DataContext = InboxLayoutViewModel.Instance;
+            this.DataContext = new ReportLayoutViewModel();
         }
     }
 }

@@ -21,23 +21,27 @@ namespace CongVanManager
     {
         public LienHe()
         {
-            this.CongVans = new HashSet<CongVan>();
-            this.DanhSachNoiNhan = new HashSet<NoiNhan>();
+            this.CongVans = new DelayedObservableCollection<CongVan>();
+            //this.CongVans.CollectionChanged += (obj, arg) => OnPropertyChanged("CongVans");
+            this.DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan>();
+            //this.DanhSachNoiNhan.CollectionChanged += (obj, arg) => OnPropertyChanged("DanhSachNoiNhan");
         }
 
         public LienHe(View.LienHe lh)
         {
             Email = lh.Email;
             Name = lh.TenLienHe;
-            this.CongVans = new HashSet<CongVan>();
-            this.DanhSachNoiNhan = new HashSet<NoiNhan>();
+            this.CongVans = new DelayedObservableCollection<CongVan>();
+            //this.CongVans.CollectionChanged += (obj, arg) => OnPropertyChanged("CongVans");
+            this.DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan>();
+            //this.DanhSachNoiNhan.CollectionChanged += (obj, arg) => OnPropertyChanged("DanhSachNoiNhan");
         }
     
         public string Email { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<CongVan> CongVans { get; set; }
-        public virtual ICollection<NoiNhan> DanhSachNoiNhan { get; set; }
+        public virtual DelayedObservableCollection<CongVan> CongVans { get; set; }
+        public virtual DelayedObservableCollection<NoiNhan> DanhSachNoiNhan { get; set; }
 
         public static void ReloadDatabase()
         {
@@ -56,32 +60,34 @@ namespace CongVanManager
             if (arg.OldItems != null)
                 foreach (LienHe item in arg.OldItems)
                 {
-                    var cvs = DataProvider.Ins.DB.LienHe;
-                    cvs.Remove(cvs.Find(item.Email));
                 }
             if (arg.NewItems != null)
                 foreach (LienHe item in arg.NewItems)
-                    if (DB.Where(temp => item.Email == temp.Email) != null)
+                {
+                    bool newItem = false;
+                    var temp = DataProvider.Ins.DB.LienHe.Find(item.Email);
+
+                    if (temp == null)
                     {
-                        var temp = item.ToLienHe();
+                        newItem = true;
+                        temp = item.ToLienHe();
+                    }
 
                         if (temp.CongVans1 == null)
                             temp.CongVans1 = new List<View.CongVan>();
 
-                        foreach (NoiNhan nh in item.DanhSachNoiNhan)
+                    foreach (NoiNhan nh in item.DanhSachNoiNhan)
+                    {
+                        nh.LienHe1 = temp;
+                        if (nh.CongVan1 != null)
                         {
-                            nh.LienHe1 = temp;
-                            if (nh.CongVan1 != null)
-                            {
-                                temp.CongVans1.Add(nh.CongVan1);
-                                nh.CongVan1.LienHes.Add(temp);
-                            }
+                            temp.CongVans1.Add(nh.CongVan1);
+                            nh.CongVan1.LienHes.Add(temp);
                         }
-
-                        DataProvider.Ins.DB.LienHe.Add(temp);
                     }
-                    else
-                        Console.WriteLine("ERROR: Primary key duplication at LienHe.");
+                    if (newItem)
+                        DataProvider.Ins.DB.LienHe.Add(temp);
+                }
         }
 
         private static DelayedObservableCollection<LienHe> _db;

@@ -95,6 +95,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MyDBContext.cs" />
     <Compile Include="Command\EventArgs.cs" />
     <Compile Include="Command\EventRaiser.cs" />
     <Compile Include="DataProvider.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="ViewModel\ContactLayoutViewModel.cs" />
     <Compile Include="ViewModel\DelayedObservableCollection.cs" />
     <Compile Include="ViewModel\ActionLayoutViewModel.cs" />
     <Compile Include="ViewModel\BoxLayoutViewModel.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="ViewModel\NewDocLayoutViewModel.cs" />
     <Compile Include="ViewModel\NewDocLayout_ChooserViewModel.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
+    <Compile Include="ViewModel\ReportLayoutViewModel.cs" />
     <Compile Include="ViewModel\SettingLayoutViewModel.cs" />
     <Compile Include="ViewModel\UC_InBoxViewModel.cs" />
     <Compile Include="ViewModel\UC_OutBoxViewModel.cs" />
@@ -127,6 +130,9 @@
     <Compile Include="View\KyHieuCongVan.cs">
       <DependentUpon>QLCV.tt</DependentUpon>
     </Compile>
+    <Compile Include="View\ContactLayout.xaml.cs">
+      <DependentUpon>ContactLayout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginLayout.xaml.cs">
       <DependentUpon>LoginLayout.xaml</DependentUpon>
     </Compile>
@@ -138,6 +144,9 @@
     </Compile>
     <Compile Include="View\PDFScan.cs">
       <DependentUpon>QLCV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportLayout.xaml.cs">
+      <DependentUpon>ReportLayout.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingLayout.xaml.cs">
       <DependentUpon>SettingLayout.xaml</DependentUpon>
@@ -156,10 +165,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BoxLayout.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\InboxLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,17 +211,17 @@
     </Compile>
     <Compile Include="Model\CongVan.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\InboxLayoutViewModel.cs" />
     <Compile Include="Model\LienHe.cs" />
     <Compile Include="Model\LoaiCongVan.cs" />
     <Compile Include="Model\NoiNhan.cs" />
-    <Compile Include="View\InboxLayout.xaml.cs">
-      <DependentUpon>InboxLayout.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ContactLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -226,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NewDocLayout_Chooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

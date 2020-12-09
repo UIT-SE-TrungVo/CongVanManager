@@ -16,6 +16,7 @@
         public CongVan()
         {
             this.DanhSachNoiNhan = new DelayedObservableCollection<NoiNhan>();
+            this.DanhSachNoiNhan.CollectionChanged += (obj, arg) => OnPropertyChanged("DanhSachNoiNhan");
             this.PhanHois = new DelayedObservableCollection<PhanHoi>();
         }
 
@@ -68,6 +69,7 @@
                 DanhSachNoiNhan.Add(noiNhan);
                 NoiNhan.DB.Add(noiNhan);
             }
+            //this.DanhSachNoiNhan.CollectionChanged += (obj, arg) => OnPropertyChanged("DanhSachNoiNhan");
         }
 
         public View.CongVan ToCongVan()

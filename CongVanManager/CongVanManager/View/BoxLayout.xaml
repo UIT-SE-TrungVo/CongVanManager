@@ -20,7 +20,7 @@
       MinHeight="600" MinWidth="1000" 
       Title="Hộp thư đến">
 
-    <Grid Margin="10">
+    <Grid Margin="10" LayoutUpdated="Reload">
         <!--#region LAYOUT DEFINITION-->
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
@@ -46,7 +46,7 @@
         <!--#region MAIN-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="700" MinWidth="400" MaxWidth="900"/>
+                <ColumnDefinition x:Name="colMailBox" Width="{Binding BoxWidth}" MinWidth="400" MaxWidth="900"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
@@ -78,9 +78,14 @@
             <GridSplitter Grid.Column="1" Width="5" Background="Purple" HorizontalAlignment="Stretch"/>
 
             <!--#region RIGHT: VIEW PANEL-->
-            <DockPanel Grid.Column="2" LastChildFill="True">
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
                 <!--View Panel-->
-                <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Auto" Height="480">
+                <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Hidden" Height="480">
                     <StackPanel>
                         <!--Header-->
                         <StackPanel Margin="5">
@@ -177,6 +182,11 @@
                             </WrapPanel>
 
                             <!--Cong Van Content-->
+                            <DockPanel Background="Pink" Height="auto">
+                                <ContentControl Content="{Binding PDF}">
+                                    
+                                </ContentControl>
+                            </DockPanel>
                         </StackPanel>
                         <!--PdfViewer-->
                         <StackPanel x:Name="pdfZone" Grid.Row="1">
@@ -192,14 +202,14 @@
                 </ScrollViewer>
 
                 <!--Action bar-->
-                <DockPanel DockPanel.Dock="Bottom" Height="50" VerticalAlignment="Bottom">
+                <Grid Grid.Row="1" Height="50" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <Button HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding Open_ActionLayout}"
                             IsEnabled="{Binding isEnable}">
                         Thực hiện hành động
                     </Button>
-                </DockPanel>
-            </DockPanel>
+                </Grid>
+            </Grid>
             <!--#endregion -->
         </Grid>
 

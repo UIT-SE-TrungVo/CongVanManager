@@ -227,6 +227,8 @@ namespace CongVanManager.ViewModel
         }
         #endregion
 
+        public static int BoxWidth { get; set; } = 70;
+
         public void ValueChanged(object sender, string[] args = null)
         {
             if (sender is CongVan)

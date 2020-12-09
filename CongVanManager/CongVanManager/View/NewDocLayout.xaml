@@ -77,7 +77,8 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBox Margin="0,10,10,10" Text="{Binding SoVao}"/>
+                            <TextBox Margin="0,10,10,10" Text="{Binding SoVao}"
+                                     ToolTip="Nhập số công văn."/>
                         </DockPanel>
                         <DockPanel Grid.Column="1">
                             <TextBlock x:Name="tbGetTime" Margin="10" VerticalAlignment="Center">
@@ -161,7 +162,8 @@
                             Trích yếu
                                 </TextBlock>
                                 <TextBox Margin="10"
-                                     Text="{Binding TrichYeu, Mode=TwoWay}"/>
+                                     Text="{Binding TrichYeu, Mode=TwoWay}"
+                                         ToolTip="Tóm tắt nội dung của công văn"/>
                             </DockPanel>
                         </Grid>
                     </Grid>
@@ -188,17 +190,24 @@
                                 Nơi gửi
                             </TextBlock>
                             <Grid Grid.Column="1">
-                                <TextBox x:Name="tbSender" VerticalAlignment="Center"/>
+                                <TextBox x:Name="tbSender" VerticalAlignment="Center"
+                                         Text="{Binding inputNoiGui, Mode=TwoWay}"
+                                         Visibility="{Binding VisibleTextBox}"/>
                                 <Button x:Name="btnSender" Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray" HorizontalAlignment="Left"
-                                   Content="{Binding ElementName=tbSender, Path=Text, Mode=TwoWay}" Visibility="Collapsed" Click="btnSender_Click">
+                                   Content="{Binding NoiGui.Name, Mode=TwoWay}" Visibility="{Binding VisibleButton}"
+                                   Command="{Binding ClickNoiGui}"
+                                        ToolTip="{Binding NoiGui.Email}">
                                 </Button>
                             </Grid>
                             <WrapPanel Grid.Column="2">
-                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0" Click="btnConfirmSender_Click"
+                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0"
+                                        Command="{Binding ClickNoiGui}"
+                                        Visibility="{Binding VisibleTextBox}"
                                         x:Name="btnConfirmSender">
                                     <materialDesign:PackIcon Kind="Tick" Height="30" Width="30"/>
                                 </Button>
-                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
+                                <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0"
+                                        Command="{Binding Open_ContactLayout_Gui}">
                                     <materialDesign:PackIcon Kind="Contact" Height="30" Width="30"/>
                                 </Button>
                             </WrapPanel>
@@ -224,7 +233,8 @@
                                         Command="{Binding ClickThemNoiNhan}">
                                         <materialDesign:PackIcon Kind="PersonAdd" Height="30" Width="30"/>
                                     </Button>
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0">
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0"
+                                            Command="{Binding Open_ContactLayout_Nhan}">
                                         <materialDesign:PackIcon Kind="Contact" Height="30" Width="30"/>
                                     </Button>
                                 </WrapPanel>
@@ -242,6 +252,7 @@
                                                 materialDesign:HintAssist.Background="White"
                                                 materialDesign:HintAssist.IsFloating="True"
                                                 Content="{Binding TenLienHe}"
+                                                ToolTip="{Binding Email}"
                                                 Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray"
                                                 Width="auto"
                                                 Height="50"

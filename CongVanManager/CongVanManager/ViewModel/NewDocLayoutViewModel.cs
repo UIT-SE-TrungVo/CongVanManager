@@ -43,7 +43,9 @@ namespace CongVanManager.ViewModel
             SoVao = (int)cv.SoCongVan;
             NgayNhan = cv.NgayXuLi;
             TrichYeu = cv.TrichYeu;
-            NoiGui = cv.NoiGui.Name;
+            NoiGui = cv.NoiGui;
+            VisibleButton = "Visible";
+            VisibleTextBox = "Collapsed";
             foreach(NoiNhan item in cv.DanhSachNoiNhan)
             {
                 DSNoiNhan.Add(new LienHeShort() { Email = item.LienHe.Email, TenLienHe = item.LienHe.Name }) ;
@@ -71,9 +73,9 @@ namespace CongVanManager.ViewModel
             set { _SoVao = value; OnPropertyChanged(); }
         }
         //Gio nhan
-        private string _GioNhan;
+        private DateTime _GioNhan;
 
-        public string GioNhan
+        public DateTime GioNhan
         {
             get { return _GioNhan; }
             set { _GioNhan = value; OnPropertyChanged(); }
@@ -178,13 +180,37 @@ namespace CongVanManager.ViewModel
             set { _TrichYeu = value; OnPropertyChanged(); }
         }
         //Noi gui
-        private string _NoiGui;
+        private string _inputNoiGui;
 
-        public string NoiGui
+        public string inputNoiGui
+        {
+            get { return _inputNoiGui; }
+            set { _inputNoiGui = value; OnPropertyChanged(); }
+        }
+
+        private LienHe _NoiGui = new LienHe();
+
+        public LienHe NoiGui
         {
             get { return _NoiGui; }
             set { _NoiGui = value; OnPropertyChanged(); }
         }
+
+        private string _VisibleTextBox = "Visible";
+
+        public string VisibleTextBox
+        {
+            get { return _VisibleTextBox; }
+            set { _VisibleTextBox = value;  OnPropertyChanged(); }
+        }
+        private string _VisibleButton = "Collapsed";
+
+        public string VisibleButton
+        {
+            get { return _VisibleButton; }
+            set { _VisibleButton = value; OnPropertyChanged(); }
+        }
+
         //Noi nhan
         private string _NoiNhan;
 
@@ -316,6 +342,30 @@ namespace CongVanManager.ViewModel
             }
         }
 
+        public ICommand ClickNoiGui
+        {
+            get
+            {
+                return new RelayCommand(
+                x =>
+                {
+                    if(VisibleTextBox == "Visible")
+                    {
+                        VisibleTextBox = "Collapsed";
+                        VisibleButton = "Visible";
+                        NoiGui = new LienHe() { Email = inputNoiGui, Name = inputNoiGui };
+                    }
+                    else
+                    {
+                        VisibleTextBox = "Visible";
+                        VisibleButton = "Collapsed";
+                        inputNoiGui = NoiGui.Name;
+                        NoiGui = new LienHe();
+                    }
+                });
+            }
+        }
+
         public ICommand XoaNoiNhan
         {
             get
@@ -389,16 +439,73 @@ namespace CongVanManager.ViewModel
                         PDFDownloader.PublishPDF(ref PDFFileName, showFileName);
                         //PDFDownloader.PublishPDF(ref PDFFileName);
 
+                        DateTime tempDateTime = new DateTime(NgayNhan.Year, NgayNhan.Month, NgayNhan.Day, GioNhan.Hour, GioNhan.Minute, 0);
+                        
                         CongVan cv = new CongVan()
                         {
                             Id = CongVan.DB.Last().Id + 1,
                             SoCongVan = SoVao,
                             SoKyHieu = this.SoKyHieu + "/" + MaKyHieu,
                             NgayCongVan = NgayTrenCongVan,
+                            NgayXuLi = tempDateTime,
+                            TrichYeu = TrichYeu,
+                            GhiChu = GhiChu,
+                            NoiGui = new LienHe() { Email = NoiGui.Email, Name = NoiGui.Name },
+                            LoaiCongVan = new LoaiCongVan() { Id = selectedLoaiCongVan },
+                        }; // TODO: add check for existing LienHe & LoaiCongVan
+                        if (iNewDocLayout_Type == (int)DocType.In)
+                        {
+                            cv.StatusCode = CongVan.StatusCodeEnum.DaTiepNhan;
+                        }
+                        else
+                        {
+                            cv.StatusCode = CongVan.StatusCodeEnum.ChoDuyet;
+                        }
+                        if (LienHe.DB.Where(l => l.Email == cv.NoiGui.Email).Count() == 0)
+                        {
+                            LienHe.DB.Add(cv.NoiGui);
+                        }
+                        CongVan.DB.Add(cv);
+                        foreach (LienHeShort item in DSNoiNhan)
+                        {
+                            LienHe lh;
+                            lh = new LienHe() { Email = item.Email, Name = item.TenLienHe };
+                            if (LienHe.DB.Where(l => l.Email == item.Email).Count() != 0)
+                            {
+                                lh = LienHe.DB.Where(l => l.Email == item.Email).First();
+                                //MessageBox.Show(lh.DanhSachNoiNhan.First()?.CongVan1.MaCongVan.ToString());
+                            }
+
+                            NoiNhan nn = new NoiNhan() { LienHe = lh, CongVan = cv };
+                            cv.DanhSachNoiNhan.Add(nn);
+                            lh.DanhSachNoiNhan.Add(nn);
+
+                            if (LienHe.DB.Where(l => l.Email == item.Email).Count() == 0)
+                            {
+                               LienHe.DB.Add(lh);
+                            }
+                            else
+                            {
+                                //LienHe.DB.Remove(LienHe.DB.Where(l => l.Email == item.Email).First());
+                                //LienHe.DB.Add(lh);
+                                lh.OnPropertyChanged("DanhSachNoiNhan");
+                            }
+
+                            CongVanManager.NoiNhan.DB.Add(nn);
+                        }
+                    }
+                    else
+                    {
+                        CongVan cv = new CongVan()
+                        {
+                            Id = editID,
+                            SoCongVan = SoVao,
+                            SoKyHieu = this.SoKyHieu + "/" + MaKyHieu,
+                            NgayCongVan = NgayTrenCongVan,
                             NgayXuLi = NgayNhan,
                             TrichYeu = TrichYeu,
                             GhiChu = GhiChu,
-                            NoiGui = new LienHe() { Email = NoiGui, Name = NoiGui },
+                            NoiGui = new LienHe() { Email = NoiGui.Email, Name = NoiGui.Name },
                             LoaiCongVan = new LoaiCongVan() { Id = selectedLoaiCongVan },
                             PDFScanLocation = PDFFileName
                         }; // TODO: add check for existing LienHe & LoaiCongVan
@@ -410,15 +517,29 @@ namespace CongVanManager.ViewModel
                         {
                             cv.StatusCode = CongVan.StatusCodeEnum.ChoDuyet;
                         }
-                        LienHe.DB.Add(cv.NoiGui);
+                        if (LienHe.DB.Where(l => l.Email == cv.NoiGui.Email).Count() == 0)
+                        {
+                            LienHe.DB.Add(cv.NoiGui);
+                        }
+                        CongVan.DB.Remove(CongVan.DB.Where(c => c.Id == cv.Id)?.First());
                         CongVan.DB.Add(cv);
+                        //chinhsua = cv;
+                        //while(CongVanManager.NoiNhan.DB.IndexOf(CongVanManager.NoiNhan.DB.Where(nn => nn.CongVan.Id == editID)?.First()) != -1)
+                        //{
+                        //   CongVanManager.NoiNhan.DB.RemoveAt(CongVanManager.NoiNhan.DB.IndexOf(CongVanManager.NoiNhan.DB.Where(nn => nn.CongVan.Id == editID)?.First()));
+                        //}
+
                         foreach (LienHeShort item in DSNoiNhan)
                         {
                             LienHe lh = new LienHe() { Email = item.Email, Name = item.TenLienHe };
                             NoiNhan nn = new NoiNhan() { LienHe = lh, CongVan = cv };
+                            cv.DanhSachNoiNhan.Clear();
                             cv.DanhSachNoiNhan.Add(nn);
                             lh.DanhSachNoiNhan.Add(nn);
-                            LienHe.DB.Add(lh);
+                            if (LienHe.DB.Where(l => l.Email == item.Email).Count() == 0)
+                            {
+                                LienHe.DB.Add(lh);
+                            }
                             CongVanManager.NoiNhan.DB.Add(nn);
                         }
                     }
@@ -438,8 +559,58 @@ namespace CongVanManager.ViewModel
                     );
             }
         }
+
+        public ICommand Open_ContactLayout_Nhan
+        {
+            get
+            {
+                return new RelayCommand(
+                   x =>
+                   {
+                       ContactLayout contactLayout = new ContactLayout();
+                       contactLayout.ShowDialog();
+                       GetLienHeNoiNhan(contactLayout);
+                   });
+            }
+        }
+        public ICommand Open_ContactLayout_Gui
+        {
+            get
+            {
+                return new RelayCommand(
+                   x =>
+                   {
+                       ContactLayout contactLayout = new ContactLayout();
+                       contactLayout.ShowDialog();
+                       GetLienHeNoiGui(contactLayout);
+                   });
+            }
+        }
         #endregion
         #region other function
+        public async void GetLienHeNoiNhan(ContactLayout contactLayout)
+        {
+            LienHe a = await ((ContactLayoutViewModel)contactLayout.DataContext).getSelectedLienHe();
+            if (a == null)
+                return;
+            LienHeShort lh = new LienHeShort();
+            lh.Email = a.Email;
+            lh.TenLienHe = a.Name;
+            DSNoiNhan.Add(lh);
+            NoiNhan = "";
+        }
+        public async void GetLienHeNoiGui(ContactLayout contactLayout)
+        {
+            LienHe a = await ((ContactLayoutViewModel)contactLayout.DataContext).getSelectedLienHe();
+            if (a == null)
+                return;
+            if (VisibleTextBox == "Visible")
+            {
+                VisibleTextBox = "Collapsed";
+                VisibleButton = "Visible";
+            }
+            NoiGui = a;
+        }
         public void ShowDialogLCV()
         {
             IsDialogOpen = true;
@@ -450,11 +621,22 @@ namespace CongVanManager.ViewModel
             IsDialogOpen = true;
             type = "Nhập mã kí hiệu mới";
         }
+        public bool CheckValid()
+        {
+            bool result = true;
+            if (VisibleTextBox == "Visible")
+                result = false;
+            if (string.IsNullOrWhiteSpace(SoVao.ToString()))
+                result = false;
+            
+            return result;
+        }
         #endregion
     }
     public class LienHeShort
     {
         public string Email { get; set; }
         public string TenLienHe { get; set; }
+    
     }
 }
