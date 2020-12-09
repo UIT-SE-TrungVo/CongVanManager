@@ -64,7 +64,7 @@ namespace CongVanManager.ViewModel
                        {
                            MessageBoxResult result = MessageBox.Show("Bạn có muốn cấp quyền" +
                                "trưởng phòng cho người dùng này không?\n" +
-                               "Bạn sẽ mất quyền trưởng phòng.\n" +
+                               "Trưởng phòng hiện tại sẽ mất quyền trưởng phòng.\n" +
                                "Bạn sẽ tạm thời vẫn có thể sửa quyền trong tab này.",
                                "Đổi quyền trưởng phòng?", MessageBoxButton.YesNo);
                            if (result != MessageBoxResult.Yes)
@@ -110,9 +110,9 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                    x =>
                    {
-                       UserType = User.UserType.Unknown;
-                       Password = "";
-                       Username = "";
+                       UserType = User?.Loai??User.UserType.Unknown;
+                       Password = User?.Password??"";
+                       Username = User?.Username??"";
                    });
             }
         }

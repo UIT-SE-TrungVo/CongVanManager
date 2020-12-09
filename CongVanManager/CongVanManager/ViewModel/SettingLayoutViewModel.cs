@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CongVanManager.View;
+using System.Windows;
 
 namespace CongVanManager.ViewModel
 {
@@ -53,14 +54,19 @@ namespace CongVanManager.ViewModel
             }
         }
 
-        public ICommand RemovwUser
+        public ICommand RemoveUser
         {
             get
             {
                 return new RelayCommand(
                    x =>
                    {
-                       User.DB.Remove(selectedUser);
+                        if (selectedUser != Setting.Ins.TruongPhong)
+                            User.DB.Remove(selectedUser);
+                        else
+                            MessageBox.Show("Cần có ít nhất 1 trưởng phòng.\n" +
+                                "Vui lòng chuyển quyền trưởng phòng cho người dùng" +
+                                "khác.\n", "Cần có Trưởng Phòng");
                        OnPropertyChanged("UserList");
                    });
             }

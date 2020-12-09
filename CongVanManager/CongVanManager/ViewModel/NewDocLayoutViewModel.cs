@@ -61,6 +61,8 @@ namespace CongVanManager.ViewModel
             MaKyHieu = cv.SoKyHieu.Remove(0, cv.SoKyHieu.IndexOf("/")+1);
             selectedLoaiCongVan = cv.LoaiCongVan.Id;
 
+            filename = showFileName = cv.PDFScanLocation;
+
             IsVisibleHuy = "Visible";
         }
         #region Binding
@@ -440,7 +442,7 @@ namespace CongVanManager.ViewModel
                         //PDFDownloader.PublishPDF(ref PDFFileName);
 
                         DateTime tempDateTime = new DateTime(NgayNhan.Year, NgayNhan.Month, NgayNhan.Day, GioNhan.Hour, GioNhan.Minute, 0);
-                        
+
                         CongVan cv = new CongVan()
                         {
                             Id = CongVan.DB.Last().Id + 1,
@@ -482,7 +484,7 @@ namespace CongVanManager.ViewModel
 
                             if (LienHe.DB.Where(l => l.Email == item.Email).Count() == 0)
                             {
-                               LienHe.DB.Add(lh);
+                                LienHe.DB.Add(lh);
                             }
                             else
                             {
@@ -496,6 +498,12 @@ namespace CongVanManager.ViewModel
                     }
                     else
                     {
+                        string PDFFileName = filename;
+                        if (DataProvider.Ins.DB.PDFScans.Find(PDFFileName) == null)
+                        {
+                            PDFDownloader.PublishPDF(ref PDFFileName, showFileName);
+                        }
+                        //PDFDownloader.PublishPDF(ref PDFFileName);
                         CongVan cv = new CongVan()
                         {
                             Id = editID,

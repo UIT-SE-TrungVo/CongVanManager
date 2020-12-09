@@ -34,9 +34,33 @@ namespace CongVanManager
             //*/
         }
 
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public UserType Loai { get; set; }
+        public string Username
+        {
+            get => _username;
+            set
+            {
+                _username = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                _password = value;
+                OnPropertyChanged();
+            }
+        }
+        public UserType Loai
+        {
+            get => _loai;
+            set
+            {
+                _loai = value;
+                OnPropertyChanged();
+            }
+        }
         public enum UserType : short
         {
             TruongPhong = 0,
@@ -47,7 +71,7 @@ namespace CongVanManager
 
         // show the time this user's last reloaded the database
         public DateTime LastSeen { get; set; }
-    
+
         public virtual ICollection<PhanHoi> PhanHois { get; set; }
 
         public static void ReloadDatabase()
@@ -86,6 +110,10 @@ namespace CongVanManager
         }
 
         private static DelayedObservableCollection<User> _db;
+        private string _username;
+        private string _password;
+        private UserType _loai;
+
         public static DelayedObservableCollection<User> DB
         {
             get
@@ -107,7 +135,7 @@ namespace CongVanManager
             return new View.NguoiDung
             {
                 LastSeen = LastSeen,
-                LoaiNguoiDung = (short) Loai,
+                LoaiNguoiDung = (short)Loai,
                 MatKhau = Password,
                 TenTaiKhoan = Username
             };
