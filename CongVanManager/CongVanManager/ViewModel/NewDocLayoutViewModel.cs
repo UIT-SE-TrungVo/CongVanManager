@@ -433,6 +433,8 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                 x =>
                 {
+                    if(!CheckValid())
+                        return;
                     if (!edit)
                     {
                         DateTime tempDateTime = new DateTime(NgayNhan.Year, NgayNhan.Month, NgayNhan.Day, GioNhan.Hour, GioNhan.Minute, 0);
@@ -482,8 +484,6 @@ namespace CongVanManager.ViewModel
                             }
                             else
                             {
-                                //LienHe.DB.Remove(LienHe.DB.Where(l => l.Email == item.Email).First());
-                                //LienHe.DB.Add(lh);
                                 lh.OnPropertyChanged("DanhSachNoiNhan");
                             }
 
@@ -492,49 +492,52 @@ namespace CongVanManager.ViewModel
                     }
                     else
                     {
-                        CongVan cv = new CongVan()
-                        {
-                            Id = editID,
-                            SoCongVan = SoVao,
-                            SoKyHieu = this.SoKyHieu + "/" + MaKyHieu,
-                            NgayCongVan = NgayTrenCongVan,
-                            NgayXuLi = NgayNhan,
-                            TrichYeu = TrichYeu,
-                            GhiChu = GhiChu,
-                            NoiGui = new LienHe() { Email = NoiGui.Email, Name = NoiGui.Name },
-                            LoaiCongVan = new LoaiCongVan() { Id = selectedLoaiCongVan },
-                        }; // TODO: add check for existing LienHe & LoaiCongVan
-                        if (iNewDocLayout_Type == (int)DocType.In)
-                        {
-                            cv.StatusCode = CongVan.StatusCodeEnum.DaTiepNhan;
-                        }
-                        else
-                        {
-                            cv.StatusCode = CongVan.StatusCodeEnum.ChoDuyet;
-                        }
+
+                        CongVan cv = CongVan.DB[CongVan.DB.IndexOf(CongVan.DB.Where(c => c.Id == editID).First())];
+                        cv.SoCongVan = SoVao;
+                        cv.SoKyHieu = this.SoKyHieu + "/" + MaKyHieu;
+                        cv.NgayCongVan = NgayTrenCongVan;
+                        cv.NgayXuLi = NgayNhan;
+                        cv.TrichYeu = TrichYeu;
+                        cv.GhiChu = GhiChu;
+                        cv.NoiGui = new LienHe() { Email = NoiGui.Email, Name = NoiGui.Name };
+                        cv.LoaiCongVan = new LoaiCongVan() { Id = selectedLoaiCongVan };
                         if (LienHe.DB.Where(l => l.Email == cv.NoiGui.Email).Count() == 0)
                         {
                             LienHe.DB.Add(cv.NoiGui);
                         }
-                        CongVan.DB.Remove(CongVan.DB.Where(c => c.Id == cv.Id)?.First());
-                        CongVan.DB.Add(cv);
-                        //chinhsua = cv;
-                        //while(CongVanManager.NoiNhan.DB.IndexOf(CongVanManager.NoiNhan.DB.Where(nn => nn.CongVan.Id == editID)?.First()) != -1)
-                        //{
-                        //   CongVanManager.NoiNhan.DB.RemoveAt(CongVanManager.NoiNhan.DB.IndexOf(CongVanManager.NoiNhan.DB.Where(nn => nn.CongVan.Id == editID)?.First()));
-                        //}
-
+                        cv.DanhSachNoiNhan.Clear();
+                        foreach (LienHe l in LienHe.DB)
+                        {
+                            int temp = l.DanhSachNoiNhan.Where(nn => nn.CongVan1.MaCongVan == cv.Id).Count();
+                            for (int i = 1; i<= temp; i++)
+                            {
+                                l.DanhSachNoiNhan.Remove(l.DanhSachNoiNhan.Where(nn => nn.CongVan1.MaCongVan == cv.Id).First());
+                            }
+                        }
                         foreach (LienHeShort item in DSNoiNhan)
                         {
-                            LienHe lh = new LienHe() { Email = item.Email, Name = item.TenLienHe };
+                            LienHe lh;
+                            lh = new LienHe() { Email = item.Email, Name = item.TenLienHe };
+                            if (LienHe.DB.Where(l => l.Email == item.Email).Count() != 0)
+                            {
+                                lh = LienHe.DB.Where(l => l.Email == item.Email).First();
+                                //MessageBox.Show(lh.DanhSachNoiNhan.First()?.CongVan1.MaCongVan.ToString());
+                            }
+
                             NoiNhan nn = new NoiNhan() { LienHe = lh, CongVan = cv };
-                            cv.DanhSachNoiNhan.Clear();
                             cv.DanhSachNoiNhan.Add(nn);
                             lh.DanhSachNoiNhan.Add(nn);
+
                             if (LienHe.DB.Where(l => l.Email == item.Email).Count() == 0)
                             {
                                 LienHe.DB.Add(lh);
                             }
+                            else
+                            {
+                                lh.OnPropertyChanged("DanhSachNoiNhan");
+                            }
+
                             CongVanManager.NoiNhan.DB.Add(nn);
                         }
                     }
@@ -618,6 +621,8 @@ namespace CongVanManager.ViewModel
         }
         public bool CheckValid()
         {
+            if (selectedLoaiCongVan == null)
+                return false;
             bool result = true;
             if (VisibleTextBox == "Visible")
                 result = false;
@@ -625,6 +630,10 @@ namespace CongVanManager.ViewModel
                 result = false;
             
             return result;
+        }
+        public void ShowThongBao()
+        {
+            
         }
         #endregion
     }
