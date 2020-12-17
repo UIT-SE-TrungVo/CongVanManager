@@ -456,6 +456,7 @@ namespace CongVanManager.ViewModel
                             GhiChu = GhiChu,
                             NoiGui = new LienHe() { Email = NoiGui.Email, Name = NoiGui.Name },
                             LoaiCongVan = new LoaiCongVan() { Id = selectedLoaiCongVan },
+                            PDFScanLocation = PDFFileName,
                         }; // TODO: add check for existing LienHe & LoaiCongVan
                         if (iNewDocLayout_Type == (int)DocType.In)
                         {
@@ -498,11 +499,6 @@ namespace CongVanManager.ViewModel
                     }
                     else
                     {
-                        string PDFFileName = filename;
-                        if (DataProvider.Ins.DB.PDFScans.Find(PDFFileName) == null)
-                        {
-                            PDFDownloader.PublishPDF(ref PDFFileName, showFileName);
-                        }
 
                         CongVan cv = CongVan.DB[CongVan.DB.IndexOf(CongVan.DB.Where(c => c.Id == editID).First())];
                         cv.SoCongVan = SoVao;
@@ -513,6 +509,14 @@ namespace CongVanManager.ViewModel
                         cv.GhiChu = GhiChu;
                         cv.NoiGui = new LienHe() { Email = NoiGui.Email, Name = NoiGui.Name };
                         cv.LoaiCongVan = new LoaiCongVan() { Id = selectedLoaiCongVan };
+
+                        string PDFFileName = filename;
+                        if (DataProvider.Ins.DB.PDFScans.Find(PDFFileName) == null)
+                        {
+                            PDFDownloader.PublishPDF(ref PDFFileName, showFileName);
+                        }
+                        cv.PDFScanLocation = PDFFileName;
+
                         if (LienHe.DB.Where(l => l.Email == cv.NoiGui.Email).Count() == 0)
                         {
                             LienHe.DB.Add(cv.NoiGui);
