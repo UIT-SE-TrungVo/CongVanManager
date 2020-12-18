@@ -32,7 +32,7 @@ namespace CongVanManager
 
         public MyDBContext DB { get; set; } = new MyDBContext();
         
-        private const int TimeToRefresh_Upload = 10000; // 10 sec
+        private const int TimeToRefresh_Upload = 100000; // 10 sec
         private const int TimeToRefresh_Download = 600000; // 10 min
 
         private async Task RefreshUploadAsync()

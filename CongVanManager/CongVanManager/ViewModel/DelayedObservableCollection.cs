@@ -81,6 +81,9 @@ namespace CongVanManager.ViewModel
                 foreach (T item in newItem)
                     this.Add(item);
 
+                if (newItem.Count > 0)
+                    DataProvider.Ins.DB.SaveChanges();
+
                 newItem = null;
             }
         }

@@ -68,10 +68,18 @@ namespace CongVanManager
 
                 var dbItem = DataProvider.Ins.DB.PDFScans.Find(FileName);
                 // If the item is in the DB and the content is different
-                if (dbItem != null && !IsEqual(dbItem.Content, pdf.Content)) 
+                if (dbItem != null)
                 {
-                    PublishPDF(ref FilePath);
-                    return;
+                    if (!IsEqual(dbItem.Content, pdf.Content))
+                    {
+                        PublishPDF(ref FilePath);
+                        return;
+                    }
+                    else
+                    {
+                        FilePath = FileName;
+                        return;
+                    }
                 }
 
                 DataProvider.Ins.DB.PDFScans.Add(pdf);

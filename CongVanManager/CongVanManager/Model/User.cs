@@ -31,6 +31,7 @@ namespace CongVanManager
             LastSeen = user.LastSeen;
             //* TODO
             Loai = (UserType)user.LoaiNguoiDung;
+            this.user = user;
             //*/
         }
 
@@ -68,6 +69,7 @@ namespace CongVanManager
             Khach = 2,
             Unknown = 3
         }
+        public NguoiDung user { get; set; }
 
         // show the time this user's last reloaded the database
         public DateTime LastSeen { get; set; }
@@ -95,18 +97,27 @@ namespace CongVanManager
                 foreach (User item in arg.OldItems)
                 {
                     var cvs = DataProvider.Ins.DB.NguoiDung;
-                    cvs.Remove(cvs.Find(item.Username));
+                    NguoiDung toRemove;
+                    if (item.user != null)
+                        toRemove = item.user;
+                    else
+                        toRemove = cvs.Find(item.Username);
+                    cvs.Remove(toRemove);
                 }
             if (arg.NewItems != null)
+            {
                 foreach (User item in arg.NewItems)
                     if (DB.Where(temp => item.Username == temp.Username) != null)
                     {
                         var temp = item.ToNguoiDung();
                         if (temp != null)
+                        {
                             DataProvider.Ins.DB.NguoiDung.Add(temp);
+                        }
                     }
                     else
                         Console.WriteLine("ERROR: Primary key duplication at User.");
+            }
         }
 
         private static DelayedObservableCollection<User> _db;
@@ -132,7 +143,9 @@ namespace CongVanManager
         {
             if (Loai == UserType.Unknown)
                 return null;
-            return new View.NguoiDung
+            if (user != null)
+                return user;
+            return user = new View.NguoiDung
             {
                 LastSeen = LastSeen,
                 LoaiNguoiDung = (short)Loai,

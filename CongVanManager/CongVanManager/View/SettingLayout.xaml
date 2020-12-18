@@ -36,10 +36,11 @@
                     <TextBlock Margin="8" VerticalAlignment="Center"> 
                     Trưởng phòng
                     </TextBlock>
-                    <ComboBox Width="300" Margin="8">
+                    <ComboBox Width="300" Margin="8" ItemsSource="{Binding UserList}" 
+                              DisplayMemberPath="Username" SelectedItem="{Binding SelectedTruongPhong}">
 
                     </ComboBox>
-                    <Button Margin="8">
+                    <Button Margin="8" Command="{Binding ConfirmTruongPhong}">
                         Xác nhận
                     </Button>
                 </StackPanel>

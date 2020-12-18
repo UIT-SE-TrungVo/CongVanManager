@@ -28,7 +28,12 @@ namespace CongVanManager.ViewModel
             get { return _isEnable; }
             set { _isEnable = value; OnPropertyChanged(); }
         }
-
+        private bool _isPDFEnable;
+        public bool isPDFEnable
+        {
+            get { return _isPDFEnable; }
+            set { _isPDFEnable = value; OnPropertyChanged(); }
+        }
         #region DanhSachCongVan
         public ICollection<CongVan> DSCongVan
         {
@@ -60,8 +65,12 @@ namespace CongVanManager.ViewModel
             set
             {
                 _selectedCongVan = value;
-                if(SelectedCongVan != null)
-                    isEnable = true;
+                if (SelectedCongVan != null)
+                {
+                    User.UserType userType = MainWindowViewModel.Ins.User.Loai;
+                    isEnable = userType != User.UserType.Khach &&
+                               userType != User.UserType.Unknown;
+                }
                 OnPropertyChanged("SelectedCongVanKeyNumber");
                 OnPropertyChanged("SelectedCongVanNumber");
                 OnPropertyChanged("SelectedLoaiCongVan");
@@ -227,7 +236,7 @@ namespace CongVanManager.ViewModel
         }
         #endregion
 
-        public static int BoxWidth { get; set; } = 70;
+        public static int BoxWidth { get; set; } = 30;
 
         public void ValueChanged(object sender, string[] args = null)
         {
@@ -305,8 +314,9 @@ namespace CongVanManager.ViewModel
                         _pdf.Document = PdfDocument.Load(pdfLoc);
                     }
                     prevPDF.Dispose();
+                    isPDFEnable = true;
                 }
-                catch (Exception e) { Console.WriteLine(e.ToString()); }
+                catch (Exception e) { Console.WriteLine(e.ToString()); isPDFEnable = false; }
                 return _wfh;
             }
         }
@@ -315,6 +325,11 @@ namespace CongVanManager.ViewModel
         private BoxLayoutViewModel(DocType docType)
         {
             _pdf = new PdfViewer();
+            _pdf.MouseDoubleClick += (obj, arg) =>
+             {
+                 if (ClickOnPDFCommand.CanExecute(SelectedCongVan))
+                     ClickOnPDFCommand.Execute(SelectedCongVan);
+             };
             _wfh = new WindowsFormsHost();
             _wfh.Child = _pdf;
 
@@ -368,12 +383,15 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand<CongVan>(
                    x =>
                    {
-                       ActionLayout actionLayout = new ActionLayout(SelectedCongVan, BoxType);
-                       actionLayout.ShowDialog();
+                       if (SelectedCongVan != null)
+                       {
+                           ActionLayout actionLayout = new ActionLayout(SelectedCongVan, BoxType);
+                           actionLayout.ShowDialog();
+                       }
                    });
             }
         }
-        public ICommand DoubleClickOnPDFCommand
+        public ICommand ClickOnPDFCommand
         {
             get
             {

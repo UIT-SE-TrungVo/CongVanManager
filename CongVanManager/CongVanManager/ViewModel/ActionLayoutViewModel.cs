@@ -20,20 +20,31 @@ namespace CongVanManager.ViewModel
         public ActionLayout layout;
         public ActionLayoutViewModel()
         {
-            isDuyetEnable = false;
-            isGuiEnable = false;
+            isDuyetEnable = isGuiEnable = isXoaEnable = isEditEnable = false;
         }
 
         private bool _isDuyetEnable;
-
         public bool isDuyetEnable
         {
             get { return _isDuyetEnable; }
             set { _isDuyetEnable = value; OnPropertyChanged(); }
         }
 
-        private bool _isGuiEnable;
+        private bool _isXoaEnable;
+        public bool isXoaEnable
+        {
+            get { return _isXoaEnable; }
+            set { _isXoaEnable = value; OnPropertyChanged(); }
+        }
 
+        private bool _isEditEnable;
+        public bool isEditEnable
+        {
+            get { return _isEditEnable; }
+            set { _isEditEnable = value; OnPropertyChanged(); }
+        }
+
+        private bool _isGuiEnable;
         public bool isGuiEnable
         {
             get { return _isGuiEnable; }
@@ -57,13 +68,16 @@ namespace CongVanManager.ViewModel
                 _selectedCongVan = value;
                 if (_selectedCongVan == null)
                 {
-                    isDuyetEnable = isGuiEnable = false;
+                    isDuyetEnable = isGuiEnable = isXoaEnable = isEditEnable = false;
                     return;
                 }
                 isDuyetEnable = value.StatusCode == CongVan.StatusCodeEnum.ChoDuyet || 
                     value.StatusCode == CongVan.StatusCodeEnum.DaTiepNhan;
                 isGuiEnable = value.StatusCode == CongVan.StatusCodeEnum.DaDuyet_Den || 
                     value.StatusCode == CongVan.StatusCodeEnum.DaLuuTru;
+                isEditEnable = value.StatusCode != CongVan.StatusCodeEnum.DaGui ||
+                    value.StatusCode != CongVan.StatusCodeEnum.DaChuyen;
+                isXoaEnable = MainWindowViewModel.Ins.User.Loai == User.UserType.TruongPhong;
             }
         }
 
@@ -87,7 +101,6 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand(
                    x =>
                    {
-                       //them phan quyen o day
                        CongVan.DB.Remove(selectedCongVan);
                        layout?.Close();
                    });

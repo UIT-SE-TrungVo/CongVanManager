@@ -37,12 +37,14 @@
                 <ListBox Margin="30" HorizontalContentAlignment="Stretch">
                     <Button Background="#FFB73A3A" BorderBrush="#FFB73A3A" 
                             materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                            Command="{Binding DeleteCongVan}">
+                            Command="{Binding DeleteCongVan}"
+                            IsEnabled="{Binding isXoaEnable}">
                         Xóa 
                     </Button>
                     <Button Background="#FFADB73A" BorderBrush="#FFADB73A" 
                             materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                            Command="{Binding EditCongVan}">
+                            Command="{Binding EditCongVan}"
+                            IsEnabled="{Binding isEditEnable}">
                         Chỉnh sửa
                     </Button>
                 </ListBox>

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CongVanManager"
+        xmlns:view="clr-namespace:CongVanManager.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:Controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -80,137 +81,137 @@
             <!--#region RIGHT: VIEW PANEL-->
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0*" MinHeight="200"/>
+                    <RowDefinition Height="0*" MinHeight="50"/>
                 </Grid.RowDefinitions>
-                
-                <!--View Panel-->
-                <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Hidden" Height="480">
-                    <StackPanel>
-                        <!--Header-->
-                        <StackPanel Margin="5">
-                            <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" 
-                               TextWrapping="WrapWithOverflow" TextAlignment="Center"
-                               Text="{Binding SelectedLoaiCongVan}"
-                               >
+                <Grid Grid.Row="0">
+                    <!--View Panel-->
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="Auto">
+                        <StackPanel>
+                            <!--Header-->
+                            <StackPanel Margin="5">
+                                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" 
+                                    TextWrapping="WrapWithOverflow" TextAlignment="Center"
+                                    Text="{Binding SelectedLoaiCongVan}"></TextBlock>
+                                <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                    TextWrapping="WrapWithOverflow" TextAlignment="Center"
+                                    Text="{Binding SelectedCongVanTrichYeu}"></TextBlock>
+                            </StackPanel>
 
-                            </TextBlock>
-                            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                               TextWrapping="WrapWithOverflow" TextAlignment="Center"
-                               Text="{Binding SelectedCongVanTrichYeu}">
-
-                            </TextBlock>
-                        </StackPanel>
-
-                        <!--CongVan Info-->
-                        <StackPanel Orientation="Vertical" Margin="0,10">
-                            <WrapPanel Margin="5">
-                                <TextBlock VerticalAlignment="Top">
-                                    <TextBlock.Style>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="Text" Value="Số vào"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding iBoxType}" Value="1">
-                                                    <Setter Property="Text" Value="Số ra"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
-                                  Text="{Binding SelectedCongVanNumber, StringFormat={}{0:000}, Mode=OneWay}">
-
-                                </TextBlock>
-                            </WrapPanel>
-                            <WrapPanel Margin="5">
-                                <TextBlock> Nơi gửi:</TextBlock>
-                                <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0">
-                                    <ListBoxItem>
-                                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}"
-                                          Text="{Binding SelectedCongVanSender, Mode=OneWay}">
-
-                                        </TextBlock>
-                                    </ListBoxItem>
-                                </ListBox>
-                            </WrapPanel>
-                            <WrapPanel Margin="5">
-                                <TextBlock> Nơi nhận:</TextBlock>
-                                <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0"
-                                    ItemsSource="{Binding SelectedCongVanDestination, Mode=OneWay}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
+                            <!--CongVan Info-->
+                            <StackPanel Orientation="Vertical" Margin="0,10">
+                                <WrapPanel Margin="5">
+                                    <TextBlock VerticalAlignment="Top">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Text" Value="Số vào"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding iBoxType}" Value="1">
+                                                        <Setter Property="Text" Value="Số ra"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                        Text="{Binding SelectedCongVanNumber, StringFormat={}{0:000}, Mode=OneWay}">
+                                    </TextBlock>
+                                </WrapPanel>
+                                <WrapPanel Margin="5">
+                                    <TextBlock> Nơi gửi:</TextBlock>
+                                    <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0">
+                                        <ListBoxItem>
                                             <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}"
-                                               Text="{Binding LienHe.Name, Mode=OneWay}">
-
+                                                Text="{Binding SelectedCongVanSender, Mode=OneWay}">
                                             </TextBlock>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </WrapPanel>
-                            <WrapPanel Margin="5">
-                                <TextBlock>
-                                    <TextBlock.Style>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="Text" Value="Thời gian nhận"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding iBoxType}" Value="1">
-                                                    <Setter Property="Text" Value="Thời gian gửi"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
-                                    Text="{Binding SelectedCongVanSentDate, Mode=OneWay}">
+                                        </ListBoxItem>
+                                    </ListBox>
+                                </WrapPanel>
+                                <WrapPanel Margin="5">
+                                    <TextBlock> Nơi nhận:</TextBlock>
+                                    <ListBox Style="{StaticResource MaterialDesignCardsListBox}" Margin="10,0"
+                                        ItemsSource="{Binding SelectedCongVanDestination, Mode=OneWay}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                                    Text="{Binding LienHe.Name, Mode=OneWay}">
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </WrapPanel>
+                                <WrapPanel Margin="5">
+                                    <TextBlock>
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Text" Value="Thời gian nhận"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding iBoxType}" Value="1">
+                                                        <Setter Property="Text" Value="Thời gian gửi"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                        Text="{Binding SelectedCongVanSentDate, Mode=OneWay}">
+                                    </TextBlock>
+                                </WrapPanel>
+                                <WrapPanel Margin="5">
+                                    <TextBlock> Số ký hiệu:</TextBlock>
+                                    <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                        Text="{Binding SelectedCongVanKeyNumber, Mode=OneWay}">
+                                    </TextBlock>
+                                </WrapPanel>
 
-                                </TextBlock>
-                            </WrapPanel>
-                            <WrapPanel Margin="5">
-                                <TextBlock> Số ký hiệu:</TextBlock>
-                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
-                                    Text="{Binding SelectedCongVanKeyNumber, Mode=OneWay}">
+                                <WrapPanel Margin="5">
+                                    <TextBlock VerticalAlignment="Top"> Ghi chú</TextBlock>
+                                    <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
+                                        Text="{Binding SelectedCongVanNote, Mode=OneWay}">
+                                    </TextBlock>
+                                </WrapPanel>
 
-                                </TextBlock>
-                            </WrapPanel>
-
-                            <WrapPanel Margin="5">
-                                <TextBlock VerticalAlignment="Top"> Ghi chú</TextBlock>
-                                <TextBlock Margin="10,0" Style="{StaticResource MaterialDesignButtonTextBlock}"
-                                  Text="{Binding SelectedCongVanNote, Mode=OneWay}">
-
-                                </TextBlock>
-                            </WrapPanel>
-
-                            <!--Cong Van Content-->
-                            <DockPanel Background="Pink" Height="auto">
-                                <ContentControl Content="{Binding PDF}">
-                                    
-                                </ContentControl>
-                            </DockPanel>
+                            </StackPanel>
+                            <!-- PDF Viewer -->
+                            
                         </StackPanel>
-                        <!--PdfViewer-->
-                        <StackPanel x:Name="pdfZone" Grid.Row="1">
-                            <ContentControl Content="{Binding PDF}" Height="400">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="MouseDoubleClick">
-                                        <i:InvokeCommandAction Command="{Binding ClickOnPDFCommand}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </ContentControl>
-                        </StackPanel>
-                    </StackPanel>
-                </ScrollViewer>
-
+                    </ScrollViewer>
+                </Grid>
+                <!--#endregion -->
+                <Grid Grid.Row="1">
+                    <!--Cong Van Content-->
+                    <ContentControl Content="{Binding PDF}" Height="200">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding ClickOnPDFCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ContentControl>
+                </Grid>
                 <!--Action bar-->
-                <Grid Grid.Row="1" Height="50" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <Button HorizontalAlignment="Center" VerticalAlignment="Center"
-                            Command="{Binding Open_ActionLayout}"
-                            IsEnabled="{Binding isEnable}">
-                        Thực hiện hành động
-                    </Button>
+                <Grid Grid.Row="2"
+                      Height="50" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding Open_ActionLayout}"
+                                IsEnabled="{Binding isEnable}">
+                            Thực hiện hành động
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Button HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding ClickOnPDFCommand}"
+                                IsEnabled="{Binding isPDFEnable}">
+                            Xem PDF
+                        </Button>
+                    </Grid>
                 </Grid>
             </Grid>
-            <!--#endregion -->
         </Grid>
 
         <!--#endregion-->
