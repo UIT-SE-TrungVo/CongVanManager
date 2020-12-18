@@ -19,91 +19,153 @@
       Title="Cài đặt">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
-        <!--CHỌN TRƯỞNG PHÒNG-->
-        <StackPanel Margin="32">
-            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 
-                Chọn trưởng phòng
-            </TextBlock>
+        <TabControl Margin="10">
 
-            <Border BorderBrush="MediumPurple" BorderThickness="2"
-                CornerRadius="8" Margin="8">
-                <StackPanel Orientation="Horizontal" Margin="8">
-                    <TextBlock Margin="8" VerticalAlignment="Center"> 
-                    Trưởng phòng
-                    </TextBlock>
-                    <ComboBox Width="300" Margin="8">
+            <!--#region QUẢN LÝ TÀI KHOẢN -->
+            <TabItem Header="Quản lý tài khoản" Style="{StaticResource MaterialDesignNavigationRailTabItem}"
+                     Width="Auto" Padding="10">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                    </ComboBox>
-                    <Button Margin="8">
-                        Xác nhận
-                    </Button>
-                </StackPanel>
-            </Border>
-        </StackPanel>
-           
-        <!--DANH SÁCH NGƯỜI DÙNG-->
-        <DockPanel Margin="32" Grid.Row="1" LastChildFill="True">
-            <TextBlock DockPanel.Dock="Top" Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 
-                Danh sách người dùng
-            </TextBlock>
+                    <!--CHỌN TRƯỞNG PHÒNG-->
+                    <StackPanel Margin="10">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 
+                            Chọn trưởng phòng
+                        </TextBlock>
 
-            <Border DockPanel.Dock="Top" BorderBrush="MediumPurple" BorderThickness="2"
-                    CornerRadius="8" Margin="8">
-                <DockPanel Margin="8">
-                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" 
-                                HorizontalAlignment="Right">
-                        <Button Margin="8" Background="Green" BorderBrush="Green"
-                                Command="{Binding CreateNewUser}">
-                            Thêm mới
-                        </Button>
-                        <Button Margin="8" Command="{Binding EditUser}">
-                            Sửa
-                        </Button>
-                        <Button Margin="8" Background="Red" BorderBrush="Red"
-                                Command="{Binding RemoveUser}">
-                            Xóa
-                        </Button>
+                        <Border BorderBrush="MediumPurple" BorderThickness="1" Margin="10"
+                                CornerRadius="8">
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Margin="10"> 
+                                    Trưởng phòng
+                                </TextBlock>
+                                <ComboBox Width="300" Margin="10">
+
+                                </ComboBox>
+                                <Button Margin="10">
+                                    Xác nhận
+                                </Button>
+                            </WrapPanel>
+                        </Border>
                     </StackPanel>
-                    <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                                 DockPanel.Dock="Top" Margin="8">
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <TextBlock Text="Trần Dần"/>
+
+                    <!--DANH SÁCH NGƯỜI DÙNG-->
+                    <DockPanel Margin="10" Grid.Row="1" LastChildFill="True">
+                        <TextBlock DockPanel.Dock="Top" Style="{StaticResource MaterialDesignHeadline6TextBlock}"> 
+                            Danh sách người dùng
+                        </TextBlock>
+
+                        <Border DockPanel.Dock="Top" BorderBrush="MediumPurple" BorderThickness="2"
+                            CornerRadius="8" Margin="10">
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" 
+                                HorizontalAlignment="Right">
+                                    <Button Margin="10" Background="Green" BorderBrush="Green"
+                                            Command="{Binding CreateNewUser}">
+                                        Thêm mới
+                                    </Button>
+                                    <Button Margin="10" Command="{Binding EditUser}">
+                                        Sửa
+                                    </Button>
+                                    <Button Margin="10" Background="Red" BorderBrush="Red"
+                                            Command="{Binding RemoveUser}">
+                                        Xóa
+                                    </Button>
+                                </StackPanel>
+                                <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                         DockPanel.Dock="Top" Margin="10">
+                                    <ListBoxItem>
+                                        <TextBlock Text="Trần Dần"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock Text="Trần Dần"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock Text="Trần Dần"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock Text="Trần Dần"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock Text="Trần Dần"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock Text="Trần Dần"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock Text="Trần Dần"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock Text="Trần Dần"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock Text="Trần Dần"/>
+                                    </ListBoxItem>
+                                    <ListBoxItem>
+                                        <TextBlock Text="Trần Dần"/>
+                                    </ListBoxItem>
+                                </ListBox>
+                            </DockPanel>
+                        </Border>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+            <!--#endregion-->
+
+
+            <!--#region QUẢN LÝ LIÊN HỆ -->
+            <TabItem Header="Quản lý liên hệ" Width="Auto"
+                     Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <DockPanel>
+                    <ListBox Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Top">
+                        <ListBoxItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                            <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="8">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Margin="10" VerticalAlignment="Center"
+                                            Style="{StaticResource MaterialDesignFlatAccentBgButton}">
+                                        Trần Đưc Po
+                                    </Button>
+
+                                    <TextBlock Grid.Column="1" Margin="10" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
+                                               Style="{StaticResource MaterialDesignSubtitle2TextBlock}">
+                                        meofmeosmeomeofmeo@gmail.com
+                                    </TextBlock>
+
+                                    <CheckBox Grid.Column="2" Margin="20,10"/>
+                                </Grid>
+                            </Border>
                         </ListBoxItem>
                     </ListBox>
+
+                    <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
+                        <Button Margin="10" Style="{StaticResource MaterialDesignFlatButton}" 
+                            BorderBrush="MediumPurple" BorderThickness="2">
+                            <WrapPanel>
+                                <materialDesign:PackIcon Kind="UserAdd" Margin="5,0"/>
+                                <TextBlock>
+                                    Thêm liên hệ mới
+                                </TextBlock>
+                            </WrapPanel>
+                        </Button>
+                        <Button Margin="10">
+                            Xác nhận
+                        </Button>
+                    </WrapPanel>
                 </DockPanel>
-            </Border>
-        </DockPanel>
+            </TabItem>
+            <!--#endregion-->
+
+        </TabControl>
+        
     </Grid>
+    
 </Page>

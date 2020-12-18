@@ -14,25 +14,27 @@
 
             <ListBox Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <ListBoxItem x:Name="itemContact" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                    <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="8">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Button Margin="10" VerticalAlignment="Center"
+                            <Button Margin="10" VerticalAlignment="Center"
                                 Style="{StaticResource MaterialDesignFlatAccentBgButton}">
-                            Trần Đưc Po
-                        </Button>
+                                Trần Đưc Po
+                            </Button>
 
-                        <TextBlock Grid.Column="1" Margin="10" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
+                            <TextBlock Grid.Column="1" Margin="10" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
                                    Style="{StaticResource MaterialDesignSubtitle2TextBlock}">
                             meofmeosmeomeofmeo@gmail.com
-                        </TextBlock>
+                            </TextBlock>
 
-                        <CheckBox Grid.Column="2"/>
-                    </Grid>
+                            <CheckBox Grid.Column="2" Margin="20,10"/>
+                        </Grid>
+                    </Border>
                 </ListBoxItem>
             </ListBox>
 
