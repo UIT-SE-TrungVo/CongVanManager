@@ -313,7 +313,7 @@ namespace CongVanManager.ViewModel
                                 "Cannot find PDF file in machine or database", pdfLoc);
                         _pdf.Document = PdfDocument.Load(pdfLoc);
                     }
-                    prevPDF.Dispose();
+                    prevPDF?.Dispose();
                     isPDFEnable = true;
                 }
                 catch (Exception e) { Console.WriteLine(e.ToString()); isPDFEnable = false; }

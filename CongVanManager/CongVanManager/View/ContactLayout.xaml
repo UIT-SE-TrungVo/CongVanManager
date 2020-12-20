@@ -4,45 +4,106 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CongVanManager.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Danh sách liên hệ" MaxHeight="800" Width="600"
         x:Name="ContactLayoutWindow">
-    <Grid Margin="10">
-        <StackPanel VerticalAlignment="Stretch">
-            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="10">
+
+    <materialDesign:DialogHost
+          IsOpen="{Binding IsDialogOpen, Mode=TwoWay}"
+          CloseOnClickAway="True"
+          Style="{StaticResource MaterialDesignEmbeddedDialogHost}"
+          DialogMargin="8"> 
+        <materialDesign:DialogHost.DialogContent>
+            <StackPanel Margin="16">
+                <TextBlock Text="{Binding type}">
+                </TextBlock>
+                <TextBox
+                    Margin="0 8 0 0"
+                    HorizontalAlignment="Stretch"
+                    materialDesign:HintAssist.Hint="Tên liên hệ"
+                    materialDesign:HintAssist.IsFloating="True"
+                    x:Name="TextBox" 
+                    Text="{Binding newTen}"/>
+                <TextBox
+                    IsEnabled="{Binding IsEnable}"
+                    Margin="0 8 0 0"
+                    HorizontalAlignment="Stretch"
+                    x:Name="TextBox2" 
+                    materialDesign:HintAssist.Hint="Email"
+                    materialDesign:HintAssist.IsFloating="True"
+                    Text="{Binding newEmail}"/>
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">    
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            IsDefault="True"
+                            Margin="0 8 8 0"
+                            Command="{Binding Save}">
+                        ACCEPT
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            IsCancel="True"
+                            Margin="0 8 8 0"
+                            Command="{Binding Cancel}">
+                        CANCEL
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:DialogHost.DialogContent>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="10" Grid.Row="0">
                 Danh sách liên hệ
             </TextBlock>
+            <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="0">
+                <Button Margin="10"
+                        Command="{Binding SuaLienHe}" IsEnabled="{Binding IsEnable}">
+                    Chỉnh sửa
+                </Button>
+                <Button Margin="10" Command="{Binding ThemLienHe}">
+                    Thêm mới
+                </Button>
+            </WrapPanel>
+            <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
 
-            <ListBox Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                <ListBox Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                      ItemsSource="{Binding DSLienHe}"
                      SelectedItem="{Binding SelectedLienHe, Mode=TwoWay}"
                      SelectionMode="Single"
                      ScrollViewer.VerticalScrollBarVisibility="Visible"
                      MaxHeight="590">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="300"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
 
-                            <Button Margin="10" VerticalAlignment="Center"
+                                <Button Margin="10" VerticalAlignment="Center"
                                 Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                 Content="{Binding Name}">
-                            </Button>
+                                </Button>
 
-                            <TextBlock Grid.Column="1" Margin="10" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
+                                <TextBlock Grid.Column="1" Margin="10" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"
                                    Style="{StaticResource MaterialDesignSubtitle2TextBlock}"
                                    Text="{Binding Email}">
-                            </TextBlock>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
-            <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+
+            </StackPanel>
+
+            <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2">
                 <Button Margin="10" Style="{StaticResource MaterialDesignFlatButton}" 
                         BorderBrush="MediumPurple" BorderThickness="2"
                         Command="{Binding Close}" CommandParameter="{Binding ElementName=ContactLayoutWindow}">
@@ -52,6 +113,6 @@
                     Xác nhận
                 </Button>
             </WrapPanel>
-        </StackPanel>
-    </Grid>
+        </Grid>
+    </materialDesign:DialogHost>
 </Window>
