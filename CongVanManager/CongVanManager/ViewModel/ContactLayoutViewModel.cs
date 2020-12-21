@@ -18,6 +18,12 @@ namespace CongVanManager.ViewModel
     {
         private ObservableCollection<LienHe> _DSLienHe = new ObservableCollection<LienHe>();
 
+        public ObservableCollection<LienHe> DSLienHe
+        {
+            get { return _DSLienHe; }
+            set { _DSLienHe = value; OnPropertyChanged(); }
+        }
+
         #region Binding
         private bool _IsDialogOpen;
 
@@ -57,12 +63,6 @@ namespace CongVanManager.ViewModel
         {
             get { return _IsEnable; }
             set { _IsEnable = value; OnPropertyChanged(); }
-        }
-
-        public ObservableCollection<LienHe> DSLienHe
-        {
-            get { return _DSLienHe; }
-            set { _DSLienHe = value; OnPropertyChanged(); }
         }
 
         private LienHe _SelectedLienHe;

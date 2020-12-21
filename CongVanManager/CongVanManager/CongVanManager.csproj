@@ -67,9 +67,11 @@
     <Reference Include="PdfiumViewer, Version=2.13.0.0, Culture=neutral, PublicKeyToken=91e4789cfb0609e0, processorArchitecture=MSIL">
       <HintPath>..\packages\PdfiumViewer.2.13.0.0\lib\net20\PdfiumViewer.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
@@ -114,6 +116,7 @@
     <Compile Include="ViewModel\NewDocLayout_ChooserViewModel.cs" />
     <Compile Include="ViewModel\ObservableObject.cs" />
     <Compile Include="ViewModel\ReportLayoutViewModel.cs" />
+    <Compile Include="ViewModel\ReportPrintPreviewViewModel.cs" />
     <Compile Include="ViewModel\SettingLayoutViewModel.cs" />
     <Compile Include="ViewModel\UC_InBoxViewModel.cs" />
     <Compile Include="ViewModel\UC_OutBoxViewModel.cs" />
@@ -147,6 +150,9 @@
     </Compile>
     <Compile Include="View\ReportLayout.xaml.cs">
       <DependentUpon>ReportLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportPrintPreview.xaml.cs">
+      <DependentUpon>ReportPrintPreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingLayout.xaml.cs">
       <DependentUpon>SettingLayout.xaml</DependentUpon>
@@ -235,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ReportLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportPrintPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
