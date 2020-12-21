@@ -20,7 +20,7 @@ namespace CongVanManager.ViewModel
         {
             window = w;
             this.passwordBox = passwordBox;
-            //*
+            /*
             Password = "admin";
             Username = "admin";
             //*/

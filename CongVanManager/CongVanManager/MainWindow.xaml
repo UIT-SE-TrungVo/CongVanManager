@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:CongVanManager"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:Controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -16,6 +17,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         
+        Name="main"
         mc:Ignorable="d"
         Title="Công Văn Manager" Height="720" Width="1280" MinHeight="720" MinWidth="1280" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
     <Grid>
@@ -96,7 +98,8 @@
                         <TextBlock Margin="20,0"> Cài đặt</TextBlock>
                     </DockPanel>
                 </Button>
-                <Button Margin="2,5" HorizontalContentAlignment="Left">
+                <Button Margin="2,5" HorizontalContentAlignment="Left"
+                        Command="{Binding Logout}" CommandParameter="{Binding ElementName=main}">
                     <DockPanel LastChildFill="True">
                         <materialDesign:PackIcon Kind="Logout"/>
                         <TextBlock Margin="20,0"> Đăng xuất</TextBlock>
@@ -122,21 +125,23 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Border CornerRadius="20" Margin="100,15,25,15" Padding="20,5" BorderBrush="MediumPurple" BorderThickness="3">
+            <Border CornerRadius="20" Margin="100,15,25,15" Padding="20,0" BorderBrush="MediumPurple" BorderThickness="3">
                 <DockPanel LastChildFill="True">
                     <WrapPanel DockPanel.Dock="Right" VerticalAlignment="Center">
-                        <materialDesign:PackIcon DockPanel.Dock="Right" Kind="Search" Margin="10,0">
-                            <materialDesign:PackIcon.LayoutTransform>
-                                <ScaleTransform ScaleX="2" ScaleY="2"/>
-                            </materialDesign:PackIcon.LayoutTransform>
-                        </materialDesign:PackIcon>
-                        <materialDesign:PackIcon DockPanel.Dock="Right" Kind="MoreHoriz">
-                            <materialDesign:PackIcon.LayoutTransform>
-                                <ScaleTransform ScaleX="2" ScaleY="2"/>
-                            </materialDesign:PackIcon.LayoutTransform>
-                        </materialDesign:PackIcon>
+                        <Button Width="Auto" Height="Auto" Padding="0,0" Background="Transparent" Foreground="MediumPurple" BorderThickness="0" DockPanel.Dock="Right">
+                            <materialDesign:PackIcon Kind="Search" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <materialDesign:PackIcon.LayoutTransform>
+                                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                </materialDesign:PackIcon.LayoutTransform>
+                            </materialDesign:PackIcon>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding ButtonFilterCongVan}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
                     </WrapPanel>
-                    <TextBox VerticalContentAlignment="Center" Margin="100,0,10,0" BorderBrush="Transparent" FontWeight="SemiBold" Text="{Binding FilterText, Mode=TwoWay}"/>
+                    <TextBox VerticalContentAlignment="Center" Margin="100,5,10,5" BorderBrush="Transparent" FontWeight="SemiBold" Text="{Binding FilterText, Mode=TwoWay}"/>
                 </DockPanel>
             </Border>
             <DockPanel Grid.Column="1" Margin="25,0">
