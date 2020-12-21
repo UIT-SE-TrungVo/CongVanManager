@@ -21,7 +21,51 @@
       Title="Hộp thư đến">
 
     <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" 
+                    VerticalAlignment="Center" Margin="16">
+            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" 
+                       VerticalAlignment="Center" Margin="8"> 
+                Chọn năm
+            </TextBlock>
+            <ComboBox Width="128" Height="48" VerticalContentAlignment="Center" Margin="8">
+                
+            </ComboBox>
+            <Button Margin="8" Width="128" Height="48">
+                Lập báo cáo
+            </Button>
+        </StackPanel>
+
+        <!-- BẢNG BÁO CÁO (lảm ở đây nha) -->
+        <DataGrid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  Background="LightGray" Margin="16"> 
+            
+        </DataGrid>
         
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="8">
+            <Button Margin="8" Height="48" Width="128">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Margin="8" Kind="ContentSave"/>
+                    <TextBlock Margin="8"> 
+                        Lưu file
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Margin="8" Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Height="48" BorderThickness="2" BorderBrush="MediumPurple" Width="128">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Margin="8" Kind="Printer"/>
+                    <TextBlock Margin="8" Foreground="MediumPurple"> 
+                        In
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>
 
