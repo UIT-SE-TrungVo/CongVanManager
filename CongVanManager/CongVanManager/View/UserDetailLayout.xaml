@@ -15,10 +15,8 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         
-        Title="Chi tiết tài khoản" ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
-        WindowStyle="ToolWindow" Width="500" Height="320">
-
-    <Grid Margin="10">
+        Title="Thực hiện hành động" Width="500" Height="325" ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" BorderBrush="MediumPurple" BorderThickness="2">
+    <Grid Margin="32" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -32,7 +30,7 @@
         </Grid.RowDefinitions>
 
         <!--TÊN TÀI KHOẢN-->
-        <TextBlock VerticalAlignment="Center">
+        <TextBlock Margin="8" VerticalAlignment="Center">
             Tên tài khoản :
         </TextBlock>
 
@@ -45,7 +43,7 @@
         </DockPanel>
 
         <!-- MẬT KHẨU -->
-        <TextBlock Grid.Row="1" Margin="10" VerticalAlignment="Center">
+        <TextBlock Grid.Row="1" Margin="8" VerticalAlignment="Center">
             Mật khẩu :
         </TextBlock>
 
@@ -58,7 +56,7 @@
         </DockPanel>
 
         <!-- LOẠI TÀI KHOẢN -->
-        <TextBlock Grid.Row="2" Margin="10" VerticalAlignment="Center">
+        <TextBlock Grid.Row="2" Margin="8" VerticalAlignment="Center">
             Loại tài khoản :
         </TextBlock>
 
@@ -72,16 +70,16 @@
         </DockPanel>
 
         <!-- CÁC NÚT BẤM -->
-        <WrapPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" >
-            <Button Margin="10" Style="{StaticResource MaterialDesignFlatButton}"
-                    Command="{Binding Cancel}">
-                Hủy
+        <WrapPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="8" Grid.RowSpan="2">
+            <Button Margin="8" Command="{Binding Save}">
+                Lưu
             </Button>
-            <Button Margin="10" Command="{Binding Reset}">
+            <Button Margin="8" Command="{Binding Reset}">
                 Làm lại
             </Button>
-            <Button Margin="10" Command="{Binding Save}" Background="Green">
-                Lưu
+            <Button Margin="8" Style="{StaticResource MaterialDesignFlatButton}"
+                    Command="{Binding Cancel}">
+                Hủy
             </Button>
         </WrapPanel>
     </Grid>
