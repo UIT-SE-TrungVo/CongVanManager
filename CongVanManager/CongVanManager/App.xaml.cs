@@ -24,11 +24,9 @@ namespace CongVanManager
 
         public void ApplicationStart(object sender, StartupEventArgs e)
         {
-            Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+            Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
             LoginLayout login = new LoginLayout();
             login.ShowDialog();
-
-            Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
     }
 }
