@@ -25,12 +25,10 @@ namespace CongVanManager
         public void ApplicationStart(object sender, StartupEventArgs e)
         {
             Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
-            MainWindow mainWindow = new MainWindow();
             LoginLayout login = new LoginLayout();
             login.ShowDialog();
 
             Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-            mainWindow.Show();
         }
     }
 }

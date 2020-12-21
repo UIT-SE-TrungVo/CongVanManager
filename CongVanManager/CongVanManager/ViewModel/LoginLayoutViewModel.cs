@@ -61,6 +61,8 @@ namespace CongVanManager.ViewModel
                            return;
                        }
                        MainWindowViewModel.Ins.SetUser(Username);
+                       MainWindow mainWindow = new MainWindow();
+                       mainWindow.Show();
                        window.Close();
                    });
             }

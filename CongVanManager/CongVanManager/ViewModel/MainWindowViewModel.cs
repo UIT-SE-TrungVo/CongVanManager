@@ -251,10 +251,13 @@ namespace CongVanManager.ViewModel
                 return new RelayCommand<MainWindow>(
                     x=>
                     {
-                        x.Visibility = Visibility.Collapsed;
+                        Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
                         LoginLayout login = new LoginLayout();
+                        x.Close();
                         login.ShowDialog();
-                        x.Visibility = Visibility.Visible;
+
+                        Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
                     });
             }
         }
