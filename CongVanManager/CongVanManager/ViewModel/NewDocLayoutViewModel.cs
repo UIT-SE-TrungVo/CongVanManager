@@ -510,9 +510,10 @@ namespace CongVanManager.ViewModel
                         cv.NoiGui = new LienHe() { Email = NoiGui.Email, Name = NoiGui.Name };
                         cv.LoaiCongVan = new LoaiCongVan() { Id = selectedLoaiCongVan };
 
-                        string PDFFileName = filename;
+                        string PDFFileName = showFileName;
                         if (DataProvider.Ins.DB.PDFScans.Find(PDFFileName) == null)
                         {
+                            PDFFileName = filename;
                             PDFDownloader.PublishPDF(ref PDFFileName, showFileName);
                         }
                         cv.PDFScanLocation = PDFFileName;

@@ -83,6 +83,7 @@ namespace CongVanManager
                 }
 
                 DataProvider.Ins.DB.PDFScans.Add(pdf);
+                DataProvider.Ins.DB.SaveChanges();
 
                 FilePath = FileName;
 
