@@ -60,7 +60,13 @@
         <!--#region DOCUMENT ACTIONS -->
         <Grid Grid.Column="1" Grid.Row="1" Margin="5">
             <Border Margin="10" CornerRadius="20" BorderBrush="MediumPurple" BorderThickness="2">
-                <ListBox Margin="30" HorizontalContentAlignment="Stretch">
+                <ListBox Margin="30,30,30,8" HorizontalContentAlignment="Stretch">
+                    <Button BorderBrush="#FFADB73A" Background="#FFB73A3A" 
+                            materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                            Command="{Binding KhongDuyetCongVan}"
+                            IsEnabled="{Binding isDuyetEnable}">
+                        Không Duyệt
+                    </Button>
                     <Button BorderBrush="#FF46B73A" Background="#FF46B73A" 
                             materialDesign:ShadowAssist.ShadowDepth="Depth2"
                             Command="{Binding DuyetCongVan}"

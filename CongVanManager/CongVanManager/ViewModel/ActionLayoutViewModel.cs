@@ -164,6 +164,36 @@ namespace CongVanManager.ViewModel
                     });
             }
         }
+        public ICommand KhongDuyetCongVan
+        {
+            get
+            {
+                return new RelayCommand(
+                    x =>
+                    {
+                        //them phan quyen vao day
+                        bool isSuccess = true;
+                        var item = CongVan.DB.Where(cv => cv.Id == selectedCongVan.Id).First();
+                        if (item != null)
+                        {
+                            item.StatusCode = CongVan.StatusCodeEnum.KhongDuyet;
+                        }
+                        else
+                        {
+                            isSuccess = false;
+                        }
+                        if (isSuccess)
+                        {
+                            MessageBox.Show("Đã duyệt thành công!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Không thành công!");
+                        }
+                        layout?.Close();
+                    });
+            }
+        }
         public ICommand GuiCongVan
         {
             get
