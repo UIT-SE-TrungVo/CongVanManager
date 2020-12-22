@@ -14,13 +14,14 @@ namespace CongVanManager.ViewModel
 {
     class LoginLayoutViewModel : ObservableObject
     {
+        bool loginSuccessful = false;
         LoginLayout window;
         PasswordBox passwordBox;
         public LoginLayoutViewModel(LoginLayout w, PasswordBox passwordBox)
         {
             window = w;
             this.passwordBox = passwordBox;
-            //*
+            /*
             Password = "admin";
             Username = "admin";
             //*/
@@ -60,11 +61,25 @@ namespace CongVanManager.ViewModel
                            MessageBox.Show("Tên đăng nhập hoặc mật khẩu sai.");
                            return;
                        }
+                       loginSuccessful = true;
                        MainWindowViewModel.Ins.SetUser(Username);
                        MainWindow mainWindow = new MainWindow();
                        mainWindow.Show();
                        window.Close();
                    });
+            }
+        }
+
+        public ICommand Closing
+        {
+            get
+            {
+                return new RelayCommand(
+                      x =>
+                      {
+                          if (!loginSuccessful)
+                              Application.Current.Shutdown();
+                      });
             }
         }
     }

@@ -33,22 +33,24 @@ namespace CongVanManager.ViewModel
             
             foreach (string word in matchItem)
             {
-                if (cv.GhiChu.ToLower().Contains(word.ToLower()))
+                if (cv.GhiChu != null && cv.GhiChu.ToLower().Contains(word.ToLower()))
                     return true;
-                if (cv.LoaiCongVan.Id.Contains(word.ToUpper()))
+                if (cv.LoaiCongVan != null && cv.LoaiCongVan.Id.Contains(word.ToUpper()))
                     return true;
                 if (cv.SoKyHieu == word)
                     return true;
-                if (cv.TrichYeu.ToLower().Contains(word.ToLower()))
+                if (cv.TrichYeu != null && cv.TrichYeu.ToLower().Contains(word.ToLower()))
                     return true;
-                if (cv.Status.ToLower().Contains(word.ToLower()))
+                if (cv.Status != null && cv.Status.ToLower().Contains(word.ToLower()))
                     return true;
-                if (cv.NoiGui.Name.ToLower().Contains(word.ToLower()))
+                if (cv.NoiGui != null && cv.NoiGui.Name.ToLower().Contains(word.ToLower()))
                     return true;
-                if (cv.NoiGui.Email == word)
+                if (cv.NoiGui != null && cv.NoiGui.Email == word)
                     return true;
                 foreach (var noiNhan in cv.DanhSachNoiNhan)
                 {
+                    if (noiNhan.LienHe == null)
+                        continue;
                     if (noiNhan.LienHe.Name.ToLower().Contains(word.ToLower()))
                         return true;
                     if (noiNhan.LienHe.Email == word)
