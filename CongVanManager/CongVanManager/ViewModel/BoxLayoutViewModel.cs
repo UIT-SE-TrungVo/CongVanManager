@@ -301,22 +301,26 @@ namespace CongVanManager.ViewModel
                 string pdfLoc = PDFScan;
                 try
                 {
-                    if (pdfLoc == null)
-                        throw new ArgumentNullException("pdfLoc","Field PDFScan is empty");
                     IPdfDocument prevPDF = _pdf.Document;
-                    if (File.Exists(pdfLoc))
-                        _pdf.Document = PdfDocument.Load(pdfLoc);
-                    else
+                    _pdf.Visible = false;
+                    isPDFEnable = false;
+                    if (pdfLoc != null)
                     {
-                        if (!PDFDownloader.LoadPDF(pdfLoc))
-                            throw new FileNotFoundException(
-                                "Cannot find PDF file in machine or database", pdfLoc);
-                        _pdf.Document = PdfDocument.Load(pdfLoc);
+                        if (File.Exists(pdfLoc))
+                            _pdf.Document = PdfDocument.Load(pdfLoc);
+                        else
+                        {
+                            if (!PDFDownloader.LoadPDF(pdfLoc))
+                                throw new FileNotFoundException(
+                                    "Cannot find PDF file in machine or database", pdfLoc);
+                            _pdf.Document = PdfDocument.Load(pdfLoc);
+                        }
+                        prevPDF?.Dispose();
+                        isPDFEnable = true;
+                        _pdf.Visible = true;
                     }
-                    prevPDF?.Dispose();
-                    isPDFEnable = true;
                 }
-                catch (Exception e) { Console.WriteLine(e.ToString()); isPDFEnable = false; }
+                catch (Exception e) { Console.WriteLine(e.ToString());}
                 return _wfh;
             }
         }
