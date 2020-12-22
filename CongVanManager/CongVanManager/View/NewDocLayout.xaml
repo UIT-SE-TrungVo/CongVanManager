@@ -190,10 +190,11 @@
                                 Nơi gửi
                             </TextBlock>
                             <Grid Grid.Column="1">
-                                <TextBox x:Name="tbSender" VerticalAlignment="Center"
+                                    <TextBox x:Name="tbSender" VerticalAlignment="Center"
                                          Text="{Binding inputNoiGui, Mode=TwoWay}"
-                                         Visibility="{Binding VisibleTextBox}"/>
-                                <Button x:Name="btnSender" Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray" HorizontalAlignment="Left"
+                                         Visibility="{Binding VisibleTextBox}">
+                                    </TextBox>
+                                    <Button x:Name="btnSender" Margin="3" Style="{StaticResource MaterialDesignOutlinedButton}" Background="LightGray" HorizontalAlignment="Left"
                                    Content="{Binding NoiGui.Name, Mode=TwoWay}" Visibility="{Binding VisibleButton}"
                                    Command="{Binding ClickNoiGui}"
                                         ToolTip="{Binding NoiGui.Email}">
@@ -227,7 +228,9 @@
                                 Nơi nhận
                                 </TextBlock>
                                 <TextBox Grid.Column="1" Margin="0,10,10,0"
-                                     Text="{Binding NoiNhan, Mode=TwoWay}"/>
+                                     Text="{Binding NoiNhan, Mode=TwoWay}">
+                                
+                                </TextBox>
                                 <WrapPanel Grid.Column="2">
                                     <Button Style="{StaticResource MaterialDesignFlatButton}" Padding="5,0"
                                         Command="{Binding ClickThemNoiNhan}">

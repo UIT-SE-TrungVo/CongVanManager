@@ -361,7 +361,7 @@ namespace CongVanManager.ViewModel
                     {
                         VisibleTextBox = "Visible";
                         VisibleButton = "Collapsed";
-                        inputNoiGui = NoiGui.Name;
+                        inputNoiGui = NoiGui.Email;
                         NoiGui = new LienHe();
                     }
                 });
