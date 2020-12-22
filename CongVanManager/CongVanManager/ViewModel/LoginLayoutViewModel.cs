@@ -82,5 +82,16 @@ namespace CongVanManager.ViewModel
                       });
             }
         }
+        public ICommand EnterPassword
+        {
+            get
+            {
+                return new RelayCommand(
+                      x =>
+                      {
+                          Login.Execute(null);
+                      });
+            }
+        }
     }
 }
