@@ -34,5 +34,6 @@ namespace CongVanManager.View
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
         public virtual DbSet<KyHieuCongVan> KyHieuCongVan { get; set; }
         public virtual DbSet<PDFScan> PDFScans { get; set; }
+        public virtual DbSet<PDFScan1> PDFScan1 { get; set; }
     }
 }

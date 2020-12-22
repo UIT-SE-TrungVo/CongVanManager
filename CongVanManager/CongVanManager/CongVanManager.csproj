@@ -148,6 +148,9 @@
     <Compile Include="View\PDFScan.cs">
       <DependentUpon>QLCV.tt</DependentUpon>
     </Compile>
+    <Compile Include="View\PDFScan1.cs">
+      <DependentUpon>QLCV.tt</DependentUpon>
+    </Compile>
     <Compile Include="View\ReportLayout.xaml.cs">
       <DependentUpon>ReportLayout.xaml</DependentUpon>
     </Compile>
