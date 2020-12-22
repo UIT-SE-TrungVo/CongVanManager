@@ -130,7 +130,10 @@ namespace CongVanManager.ViewModel
                 x =>
                 {
                     if (String.IsNullOrWhiteSpace(newEmail) || String.IsNullOrWhiteSpace(newTen))
+                    {
+                        System.Windows.Forms.MessageBox.Show("Tên và Email không được để trống.");
                         return;
+                    }
                     if (type == "Nhập liên hệ mới")
                     {
                         LienHe lh = new LienHe() { Email = newEmail, Name = newTen };

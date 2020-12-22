@@ -391,6 +391,11 @@ namespace CongVanManager.ViewModel
                         return;
                     if (type == "Nhập loại công văn mới")
                     {
+                        if (LoaiCongVan.DB.Where(l => l.Id == newLoaiCongVan).Count() > 0)
+                        {
+                            MessageBox.Show("Loại công văn đã tồn tại!");
+                            return;
+                        }
                         LoaiCongVan lcv = new LoaiCongVan() { Id = newLoaiCongVan };
                         LoaiCongVan.DB.Add(lcv);
                         ResetListCongVan();
@@ -399,6 +404,11 @@ namespace CongVanManager.ViewModel
                     {
                         if(type == "Nhập mã kí hiệu mới")
                         {
+                            if (KyHieu.DB.Where(k => k.MaKyHieu == newLoaiCongVan).Count() > 0)
+                            {
+                                MessageBox.Show("Mã ký hiệu đã tồn tại!");
+                                return;
+                            }
                             KyHieu kh = new KyHieu() { MaKyHieu = newLoaiCongVan };
                             KyHieu.DB.Add(kh);
                             ResetListMaKyHieu();

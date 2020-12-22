@@ -24,7 +24,11 @@
                     materialDesign:HintAssist.Hint="Tên liên hệ"
                     materialDesign:HintAssist.IsFloating="True"
                     x:Name="TextBox" 
-                    Text="{Binding newTen}"/>
+                    Text="{Binding newTen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding Save}" />
+                    </TextBox.InputBindings>
+                </TextBox>
                 <TextBox
                     IsEnabled="{Binding IsEnable}"
                     Margin="0 8 0 0"
@@ -32,7 +36,11 @@
                     x:Name="TextBox2" 
                     materialDesign:HintAssist.Hint="Email"
                     materialDesign:HintAssist.IsFloating="True"
-                    Text="{Binding newEmail}"/>
+                    Text="{Binding newEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding Save}" />
+                    </TextBox.InputBindings>
+                </TextBox>
                 <StackPanel
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">    

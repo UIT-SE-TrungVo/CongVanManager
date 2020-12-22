@@ -141,7 +141,11 @@
                             </i:Interaction.Triggers>
                         </Button>
                     </WrapPanel>
-                    <TextBox VerticalContentAlignment="Center" Margin="100,5,10,5" BorderBrush="Transparent" FontWeight="SemiBold" Text="{Binding FilterText, Mode=TwoWay}"/>
+                    <TextBox VerticalContentAlignment="Center" Margin="10,5,10,5" BorderBrush="Transparent" FontWeight="SemiBold" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding ButtonFilterCongVan}" />
+                        </TextBox.InputBindings>
+                    </TextBox>
                 </DockPanel>
             </Border>
             <DockPanel Grid.Column="1" Margin="25,0">
