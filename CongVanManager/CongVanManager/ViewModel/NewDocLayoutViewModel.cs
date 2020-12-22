@@ -482,6 +482,7 @@ namespace CongVanManager.ViewModel
                             }
 
                             NoiNhan nn = new NoiNhan() { LienHe = lh, CongVan = cv };
+
                             cv.DanhSachNoiNhan.Add(nn);
                             lh.DanhSachNoiNhan.Add(nn);
 
