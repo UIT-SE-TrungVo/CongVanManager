@@ -17,7 +17,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         
         mc:Ignorable="d"
-        Title="Công Văn Manager" Height="720" Width="1280" MinHeight="720" MinWidth="1280" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
+        Title="Công Văn Manager" Height="720" Width="1280" Icon="Asset/Image/Logo.png" MinHeight="720" MinWidth="1280" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
     <Grid>
         
         <!--#region LAYOUT DEFINITION-->
