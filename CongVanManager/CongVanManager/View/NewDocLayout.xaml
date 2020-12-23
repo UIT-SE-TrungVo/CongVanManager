@@ -329,7 +329,8 @@
                     <Button Grid.Column="1" materialDesign:ButtonAssist.CornerRadius="5"
                             Width="200"
                             Margin="30,10,30,10"
-                            Command="{Binding HuyChinhSua}" Content="Huỷ" Visibility="{Binding IsVisibleHuy}"/>
+                            Command="{Binding HuyChinhSua}" Content="Huỷ"/>
+                    <!--Visibility="{Binding IsVisibleHuy}"-->
                 </StackPanel>
                 <!--#endregion-->
             </StackPanel>
