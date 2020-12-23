@@ -35,6 +35,27 @@ namespace CongVanManager.ViewModel
             ResetListMaKyHieu();
         }
 
+        public void ResetAll()
+        {
+            NgayNhan = DateTime.Today;
+            NgayTrenCongVan = DateTime.Today;
+            listLoaiCongVan = new ObservableCollection<string>();
+
+            ResetListCongVan();
+            ResetListMaKyHieu();
+
+            SoVao = 0;
+            TrichYeu = null;
+            NoiGui = null;
+            VisibleButton = "Collapsed";
+            VisibleTextBox = "Visible";
+            DSNoiNhan.Clear();
+            GhiChu = "";
+            SoKyHieu = "";
+            selectedLoaiCongVan = "";
+            filename = showFileName = "";
+        }
+
         public NewDocLayoutViewModel(bool isedit, CongVan cv)
         {
             edit = isedit;
@@ -507,6 +528,8 @@ namespace CongVanManager.ViewModel
 
                             CongVanManager.NoiNhan.DB.Add(nn);
                         }
+                        ResetAll();
+                        HuyChinhSua.Execute(null);
                     }
                     else
                     {
@@ -567,6 +590,7 @@ namespace CongVanManager.ViewModel
 
                             CongVanManager.NoiNhan.DB.Add(nn);
                         }
+                        HuyChinhSua.Execute(null);
                     }
                 });
             }
@@ -580,6 +604,7 @@ namespace CongVanManager.ViewModel
                     {
                         //MainWindowViewModel.Ins.PageSwitch(PageName.SettingLayout);
                         MainWindowViewModel.Ins.PageSwitch(PageName.InboxLayout);
+                        ResetAll();
                     }
                     );
             }

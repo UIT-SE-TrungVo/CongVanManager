@@ -8,6 +8,7 @@
     using System.Collections.Specialized;
     using System.Threading.Tasks;
     using System.Linq;
+    using System.Windows.Forms;
 
     public class CongVan : ObservableObject, IComparable
     {
@@ -249,6 +250,7 @@
                     cvs.Remove(cvs.Find(item.Id));
                 }
             if (arg.NewItems != null)
+            {
                 foreach (CongVan item in arg.NewItems)
                     if (DB.Where(temp => item.Id == temp.Id) != null)
                     {
@@ -272,6 +274,8 @@
                     }
                     else
                         Console.WriteLine("ERROR: Primary key duplication at CongVan.");
+                MessageBox.Show("Đã cập nhật cơ sở dữ liệu!");
+            }
         }
 
         public static CongVan Get(View.CongVan cv)
