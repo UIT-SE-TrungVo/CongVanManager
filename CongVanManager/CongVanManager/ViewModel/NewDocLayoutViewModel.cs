@@ -609,6 +609,18 @@ namespace CongVanManager.ViewModel
                     );
             }
         }
+        public ICommand LamMoi
+        {
+            get
+            {
+                return new RelayCommand(
+                    x =>
+                    {
+                        ResetAll();
+                    }
+                    );
+            }
+        }
 
         public ICommand Open_ContactLayout_Nhan
         {
