@@ -151,13 +151,12 @@
             <DockPanel Grid.Column="1" Margin="25,0">
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="100">
                     <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Username}"/>
-                    <TextBlock TextAlignment="Right"> 12783712379</TextBlock>
                 </StackPanel>
                 <Ellipse Width="60" Height="60">
                     <Ellipse.Fill>
                         <ImageBrush>
                             <ImageBrush.ImageSource>
-                                <BitmapImage UriSource="Asset/Image/116708945_963250040791127_2325266720546025099_n.png"/>
+                                <BitmapImage UriSource="/Asset/Image/user.png"/>
                             </ImageBrush.ImageSource>
                         </ImageBrush>
                     </Ellipse.Fill>

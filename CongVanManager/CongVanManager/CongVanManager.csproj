@@ -323,6 +323,7 @@
     <Resource Include="Asset\Image\download.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Asset\Image\user.png" />
     <Content Include="View\QLCV.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>QLCV.edmx</DependentUpon>
