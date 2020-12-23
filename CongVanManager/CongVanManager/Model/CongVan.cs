@@ -153,6 +153,7 @@
         [Flags]
         public enum StatusCodeEnum : int
         {
+            KhongDuyet = -1,
             ChuaDoc = 0,
             DaTiepNhan = 1,
             DaDuyet_Den = 2,
